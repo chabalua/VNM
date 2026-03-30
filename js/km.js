@@ -23,7 +23,7 @@ function kmRenderForm(prog) {
   const body = document.getElementById('km-modal-body');
   const t = prog.type || 'bonus';
   const typeLabels = { bonus:'🎁 Tặng hàng', fixed:'% CK cố định', tier_qty:'📦 CK theo SL', tier_money:'💰 CK theo tiền' };
-  body.innerHTML = `<div class="kf"><div class="kfl">Tên chương trình</div><input type="text" id="kf-name" value="${prog.name || ''}" placeholder="VD: Sữa đặc NSPN xuất nhỏ xanh lá"></div>
+  body.innerHTML = `<div class="kf"><div class="kfl">Tên chương trình</div><input type="text" id="kf-name" value="${prog.name || ''}" placeholder="VD: Sữa đặc NSPN xuất nhỏ xanh lá" inputmode="text"></div>
     <div class="kf"><div class="kfl">Loại khuyến mãi</div><div class="km-types">${['bonus','fixed','tier_qty','tier_money'].map(tp => `<button class="km-type-btn${t===tp?' sel':''}" onclick="kmSelType('${tp}')">${typeLabels[tp]}</button>`).join('')}</div></div>
     <div id="kf-fields">${kmTypeFields(prog)}</div>
     <div class="kf"><div class="kfl">Gộp với CT KM khác</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button class="km-stack-btn${_kmStackable ? ' sel' : ''}" onclick="kmSetStack(true,this)">🔗 Được gộp<br><span style="font-size:10px;font-weight:400;opacity:.7">Cộng thêm với CT khác</span></button><button class="km-stack-btn${!_kmStackable ? ' sel' : ''}" onclick="kmSetStack(false,this)">🔒 Không gộp<br><span style="font-size:10px;font-weight:400;opacity:.7">Chỉ dùng 1 CT lợi nhất</span></button></div></div>
