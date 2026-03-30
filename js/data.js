@@ -32,7 +32,10 @@ async function loadProducts() {
 
 // Tải CT KM
 async function loadPromotions() {
-  kmProgs = await fetchJSON(PROMOTIONS_URL, 'vnm_km3', []);
+  kmProgs = await fetchJSON(LOCAL_PROMOTIONS_URL || PROMOTIONS_URL, 'vnm_km3', []);
+  if (!kmProgs || !kmProgs.length) {
+    kmProgs = await fetchJSON(PROMOTIONS_URL, 'vnm_km3', []);
+  }
   kmSave();
 }
 

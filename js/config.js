@@ -1,7 +1,11 @@
 // Cấu hình hằng số
 const REPO_RAW = 'https://raw.githubusercontent.com/chabalua/VNM-PWD-1/main/';
 const PRODUCTS_URL = REPO_RAW + 'products.json';
-const PROMOTIONS_URL = REPO_RAW + 'promotions.json';
+
+// For local workflow (e.g., your daily mobile work + PC merge), keep promotions.json in the app root.
+// If missing, it falls back to GitHub remote URL.
+const LOCAL_PROMOTIONS_URL = 'promotions.json';
+const PROMOTIONS_URL = LOCAL_PROMOTIONS_URL || REPO_RAW + 'promotions.json';
 
 // Thuế VAT
 const VAT = 0.015;
