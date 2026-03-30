@@ -130,14 +130,15 @@ function kmRenderPicker(checked) {
 }
 
 function toggleFavorite(event, ma) {
-  event.stopPropagation();
+  if (event && event.stopPropagation) event.stopPropagation();
   let favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
   const idx = favorites.indexOf(ma);
   if (idx === -1) favorites.push(ma);
   else favorites.splice(idx, 1);
   localStorage.setItem('vnm_favorites', JSON.stringify(favorites));
-  const currentChecked = kmGetChecked();
-  kmRenderPicker(currentChecked);
+  const currentChecked = kmGetChecked ? kmGetChecked() : [];
+  if (window.kmRenderPicker) window.kmRenderPicker(currentChecked);
+  if (window.renderOrder) window.renderOrder();
 }
 
 function kmCheckAll(val) { document.querySelectorAll('.km-pick-cb').forEach(cb => cb.checked = val); kmPreview(); }
@@ -217,12 +218,33 @@ function renderKMTab() {
     el.innerHTML = '<div class="empty">Chưa có CT KM nào<br><small>Nhấn ＋ để tạo</small></div>';
     return;
   }
-  el.innerHTML = kmProgs.map((prog, i) => {
-    const cnt = (prog.spMas || []).length;
-    const txt = kmBuildText(prog);
-    const stackLbl = prog.stackable ? '🔗 Được gộp' : '🔒 Không gộp';
-    return `<div class="km-card"><div class="km-card-h"><div style="flex:1;min-width:0"><div class="km-card-nm">${prog.name || 'CT KM'}</div><div class="km-card-sm">${txt} · ${cnt} SP · ${stackLbl}</div></div><span class="km-badge ${prog.active ? 'on' : ''}">${prog.active ? '✓ Bật' : '○ Tắt'}</span></div><div class="km-card-f"><button class="btn-kme" onclick="kmEdit(${i})">✏️ Sửa</button><button class="btn-kmt" onclick="kmToggle(${i})">${prog.active ? '⏸ Tắt' : '▶ Bật'}</button><button class="btn-kmd" onclick="kmDel(${i})">✕</button></div></div>`;
-  }).join('');
+
+  const groups = { all: [], A: [], B: [], C: [], D: [], other: [] };
+  kmProgs.forEach((prog, i) => {
+    const label = (prog.nhoms || '').trim();
+    const key = label ? (groups[label] ? label : 'other') : 'all';
+    groups[key].push({ prog, idx: i });
+  });
+
+  const sectionOrder = ['all', 'A', 'B', 'C', 'D', 'other'];
+  const sectionLabels = { all: 'Tất cả', A: 'A·Bột', B: 'B·Đặc', C: 'C·Nước', D: 'D·Chua', other: 'Khác' };
+  let html = '';
+
+  sectionOrder.forEach(key => {
+    if (!groups[key].length) return;
+    html += `<div class="km-section"><div class="km-sec-hd">${sectionLabels[key]} (${groups[key].length})</div>`;
+    html += groups[key].map(item => {
+      const prog = item.prog;
+      const i = item.idx;
+      const cnt = (prog.spMas || []).length;
+      const txt = kmBuildText(prog);
+      const stackLbl = prog.stackable ? '🔗 Được gộp' : '🔒 Không gộp';
+      return `<div class="km-card"><div class="km-card-h"><div style="flex:1;min-width:0"><div class="km-card-nm">${prog.name || 'CT KM'}</div><div class="km-card-sm">${txt} · ${cnt} SP · ${stackLbl}</div></div><span class="km-badge ${prog.active ? 'on' : ''}">${prog.active ? '✓ Bật' : '○ Tắt'}</span></div><div class="km-card-f"><button class="btn-kme" onclick="kmEdit(${i})">✏️ Sửa</button><button class="btn-kmt" onclick="kmToggle(${i})">${prog.active ? '⏸ Tắt' : '▶ Bật'}</button><button class="btn-kmd" onclick="kmDel(${i})">✕</button></div></div>`;
+    }).join('');
+    html += '</div>';
+  });
+
+  el.innerHTML = html;
 }
 
 function kmToggle(i) { kmProgs[i].active = !kmProgs[i].active; kmSave(); renderKMTab(); renderOrder(); }

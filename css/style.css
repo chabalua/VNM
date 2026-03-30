@@ -941,6 +941,18 @@ input, button, select, textarea {
   font-size: 15px;
   line-height: 1.7;
 }
+.order-section {
+  margin: 8px 0;
+}
+.order-sec-hd {
+  padding: 6px 12px;
+  font-weight: 700;
+  color: var(--t1);
+  background: var(--l4);
+  border-radius: var(--Rs);
+  margin: 0 9px 6px;
+  font-size: 13px;
+}
 .km-card {
   background: var(--card);
   margin: 7px 9px;

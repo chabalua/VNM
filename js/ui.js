@@ -48,26 +48,50 @@ function onQty(ma) {
 function renderOrder() {
   const q = (document.getElementById('order-q')||{}).value || '';
   const lq = q.toLowerCase();
+  const favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
   const f = SP.filter(p => (!nhomF.order || p.nhom === nhomF.order) && (!lq || p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq)));
   const el = document.getElementById('order-list');
   if (!el) return;
   if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy</div>'; return; }
-  el.innerHTML = f.map(p => {
-    const inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
-    return `<div class="sp-card ${inCart ? 'inCart' : ''}" id="card_${p.ma}">
-      <div class="sp-top"><div class="sp-bar" style="background:${NCOLOR[p.nhom]}"></div>
-        <div class="sp-body"><div class="sp-name">${p.ten}</div>
-          <div class="sp-meta"><span class="sp-chip">${p.ma}</span><span class="sp-chip">${p.donvi}·${p.slThung}/thùng</span></div>
+
+  f.sort((a,b) => {
+    const aFav = favorites.includes(a.ma);
+    const bFav = favorites.includes(b.ma);
+    if (aFav !== bFav) return aFav ? -1 : 1;
+    return a.ten.localeCompare(b.ten);
+  });
+
+  const groups = {};
+  f.forEach(p => { if (!groups[p.nhom]) groups[p.nhom] = []; groups[p.nhom].push(p); });
+  const sectionOrder = ['A','B','C','D'];
+  let html = '';
+  sectionOrder.forEach(nhom => {
+    if (!groups[nhom] || !groups[nhom].length) return;
+    const label = NLBL[nhom] || nhom;
+    html += `<div class="order-section"><div class="order-sec-hd">${label} (${groups[nhom].length} SP)</div>`;
+    html += groups[nhom].map(p => {
+      const inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
+      const isFav = favorites.includes(p.ma);
+      return `<div class="sp-card ${inCart ? 'inCart' : ''}" id="card_${p.ma}">
+        <div class="sp-top"><div class="sp-bar" style="background:${NCOLOR[p.nhom]}"></div>
+          <div class="sp-body"><div class="sp-name">${p.ten}<span class="fav-star${isFav ? ' active' : ''}" onclick="toggleFavorite(event, '${p.ma}')">★</span></div>
+            <div class="sp-meta"><span class="sp-chip">${p.ma}</span><span class="sp-chip">${p.donvi}·${p.slThung}/thùng</span></div>
+          </div>
         </div>
-      </div>
-      <div id="pt_${p.ma}">${ptbl(p, calcKM(p, 0, 0))}</div>
-      <div class="qty-area"><div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" inputmode="numeric" placeholder="0" id="qT_${p.ma}" oninput="onQty('${p.ma}')"></div>
-        <div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" inputmode="numeric" placeholder="0" id="qL_${p.ma}" oninput="onQty('${p.ma}')"></div>
-        <button class="btn-add" onclick="addCart('${p.ma}')">＋</button>
-      </div>
-      <div class="pv-box" id="pv_${p.ma}"></div>
-    </div>`;
-  }).join('');
+        <div id="pt_${p.ma}">${ptbl(p, calcKM(p, 0, 0))}</div>
+        <div class="qty-area"><div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" inputmode="numeric" placeholder="0" id="qT_${p.ma}" oninput="onQty('${p.ma}')"></div>
+          <div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" inputmode="numeric" placeholder="0" id="qL_${p.ma}" oninput="onQty('${p.ma}')"></div>
+          <button class="btn-add" onclick="addCart('${p.ma}')">＋</button>
+        </div>
+        <div class="pv-box" id="pv_${p.ma}"></div>
+      </div>`;
+    }).join('');
+    html += '</div>';
+  });
+
+  if (!html) { el.innerHTML = '<div class="empty">Không tìm thấy</div>'; return; }
+  el.innerHTML = html;
+
   for (const [ma, q] of Object.entries(cart)) {
     if (!q.qT && !q.qL) continue;
     const iT = document.getElementById('qT_'+ma), iL = document.getElementById('qL_'+ma);
