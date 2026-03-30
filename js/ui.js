@@ -52,7 +52,11 @@ function renderOrder() {
   const f = SP.filter(p => (!nhomF.order || p.nhom === nhomF.order) && (!lq || p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq)));
   const el = document.getElementById('order-list');
   if (!el) return;
-  if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy</div>'; return; }
+  if (!SP.length) {
+    el.innerHTML = '<div class="empty">Chưa có sản phẩm (kiểm tra kết nối hoặc sync từ GitHub)</div>';
+    return;
+  }
+  if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy (lọc quá chặt)</div>'; return; }
 
   f.sort((a,b) => {
     const aFav = favorites.includes(a.ma);
@@ -62,12 +66,16 @@ function renderOrder() {
   });
 
   const groups = {};
-  f.forEach(p => { if (!groups[p.nhom]) groups[p.nhom] = []; groups[p.nhom].push(p); });
-  const sectionOrder = ['A','B','C','D'];
+  f.forEach(p => {
+    const key = p.nhom || 'X';
+    if (!groups[key]) groups[key] = [];
+    groups[key].push(p);
+  });
+  const sectionOrder = ['A','B','C','D','X'];
   let html = '';
   sectionOrder.forEach(nhom => {
     if (!groups[nhom] || !groups[nhom].length) return;
-    const label = NLBL[nhom] || nhom;
+    const label = nhom === 'X' ? 'Khác' : (NLBL[nhom] || nhom);
     html += `<div class="order-section"><div class="order-sec-hd">${label} (${groups[nhom].length} SP)</div>`;
     html += groups[nhom].map(p => {
       const inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
