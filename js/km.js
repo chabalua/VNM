@@ -68,8 +68,8 @@ function kmTypeFields(prog) {
     return `<div class="kf"><div class="kfl">CK theo số lượng</div><div style="display:flex;gap:8px;align-items:center;margin-bottom:8px"><span style="font-size:12px;font-weight:700;color:var(--t2)">Tính theo:</span><select id="kf-tunit" style="flex:1;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"><option value="lon"${prog.tUnit !== 'thung' ? ' selected' : ''}>Lon/Hộp</option><option value="thung"${prog.tUnit === 'thung' ? ' selected' : ''}>Thùng</option></select></div><div id="km-tiers">${rows}</div><button class="btn-atr" onclick="kmAddTier('qty')">+ Thêm mức</button></div>`;
   }
   if (t === 'tier_money') {
-    const rows = (prog.tiers || [{ mx: 600, ck: 12 }, { mx: 1200, ck: 14 }, { mx: 0, ck: 16 }]).map((ti, i) => `<div class="km-tier-row" id="ktr-${i}"><label>Dưới</label><input type="number" class="t-mx" value="${ti.mx || 0}" placeholder="K" oninput="kmPreview()"><label>K→CK</label><input type="number" class="t-ck" value="${ti.ck}" min="0" max="50" oninput="kmPreview()"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>`).join('');
-    return `<div class="kf"><div class="kfl">CK theo tổng tiền</div><div id="km-tiers">${rows}</div><button class="btn-atr" onclick="kmAddTier('money')">+ Thêm mức</button><div style="font-size:10px;color:var(--t3);margin-top:5px">💡 0 = không giới hạn</div></div>`;
+    const rows = (prog.tiers || [{ type: 'below', value: 600, ck: 12 }, { type: 'below', value: 1200, ck: 14 }, { type: 'above', value: 0, ck: 16 }]).map((ti, i) => `<div class="km-tier-row" id="ktr-${i}"><select class="t-type" onchange="kmPreview()"><option value="below"${ti.type === 'below' ? ' selected' : ''}>Dưới</option><option value="above"${ti.type === 'above' ? ' selected' : ''}>Trên</option></select><input type="number" class="t-val" value="${ti.value || 0}" placeholder="K" oninput="kmPreview()"><label>K→CK</label><input type="number" class="t-ck" value="${ti.ck}" min="0" max="50" oninput="kmPreview()"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>`).join('');
+    return `<div class="kf"><div class="kfl">CK theo tổng tiền</div><div id="km-tiers">${rows}</div><button class="btn-atr" onclick="kmAddTier('money')">+ Thêm mức</button><div style="font-size:10px;color:var(--t3);margin-top:5px">💡 Dưới/Trên số tiền → áp dụng CK</div></div>`;
   }
   return '';
 }
@@ -80,7 +80,7 @@ function kmAddTier(kind) {
   const div = document.createElement('div');
   div.className = 'km-tier-row'; div.id = 'ktr-'+i;
   if (kind === 'money') {
-    div.innerHTML = '<label>Dưới</label><input type="number" class="t-mx" value="0" placeholder="K"><label>K→CK</label><input type="number" class="t-ck" value="0"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
+    div.innerHTML = '<select class="t-type"><option value="below" selected>Dưới</option><option value="above">Trên</option></select><input type="number" class="t-val" value="0" placeholder="K"><label>K→CK</label><input type="number" class="t-ck" value="0"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
   } else {
     div.innerHTML = '<label>Từ</label><input type="number" class="t-mn" value="2"><label>CK</label><input type="number" class="t-ck" value="0"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
   }
@@ -174,8 +174,10 @@ function kmReadForm() {
   } else if (t === 'tier_money') {
     prog.tiers = [];
     document.querySelectorAll('#km-tiers .km-tier-row').forEach(r => {
-      const mx = (r.querySelector('.t-mx')||{}).value; const ck = (r.querySelector('.t-ck')||{}).value;
-      if (ck) prog.tiers.push({ mx: mx || 0, ck: ck });
+      const type = (r.querySelector('.t-type')||{}).value;
+      const val = (r.querySelector('.t-val')||{}).value;
+      const ck = (r.querySelector('.t-ck')||{}).value;
+      if (ck) prog.tiers.push({ type: type || 'below', value: val || 0, ck: ck });
     });
   }
   return prog;
@@ -261,7 +263,7 @@ function kmBuildText(prog) {
   }
   if (t === 'fixed') return 'CK ' + prog.ck + '%';
   if (t === 'tier_qty') return (prog.tiers || []).map(ti => ti.mn + '+ CK' + ti.ck + '%').join(' | ');
-  if (t === 'tier_money') return (prog.tiers || []).map(ti => (ti.mx ? '<' + ti.mx + 'K' : '≥') + ' CK' + ti.ck + '%').join(' | ');
+  if (t === 'tier_money') return (prog.tiers || []).map(ti => (ti.type === 'below' ? '<' : '≥') + (ti.value || 0) + 'K CK' + ti.ck + '%').join(' | ');
   return '';
 }
 

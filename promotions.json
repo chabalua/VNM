@@ -9,14 +9,13 @@
     "spMas": []
   },
   {
-    "name": "Mua 12 tặng 1 cùng loại B/C",
-    "type": "bonus",
-    "bX": 12,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "nhoms": "BC",
+    "name": "Dưới 600K CK 12%, trên 1200K CK 16%",
+    "type": "tier_money",
+    "tiers": [
+      { "type": "below", "value": 600, "ck": 12 },
+      { "type": "above", "value": 1200, "ck": 16 }
+    ],
+    "nhoms": "",
     "active": true,
     "stackable": true,
     "spMas": []

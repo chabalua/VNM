@@ -25,7 +25,7 @@ function kmBuildRules(prog) {
     const tiers = (prog.tiers || []).filter(t => +t.mn > 0 && +t.ck > 0).map(t => ({ minT: +t.mn, ck: +t.ck / 100 }));
     if (tiers.length) rules.push({ type: 'tier_qty', unit: prog.tUnit || 'lon', tiers });
   } else if (prog.type === 'tier_money') {
-    const tiers = (prog.tiers || []).filter(t => +t.ck > 0).map(t => ({ maxMoney: (+t.mx || 99999) * 1000, ck: +t.ck / 100 }));
+    const tiers = (prog.tiers || []).filter(t => +t.ck > 0).map(t => ({ type: t.type || 'below', value: (+t.value || 0) * 1000, ck: +t.ck / 100 }));
     if (tiers.length) rules.push({ type: 'tier_money', tiers });
   }
   return rules;
@@ -66,9 +66,20 @@ function _calcKM_orig(p, qT, qL) {
   let ckDisc = 0, lines = [];
   for (const r of p.kmRules) {
     if (r.type === 'tier_money') {
-      const tiers = [...r.tiers].sort((a,b) => a.maxMoney - b.maxMoney);
-      const t = tiers.find(x => base < x.maxMoney) || tiers[tiers.length-1];
-      if (t && t.ck > 0) { ckDisc += Math.round(base * t.ck); lines.push('CK ' + Math.round(t.ck*100) + '%'); }
+      const tiers = [...r.tiers].sort((a,b) => a.value - b.value);
+      let applicableTier = null;
+      for (const t of tiers) {
+        if (t.type === 'below' && base < t.value) {
+          applicableTier = t;
+          break;
+        } else if (t.type === 'above' && base >= t.value) {
+          applicableTier = t;
+        }
+      }
+      if (applicableTier && applicableTier.ck > 0) {
+        ckDisc += Math.round(base * applicableTier.ck / 100);
+        lines.push('CK ' + applicableTier.ck + '%');
+      }
     } else if (r.type === 'tier_qty') {
       const cq = r.unit === 'thung' ? qT : totalLon;
       const t = [...r.tiers].sort((a,b) => b.minT - a.minT).find(x => cq >= x.minT);
