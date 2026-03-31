@@ -25,7 +25,34 @@ function kmBuildRules(prog) {
     const tiers = (prog.tiers || []).filter(t => +t.mn > 0 && +t.ck > 0).map(t => ({ minT: +t.mn, ck: +t.ck / 100 }));
     if (tiers.length) rules.push({ type: 'tier_qty', unit: prog.tUnit || 'lon', tiers });
   } else if (prog.type === 'tier_money') {
-    const tiers = (prog.tiers || []).filter(t => +t.ck > 0).map(t => ({ type: t.type || 'below', value: (+t.value || 0) * 1000, ck: +t.ck / 100 }));
+    const tiers = (prog.tiers || []).map(t => {
+      const ckPerc = +t.ck;
+      if (!ckPerc || ckPerc <= 0) return null;
+
+      let type = t.type;
+      if (!type) {
+        if (t.mx != null) type = 'below';
+        else if (t.mn != null) type = 'above';
+        else type = 'below';
+      }
+
+      let value = 0;
+      if (t.value != null && t.value !== '') {
+        value = +t.value;
+        if (!isNaN(value) && value > 0) {
+          // UI store uses 'K' as unit (600 means 600.000 VND); legacy may store full VND.
+          if (value < 10000) value = value * 1000;
+        } else value = 0;
+      } else if (t.mx != null && t.mx !== '') {
+        value = +t.mx;
+      } else if (t.mn != null && t.mn !== '') {
+        value = +t.mn * 1000;
+      }
+
+      if (isNaN(value) || value < 0) value = 0;
+      return { type, value, ck: ckPerc / 100 };
+    }).filter(t => t && t.ck > 0);
+
     if (tiers.length) rules.push({ type: 'tier_money', tiers });
   }
   return rules;
@@ -38,33 +65,30 @@ function calcKM(p, qT, qL) {
   if (!applicable.length) {
     return { ...baseKM, appliedPromos: [] };
   }
-  const hasNonStack = applicable.some(prog => !prog.stackable);
+  const stackable = applicable.filter(prog => prog.stackable);
+  const nonStackable = applicable.filter(prog => !prog.stackable);
   const pTest = { ...p };
-  if (hasNonStack) {
-    let best = null, bestHop = p.giaNYLon;
-    applicable.forEach(prog => {
-      pTest.kmRules = kmBuildRules(prog);
-      const km = _calcKM_orig(pTest, qT, qL);
-      if (km.hopKM < bestHop) { bestHop = km.hopKM; best = prog; }
-    });
-    if (best) {
-      pTest.kmRules = kmBuildRules(best);
-      const km = _calcKM_orig(pTest, qT, qL);
-      const applied = (km.disc > 0 || km.bonus > 0) ? [best.name || 'CT KM'] : [];
-      return { ...km, appliedPromos: applied };
-    }
-    return { ...baseKM, appliedPromos: [] };
-  } else {
-    let allRules = [];
-    applicable.forEach(prog => { allRules.push(...kmBuildRules(prog)); });
-    pTest.kmRules = allRules;
-    const kmAll = _calcKM_orig(pTest, qT, qL);
-    const applied = applicable.filter(prog => {
-      const testKM = _calcKM_orig({ ...p, kmRules: kmBuildRules(prog) }, qT, qL);
-      return testKM.disc > 0 || testKM.bonus > 0;
-    }).map(prog => prog.name || 'CT KM');
-    return { ...kmAll, appliedPromos: applied };
+  let allRules = [];
+  let appliedProgs = [];
+  // Áp dụng tất cả các CT KM stackable
+  stackable.forEach(prog => { allRules.push(...kmBuildRules(prog)); });
+  // Tìm CT KM non-stackable tốt nhất
+  let bestNonStack = null, bestHop = p.giaNYLon;
+  nonStackable.forEach(prog => {
+    const testRules = kmBuildRules(prog);
+    const testKM = _calcKM_orig({ ...p, kmRules: testRules }, qT, qL);
+    if (testKM.hopKM < bestHop) { bestHop = testKM.hopKM; bestNonStack = { prog, rules: testRules }; }
+  });
+  if (bestNonStack) { allRules.push(...bestNonStack.rules); }
+  // Tính toán cuối cùng
+  pTest.kmRules = allRules;
+  const kmFinal = _calcKM_orig(pTest, qT, qL);
+  // Ghi lại CT KM nào được áp dụng
+  if (kmFinal.disc > 0 || kmFinal.bonus > 0) {
+    appliedProgs = stackable.map(prog => prog.name || 'CT KM');
+    if (bestNonStack) appliedProgs.push(bestNonStack.prog.name || 'CT KM');
   }
+  return { ...kmFinal, appliedPromos: appliedProgs };
 }
 
 // Hàm tính toán cốt lõi (dùng cho kmRules)
@@ -75,15 +99,16 @@ function _calcKM_orig(p, qT, qL) {
   let ckDisc = 0, lines = [];
   for (const r of p.kmRules) {
     if (r.type === 'tier_money') {
-      const tiers = [...r.tiers].sort((a,b) => a.value - b.value);
       let applicableTier = null;
-      for (const t of tiers) {
-        if (t.type === 'below' && base < t.value) {
-          applicableTier = t;
-          break;
-        } else if (t.type === 'above' && base >= t.value) {
-          applicableTier = t;
-        }
+      // Xử lý 'below': tìm tier có value LỚN NHẤT mà base < value
+      const belowTiers = r.tiers.filter(t => t.type === 'below' && base < t.value);
+      if (belowTiers.length) {
+        applicableTier = belowTiers.reduce((prev, curr) => !prev || curr.value < prev.value ? curr : prev);
+      }
+      // Xử lý 'above': tìm tier có value NHỎ NHẤT mà base >= value
+      const aboveTiers = r.tiers.filter(t => t.type === 'above' && base >= t.value);
+      if (aboveTiers.length) {
+        applicableTier = aboveTiers.reduce((prev, curr) => !prev || curr.value > prev.value ? curr : prev);
       }
       if (applicableTier && applicableTier.ck > 0) {
         ckDisc += Math.round(base * applicableTier.ck / 100);
