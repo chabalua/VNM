@@ -73,8 +73,8 @@ function calcKM(p, qT, qL) {
   const pTest = { ...p };
   let allRules = [];
   let appliedProgs = [];
-  // Áp dụng tất cả các CT KM stackable
-  stackable.forEach(prog => { allRules.push(...kmBuildRules(prog)); });
+  const stackableRules = stackable.map(prog => ({ prog, rules: kmBuildRules(prog) }));
+  stackableRules.forEach(({ rules }) => { allRules.push(...rules); });
   // Tìm CT KM non-stackable tốt nhất
   let bestNonStack = null, bestHop = p.giaNYLon;
   nonStackable.forEach(prog => {
@@ -86,9 +86,12 @@ function calcKM(p, qT, qL) {
   // Tính toán cuối cùng
   pTest.kmRules = allRules;
   const kmFinal = _calcKM_orig(pTest, qT, qL);
-  // Ghi lại CT KM nào được áp dụng
+  // Ghi lại CT KM nào thực sự được áp dụng
   if (kmFinal.disc > 0 || kmFinal.bonus > 0) {
-    appliedProgs = stackable.map(prog => prog.name || 'CT KM');
+    appliedProgs = stackableRules.filter(({ prog, rules }) => {
+      const testKM = _calcKM_orig({ ...p, kmRules: rules }, qT, qL);
+      return testKM.disc > 0 || testKM.bonus > 0;
+    }).map(({ prog }) => prog.name || 'CT KM');
     if (bestNonStack) appliedProgs.push(bestNonStack.prog.name || 'CT KM');
   }
   return { ...kmFinal, appliedPromos: appliedProgs };
