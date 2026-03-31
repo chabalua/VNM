@@ -156,6 +156,7 @@ input, button, select, textarea {
   border-radius: 14px;
   cursor: pointer;
   white-space: nowrap;
+  position: relative;
 }
 .pill.on-all {
   background: var(--t1);
@@ -1306,86 +1307,32 @@ input, button, select, textarea {
   border-bottom: none;
 }
 
-.group-list {
-  margin: 10px 9px;
+.group-dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
   background: var(--card);
-  border-radius: var(--R);
-  box-shadow: 0 1px 3px rgba(0,0,0,.07);
-  overflow: hidden;
-  display: none;
-}
-
-.group-list:not(:empty) {
-  display: block;
-}
-
-.group-header {
-  background: var(--g);
-  color: #fff;
-  padding: 10px 13px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.group-items {
-  max-height: 300px;
+  border: 1px solid var(--l1);
+  border-radius: var(--Rs);
+  box-shadow: 0 2px 8px rgba(0,0,0,.15);
+  z-index: 1000;
+  max-height: 200px;
   overflow-y: auto;
+  min-width: 200px;
 }
 
-.group-item {
-  padding: 10px 13px;
-  border-bottom: 1px solid var(--l1);
+.group-dropdown div {
+  padding: 8px 12px;
   cursor: pointer;
+  border-bottom: 1px solid var(--l1);
   font-size: 13px;
   font-weight: 600;
 }
 
-.group-item:hover {
+.group-dropdown div:hover {
   background: var(--bg);
 }
 
-.group-item:last-child {
-  border-bottom: none;
-}
-
-.group-list {
-  margin: 10px 9px;
-  background: var(--card);
-  border-radius: var(--R);
-  box-shadow: 0 1px 3px rgba(0,0,0,.07);
-  overflow: hidden;
-  display: none;
-}
-
-.group-list:not(:empty) {
-  display: block;
-}
-
-.group-header {
-  background: var(--g);
-  color: #fff;
-  padding: 10px 13px;
-  font-size: 13px;
-  font-weight: 700;
-}
-
-.group-items {
-  max-height: 300px;
-  overflow-y: auto;
-}
-
-.group-item {
-  padding: 10px 13px;
-  border-bottom: 1px solid var(--l1);
-  cursor: pointer;
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.group-item:hover {
-  background: var(--bg);
-}
-
-.group-item:last-child {
+.group-dropdown div:last-child {
   border-bottom: none;
 }

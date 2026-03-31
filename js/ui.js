@@ -158,18 +158,23 @@ function showGroupProducts(tab, nhom) {
     alert('Không có sản phẩm trong nhóm này.');
     return;
   }
-  const el = document.getElementById('group-list');
-  if (!el) return;
-  // Nếu đang hiển thị cùng nhóm, ẩn đi
-  if (el.dataset.currentNhom === nhom) {
-    el.innerHTML = '';
-    el.dataset.currentNhom = '';
-    return;
+  // Tìm pill element
+  const pills = document.querySelectorAll('.pill');
+  let targetPill = null;
+  for (let pill of pills) {
+    if (pill.textContent.includes(nhom ? nhom : 'Tất cả')) {
+      targetPill = pill;
+      break;
+    }
   }
-  // Hiển thị list
-  el.dataset.currentNhom = nhom;
-  el.innerHTML = `<div class="group-header">${nhom ? NLBL[nhom] : 'Tất cả'} (${products.length} SP)</div>
-    <div class="group-items">${products.slice(0, 20).map(p => `<div class="group-item" onclick="addCart('${p.ma}'); document.getElementById('group-list').innerHTML='';">${p.ten}</div>`).join('')}</div>`;
+  if (!targetPill) return;
+  // Xóa dropdown cũ
+  document.querySelectorAll('.group-dropdown').forEach(d => d.remove());
+  // Tạo dropdown
+  const dropdown = document.createElement('div');
+  dropdown.className = 'group-dropdown';
+  dropdown.innerHTML = products.slice(0, 10).map(p => `<div onclick="addCart('${p.ma}'); this.closest('.group-dropdown').remove();">${p.ten}</div>`).join('') + (products.length > 10 ? '<div style="color:#999;padding:8px;">+ ' + (products.length - 10) + ' sản phẩm nữa</div>' : '');
+  targetPill.appendChild(dropdown);
 }
 
 // Xuất các hàm ra window
