@@ -1,7 +1,7 @@
 # VNM
-# VNM Order - Hệ thống quản lý bán hàng & khuyến mãi
+# VNM Order
 
-Ứng dụng web dành cho nhân viên kinh doanh/đại lý của Vinamilk, hỗ trợ tạo đơn hàng nhanh, quản lý sản phẩm, khách hàng và chương trình khuyến mãi linh hoạt. Dữ liệu được đồng bộ từ GitHub, có thể dùng offline với cache local.
+Ứng dụng web dành cho nhân viên kinh doanh/đại , hỗ trợ tạo đơn hàng nhanh, quản lý sản phẩm, khách hàng và chương trình khuyến mãi linh hoạt. Dữ liệu được đồng bộ từ GitHub, có thể dùng offline với cache local.
 
 ## 🚀 Tính năng chính
 
