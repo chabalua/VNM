@@ -107,6 +107,9 @@ function kmPickNhom(n) {
 function kmRenderPicker(checked) {
   const el = document.getElementById('km-picker'); if (!el) return;
   const favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
+  const selected = Array.isArray(checked) ? checked : [];
+  const pickedProducts = selected.map(ma => SP.find(p => p.ma === ma)).filter(Boolean);
+  const missingCodes = selected.filter(ma => !pickedProducts.some(p => p.ma === ma));
   let list = SP.filter(p => !_kmPickerNhom || p.nhom === _kmPickerNhom);
   list.sort((a, b) => {
     const aFav = favorites.includes(a.ma);
@@ -114,23 +117,42 @@ function kmRenderPicker(checked) {
     if (aFav !== bFav) return aFav ? -1 : 1;
     return a.ten.localeCompare(b.ten);
   });
+  const visible = [];
+  const added = new Set();
+  pickedProducts.forEach(p => { visible.push(p); added.add(p.ma); });
+  list.forEach(p => { if (!added.has(p.ma)) { visible.push(p); added.add(p.ma); } });
   const nhomLabels = {A:'Bột', B:'Đặc', C:'Nước', D:'Chua'};
-  el.innerHTML = list.map(p => {
+  const rows = visible.map(p => {
     const isFav = favorites.includes(p.ma);
+    const hasInfo = !!p.ten;
     return `<div class="km-pick-row" data-ma="${p.ma}">
-      <input type="checkbox" class="km-pick-cb" id="kpk-${p.ma}" value="${p.ma}"${checked.indexOf(p.ma) >= 0 ? ' checked' : ''} onchange="kmPreview()">
+      <input type="checkbox" class="km-pick-cb" id="kpk-${p.ma}" value="${p.ma}"${selected.indexOf(p.ma) >= 0 ? ' checked' : ''} onchange="kmPreview()">
       <label for="kpk-${p.ma}" style="flex:1;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
         <div>
-          <div style="font-size:12px;color:var(--t1)">${p.ten}</div>
-          <div style="font-size:10px;color:var(--t3)">${p.ma} · ${fmt(p.giaNYLon)}đ/${p.donvi}</div>
+          <div style="font-size:12px;color:var(--t1)">${hasInfo ? p.ten : '[Không có SP] ' + p.ma}</div>
+          <div style="font-size:10px;color:var(--t3)">${p.ma}${hasInfo ? ' · ' + fmt(p.giaNYLon) + 'đ/' + p.donvi : ''}</div>
         </div>
         <div style="display:flex;align-items:center;gap:6px;">
-          <span class="sp-nhom-badge ${p.nhom}">${nhomLabels[p.nhom]}</span>
-          <span class="fav-star${isFav ? ' active' : ''}" data-ma="${p.ma}" onclick="toggleFavorite(event, '${p.ma}')">★</span>
+          ${hasInfo ? `<span class="sp-nhom-badge ${p.nhom}">${nhomLabels[p.nhom]}</span>` : ''}
+          ${hasInfo ? `<span class="fav-star${isFav ? ' active' : ''}" data-ma="${p.ma}" onclick="toggleFavorite(event, '${p.ma}')">★</span>` : ''}
         </div>
       </label>
     </div>`;
-  }).join('');
+  });
+  if (missingCodes.length) {
+    const missingRows = missingCodes.map(ma => `<div class="km-pick-row" data-ma="${ma}">
+      <input type="checkbox" class="km-pick-cb" id="kpk-${ma}" value="${ma}" checked onchange="kmPreview()">
+      <label for="kpk-${ma}" style="flex:1;cursor:pointer;display:flex;align-items:center;justify-content:space-between;">
+        <div>
+          <div style="font-size:12px;color:var(--r)">[Không có dữ liệu SP]</div>
+          <div style="font-size:10px;color:var(--t3)">${ma}</div>
+        </div>
+      </label>
+    </div>`);
+    el.innerHTML = missingRows.join('') + rows.join('');
+  } else {
+    el.innerHTML = rows.join('');
+  }
 }
 
 function toggleFavorite(event, ma) {
@@ -198,7 +220,11 @@ function kmPreview() {
     return;
   }
   if (!spMas.length) { area.innerHTML = ''; return; }
-  const p = SP.find(x => x.ma === spMas[0]); if (!p) return;
+  const p = SP.find(x => spMas.includes(x.ma));
+  if (!p) {
+    area.innerHTML = `<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview CTKM</div><div class="km-pv-row"><span>Chú ý</span><span>Không tìm thấy sản phẩm hợp lệ để xem preview</span></div></div>`;
+    return;
+  }
   const rules = kmBuildRules(prog);
   const pTest = { ...p, kmRules: rules };
   const X = prog.type === 'bonus' ? (+prog.bX || 12) : 2;
