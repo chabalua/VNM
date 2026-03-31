@@ -31,10 +31,7 @@ function onQty(ma) {
   const km = calcKM(p, qT, qL);
   const totalLon = qT * p.slThung + qL;
   const after = p.giaNYLon * totalLon - km.disc;
-  const ctName = (() => {
-    const applicable = kmProgs.filter(prog => prog.active && (prog.spMas || []).indexOf(p.ma) >= 0);
-    return applicable.length ? applicable.map(prog => prog.name).join(' + ') : '';
-  })();
+  const ctName = (km.appliedPromos || []).length ? (km.appliedPromos).join(' + ') : '';
   pv.style.display = 'block';
   pv.innerHTML = `<div class="pv-row"><span class="pv-l">SL: ${totalLon} ${p.donvi}${km.bonus > 0 ? ' + tặng ' + km.bonus + ' ' + p.donvi : ''}</span>${ctName ? `<span class="sp-kmbadge" style="font-size:11px">${ctName}</span>` : ''}</div>
     <div class="pv-row"><span class="pv-l">Thành tiền</span><span class="pv-v">${fmt(after)}đ</span></div>

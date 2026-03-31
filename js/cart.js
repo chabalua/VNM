@@ -34,9 +34,9 @@ function kmBuildRules(prog) {
 // Hàm tính KM chính (được export)
 function calcKM(p, qT, qL) {
   const applicable = kmProgs.filter(prog => prog.active && (prog.spMas || []).indexOf(p.ma) >= 0);
+  const baseKM = _calcKM_orig(p, qT, qL);
   if (!applicable.length) {
-    // Fallback: gọi hàm nội bộ _calcKM_orig
-    return _calcKM_orig(p, qT, qL);
+    return { ...baseKM, appliedPromos: [] };
   }
   const hasNonStack = applicable.some(prog => !prog.stackable);
   const pTest = { ...p };
@@ -47,14 +47,23 @@ function calcKM(p, qT, qL) {
       const km = _calcKM_orig(pTest, qT, qL);
       if (km.hopKM < bestHop) { bestHop = km.hopKM; best = prog; }
     });
-    if (best) { pTest.kmRules = kmBuildRules(best); return _calcKM_orig(pTest, qT, qL); }
-    pTest.kmRules = [];
-    return _calcKM_orig(pTest, qT, qL);
+    if (best) {
+      pTest.kmRules = kmBuildRules(best);
+      const km = _calcKM_orig(pTest, qT, qL);
+      const applied = (km.disc > 0 || km.bonus > 0) ? [best.name || 'CT KM'] : [];
+      return { ...km, appliedPromos: applied };
+    }
+    return { ...baseKM, appliedPromos: [] };
   } else {
     let allRules = [];
     applicable.forEach(prog => { allRules.push(...kmBuildRules(prog)); });
     pTest.kmRules = allRules;
-    return _calcKM_orig(pTest, qT, qL);
+    const kmAll = _calcKM_orig(pTest, qT, qL);
+    const applied = applicable.filter(prog => {
+      const testKM = _calcKM_orig({ ...p, kmRules: kmBuildRules(prog) }, qT, qL);
+      return testKM.disc > 0 || testKM.bonus > 0;
+    }).map(prog => prog.name || 'CT KM');
+    return { ...kmAll, appliedPromos: applied };
   }
 }
 
