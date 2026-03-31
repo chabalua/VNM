@@ -156,7 +156,6 @@ input, button, select, textarea {
   border-radius: 14px;
   cursor: pointer;
   white-space: nowrap;
-  position: relative;
 }
 .pill.on-all {
   background: var(--t1);
@@ -437,7 +436,6 @@ input, button, select, textarea {
 .oi {
   padding: 9px 13px;
   border-bottom: 1px solid var(--l1);
-  position: relative;
 }
 .oi-top {
   display: flex;
@@ -1275,64 +1273,4 @@ input, button, select, textarea {
 .km-pick-row .sp-nhom-badge.D {
   background: var(--rL);
   color: var(--r);
-}
-
-.variant-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  right: 0;
-  background: var(--card);
-  border: 1px solid var(--l1);
-  border-radius: var(--Rs);
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  z-index: 1000;
-  max-height: 200px;
-  overflow-y: auto;
-}
-
-.variant-dropdown div {
-  padding: 8px 12px;
-  cursor: pointer;
-  border-bottom: 1px solid var(--l1);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.variant-dropdown div:hover {
-  background: var(--bg);
-}
-
-.variant-dropdown div:last-child {
-  border-bottom: none;
-}
-
-.group-dropdown {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: var(--card);
-  border: 1px solid var(--l1);
-  border-radius: var(--Rs);
-  box-shadow: 0 2px 8px rgba(0,0,0,.15);
-  z-index: 1000;
-  max-height: 200px;
-  overflow-y: auto;
-  min-width: 200px;
-}
-
-.group-dropdown div {
-  padding: 8px 12px;
-  cursor: pointer;
-  border-bottom: 1px solid var(--l1);
-  font-size: 13px;
-  font-weight: 600;
-}
-
-.group-dropdown div:hover {
-  background: var(--bg);
-}
-
-.group-dropdown div:last-child {
-  border-bottom: none;
 }
