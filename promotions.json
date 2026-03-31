@@ -1,192 +1,5 @@
 [
   {
-    "name": "CK bậc thang 12%-14%-16% theo tổng tiền",
-    "type": "tier_money",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "tiers": [
-      {
-        "mx": 600000,
-        "ck": 12
-      },
-      {
-        "mx": 1200000,
-        "ck": 14
-      },
-      {
-        "mx": 999999999,
-        "ck": 16
-      }
-    ],
-    "spMas": [
-      "02HO38",
-      "02HO18",
-      "02HL38",
-      "02HL18",
-      "02HD19",
-      "02HD39",
-      "02HG18",
-      "02HG38",
-      "02HS37",
-      "02PD21",
-      "02PU21",
-      "02PU02",
-      "02HY39",
-      "02HY19",
-      "02HT30"
-    ]
-  },
-  {
-    "name": "SURE 24+1",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 24,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "02PU02"
-    ]
-  },
-  {
-    "name": "SURE 60+3",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 60,
-    "bY": 3,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "02PU02"
-    ]
-  },
-  {
-    "name": "SURE 210+12",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 210,
-    "bY": 12,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "02PU02"
-    ]
-  },
-  {
-    "name": "SURE 450+30",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 450,
-    "bY": 30,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "02PU02"
-    ]
-  },
-  {
-    "name": "CK 3% cho Alpha (mua 2+ lon)",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 3,
-    "spMas": [
-      "02DA35",
-      "02EA35",
-      "02EA15",
-      "02AA15"
-    ]
-  },
-  {
-    "name": "CK 7% cho Alpha Gold & Dielac Gold 1400g",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 7,
-    "spMas": [
-      "02AG17",
-      "02DG4A"
-    ]
-  },
-  {
-    "name": "CK 10% cho Optimum (2+ lon)",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 10,
-    "spMas": [
-      "02EO18",
-      "02EO28",
-      "02EO38",
-      "02EO48",
-      "02DO3A",
-      "02DO4A"
-    ]
-  },
-  {
-    "name": "Bò ít đường 150ml - Mua 4 tặng 1",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 4,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "04CI50"
-    ]
-  },
-  {
-    "name": "STT 110ml - Mua 12 tặng 1",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 12,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "04ED32",
-      "04EI32"
-    ]
-  },
-  {
-    "name": "STT 180ml - Mua 12 tặng 1",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 12,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "04ED12",
-      "04EI12"
-    ]
-  },
-  {
     "name": "STT 1L - Mua 12 tặng 1",
     "type": "bonus",
     "nhoms": "C",
@@ -200,7 +13,9 @@
     "spMas": [
       "04ED04",
       "04EI04",
-      "04ET04"
+      "04ET04",
+      "04GT05",
+      "04ET22"
     ]
   },
   {
@@ -234,164 +49,115 @@
     ]
   },
   {
-    "name": "ADM 180ml - CK 13%",
-    "type": "fixed",
-    "nhoms": "",
+    "name": "12 Hộp 1L - CK2%",
+    "type": "tier_qty",
+    "nhoms": "C",
     "active": true,
     "stackable": true,
-    "ck": 13,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "12",
+        "ck": "2"
+      }
+    ],
     "spMas": [
-      "04CD14"
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04GT05",
+      "04ET22"
     ]
   },
   {
-    "name": "SUSU hộp 110ml - Mua 22 tặng 2",
-    "type": "bonus",
-    "nhoms": "",
+    "name": "DH_SUANUOC",
+    "type": "tier_money",
+    "nhoms": "C",
     "active": true,
     "stackable": true,
-    "bX": 22,
-    "bY": 2,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
+    "tiers": [
+      {
+        "type": "above",
+        "value": "1000",
+        "ck": "1"
+      },
+      {
+        "type": "above",
+        "value": "3000",
+        "ck": "2"
+      }
+    ],
     "spMas": [
-      "06UN36"
-    ]
-  },
-  {
-    "name": "Sữa bịch 220ml - Mua 16 tặng 1",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 16,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "04FI31",
-      "04FD31"
-    ]
-  },
-  {
-    "name": "Sữa đậu nành bịch - CK 5%",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 5,
-    "spMas": [
-      "05FV43"
-    ]
-  },
-  {
-    "name": "Sữa đậu nành tươi - CK 5%",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 5,
-    "spMas": [
-      "05AT11"
-    ]
-  },
-  {
-    "name": "Sữa 9 loại hạt 1L - Mua 3 tặng 1",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 3,
-    "bY": 1,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "05AN02"
-    ]
-  },
-  {
-    "name": "Cao đạm 180ml - Mua 24 tặng 2",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 24,
-    "bY": 2,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "05AD10"
-    ]
-  },
-  {
-    "name": "Cao đạm 240ml - Mua 24 tặng 2",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 24,
-    "bY": 2,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "05AD20"
-    ]
-  },
-  {
-    "name": "Sữa 9 loại hạt 180ml - Mua 24 tặng 2 cao đạm",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 24,
-    "bY": 2,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "05AD10",
-    "spMas": [
-      "05AN23"
-    ]
-  },
-  {
-    "name": "Sữa hạt Đậu đỏ/Hạnh nhân - CK 5%",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 5,
-    "spMas": [
-      "05DH13"
-    ]
-  },
-  {
-    "name": "Sữa hạt Óc chó - CK 5%",
-    "type": "fixed",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "ck": 5,
-    "spMas": [
-      "05AV23"
-    ]
-  },
-  {
-    "name": "YOMILK 170ml - Mua 86 tặng 10",
-    "type": "bonus",
-    "nhoms": "",
-    "active": true,
-    "stackable": true,
-    "bX": 86,
-    "bY": 10,
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "same",
-    "spMas": [
-      "06VA23"
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "08HA31",
+      "08HA11",
+      "04CH30",
+      "04CH10",
+      "04FH20",
+      "04CD35",
+      "04CD15",
+      "04CA33",
+      "04CI31",
+      "04CI11",
+      "04CC34",
+      "04FD32",
+      "04LL13",
+      "04FA31",
+      "04FI32",
+      "04FT32",
+      "04FC32",
+      "05FV44",
+      "05AV33",
+      "04EN10",
+      "04FD2H",
+      "04ED33",
+      "04ED13",
+      "04EU11",
+      "04EB11",
+      "04EA33",
+      "04EA13",
+      "04EI33",
+      "04EI18",
+      "04FT2H",
+      "04ET33",
+      "04ET13",
+      "04GT05",
+      "04AE32",
+      "04AE12",
+      "04GO11",
+      "04ET22",
+      "04GI34",
+      "04GI14",
+      "04EC33",
+      "04EC13",
+      "04EM10",
+      "04EC60",
+      "04GB18",
+      "05AN31",
+      "05AN25",
+      "05AD31",
+      "05AD11",
+      "05DD14",
+      "05DH14",
+      "05MD10",
+      "05AV24",
+      "05DY10",
+      "06UC40",
+      "06UC32",
+      "06SC73",
+      "06UA40",
+      "06UA32",
+      "06SA73",
+      "06UK10",
+      "06UN40",
+      "06UN32",
+      "06UQ40",
+      "06UQ32",
+      "06VC23",
+      "06VA23",
+      "06VQ23"
     ]
   }
 ]
