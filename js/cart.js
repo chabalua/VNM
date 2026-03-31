@@ -184,7 +184,7 @@ function renderDon() {
   const totAfter = items.reduce((s,x) => s + x.afterKM, 0);
   const totSave = totGoc - totAfter;
   el.innerHTML = `<div class="ord-wrap"><div class="ord-hd"><span class="ord-hdT">Đơn · ${items.length} SP</span><span class="ord-hdV">${fmt(totAfter)}đ</span></div>
-    ${items.map(it => `<div class="oi"><div class="oi-top"><div class="oi-name">${it.ten}</div><button class="oi-del" onclick="removeCart('${it.ma}')">✕</button></div>
+    ${items.map(it => `<div class="oi"><div class="oi-top"><div class="oi-name" onclick="showVariants('${it.ma}')">${it.ten}</div><button class="oi-del" onclick="removeCart('${it.ma}')">✕</button></div>
       <div class="oi-sub">${it.ma} · ${it.donvi}</div><div class="oi-qty">${it.qT > 0 ? it.qT + ' thùng' : ''}${it.qT > 0 && it.qL > 0 ? ' + ' : ''}${it.qL > 0 ? it.qL + ' ' + it.donvi + ' lẻ' : ''} = ${it.totalLon} ${it.donvi}${it.bonus > 0 ? ' + tặng ' + it.bonus : ''}</div>
       ${it.desc ? `<div class="oi-km">${it.desc}</div>` : ''}<div class="oi-pr"><span class="oi-pl">Thành tiền</span><span class="oi-pv">${fmt(it.afterKM)}đ</span></div>
     </div>`).join('')}
@@ -211,6 +211,55 @@ function submitOrder() {
   }
   alert('✅ Đã tạo đơn ' + fmt(tong) + 'đ' + (makh ? ' cho ' + makh : ''));
   clearCart();
+}
+
+// Hiển thị biến thể sản phẩm cùng loại
+function showVariants(ma) {
+  const p = spFind(ma);
+  if (!p) return;
+  // Giả sử tên có format "Base Type Size", ví dụ "Sữa bột SDD 400g"
+  const match = p.ten.match(/^(.+?)\s+(\w{3,5})\s+(.+)$/);
+  if (!match) return;
+  const base = match[1] + ' ' + match[3];
+  const currentType = match[2];
+  // Tìm biến thể khác
+  const variants = SP.filter(sp => {
+    const m = sp.ten.match(/^(.+?)\s+(\w{3,5})\s+(.+)$/);
+    return m && m[1] + ' ' + m[3] === base && m[2] !== currentType;
+  });
+  if (!variants.length) return;
+  // Tìm element .oi
+  const oiElements = document.querySelectorAll('.oi');
+  let targetOi = null;
+  for (let oi of oiElements) {
+    if (oi.querySelector('.oi-sub').textContent.includes(ma)) {
+      targetOi = oi;
+      break;
+    }
+  }
+  if (!targetOi) return;
+  // Xóa dropdown cũ nếu có
+  let dropdown = targetOi.querySelector('.variant-dropdown');
+  if (dropdown) {
+    dropdown.remove();
+    return;
+  }
+  // Tạo dropdown
+  dropdown = document.createElement('div');
+  dropdown.className = 'variant-dropdown';
+  dropdown.innerHTML = variants.map(v => `<div onclick="replaceCart('${ma}', '${v.ma}')">${v.ten}</div>`).join('');
+  targetOi.appendChild(dropdown);
+}
+
+// Thay thế sản phẩm trong giỏ
+function replaceCart(oldMa, newMa) {
+  if (cart[oldMa] && !cart[newMa]) {
+    cart[newMa] = cart[oldMa];
+    delete cart[oldMa];
+    saveCart();
+    updateBadge();
+    renderDon();
+  }
 }
 
 // Quản lý khách hàng
@@ -248,6 +297,8 @@ window.cart = cart;
 window.customers = customers;
 window.saveCart = saveCart;
 window.fmt = fmt;
+window.showVariants = showVariants;
+window.replaceCart = replaceCart;
 window.calcKM = calcKM;
 window.getItems = getItems;
 window.addCart = addCart;

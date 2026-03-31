@@ -147,6 +147,36 @@ function closeAdmModal(e) {
   document.getElementById('adm-modal').style.display = 'none';
 }
 
+// Hiển thị dropdown sản phẩm trong nhóm
+function showGroupProducts(tab, nhom) {
+  if (!SP.length) {
+    alert('Chưa có dữ liệu sản phẩm. Vui lòng tải lại trang hoặc sync từ GitHub.');
+    return;
+  }
+  const products = nhom ? SP.filter(p => p.nhom === nhom) : SP;
+  if (!products.length) {
+    alert('Không có sản phẩm trong nhóm này.');
+    return;
+  }
+  // Tìm pill element
+  const pills = document.querySelectorAll('.pill');
+  let targetPill = null;
+  for (let pill of pills) {
+    if (pill.textContent.includes(nhom ? nhom : 'Tất cả')) {
+      targetPill = pill;
+      break;
+    }
+  }
+  if (!targetPill) return;
+  // Xóa dropdown cũ
+  document.querySelectorAll('.group-dropdown').forEach(d => d.remove());
+  // Tạo dropdown
+  const dropdown = document.createElement('div');
+  dropdown.className = 'group-dropdown';
+  dropdown.innerHTML = products.slice(0, 10).map(p => `<div onclick="addCart('${p.ma}'); this.closest('.group-dropdown').remove();">${p.ten}</div>`).join('') + (products.length > 10 ? '<div style="color:#999;padding:8px;">+ ' + (products.length - 10) + ' sản phẩm nữa</div>' : '');
+  targetPill.appendChild(dropdown);
+}
+
 // Xuất các hàm ra window
 window.nhomF = nhomF;
 window.ptbl = ptbl;
@@ -156,3 +186,4 @@ window.renderOrder = renderOrder;
 window.renderAdm = renderAdm;
 window.saveAdmPrice = saveAdmPrice;
 window.closeAdmModal = closeAdmModal;
+window.showGroupProducts = showGroupProducts;

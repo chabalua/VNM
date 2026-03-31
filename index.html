@@ -35,11 +35,11 @@
       <input type="text" id="order-q" placeholder="Tìm sản phẩm, mã SP..." oninput="renderOrder()">
     </div>
     <div class="pills">
-      <div class="pill on-all" onclick="setNhom(this,'order','')">Tất cả</div>
-      <div class="pill" onclick="setNhom(this,'order','A')">A·Bột</div>
-      <div class="pill" onclick="setNhom(this,'order','B')">B·Đặc</div>
-      <div class="pill" onclick="setNhom(this,'order','C')">C·Nước</div>
-      <div class="pill" onclick="setNhom(this,'order','D')">D·Chua</div>
+      <div class="pill on-all" onclick="showGroupProducts('order','')">Tất cả</div>
+      <div class="pill" onclick="showGroupProducts('order','A')">A·Bột</div>
+      <div class="pill" onclick="showGroupProducts('order','B')">B·Đặc</div>
+      <div class="pill" onclick="showGroupProducts('order','C')">C·Nước</div>
+      <div class="pill" onclick="showGroupProducts('order','D')">D·Chua</div>
     </div>
   </div>
   <div id="order-list"></div>
