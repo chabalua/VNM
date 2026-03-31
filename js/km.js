@@ -22,9 +22,9 @@ function kmCloseModal(e) {
 function kmRenderForm(prog) {
   const body = document.getElementById('km-modal-body');
   const t = prog.type || 'bonus';
-  const typeLabels = { bonus:'🎁 Tặng hàng', fixed:'% CK cố định', tier_qty:'📦 CK theo SL', tier_money:'💰 CK theo tiền' };
+  const typeLabels = { bonus:'🎁 Tặng hàng', fixed:'% CK cố định', tier_qty:'📦 CK theo SL', tier_money:'💰 CK theo tiền', order_money:'🧾 CK theo đơn hàng' };
   body.innerHTML = `<div class="kf"><div class="kfl">Tên chương trình</div><input type="text" id="kf-name" value="${prog.name || ''}" placeholder="VD: Sữa đặc NSPN xuất nhỏ xanh lá" inputmode="text"></div>
-    <div class="kf"><div class="kfl">Loại khuyến mãi</div><div class="km-types">${['bonus','fixed','tier_qty','tier_money'].map(tp => `<button class="km-type-btn${t===tp?' sel':''}" onclick="kmSelType('${tp}')">${typeLabels[tp]}</button>`).join('')}</div></div>
+    <div class="kf"><div class="kfl">Loại khuyến mãi</div><div class="km-types">${['bonus','fixed','tier_qty','tier_money','order_money'].map(tp => `<button class="km-type-btn${t===tp?' sel':''}" onclick="kmSelType('${tp}')">${typeLabels[tp]}</button>`).join('')}</div></div>
     <div id="kf-fields">${kmTypeFields(prog)}</div>
     <div class="kf"><div class="kfl">Gộp với CT KM khác</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><button class="km-stack-btn${_kmStackable ? ' sel' : ''}" onclick="kmSetStack(true,this)">🔗 Được gộp<br><span style="font-size:10px;font-weight:400;opacity:.7">Cộng thêm với CT khác</span></button><button class="km-stack-btn${!_kmStackable ? ' sel' : ''}" onclick="kmSetStack(false,this)">🔒 Không gộp<br><span style="font-size:10px;font-weight:400;opacity:.7">Chỉ dùng 1 CT lợi nhất</span></button></div></div>
     <div class="kf"><div class="kfl">Gán cho sản phẩm</div><div class="km-nhom-row">${['','A','B','C','D'].map(n => { const lbl = n ? n+'·'+{A:'Bột',B:'Đặc',C:'Nước',D:'Chua'}[n] : 'Tất cả'; return `<button class="km-nhom-btn${_kmPickerNhom===n?' sel':''}" onclick="kmPickNhom('${n}')">${lbl}</button>`; }).join('')}</div>
@@ -62,6 +62,10 @@ function kmTypeFields(prog) {
   }
   if (t === 'fixed') {
     return `<div class="kf"><div class="kfl">Chiết khấu</div><div style="display:flex;gap:8px;align-items:center"><input type="number" id="kf-ck" value="${prog.ck || 5}" min="1" max="50" style="flex:1;height:46px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:24px;font-weight:800;text-align:center;" oninput="kmPreview()"><span style="font-size:24px;font-weight:700;color:var(--t2)">%</span></div></div>`;
+  }
+  if (t === 'order_money') {
+    const rows = (prog.tiers || [{ type: 'above', value: 1000, ck: 1 }, { type: 'above', value: 3000, ck: 2 }]).map((ti, i) => `<div class="km-tier-row" id="ktr-${i}"><select class="t-type" onchange="kmPreview()"><option value="below"${ti.type === 'below' ? ' selected' : ''}>Dưới</option><option value="above"${ti.type === 'above' ? ' selected' : ''}>Trên</option></select><input type="number" class="t-val" value="${ti.value || 0}" placeholder="K" oninput="kmPreview()"><label>K→CK</label><input type="number" class="t-ck" value="${ti.ck}" min="0" max="50" oninput="kmPreview()"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>`).join('');
+    return `<div class="kf"><div class="kfl">CK theo tổng đơn hàng</div><div id="km-tiers">${rows}</div><button class="btn-atr" onclick="kmAddTier('money')">+ Thêm mức</button><div style="font-size:10px;color:var(--t3);margin-top:5px">Giá trị đơn hàng tính theo đơn vị K (1K = 1.000 VND).</div></div>`;
   }
   if (t === 'tier_qty') {
     const rows = (prog.tiers || [{ mn: 2, ck: 3 }]).map((ti, i) => `<div class="km-tier-row" id="ktr-${i}"><label>Từ</label><input type="number" class="t-mn" value="${ti.mn}" min="1" oninput="kmPreview()"><label>CK</label><input type="number" class="t-ck" value="${ti.ck}" min="1" max="50" oninput="kmPreview()"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>`).join('');
@@ -153,6 +157,7 @@ function kmReadForm() {
     if (txt.indexOf('Tặng') >= 0) t = 'bonus';
     else if (txt.indexOf('cố định') >= 0) t = 'fixed';
     else if (txt.indexOf('theo SL') >= 0) t = 'tier_qty';
+    else if (txt.indexOf('đơn hàng') >= 0) t = 'order_money';
     else if (txt.indexOf('theo tiền') >= 0) t = 'tier_money';
   }
   const prog = { name: (document.getElementById('kf-name')||{}).value || '', type: t, nhoms: _kmPickerNhom, active: true, stackable: _kmStackable };
@@ -187,6 +192,11 @@ function kmPreview() {
   const prog = kmReadForm();
   const area = document.getElementById('km-preview'); if (!area) return;
   const spMas = kmGetChecked();
+  if (prog.type === 'order_money') {
+    const text = kmBuildText(prog) || 'CK theo tổng đơn hàng';
+    area.innerHTML = `<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview CTKM đơn hàng</div><div class="km-pv-row"><span>Chi tiết</span><span>${text}</span></div></div>`;
+    return;
+  }
   if (!spMas.length) { area.innerHTML = ''; return; }
   const p = SP.find(x => x.ma === spMas[0]); if (!p) return;
   const rules = kmBuildRules(prog);
@@ -202,7 +212,7 @@ function kmSaveForm() {
   prog.spMas = kmGetChecked();
   prog.stackable = _kmStackable;
   if (!prog.name) { alert('Nhập tên chương trình'); return; }
-  if (!prog.spMas.length) { alert('Chọn ít nhất 1 sản phẩm'); return; }
+  if (prog.type !== 'order_money' && !prog.spMas.length) { alert('Chọn ít nhất 1 sản phẩm'); return; }
   if (_kmEditIdx >= 0) kmProgs[_kmEditIdx] = prog;
   else kmProgs.push(prog);
   kmSave();
@@ -263,7 +273,7 @@ function kmBuildText(prog) {
   }
   if (t === 'fixed') return 'CK ' + prog.ck + '%';
   if (t === 'tier_qty') return (prog.tiers || []).map(ti => ti.mn + '+ CK' + ti.ck + '%').join(' | ');
-  if (t === 'tier_money') return (prog.tiers || []).map(ti => (ti.type === 'below' ? '<' : '≥') + (ti.value || 0) + 'K CK' + ti.ck + '%').join(' | ');
+  if (t === 'tier_money' || t === 'order_money') return (prog.tiers || []).map(ti => (ti.type === 'below' ? '<' : '≥') + (ti.value || 0) + 'K CK' + ti.ck + '%').join(' | ');
   return '';
 }
 

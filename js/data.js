@@ -2,6 +2,18 @@
 let SP = [];
 let kmProgs = [];
 
+function validateProductList(data) {
+  return Array.isArray(data) && data.every(item => item && typeof item.ma === 'string' && typeof item.giaNYLon === 'number');
+}
+
+function validatePromotionList(data) {
+  return Array.isArray(data) && data.every(item => {
+    if (!item || typeof item.name !== 'string' || typeof item.type !== 'string') return false;
+    if (item.type === 'order_money') return true;
+    return Array.isArray(item.spMas);
+  });
+}
+
 // Hàm fetch với cache local
 async function fetchJSON(url, storageKey, fallback) {
   try {
@@ -22,7 +34,8 @@ async function fetchJSON(url, storageKey, fallback) {
 
 // Tải sản phẩm
 async function loadProducts() {
-  SP = await fetchJSON(PRODUCTS_URL, 'vnm_sp', FALLBACK_PRODUCTS);
+  const raw = await fetchJSON(PRODUCTS_URL, 'vnm_sp', FALLBACK_PRODUCTS);
+  SP = validateProductList(raw) ? raw : FALLBACK_PRODUCTS;
   SP.forEach(p => {
     if (!p.kmRules) p.kmRules = [];
     if (!p.kmText) p.kmText = '';
@@ -32,10 +45,11 @@ async function loadProducts() {
 
 // Tải CT KM
 async function loadPromotions() {
-  kmProgs = await fetchJSON(LOCAL_PROMOTIONS_URL || PROMOTIONS_URL, 'vnm_km3', []);
-  if (!kmProgs || !kmProgs.length) {
-    kmProgs = await fetchJSON(PROMOTIONS_URL, 'vnm_km3', []);
+  let raw = await fetchJSON(LOCAL_PROMOTIONS_URL, 'vnm_km3', []);
+  if (!validatePromotionList(raw) || !raw.length) {
+    raw = await fetchJSON(PROMOTIONS_URL, 'vnm_km3', []);
   }
+  kmProgs = validatePromotionList(raw) ? raw : [];
   kmSave();
 }
 
@@ -114,14 +128,20 @@ function importData() {
     reader.onload = ev => {
       try {
         const data = JSON.parse(ev.target.result);
+        let changed = false;
         if (data.products) {
+          if (!validateProductList(data.products)) throw new Error('Dữ liệu products không hợp lệ');
           SP = data.products;
           saveSP();
+          changed = true;
         }
         if (data.promotions) {
+          if (!validatePromotionList(data.promotions)) throw new Error('Dữ liệu promotions không hợp lệ');
           kmProgs = data.promotions;
           kmSave();
+          changed = true;
         }
+        if (!changed) throw new Error('File không chứa products hoặc promotions hợp lệ');
         if (window.renderOrder) window.renderOrder();
         if (window.renderAdm) window.renderAdm();
         if (window.renderKMTab) window.renderKMTab();

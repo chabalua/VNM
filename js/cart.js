@@ -54,6 +54,9 @@ function kmBuildRules(prog) {
     }).filter(t => t && t.ck > 0);
 
     if (tiers.length) rules.push({ type: 'tier_money', tiers });
+  } else if (prog.type === 'order_money') {
+    // order-level promotions do not create item-level kmRules
+    return [];
   }
   return rules;
 }
@@ -89,6 +92,64 @@ function calcKM(p, qT, qL) {
     if (bestNonStack) appliedProgs.push(bestNonStack.prog.name || 'CT KM');
   }
   return { ...kmFinal, appliedPromos: appliedProgs };
+}
+
+function parsePromoMoneyValue(value) {
+  const num = +value;
+  if (isNaN(num) || num <= 0) return 0;
+  return num < 10000 ? num * 1000 : num;
+}
+
+function orderPromoDiscount(baseTotal, prog) {
+  const tiers = (prog.tiers || []).map(t => {
+    const type = t.type || 'above';
+    const value = parsePromoMoneyValue(t.value != null ? t.value : (t.mn != null ? t.mn : 0));
+    const ck = +t.ck / 100;
+    if (!value || !ck) return null;
+    return { type, value, ck };
+  }).filter(t => t && t.ck > 0);
+  if (!tiers.length) return 0;
+
+  let disc = 0;
+  tiers.forEach(t => {
+    if (t.type === 'below' && baseTotal < t.value) disc = Math.max(disc, Math.round(baseTotal * t.ck));
+    if (t.type === 'above' && baseTotal >= t.value) disc = Math.max(disc, Math.round(baseTotal * t.ck));
+  });
+  return disc;
+}
+
+function calcOrderKM(items) {
+  if (!items || !items.length) return { disc: 0, desc: '' };
+  const baseTotal = items.reduce((sum, item) => sum + item.gocTotal, 0);
+  const orderPromos = kmProgs.filter(prog => prog.active && prog.type === 'order_money');
+  if (!orderPromos.length) return { disc: 0, desc: '' };
+
+  let disc = 0;
+  const descParts = [];
+  const stackable = orderPromos.filter(prog => prog.stackable);
+  const nonStackable = orderPromos.filter(prog => !prog.stackable);
+
+  stackable.forEach(prog => {
+    const d = orderPromoDiscount(baseTotal, prog);
+    if (d > 0) {
+      disc += d;
+      descParts.push(prog.name || 'Đơn hàng');
+    }
+  });
+  let bestDisc = 0;
+  let bestProg = null;
+  nonStackable.forEach(prog => {
+    const d = orderPromoDiscount(baseTotal, prog);
+    if (d > bestDisc) {
+      bestDisc = d;
+      bestProg = prog;
+    }
+  });
+  if (bestDisc > 0 && bestProg) {
+    disc += bestDisc;
+    descParts.push(bestProg.name || 'Đơn hàng');
+  }
+  return { disc, desc: descParts.join(' + ') };
 }
 
 // Hàm tính toán cốt lõi (dùng cho kmRules)
@@ -216,15 +277,17 @@ function renderDon() {
   if (!items.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm<br><small>Vào Đặt hàng để thêm</small></div>'; return; }
   const totGoc = items.reduce((s,x) => s + x.gocTotal, 0);
   const totAfter = items.reduce((s,x) => s + x.afterKM, 0);
-  const totSave = totGoc - totAfter;
-  el.innerHTML = `<div class="ord-wrap"><div class="ord-hd"><span class="ord-hdT">Đơn · ${items.length} SP</span><span class="ord-hdV">${fmt(totAfter)}đ</span></div>
+  const orderKM = calcOrderKM(items);
+  const totAfterOrder = totAfter - orderKM.disc;
+  const totSave = totGoc - totAfterOrder;
+  el.innerHTML = `<div class="ord-wrap"><div class="ord-hd"><span class="ord-hdT">Đơn · ${items.length} SP</span><span class="ord-hdV">${fmt(totAfterOrder)}đ</span></div>
     ${items.map(it => `<div class="oi"><div class="oi-top"><div class="oi-name">${it.ten}</div><button class="oi-del" onclick="removeCart('${it.ma}')">✕</button></div>
       <div class="oi-sub">${it.ma} · ${it.donvi}</div><div class="oi-qty">${it.qT > 0 ? it.qT + ' thùng' : ''}${it.qT > 0 && it.qL > 0 ? ' + ' : ''}${it.qL > 0 ? it.qL + ' ' + it.donvi + ' lẻ' : ''} = ${it.totalLon} ${it.donvi}${it.bonus > 0 ? ' + tặng ' + it.bonus : ''}</div>
       ${it.desc ? `<div class="oi-km">${it.desc}</div>` : ''}<div class="oi-pr"><span class="oi-pl">Thành tiền</span><span class="oi-pv">${fmt(it.afterKM)}đ</span></div>
     </div>`).join('')}
-    <div class="ord-ft">${totSave > 0 ? `<div class="ft-row"><span class="ft-l">Giá gốc</span><span class="ft-v">${fmt(totGoc)}đ</span></div><div class="ft-row"><span class="ft-l">Tiết kiệm</span><span class="ft-save">- ${fmt(totSave)}đ</span></div>` : ''}
-      <div class="ft-grand"><div class="ft-gr"><span class="ft-gl">Tổng cộng</span><span class="ft-gv">${fmt(totAfter)}đ</span></div>
-      <div class="ft-gr"><span class="ft-vl">Đã bao gồm VAT 1,5%</span><span class="ft-vv">${fmt(Math.round(totAfter * 1.015))}đ</span></div></div>
+    <div class="ord-ft">${totSave > 0 ? `<div class="ft-row"><span class="ft-l">Giá gốc</span><span class="ft-v">${fmt(totGoc)}đ</span></div><div class="ft-row"><span class="ft-l">Tiết kiệm</span><span class="ft-save">- ${fmt(totSave)}đ</span></div>` : ''}${orderKM.disc > 0 ? `<div class="ft-row"><span class="ft-l">CK đơn hàng</span><span class="ft-save">- ${fmt(orderKM.disc)}đ</span></div>` : ''}${orderKM.disc > 0 && orderKM.desc ? `<div class="ft-row"><span class="ft-l">CTKM đơn</span><span class="ft-v">${orderKM.desc}</span></div>` : ''}
+      <div class="ft-grand"><div class="ft-gr"><span class="ft-gl">Tổng cộng</span><span class="ft-gv">${fmt(totAfterOrder)}đ</span></div>
+      <div class="ft-gr"><span class="ft-vl">Đã bao gồm VAT 1,5%</span><span class="ft-vv">${fmt(Math.round(totAfterOrder * 1.015))}đ</span></div></div>
       <input class="makh-inp" type="text" id="makh-inp" placeholder="Mã khách hàng (tuỳ chọn)">
       <button class="btn-submit" onclick="submitOrder()">📤 Tạo đơn hàng</button>
       <button class="btn-clear" onclick="clearCart()">🗑 Xoá tất cả</button>
@@ -235,11 +298,12 @@ function renderDon() {
 function submitOrder() {
   const items = getItems(); if (!items.length) return;
   const makh = (document.getElementById('makh-inp')||{}).value || '';
-  const tong = items.reduce((s,x) => s + x.afterKM, 0);
+  const orderKM = calcOrderKM(items);
+  const tong = items.reduce((s,x) => s + x.afterKM, 0) - orderKM.disc;
   if (makh) {
     let kh = customers.find(k => k.ma === makh);
     if (!kh) { kh = { ma: makh, orders: [] }; customers.push(kh); }
-    kh.orders.unshift({ id: Date.now(), ngay: new Date().toLocaleDateString('vi-VN'), items, tong });
+    kh.orders.unshift({ id: Date.now(), ngay: new Date().toLocaleDateString('vi-VN'), items, tong, orderDisc: orderKM.disc, orderDesc: orderKM.desc });
     if (kh.orders.length > 30) kh.orders = kh.orders.slice(0,30);
     localStorage.setItem('vnm_kh', JSON.stringify(customers));
   }

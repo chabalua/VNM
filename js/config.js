@@ -3,9 +3,9 @@ const REPO_RAW = 'https://raw.githubusercontent.com/chabalua/VNM-PWD-1/main/';
 const PRODUCTS_URL = REPO_RAW + 'products.json';
 
 // For local workflow (e.g., your daily mobile work + PC merge), keep promotions.json in the app root.
-// If missing, it falls back to GitHub remote URL.
+// If missing, the app will fall back to GitHub remote URL.
 const LOCAL_PROMOTIONS_URL = 'promotions.json';
-const PROMOTIONS_URL = LOCAL_PROMOTIONS_URL || REPO_RAW + 'promotions.json';
+const PROMOTIONS_URL = REPO_RAW + 'promotions.json';
 
 // Thuế VAT
 const VAT = 0.015;
@@ -21,7 +21,7 @@ const NBG = {
 const NLBL = { A: 'Sữa bột', B: 'Sữa đặc', C: 'Sữa nước', D: 'Sữa chua' };
 
 // Dữ liệu fallback (dùng khi không có mạng và cũng chưa có cache)
-const FALLBACK_PRODUCTS = [ /* nội dung fallback products như trong file gốc */ ];
+const FALLBACK_PRODUCTS = [];
 
 // Export ra window để dùng chung
 window.REPO_RAW = REPO_RAW;

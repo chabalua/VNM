@@ -159,5 +159,439 @@
       "06VA23",
       "06VQ23"
     ]
+  },
+  {
+    "name": "Giá thùng 600-1.2tr-1.2tr+ CK 12/14/16%",
+    "type": "tier_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      { "type": "below", "value": "600", "ck": "12" },
+      { "type": "above", "value": "600", "ck": "14" },
+      { "type": "above", "value": "1200", "ck": "16" }
+    ],
+    "spMas": [
+      "02HO38",
+      "02HO18",
+      "02HD39",
+      "02HD19",
+      "02HG18",
+      "02HG38",
+      "02HS37",
+      "02HT30"
+    ]
+  },
+  {
+    "name": "YokoGold CK 10%",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "10",
+    "spMas": ["02HY19", "02HY39"]
+  },
+  {
+    "name": "Sure Prevent / Sure Tiểu Đường 6 chai CK 14%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "6", "ck": "14" }
+    ],
+    "spMas": ["02PD21", "02PU21", "02PU02"]
+  },
+  {
+    "name": "AD Ridielac Gold - Mua 2 hộp CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "3" }
+    ],
+    "spMas": [
+      "03CA15",
+      "03CA24",
+      "03CA34",
+      "03CA44",
+      "03CA54",
+      "03CA75",
+      "03CA84",
+      "03CA92",
+      "03CM06",
+      "03AA13",
+      "03AA23",
+      "03AA42",
+      "03AA54",
+      "03AA74",
+      "03AA92",
+      "03AH10",
+      "03AB11",
+      "03AY73"
+    ]
+  },
+  {
+    "name": "ALPHAL - Mua 2 lon CK 3%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "3" }
+    ],
+    "spMas": [
+      "02DA35",
+      "02EA35",
+      "02EA15",
+      "02AA15"
+    ]
+  },
+  {
+    "name": "ALPHAL GOLD - Mua 2 lon CK 7%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "7" }
+    ],
+    "spMas": [
+      "02EG37",
+      "02EG47",
+      "02DG3A",
+      "02DG4A"
+    ]
+  },
+  {
+    "name": "OPTIMUM - Mua 2 lon CK 10%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "10" }
+    ],
+    "spMas": [
+      "02E018",
+      "02E028",
+      "02E038",
+      "02E048",
+      "02DO3A",
+      "02DO4A"
+    ]
+  },
+  {
+    "name": "GROW PLUS ĐỎ - Mua 2 lon CK 10%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "10" }
+    ],
+    "spMas": [
+      "02ER68",
+      "02DR64"
+    ]
+  },
+  {
+    "name": "OPTIMUM CLOS - Mua 2 lon CK 7%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "7" }
+    ],
+    "spMas": [
+      "02ES38",
+      "02ES28"
+    ]
+  },
+  {
+    "name": "YOKO - Mua 2 lon CK 3%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "3" }
+    ],
+    "spMas": [
+      "02EY19",
+      "02EY29",
+      "02EY39"
+    ]
+  },
+  {
+    "name": "MAMA - Mua 2 lon CK 3%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "3" }
+    ],
+    "spMas": [
+      "02EM12",
+      "02EM22"
+    ]
+  },
+  {
+    "name": "SURE PRIVEN - Mua 2 lon CK 7%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "7" }
+    ],
+    "spMas": [
+      "02AU14",
+      "02EU14"
+    ]
+  },
+  {
+    "name": "DIECIMA - Mua 2 lon CK 7%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "7" }
+    ],
+    "spMas": [
+      "02AD11",
+      "02ED11"
+    ]
+  },
+  {
+    "name": "NGUYÊN KEM - Mua 2 lon CK 3%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "3" }
+    ],
+    "spMas": [
+      "02EN22"
+    ]
+  },
+  {
+    "name": "CANXI PRO - Mua 2 lon CK 3%",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      { "mn": "2", "ck": "3" }
+    ],
+    "spMas": [
+      "02EC13"
+    ]
+  },
+  {
+    "name": "ADM 110 ml - CK theo số thùng (04CD34)",
+    "type": "tier_qty",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tUnit": "thung",
+    "tiers": [
+      { "mn": "1", "ck": "8" },
+      { "mn": "3", "ck": "10" },
+      { "mn": "5", "ck": "13" }
+    ],
+    "spMas": [
+      "04CD34"
+    ]
+  },
+  {
+    "name": "ADM 180 ml CK 13%",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "13",
+    "spMas": [
+      "04CD14"
+    ]
+  },
+  {
+    "name": "Sữa bịch 16+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": [
+      "04FI31",
+      "04FD31"
+    ]
+  },
+  {
+    "name": "Sữa tươi 100% 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": [
+      "04ED32",
+      "04EI32",
+      "04ED12",
+      "04EI12",
+      "04ED02",
+      "04ET21"
+    ]
+  },
+  {
+    "name": "Sữa tươi 1L CK 2%",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "2",
+    "spMas": [
+      "04ED02",
+      "04ET21"
+    ]
+  },
+  {
+    "name": "Green Farm 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": [
+      "04GI13",
+      "04GI33"
+    ]
+  },
+  {
+    "name": "Green Farm CK theo tiền",
+    "type": "tier_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      { "type": "above", "value": "1500", "ck": "1" },
+      { "type": "above", "value": "5000", "ck": "2" }
+    ],
+    "spMas": [
+      "04GI13",
+      "04GI33"
+    ]
+  },
+  {
+    "name": "Sữa đậu nành & hạt CK 5%",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "5",
+    "spMas": [
+      "05FV43",
+      "05AT11",
+      "05DH13",
+      "05AV23"
+    ]
+  },
+  {
+    "name": "Organic 180 ml 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": ["04GO10"]
+  },
+  {
+    "name": "YOMILK 170ml 86+10",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "86",
+    "bY": "10",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": ["06VA23"]
+  },
+  {
+    "name": "Cao đạm 180ml 24+2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "24",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": ["05AD10"]
+  },
+  {
+    "name": "Cao đạm 240ml 24+2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "24",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": ["05AD20"]
+  },
+  {
+    "name": "Sữa 9 loại hạt 180ml 24+2H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "24",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMa": "same",
+    "spMas": ["05AN23"]
+  },
+  {
+    "name": "BÒ 100% / FINO ĐƠN HÀNG CK theo tổng",
+    "type": "order_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      { "type": "above", "value": "1000", "ck": "1" },
+      { "type": "above", "value": "3000", "ck": "2" }
+    ]
   }
 ]
