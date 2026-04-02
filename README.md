@@ -15,21 +15,6 @@
 - **Yêu thích sản phẩm**: Đánh dấu sao để ưu tiên hiển thị đầu danh sách trong phần chọn sản phẩm cho CTKM.
 - **Chạy offline**: Dữ liệu được cache trong localStorage, vẫn hoạt động khi mất mạng.
 
-## 🗂 Cấu trúc thư mục
-project/
-├── index.html # File chính, chứa cấu trúc HTML
-├── css/
-│ └── style.css # Toàn bộ CSS
-├── js/
-│ ├── config.js # Cấu hình URL GitHub, VAT, màu sắc...
-│ ├── data.js # Quản lý dữ liệu SP, KM, load/save localStorage, sync
-│ ├── cart.js # Giỏ hàng, đơn hàng, khách hàng
-│ ├── ui.js # Render các giao diện: đặt hàng, admin, KH
-│ ├── km.js # Logic và giao diện quản lý CT KM (modal, form)
-│ └── main.js # Khởi tạo, chuyển tab, lọc nhóm
-├── data/
-│ ├── products.json # (không bắt buộc) file mẫu dữ liệu sản phẩm
-│ └── promotions.json # (không bắt buộc) file mẫu CTKM
-└── README.md
+
 
 
