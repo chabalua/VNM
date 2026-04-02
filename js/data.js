@@ -9,7 +9,7 @@ function validateProductList(data) {
 function validatePromotionList(data) {
   return Array.isArray(data) && data.every(item => {
     if (!item || typeof item.name !== 'string' || typeof item.type !== 'string') return false;
-    if (item.type === 'order_money') return true;
+    if (item.type === 'order_money' || item.type === 'order_bonus') return true;
     return Array.isArray(item.spMas);
   });
 }
@@ -71,7 +71,6 @@ async function initData() {
   if (!localStorage.getItem('vnm_favorites')) {
     localStorage.setItem('vnm_favorites', '[]');
   }
-  // Các hàm render sẽ được gọi từ main.js sau khi init
 }
 
 // Đồng bộ thủ công từ GitHub
@@ -88,7 +87,6 @@ async function syncFromGitHub() {
     kmProgs = newPromos;
     saveSP();
     kmSave();
-    // Cập nhật giao diện
     if (window.renderOrder) window.renderOrder();
     if (window.renderAdm) window.renderAdm();
     if (window.renderKMTab) window.renderKMTab();
@@ -155,7 +153,7 @@ function importData() {
   input.click();
 }
 
-// Đưa các hàm và biến ra window để dùng trong các file khác và onclick
+// Đưa các hàm và biến ra window
 window.SP = () => SP;
 window.kmProgs = () => kmProgs;
 window.saveSP = saveSP;
