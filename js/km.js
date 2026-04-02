@@ -3,6 +3,8 @@
 let _kmEditIdx = -1;
 let _kmPickerNhom = '';
 let _kmStackable = true;
+let _kmFilterGroup = '';
+let _kmFilterQuery = '';
 
 function kmOpenModal(prog, idx) {
   _kmEditIdx = (idx !== undefined) ? idx : -1;
@@ -152,6 +154,35 @@ function kmPickNhom(n) {
   var cur = [];
   document.querySelectorAll('.km-pick-cb:checked').forEach(function(c) { cur.push(c.value); });
   kmRenderPicker(cur);
+}
+
+function kmSetFilterGroup(group) {
+  _kmFilterGroup = group || '';
+  renderKMTab();
+}
+
+function kmSearchByName(query) {
+  _kmFilterQuery = (query || '').trim().toLowerCase();
+  renderKMTab();
+}
+
+function kmClearSearch() {
+  _kmFilterQuery = '';
+  var input = document.getElementById('km-search-input');
+  if (input) input.value = '';
+  renderKMTab();
+}
+
+function kmUpdateFilterButtons() {
+  var buttons = document.querySelectorAll('#page-km .pills .pill');
+  buttons.forEach(function(btn) {
+    var text = btn.textContent.trim();
+    var group = text === 'Tất cả' ? '' : text === 'Khác' ? 'other' : text.charAt(0);
+    btn.classList.remove('on-all','on-A','on-B','on-C','on-D','on-other');
+    if (group === _kmFilterGroup) {
+      btn.classList.add('on-' + (group || 'all'));
+    }
+  });
 }
 
 function kmRenderPicker(checked) {
@@ -304,14 +335,40 @@ function kmSaveForm() {
 function renderKMTab() {
   var fab = document.getElementById('km-fab');
   if (fab) fab.style.display = 'flex';
+  kmUpdateFilterButtons();
   var el = document.getElementById('km-list');
   if (!el) return;
-  if (!kmProgs.length) { el.innerHTML = '<div class="empty">Chưa có CT KM nào<br><small>Nhấn ＋ để tạo</small></div>'; return; }
+
+  if (!kmProgs.length) {
+    el.innerHTML = '<div class="empty">Chưa có CT KM nào<br><small>Nhấn ＋ để tạo</small></div>';
+    return;
+  }
+
+  var filtered = kmProgs.map(function(prog, i) { return { prog: prog, idx: i }; }).filter(function(item) {
+    if (_kmFilterGroup) {
+      if (_kmFilterGroup === 'other') {
+        var n = (item.prog.nhoms || '').trim();
+        if (n === 'A' || n === 'B' || n === 'C' || n === 'D') return false;
+      } else {
+        if ((item.prog.nhoms || '').trim() !== _kmFilterGroup) return false;
+      }
+    }
+    if (_kmFilterQuery) {
+      return (item.prog.name || '').toLowerCase().indexOf(_kmFilterQuery) >= 0;
+    }
+    return true;
+  });
+
+  if (!filtered.length) {
+    el.innerHTML = '<div class="empty">Không tìm thấy CT KM nào theo bộ lọc</div>';
+    return;
+  }
+
   var groups = { all: [], A: [], B: [], C: [], D: [], other: [] };
-  kmProgs.forEach(function(prog, i) {
-    var label = (prog.nhoms || '').trim();
+  filtered.forEach(function(item) {
+    var label = (item.prog.nhoms || '').trim();
     var key = label ? (groups[label] ? label : 'other') : 'all';
-    groups[key].push({ prog: prog, idx: i });
+    groups[key].push(item);
   });
   var sectionOrder = ['all', 'A', 'B', 'C', 'D', 'other'];
   var sectionLabels = { all: 'Tất cả', A: 'A·Bột', B: 'B·Đặc', C: 'C·Nước', D: 'D·Chua', other: 'Khác' };
@@ -426,6 +483,9 @@ window.kmCheckAll = kmCheckAll;
 window.kmGetChecked = kmGetChecked;
 window.kmReadForm = kmReadForm;
 window.kmPreview = kmPreview;
+window.kmSearchByName = kmSearchByName;
+window.kmClearSearch = kmClearSearch;
+window.kmSetFilterGroup = kmSetFilterGroup;
 window.kmSaveForm = kmSaveForm;
 window.renderKMTab = renderKMTab;
 window.kmToggle = kmToggle;

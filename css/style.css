@@ -23,6 +23,7 @@ input,button,select,textarea{font-family:inherit;font-size:16px}
 .pill.on-B{background:var(--oL);color:var(--o);border-color:var(--o)}
 .pill.on-C{background:var(--gL);color:var(--g);border-color:var(--g)}
 .pill.on-D{background:var(--rL);color:var(--r);border-color:var(--r)}
+.pill.on-other{background:#f2f4f7;color:#111;border-color:#a3adb8}
 .sp-card{background:var(--card);margin:6px 9px;border-radius:var(--R);box-shadow:0 1px 3px rgba(0,0,0,.07);overflow:hidden;border:1.5px solid transparent}
 .sp-card.inCart{border-color:var(--g2);background:#f7fef9}
 .sp-top{display:flex;gap:9px;padding:11px 12px 0}

@@ -88,8 +88,18 @@
     <button onclick="exportKM()" class="btn-tool" style="flex:1; margin:0;">📤 Xuất CT KM</button>
     <button onclick="importKM()" class="btn-tool" style="flex:1; margin:0;">📥 Nhập CT KM</button>
     <button onclick="loadKMFromURL()" class="btn-tool" style="flex:1; margin:0;">🌐 Load từ URL</button>
+  </div>  <div style="background:var(--card); margin:0 9px 8px; border-radius:var(--R); padding:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
+    <input id="km-search-input" type="search" placeholder="Tìm theo tên CT KM..." oninput="kmSearchByName(this.value)" style="flex:1; min-width:170px; height:40px; border:1.5px solid var(--l2); border-radius:var(--Rs); padding:0 12px; font-size:14px;" />
+    <button onclick="kmClearSearch()" class="btn-tool" style="flex:0 0 auto; margin:0; min-width:86px;">✕ Xoá</button>
   </div>
-  <div id="km-list" style="padding-bottom:72px"></div>
+  <div class="pills" style="margin:0 9px 8px;">
+    <div class="pill on-all" onclick="kmSetFilterGroup('')">Tất cả</div>
+    <div class="pill" onclick="kmSetFilterGroup('A')">A·Bột</div>
+    <div class="pill" onclick="kmSetFilterGroup('B')">B·Đặc</div>
+    <div class="pill" onclick="kmSetFilterGroup('C')">C·Nước</div>
+    <div class="pill" onclick="kmSetFilterGroup('D')">D·Chua</div>
+    <div class="pill" onclick="kmSetFilterGroup('other')">Khác</div>
+  </div>  <div id="km-list" style="padding-bottom:72px"></div>
 </div>
 <button id="km-fab" onclick="kmOpenModal()" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--g);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(0,77,51,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
 
