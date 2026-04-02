@@ -9,7 +9,11 @@ function gotoTab(t) {
   if (t === 'adm') renderAdm();
   if (t === 'km') renderKMTab();
   if (t === 'kh') renderKH();
-  var fab = document.getElementById('km-fab'); if (fab) fab.style.display = (t === 'km' ? 'flex' : 'none');
+  // FAB visibility
+  var kmFab = document.getElementById('km-fab');
+  var admFab = document.getElementById('adm-fab');
+  if (kmFab) kmFab.style.display = (t === 'km' ? 'flex' : 'none');
+  if (admFab) admFab.style.display = (t === 'adm' ? 'flex' : 'none');
   // Show/hide scroll-to-top button
   var stt = document.getElementById('scroll-top-btn');
   if (stt) stt.style.display = (t === 'order' ? 'flex' : 'none');
