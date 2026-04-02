@@ -6,8 +6,21 @@ function validateProductList(data) {
   return Array.isArray(data) && data.every(item => item && typeof item.ma === 'string' && typeof item.giaNYLon === 'number');
 }
 
+function isPromotionMetadata(item) {
+  if (!item || typeof item !== 'object') return false;
+  const keys = Object.keys(item);
+  if (!keys.length) return false;
+  return keys.every(key => key.startsWith('_'));
+}
+
+function normalizePromotionList(data) {
+  if (!Array.isArray(data)) return [];
+  return data.filter(item => !isPromotionMetadata(item));
+}
+
 function validatePromotionList(data) {
-  return Array.isArray(data) && data.every(item => {
+  const list = normalizePromotionList(data);
+  return Array.isArray(list) && list.every(item => {
     if (!item || typeof item.name !== 'string' || typeof item.type !== 'string') return false;
     if (item.type === 'order_money' || item.type === 'order_bonus') return true;
     return Array.isArray(item.spMas);
@@ -49,7 +62,8 @@ async function loadPromotions() {
   if (!validatePromotionList(raw) || !raw.length) {
     raw = await fetchJSON(PROMOTIONS_URL, 'vnm_km3', []);
   }
-  kmProgs = validatePromotionList(raw) ? raw : [];
+  const normalized = normalizePromotionList(raw);
+  kmProgs = validatePromotionList(normalized) ? normalized : [];
   kmSave();
 }
 
@@ -84,7 +98,7 @@ async function syncFromGitHub() {
       fetch(PROMOTIONS_URL).then(r => r.json())
     ]);
     SP = newProducts;
-    kmProgs = newPromos;
+    kmProgs = normalizePromotionList(newPromos);
     saveSP();
     kmSave();
     if (window.renderOrder) window.renderOrder();
@@ -134,8 +148,9 @@ function importData() {
           changed = true;
         }
         if (data.promotions) {
-          if (!validatePromotionList(data.promotions)) throw new Error('Dữ liệu promotions không hợp lệ');
-          kmProgs = data.promotions;
+          const normalized = normalizePromotionList(data.promotions);
+          if (!validatePromotionList(normalized)) throw new Error('Dữ liệu promotions không hợp lệ');
+          kmProgs = normalized;
           kmSave();
           changed = true;
         }

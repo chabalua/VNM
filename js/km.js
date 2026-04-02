@@ -439,6 +439,7 @@ function importKM() {
       try {
         var data = JSON.parse(ev.target.result);
         if (!Array.isArray(data)) throw new Error('File không đúng định dạng');
+        data = normalizePromotionList(data);
         var action = confirm('Thay thế toàn bộ CT KM hiện tại? (OK = thay thế, Cancel = gộp thêm)');
         if (action) kmProgs = data;
         else kmProgs.push.apply(kmProgs, data);
@@ -459,6 +460,7 @@ async function loadKMFromURL() {
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
     if (!Array.isArray(data)) throw new Error('Dữ liệu không phải mảng');
+    data = normalizePromotionList(data);
     var action = confirm('Thay thế toàn bộ CT KM hiện tại? (OK = thay thế, Cancel = gộp thêm)');
     if (action) kmProgs = data;
     else kmProgs.push.apply(kmProgs, data);
