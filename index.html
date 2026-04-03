@@ -22,7 +22,7 @@
   <button class="tb" onclick="gotoTab('don')" id="tab-don">ĐƠN HÀNG<span class="tb-badge" id="don-badge"></span></button>
   <button class="tb" onclick="gotoTab('adm')" id="tab-adm">⚙️ QUẢN LÝ</button>
   <button class="tb" onclick="gotoTab('km')" id="tab-km">🎯 CT KM</button>
-  <button class="tb" onclick="gotoTab('kh')" id="tab-kh">KHÁCH HÀNG</button>
+  <button class="tb" onclick="gotoTab('kh')" id="tab-kh">👥 KH</button>
 </div>
 
 <div id="main">
@@ -66,20 +66,30 @@
     </div>
   </div>
   <div class="adm-tools">
-    <button class="btn-tool filled" onclick="exportData()">📤 Xuất data (copy JSON)</button>
+    <button class="btn-tool filled" onclick="exportData()">📤 Xuất data (JSON)</button>
     <button class="btn-tool" onclick="importData()">📥 Nhập data từ JSON</button>
     <button class="btn-tool" onclick="syncFromGitHub()" style="background:var(--b); color:white; border-color:var(--b);">🔄 Sync từ GitHub</button>
   </div>
   <div id="adm-list" style="padding-bottom:72px"></div>
 </div>
 
-<!-- KHÁCH HÀNG -->
+<!-- KHÁCH HÀNG (Redesigned v2 — DMS style) -->
 <div id="page-kh" class="page">
-  <div class="add-kh-row">
-    <input class="add-kh-inp" type="text" id="new-makh" placeholder="Nhập mã khách hàng...">
-    <button class="add-kh-btn" onclick="addKH()">+ Thêm</button>
+  <div class="sbar" style="padding-bottom:5px">
+    <div class="sinp-wrap">
+      <span class="sico">🔍</span>
+      <input type="text" id="cus-search" placeholder="Tìm KH theo tên, mã..." oninput="cusFilterSearch(this.value)">
+    </div>
+    <div class="pills" id="cus-route-pills" style="margin-bottom:5px">
+      <!-- Route pills rendered dynamically in renderCusTab -->
+    </div>
+    <div style="display:flex;gap:5px;flex-wrap:wrap">
+      <button onclick="cusExport()" style="flex:1;height:30px;border:1px solid var(--g);border-radius:14px;background:#fff;color:var(--g);font-size:11px;font-weight:700;cursor:pointer">📤 Xuất KH</button>
+      <button onclick="cusImport()" style="flex:1;height:30px;border:1px solid var(--b);border-radius:14px;background:#fff;color:var(--b);font-size:11px;font-weight:700;cursor:pointer">📥 Nhập KH</button>
+      <button onclick="cusManageRoutes()" style="flex:1;height:30px;border:1px solid var(--o);border-radius:14px;background:#fff;color:var(--o);font-size:11px;font-weight:700;cursor:pointer">📍 Tuyến</button>
+    </div>
   </div>
-  <div id="kh-list"></div>
+  <div id="kh-list" style="padding-bottom:72px"></div>
 </div>
 
 <!-- CT KM -->
@@ -103,12 +113,11 @@
   </div>
   <div id="km-list" style="padding-bottom:72px"></div>
 </div>
+
+<!-- FABs -->
 <button id="km-fab" onclick="kmOpenModal()" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--g);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(0,77,51,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
-
-<!-- FAB thêm SP (chỉ hiển thị khi ở tab Quản lý) -->
 <button id="adm-fab" onclick="spOpenModal()" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--b);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(21,87,176,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
-
-<!-- Scroll to top button -->
+<button id="kh-fab" onclick="cusEdit(-1)" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--g);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(0,77,51,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
 <button id="scroll-top-btn" onclick="scrollToTop()" style="display:flex;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:16px;width:44px;height:44px;border-radius:22px;background:rgba(0,0,0,.5);color:#fff;border:none;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3);z-index:250;align-items:center;justify-content:center;">↑</button>
 
 <!-- MODAL THÊM/SỬA SP -->
@@ -122,7 +131,7 @@
   </div>
 </div>
 
-<!-- KM MODAL -->
+<!-- KM MODAL (dùng chung cho KM + KH) -->
 <div id="km-modal" onclick="kmCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);">
   <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom);">
     <div style="padding:14px 15px 10px;border-bottom:1px solid var(--l1);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
@@ -151,6 +160,7 @@
 <script src="js/cart.js"></script>
 <script src="js/ui.js"></script>
 <script src="js/km.js"></script>
+<script src="js/customer.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
