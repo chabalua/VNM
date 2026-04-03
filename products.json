@@ -1,8 +1,1712 @@
 [
   {
-    "_schema": "v2",
-    "_note": "File sản phẩm cho GitHub sync. Push lên repo để cập nhật giá cho tất cả thiết bị.",
-    "_brands": "Mỗi SP có field 'brand' để phân loại nhãn hàng con: STT, GF, ADM, Fino, Susu, Hero, Probi, Yomilk, SCA, SĐ, SBPS, ICY, Vfresh, v.v.",
-    "_howToUse": "1. Sửa giá/thêm SP trong file này. 2. Push lên GitHub. 3. Trong app nhấn Sync từ GitHub."
+    "ma": "01SB10",
+    "ten": "Creamer đặc NSPN xanh biển 1284g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 55404,
+    "giaNYThung": 664848
+  },
+  {
+    "ma": "01SB02",
+    "ten": "Creamer đặc NSPN xanh biển 380g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 19062,
+    "giaNYThung": 914976
+  },
+  {
+    "ma": "01SX11",
+    "ten": "Creamer đặc NSPN xanh lá 1284g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 66204,
+    "giaNYThung": 794448
+  },
+  {
+    "ma": "01SX07",
+    "ten": "Creamer đặc NSPN xanh lá HG 380g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 19926,
+    "giaNYThung": 478224
+  },
+  {
+    "ma": "01SX05",
+    "ten": "Creamer đặc NSPN xanh lá lon 380g",
+    "nhom": "B",
+    "donvi": "Lon",
+    "slThung": 48,
+    "giaNYLon": 19926,
+    "giaNYThung": 956448
+  },
+  {
+    "ma": "01TL10",
+    "ten": "Creamer đặc Tài Lộc 1284g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 47574,
+    "giaNYThung": 570888
+  },
+  {
+    "ma": "01TL00",
+    "ten": "Creamer đặc Tài Lộc 380g",
+    "nhom": "B",
+    "donvi": "Lon",
+    "slThung": 48,
+    "giaNYLon": 16092,
+    "giaNYThung": 772416
+  },
+  {
+    "ma": "01TH60",
+    "ten": "Creamer 9 loại hạt tuýp 165g",
+    "nhom": "B",
+    "donvi": "Tuýp",
+    "slThung": 24,
+    "giaNYLon": 20034,
+    "giaNYThung": 480816
+  },
+  {
+    "ma": "01TD11",
+    "ten": "SĐCĐ Ông Thọ Đỏ hộp lớn 1284g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 78289,
+    "giaNYThung": 939468
+  },
+  {
+    "ma": "01TD12",
+    "ten": "SĐCĐ Ông Thọ Đỏ lon lớn 1kg",
+    "nhom": "B",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 61420,
+    "giaNYThung": 737040
+  },
+  {
+    "ma": "01TD13",
+    "ten": "SĐCĐ Ông Thọ Đỏ HG 380g",
+    "nhom": "B",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 25380,
+    "giaNYThung": 609120
+  },
+  {
+    "ma": "01TD03",
+    "ten": "SĐCĐ Ông Thọ Đỏ lon nhỏ 380g",
+    "nhom": "B",
+    "donvi": "Lon",
+    "slThung": 48,
+    "giaNYLon": 25380,
+    "giaNYThung": 1218240
+  },
+  {
+    "ma": "01TD60",
+    "ten": "SĐCĐ Ông Thọ Đỏ tuýp 165g",
+    "nhom": "B",
+    "donvi": "Tuýp",
+    "slThung": 24,
+    "giaNYLon": 18360,
+    "giaNYThung": 440640
+  },
+  {
+    "ma": "01TA60",
+    "ten": "Creamer Ông Thọ vị dâu tuýp 165g",
+    "nhom": "B",
+    "donvi": "Tuýp",
+    "slThung": 24,
+    "giaNYLon": 18360,
+    "giaNYThung": 440640
+  },
+  {
+    "ma": "01TC60",
+    "ten": "Creamer Ông Thọ vị sôcôla tuýp 165g",
+    "nhom": "B",
+    "donvi": "Tuýp",
+    "slThung": 24,
+    "giaNYLon": 18360,
+    "giaNYThung": 440640
+  },
+  {
+    "ma": "01VD41",
+    "ten": "SĐCĐ Ông Thọ Đỏ vị 40g",
+    "nhom": "B",
+    "donvi": "Gói",
+    "slThung": 180,
+    "giaNYLon": 4428,
+    "giaNYThung": 797040
+  },
+  {
+    "ma": "01TX03",
+    "ten": "Creamer Ông Thọ xanh lá 380g",
+    "nhom": "B",
+    "donvi": "Lon",
+    "slThung": 48,
+    "giaNYLon": 21838,
+    "giaNYThung": 1048224
+  },
+  {
+    "ma": "01TT02",
+    "ten": "SĐCĐ Ông Thọ thượng hạng nắp khui 380g",
+    "nhom": "B",
+    "donvi": "Lon",
+    "slThung": 48,
+    "giaNYLon": 31860,
+    "giaNYThung": 1529280
+  },
+  {
+    "ma": "02EO18",
+    "ten": "Optimum Gold 1 HT 800g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 514296,
+    "giaNYThung": 6171552
+  },
+  {
+    "ma": "02EO28",
+    "ten": "Optimum Gold 2 HT 800g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 502308,
+    "giaNYThung": 6027696
+  },
+  {
+    "ma": "02EO38",
+    "ten": "Optimum Gold 3 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 517212,
+    "giaNYThung": 6206544
+  },
+  {
+    "ma": "02EO48",
+    "ten": "Optimum Gold 4 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 479952,
+    "giaNYThung": 5759424
+  },
+  {
+    "ma": "02DO3A",
+    "ten": "Optimum Gold 3 HT 1450g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 837972,
+    "giaNYThung": 5027832
+  },
+  {
+    "ma": "02DO4A",
+    "ten": "Optimum Gold 4 HT 1450g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 777816,
+    "giaNYThung": 4666896
+  },
+  {
+    "ma": "02EG17",
+    "ten": "Dielac Gold 1 HT 800g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 371466,
+    "giaNYThung": 4457592
+  },
+  {
+    "ma": "02EG27",
+    "ten": "Dielac Gold 2 HT 800g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 356778,
+    "giaNYThung": 4281336
+  },
+  {
+    "ma": "02EG37",
+    "ten": "Dielac Gold 3 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 323082,
+    "giaNYThung": 3876984
+  },
+  {
+    "ma": "02EG47",
+    "ten": "Dielac Gold 4 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 315846,
+    "giaNYThung": 3790152
+  },
+  {
+    "ma": "02DG4A",
+    "ten": "Dielac Gold 4 HT 1400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 488754,
+    "giaNYThung": 2932524
+  },
+  {
+    "ma": "02ER68",
+    "ten": "Dielac Grow Plus 1+ HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 426276,
+    "giaNYThung": 5115312
+  },
+  {
+    "ma": "02ER78",
+    "ten": "Dielac Grow Plus 2+ HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 426276,
+    "giaNYThung": 5115312
+  },
+  {
+    "ma": "02DR64",
+    "ten": "Dielac Grow Plus 1+ HT 1400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 661716,
+    "giaNYThung": 3970296
+  },
+  {
+    "ma": "02DR74",
+    "ten": "Dielac Grow Plus 2+ HT 1400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 661716,
+    "giaNYThung": 3970296
+  },
+  {
+    "ma": "02ES18",
+    "ten": "Optimum Colos 1 HT 800g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 625536,
+    "giaNYThung": 7506432
+  },
+  {
+    "ma": "02ES38",
+    "ten": "Optimum Colos 3 HT 800g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 567756,
+    "giaNYThung": 6813072
+  },
+  {
+    "ma": "02EA15",
+    "ten": "Dielac Alpha 1 HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 262872,
+    "giaNYThung": 3154464
+  },
+  {
+    "ma": "02EA25",
+    "ten": "Dielac Alpha 2 HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 262872,
+    "giaNYThung": 3154464
+  },
+  {
+    "ma": "02EA35",
+    "ten": "Dielac Alpha 3 HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 243972,
+    "giaNYThung": 2927664
+  },
+  {
+    "ma": "02EA45",
+    "ten": "Dielac Alpha 4 HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 243972,
+    "giaNYThung": 2927664
+  },
+  {
+    "ma": "02AM12",
+    "ten": "Dielac Mama Gold HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 193644,
+    "giaNYThung": 4647456
+  },
+  {
+    "ma": "02AM22",
+    "ten": "Optimum Mama Gold HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 193644,
+    "giaNYThung": 4647456
+  },
+  {
+    "ma": "02EM12",
+    "ten": "Dielac Mama Gold HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 257850,
+    "giaNYThung": 3094200
+  },
+  {
+    "ma": "02EM22",
+    "ten": "Optimum Mama Gold HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 441612,
+    "giaNYThung": 5299344
+  },
+  {
+    "ma": "02EU15",
+    "ten": "Sure Prevent Gold HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 658476,
+    "giaNYThung": 7901712
+  },
+  {
+    "ma": "02PU02",
+    "ten": "Sure Prevent PET 200ml",
+    "nhom": "A",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 29484,
+    "giaNYThung": 707616
+  },
+  {
+    "ma": "02ED12",
+    "ten": "Sure Diecima HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 625158,
+    "giaNYThung": 7501896
+  },
+  {
+    "ma": "02EC14",
+    "ten": "Sure CanxiPro HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 486000,
+    "giaNYThung": 5832000
+  },
+  {
+    "ma": "02EN22",
+    "ten": "Nguyên kem Dinh Dưỡng HT 900g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 213030,
+    "giaNYThung": 2556360
+  },
+  {
+    "ma": "02HT30",
+    "ten": "Optimum A2 Pro+ 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 12420,
+    "giaNYThung": 298080
+  },
+  {
+    "ma": "02AY19",
+    "ten": "YokoGold 1 HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 236304,
+    "giaNYThung": 5671296
+  },
+  {
+    "ma": "03CA15",
+    "ten": "Bột AD Ridielac bò rau củ HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 61560,
+    "giaNYThung": 1477440
+  },
+  {
+    "ma": "03CA24",
+    "ten": "Bột AD Ridielac heo bó xôi HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 61560,
+    "giaNYThung": 1477440
+  },
+  {
+    "ma": "03CA34",
+    "ten": "Bột AD Ridielac heo cà rốt HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 61560,
+    "giaNYThung": 1477440
+  },
+  {
+    "ma": "03CA44",
+    "ten": "Bột AD Ridielac gà bí đỏ HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 61560,
+    "giaNYThung": 1477440
+  },
+  {
+    "ma": "03CA54",
+    "ten": "Bột AD Ridielac Lươn cà rốt đậu xanh HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 61560,
+    "giaNYThung": 1477440
+  },
+  {
+    "ma": "03CA75",
+    "ten": "Bột AD Ridielac gạo sữa HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 50328,
+    "giaNYThung": 1207872
+  },
+  {
+    "ma": "03CA84",
+    "ten": "Bột AD Ridielac gạo trái cây HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 56592,
+    "giaNYThung": 1358208
+  },
+  {
+    "ma": "03CA92",
+    "ten": "Bột AD Ridielac cá hồi bông cải xanh HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 67392,
+    "giaNYThung": 1617408
+  },
+  {
+    "ma": "03CM06",
+    "ten": "Bột AD Ridielac 4 gói vị mặn 4×50g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 65556,
+    "giaNYThung": 1573344
+  },
+  {
+    "ma": "03CM20",
+    "ten": "Bột AD Ridielac 4 gói vị ngọt 4×50g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 57240,
+    "giaNYThung": 1373760
+  },
+  {
+    "ma": "03CY73",
+    "ten": "Bột AD Ridielac Yến mạch sữa HG 200g",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 61560,
+    "giaNYThung": 1477440
+  },
+  {
+    "ma": "03AB11",
+    "ten": "Bột AD Ridielac bò rau củ HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 95796,
+    "giaNYThung": 2299104
+  },
+  {
+    "ma": "03AA13",
+    "ten": "Bột AD Ridielac Gold bò rau củ HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 85104,
+    "giaNYThung": 2042496
+  },
+  {
+    "ma": "03AA42",
+    "ten": "Bột AD Ridielac Gold gà rau củ HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 95796,
+    "giaNYThung": 2299104
+  },
+  {
+    "ma": "03AA54",
+    "ten": "Bột AD Ridielac Gold Lươn cà rốt đậu xanh HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 95796,
+    "giaNYThung": 2299104
+  },
+  {
+    "ma": "03AA74",
+    "ten": "Bột AD Ridielac Gold gạo sữa HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 75168,
+    "giaNYThung": 1804032
+  },
+  {
+    "ma": "03AA92",
+    "ten": "Bột AD Ridielac Gold cá hồi bông cải xanh HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 104760,
+    "giaNYThung": 2514240
+  },
+  {
+    "ma": "03AO90",
+    "ten": "Bột AD Optimum Gold Yến Mạch Cá Hồi Rau Xanh HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 115460,
+    "giaNYThung": 2771040
+  },
+  {
+    "ma": "03AY73",
+    "ten": "Bột AD Ridielac Yến mạch sữa HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 95796,
+    "giaNYThung": 2299104
+  },
+  {
+    "ma": "04ED04",
+    "ten": "STTT có đường VNM 1L",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 38178,
+    "giaNYThung": 458136
+  },
+  {
+    "ma": "04EI04",
+    "ten": "STTT ít đường VNM 1L",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 38178,
+    "giaNYThung": 458136
+  },
+  {
+    "ma": "04ET04",
+    "ten": "STTT không đường VNM 1L",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 38178,
+    "giaNYThung": 458136
+  },
+  {
+    "ma": "04ET22",
+    "ten": "STTT nguyên chất VNM 1L",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 38178,
+    "giaNYThung": 458136
+  },
+  {
+    "ma": "04ED13",
+    "ten": "STTT có đường VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8478,
+    "giaNYThung": 406944
+  },
+  {
+    "ma": "04EI18",
+    "ten": "STTT ít đường VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8478,
+    "giaNYThung": 406944
+  },
+  {
+    "ma": "04ET13",
+    "ten": "STTT không đường VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8478,
+    "giaNYThung": 406944
+  },
+  {
+    "ma": "04EA13",
+    "ten": "STTT hương dâu VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8748,
+    "giaNYThung": 419904
+  },
+  {
+    "ma": "04EC13",
+    "ten": "STTT sôcôla VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8748,
+    "giaNYThung": 419904
+  },
+  {
+    "ma": "04EU11",
+    "ten": "STTT dừa VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8748,
+    "giaNYThung": 419904
+  },
+  {
+    "ma": "04EM10",
+    "ten": "STTT tách béo Dưa Lưới VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8748,
+    "giaNYThung": 419904
+  },
+  {
+    "ma": "04EN10",
+    "ten": "STTT Bắp VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8748,
+    "giaNYThung": 419904
+  },
+  {
+    "ma": "04EB11",
+    "ten": "STTT giảm béo chuối VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8748,
+    "giaNYThung": 419904
+  },
+  {
+    "ma": "04EC60",
+    "ten": "STTT tách béo sôcôla VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 10044,
+    "giaNYThung": 482112
+  },
+  {
+    "ma": "04ED33",
+    "ten": "STTT có đường VNM 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 5400,
+    "giaNYThung": 259200
+  },
+  {
+    "ma": "04EI33",
+    "ten": "STTT ít đường VNM 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 5400,
+    "giaNYThung": 259200
+  },
+  {
+    "ma": "04ET33",
+    "ten": "STTT không đường VNM 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 5400,
+    "giaNYThung": 259200
+  },
+  {
+    "ma": "04EA33",
+    "ten": "STTT hương dâu VNM 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 5400,
+    "giaNYThung": 259200
+  },
+  {
+    "ma": "04EC33",
+    "ten": "STTT sôcôla VNM 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 5400,
+    "giaNYThung": 259200
+  },
+  {
+    "ma": "04FD2H",
+    "ten": "STTT có đường 100% Sữa tươi F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8586,
+    "giaNYThung": 412128
+  },
+  {
+    "ma": "04FT2H",
+    "ten": "STTT không đường 100% Sữa tươi F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8586,
+    "giaNYThung": 412128
+  },
+  {
+    "ma": "04FD32",
+    "ten": "SDD có đường Vinamilk F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7668,
+    "giaNYThung": 368064
+  },
+  {
+    "ma": "04FI32",
+    "ten": "SDD ít đường Vinamilk F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7668,
+    "giaNYThung": 368064
+  },
+  {
+    "ma": "04FT32",
+    "ten": "SDD không đường Vinamilk F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7668,
+    "giaNYThung": 368064
+  },
+  {
+    "ma": "04FA31",
+    "ten": "SDD hương dâu VNM F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7668,
+    "giaNYThung": 368064
+  },
+  {
+    "ma": "04FC32",
+    "ten": "SDD sôcôla Vinamilk F220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7668,
+    "giaNYThung": 368064
+  },
+  {
+    "ma": "04CD15",
+    "ten": "SDD ADM có đường 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7506,
+    "giaNYThung": 360288
+  },
+  {
+    "ma": "04CI11",
+    "ten": "SDD ADM ít đường 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7506,
+    "giaNYThung": 360288
+  },
+  {
+    "ma": "04CD35",
+    "ten": "SDD ADM có đường 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4698,
+    "giaNYThung": 225504
+  },
+  {
+    "ma": "04CI31",
+    "ten": "SDD ADM ít đường 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4698,
+    "giaNYThung": 225504
+  },
+  {
+    "ma": "04CC34",
+    "ten": "SDD ADM sôcôla 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4698,
+    "giaNYThung": 225504
+  },
+  {
+    "ma": "04CA33",
+    "ten": "SDD ADM hương dâu 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4698,
+    "giaNYThung": 225504
+  },
+  {
+    "ma": "04CH10",
+    "ten": "SDD A2 ADM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9126,
+    "giaNYThung": 438048
+  },
+  {
+    "ma": "04CH30",
+    "ten": "SDD A2 ADM 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 5994,
+    "giaNYThung": 287712
+  },
+  {
+    "ma": "04FH20",
+    "ten": "SDD A2 ít đường 220ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9450,
+    "giaNYThung": 453600
+  },
+  {
+    "ma": "04GI14",
+    "ten": "STTT rất ít đường Green Farm 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9612,
+    "giaNYThung": 461376
+  },
+  {
+    "ma": "04GI34",
+    "ten": "STTT rất ít đường Green Farm 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 6156,
+    "giaNYThung": 295488
+  },
+  {
+    "ma": "04GB18",
+    "ten": "STTT tổ yến Green Farm 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 13662,
+    "giaNYThung": 327888
+  },
+  {
+    "ma": "04GO11",
+    "ten": "STTT NC Green Farm Organic 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 11934,
+    "giaNYThung": 572832
+  },
+  {
+    "ma": "04GT05",
+    "ten": "STTT NC Green Farm 1L",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 12,
+    "giaNYLon": 42444,
+    "giaNYThung": 509328
+  },
+  {
+    "ma": "04AE12",
+    "ten": "STTT NC Green Farm A2 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 12474,
+    "giaNYThung": 598752
+  },
+  {
+    "ma": "04AE32",
+    "ten": "STTT NC Green Farm A2 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8370,
+    "giaNYThung": 401760
+  },
+  {
+    "ma": "04LL13",
+    "ten": "SDD Giàu Canxi Không Lactoza Flex 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8802,
+    "giaNYThung": 422496
+  },
+  {
+    "ma": "05AN25",
+    "ten": "Sữa hạt 9 loại hạt VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 11610,
+    "giaNYThung": 278640
+  },
+  {
+    "ma": "05AN31",
+    "ten": "Sữa hạt 9 loại hạt không đường 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 11610,
+    "giaNYThung": 278640
+  },
+  {
+    "ma": "05DY10",
+    "ten": "Sữa yến mạch VNM hộp 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 9288,
+    "giaNYThung": 222912
+  },
+  {
+    "ma": "05MD10",
+    "ten": "Sữa hạt đậu nành mè đen VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 6858,
+    "giaNYThung": 329184
+  },
+  {
+    "ma": "05AV24",
+    "ten": "Sữa hạt đậu nành Óc chó VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 6858,
+    "giaNYThung": 329184
+  },
+  {
+    "ma": "05AV33",
+    "ten": "SDN cao Canxi VNM hộp 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4320,
+    "giaNYThung": 207360
+  },
+  {
+    "ma": "05DD14",
+    "ten": "Sữa hạt đậu nành Đậu đỏ VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 6858,
+    "giaNYThung": 329184
+  },
+  {
+    "ma": "05DH14",
+    "ten": "Sữa hạt đậu nành Hạnh nhân VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 6858,
+    "giaNYThung": 329184
+  },
+  {
+    "ma": "05FV44",
+    "ten": "SDN cao Canxi VNM bịch 220ml",
+    "nhom": "C",
+    "donvi": "Bịch",
+    "slThung": 48,
+    "giaNYLon": 4644,
+    "giaNYThung": 222912
+  },
+  {
+    "ma": "05AD11",
+    "ten": "Sữa hạt Cao đạm VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 14364,
+    "giaNYThung": 344736
+  },
+  {
+    "ma": "05AD31",
+    "ten": "Sữa hạt Cao đạm không đường VNM 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 14364,
+    "giaNYThung": 344736
+  },
+  {
+    "ma": "06UA40",
+    "ten": "Susu hương dâu Chai 80ml",
+    "nhom": "C",
+    "donvi": "Chai",
+    "slThung": 48,
+    "giaNYLon": 3996,
+    "giaNYThung": 191808
+  },
+  {
+    "ma": "06UC40",
+    "ten": "Susu hương cam Chai 80ml",
+    "nhom": "C",
+    "donvi": "Chai",
+    "slThung": 48,
+    "giaNYLon": 3996,
+    "giaNYThung": 191808
+  },
+  {
+    "ma": "06UN40",
+    "ten": "Susu hương táo nho Chai 80ml",
+    "nhom": "C",
+    "donvi": "Chai",
+    "slThung": 48,
+    "giaNYLon": 3996,
+    "giaNYThung": 191808
+  },
+  {
+    "ma": "06UQ40",
+    "ten": "Susu hương việt quất chuối Chai 80ml",
+    "nhom": "C",
+    "donvi": "Chai",
+    "slThung": 48,
+    "giaNYLon": 3996,
+    "giaNYThung": 191808
+  },
+  {
+    "ma": "06UK10",
+    "ten": "Susu hương kẹo bông thạch hộp 170ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8802,
+    "giaNYThung": 422496
+  },
+  {
+    "ma": "06SA73",
+    "ten": "Susu hương dâu Túi 110ml",
+    "nhom": "C",
+    "donvi": "Túi",
+    "slThung": 24,
+    "giaNYLon": 4590,
+    "giaNYThung": 110160
+  },
+  {
+    "ma": "06SC73",
+    "ten": "Susu hương cam Túi 110ml",
+    "nhom": "C",
+    "donvi": "Túi",
+    "slThung": 24,
+    "giaNYLon": 4590,
+    "giaNYThung": 110160
+  },
+  {
+    "ma": "06UA32",
+    "ten": "Susu hương dâu Hộp 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4320,
+    "giaNYThung": 207360
+  },
+  {
+    "ma": "06UC32",
+    "ten": "Susu hương cam Hộp 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4320,
+    "giaNYThung": 207360
+  },
+  {
+    "ma": "06UN32",
+    "ten": "Susu hương táo nho Hộp 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4320,
+    "giaNYThung": 207360
+  },
+  {
+    "ma": "06UQ32",
+    "ten": "Susu hương việt quất chuối Hộp 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4320,
+    "giaNYThung": 207360
+  },
+  {
+    "ma": "06VA23",
+    "ten": "Yomilk hương dâu 170ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7128,
+    "giaNYThung": 342144
+  },
+  {
+    "ma": "06VC23",
+    "ten": "Yomilk hương cam 170ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7128,
+    "giaNYThung": 342144
+  },
+  {
+    "ma": "06VQ23",
+    "ten": "Yomilk hương việt quất bạc hà 170ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 7128,
+    "giaNYThung": 342144
+  },
+  {
+    "ma": "07UA11",
+    "ten": "Probi hương dứa 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 4644,
+    "giaNYThung": 232200
+  },
+  {
+    "ma": "07UC11",
+    "ten": "Probi hương cam 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 5184,
+    "giaNYThung": 259200
+  },
+  {
+    "ma": "07UD11",
+    "ten": "Probi hương dâu 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 4644,
+    "giaNYThung": 232200
+  },
+  {
+    "ma": "07UG11",
+    "ten": "Probi hương dưa gang 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 4644,
+    "giaNYThung": 232200
+  },
+  {
+    "ma": "07UI11",
+    "ten": "Probi ít đường 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 4644,
+    "giaNYThung": 232200
+  },
+  {
+    "ma": "07UQ11",
+    "ten": "Probi hương việt quất 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 4644,
+    "giaNYThung": 232200
+  },
+  {
+    "ma": "07UR13",
+    "ten": "Probi vị truyền thống 65ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 50,
+    "giaNYLon": 4644,
+    "giaNYThung": 232200
+  },
+  {
+    "ma": "07UD30",
+    "ten": "Probi hương đào ít đường 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 8316,
+    "giaNYThung": 199584
+  },
+  {
+    "ma": "07UI31",
+    "ten": "Probi ít đường 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 8316,
+    "giaNYThung": 199584
+  },
+  {
+    "ma": "07UL31",
+    "ten": "Probi lựu đỏ ít đường 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 9018,
+    "giaNYThung": 216432
+  },
+  {
+    "ma": "07UM31",
+    "ten": "Probi nghệ mật ong 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 8975,
+    "giaNYThung": 215400
+  },
+  {
+    "ma": "07UQ31",
+    "ten": "Probi hương việt quất 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 8316,
+    "giaNYThung": 199584
+  },
+  {
+    "ma": "07UR31",
+    "ten": "Probi vị truyền thống 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 8316,
+    "giaNYThung": 199584
+  },
+  {
+    "ma": "07UT30",
+    "ten": "Probi không đường 130ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 8316,
+    "giaNYThung": 199584
+  },
+  {
+    "ma": "07UI40",
+    "ten": "Probi ít đường 400ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 12,
+    "giaNYLon": 24246,
+    "giaNYThung": 290952
+  },
+  {
+    "ma": "07UR41",
+    "ten": "Probi vị truyền thống 400ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 12,
+    "giaNYLon": 24246,
+    "giaNYThung": 290952
+  },
+  {
+    "ma": "07UI70",
+    "ten": "Probi ít đường 700ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 6,
+    "giaNYLon": 40014,
+    "giaNYThung": 240084
+  },
+  {
+    "ma": "07UR71",
+    "ten": "Probi vị truyền thống 700ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 6,
+    "giaNYLon": 40014,
+    "giaNYThung": 240084
+  },
+  {
+    "ma": "07TR33",
+    "ten": "Sữa chua ăn có đường VNM 100g",
+    "nhom": "D",
+    "donvi": "Hũ",
+    "slThung": 48,
+    "giaNYLon": 6210,
+    "giaNYThung": 298080
+  },
+  {
+    "ma": "07TR61",
+    "ten": "Sữa chua ăn có đường VNM 60g",
+    "nhom": "D",
+    "donvi": "Hũ",
+    "slThung": 48,
+    "giaNYLon": 3942,
+    "giaNYThung": 189216
+  },
+  {
+    "ma": "07PR50",
+    "ten": "SCA Probi có đường 100g",
+    "nhom": "D",
+    "donvi": "Hũ",
+    "slThung": 48,
+    "giaNYLon": 6977,
+    "giaNYThung": 334896
+  },
+  {
+    "ma": "07GR20",
+    "ten": "Sữa chua uống VNM 200ml",
+    "nhom": "D",
+    "donvi": "Chai",
+    "slThung": 24,
+    "giaNYLon": 11848,
+    "giaNYThung": 284352
+  },
+  {
+    "ma": "07GR10",
+    "ten": "SCA VNM Green Farm Có Đường 100g",
+    "nhom": "D",
+    "donvi": "Hũ",
+    "slThung": 48,
+    "giaNYLon": 6480,
+    "giaNYThung": 311040
+  },
+  {
+    "ma": "02HO38",
+    "ten": "Optimum Gold 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9990,
+    "giaNYThung": 479520
+  },
+  {
+    "ma": "02HO18",
+    "ten": "Optimum Gold 180ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 15984,
+    "giaNYThung": 767232
+  },
+  {
+    "ma": "02HL37",
+    "ten": "Dielac Grow Plus 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9450,
+    "giaNYThung": 453600
+  },
+  {
+    "ma": "02HL17",
+    "ten": "Dielac Grow Plus 180ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 14148,
+    "giaNYThung": 679104
+  },
+  {
+    "ma": "02HD39",
+    "ten": "Dielac Grow tím 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9450,
+    "giaNYThung": 453600
+  },
+  {
+    "ma": "02HD19",
+    "ten": "Dielac Grow tím 180ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 14148,
+    "giaNYThung": 679104
+  },
+  {
+    "ma": "02HG18",
+    "ten": "Dielac Alpha Gold 180ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 12852,
+    "giaNYThung": 616896
+  },
+  {
+    "ma": "02HG38",
+    "ten": "Dielac Alpha Gold 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 8586,
+    "giaNYThung": 412128
+  },
+  {
+    "ma": "02HS37",
+    "ten": "Optimum Colos Gold 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 10962,
+    "giaNYThung": 526176
+  },
+  {
+    "ma": "02HY19",
+    "ten": "YokoGold 180ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 15768,
+    "giaNYThung": 756864
+  },
+  {
+    "ma": "02HY39",
+    "ten": "YokoGold 110ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 9936,
+    "giaNYThung": 476928
+  },
+  {
+    "ma": "02PD21",
+    "ten": "Sure Diacerna 237ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 38826,
+    "giaNYThung": 931824
+  },
+  {
+    "ma": "02PU21",
+    "ten": "Sure Prevent Gold 237ml",
+    "nhom": "A",
+    "donvi": "Hộp",
+    "slThung": 24,
+    "giaNYLon": 35748,
+    "giaNYThung": 857952
+  },
+  {
+    "ma": "02AA15",
+    "ten": "Dielac Alpha 1 HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 159462,
+    "giaNYThung": 3827088
+  },
+  {
+    "ma": "02AA25",
+    "ten": "Dielac Alpha 2 HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 159462,
+    "giaNYThung": 3827088
+  },
+  {
+    "ma": "02DA35",
+    "ten": "Dielac Alpha 3 HT 1500g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 386910,
+    "giaNYThung": 2321460
+  },
+  {
+    "ma": "02DA45",
+    "ten": "Dielac Alpha 4 HT 1500g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 386910,
+    "giaNYThung": 2321460
+  },
+  {
+    "ma": "02AG17",
+    "ten": "Dielac AlphaGold 1 HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 186462,
+    "giaNYThung": 4475088
+  },
+  {
+    "ma": "02AG27",
+    "ten": "Dielac AlphaGold 2 HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 182790,
+    "giaNYThung": 4386960
+  },
+  {
+    "ma": "02AO18",
+    "ten": "Optimum Gold 1 HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 295812,
+    "giaNYThung": 7099488
+  },
+  {
+    "ma": "02AO28",
+    "ten": "Optimum Gold 2 HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 292680,
+    "giaNYThung": 7024320
+  },
+  {
+    "ma": "02DG3A",
+    "ten": "Dielac Gold 3 HT 1400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 6,
+    "giaNYLon": 499392,
+    "giaNYThung": 2996352
+  },
+  {
+    "ma": "02AU15",
+    "ten": "Sure Prevent Gold HT 400g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 316332,
+    "giaNYThung": 7591968
+  },
+  {
+    "ma": "02EY19",
+    "ten": "YokoGold 1 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 469260,
+    "giaNYThung": 5631120
+  },
+  {
+    "ma": "02EY29",
+    "ten": "YokoGold 2 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 442260,
+    "giaNYThung": 5307120
+  },
+  {
+    "ma": "02EY39",
+    "ten": "YokoGold 3 HT 850g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 12,
+    "giaNYLon": 426060,
+    "giaNYThung": 5112720
+  },
+  {
+    "ma": "03AH10",
+    "ten": "Bột AD Ridielac Gold heo cà rốt HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 95796,
+    "giaNYThung": 2299104
+  },
+  {
+    "ma": "03AA23",
+    "ten": "Bột AD Ridielac Gold heo bó xôi HT 350g",
+    "nhom": "A",
+    "donvi": "Lon",
+    "slThung": 24,
+    "giaNYLon": 95796,
+    "giaNYThung": 2299104
+  },
+  {
+    "ma": "08HA11",
+    "ten": "Hero vị dâu 180ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 6588,
+    "giaNYThung": 316224
+  },
+  {
+    "ma": "08HA31",
+    "ten": "Hero vị dâu 110ml",
+    "nhom": "C",
+    "donvi": "Hộp",
+    "slThung": 48,
+    "giaNYLon": 4158,
+    "giaNYThung": 199584
   }
 ]
