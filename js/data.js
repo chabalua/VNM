@@ -27,7 +27,6 @@ function validatePromotionList(data) {
   });
 }
 
-// Hàm fetch với cache local
 async function fetchJSON(url, storageKey, fallback) {
   try {
     const res = await fetch(url);
@@ -45,7 +44,6 @@ async function fetchJSON(url, storageKey, fallback) {
   }
 }
 
-// Tải sản phẩm
 async function loadProducts() {
   const raw = await fetchJSON(PRODUCTS_URL, 'vnm_sp', FALLBACK_PRODUCTS);
   SP = validateProductList(raw) ? raw : FALLBACK_PRODUCTS;
@@ -56,7 +54,6 @@ async function loadProducts() {
   saveSP();
 }
 
-// Tải CT KM
 async function loadPromotions() {
   let raw = await fetchJSON(LOCAL_PROMOTIONS_URL, 'vnm_km3', []);
   if (!validatePromotionList(raw) || !raw.length) {
@@ -67,29 +64,22 @@ async function loadPromotions() {
   kmSave();
 }
 
-// Lưu SP vào localStorage
 function saveSP() { localStorage.setItem('vnm_sp', JSON.stringify(SP)); }
-// Lưu KM vào localStorage
 function kmSave() { localStorage.setItem('vnm_km3', JSON.stringify(kmProgs)); }
-
-// Tìm sản phẩm theo mã
 function spFind(ma) { return SP.find(x => x.ma === ma); }
 
-// Khởi tạo dữ liệu (gọi khi load trang)
 async function initData() {
   const overlay = document.getElementById('loadingOverlay');
   overlay.classList.add('show');
   await Promise.all([loadProducts(), loadPromotions()]);
   overlay.classList.remove('show');
-  // Khởi tạo danh sách yêu thích nếu chưa có
   if (!localStorage.getItem('vnm_favorites')) {
     localStorage.setItem('vnm_favorites', '[]');
   }
 }
 
-// Đồng bộ thủ công từ GitHub
 async function syncFromGitHub() {
-  if (!confirm('Tải lại toàn bộ sản phẩm và CT KM từ GitHub?\nMọi thay đổi chưa lưu lên GitHub sẽ bị mất.')) return;
+  if (!confirm('Tải lại toàn bộ SP và CT KM từ GitHub?\nDữ liệu local sẽ bị ghi đè.')) return;
   const overlay = document.getElementById('loadingOverlay');
   overlay.classList.add('show');
   try {
@@ -99,76 +89,79 @@ async function syncFromGitHub() {
     ]);
     SP = newProducts;
     kmProgs = normalizePromotionList(newPromos);
-    saveSP();
-    kmSave();
+    saveSP(); kmSave();
     if (window.renderOrder) window.renderOrder();
     if (window.renderAdm) window.renderAdm();
     if (window.renderKMTab) window.renderKMTab();
     if (window.renderDon) window.renderDon();
-    if (window.renderKH) window.renderKH();
     alert('✅ Đồng bộ thành công từ GitHub');
   } catch (err) {
     alert('Lỗi đồng bộ: ' + err.message);
-  } finally {
-    overlay.classList.remove('show');
-  }
+  } finally { overlay.classList.remove('show'); }
 }
 
-// Xuất toàn bộ data (sản phẩm + CT KM)
 function exportData() {
   const data = { products: SP, promotions: kmProgs };
   const str = JSON.stringify(data, null, 2);
   const blob = new Blob([str], { type: 'application/json' });
   const url = URL.createObjectURL(blob);
-  const a = document.createElement('a');
-  a.href = url;
+  const a = document.createElement('a'); a.href = url;
   a.download = `vnm_full_data_${new Date().toISOString().slice(0,19)}.json`;
-  a.click();
-  URL.revokeObjectURL(url);
-  alert('✅ Đã xuất toàn bộ data (sản phẩm + CT KM)');
+  a.click(); URL.revokeObjectURL(url);
+  alert('✅ Đã xuất data (SP + CT KM)');
 }
 
-// Nhập toàn bộ data
 function importData() {
-  const input = document.createElement('input');
-  input.type = 'file';
-  input.accept = 'application/json';
+  const input = document.createElement('input'); input.type = 'file'; input.accept = 'application/json';
   input.onchange = e => {
-    const file = e.target.files[0];
-    if (!file) return;
+    const file = e.target.files[0]; if (!file) return;
     const reader = new FileReader();
     reader.onload = ev => {
       try {
         const data = JSON.parse(ev.target.result);
         let changed = false;
         if (data.products) {
-          if (!validateProductList(data.products)) throw new Error('Dữ liệu products không hợp lệ');
-          SP = data.products;
-          saveSP();
-          changed = true;
+          if (!validateProductList(data.products)) throw new Error('products không hợp lệ');
+          SP = data.products; saveSP(); changed = true;
         }
         if (data.promotions) {
           const normalized = normalizePromotionList(data.promotions);
-          if (!validatePromotionList(normalized)) throw new Error('Dữ liệu promotions không hợp lệ');
-          kmProgs = normalized;
-          kmSave();
-          changed = true;
+          if (!validatePromotionList(normalized)) throw new Error('promotions không hợp lệ');
+          kmProgs = normalized; kmSave(); changed = true;
         }
-        if (!changed) throw new Error('File không chứa products hoặc promotions hợp lệ');
+        if (!changed) throw new Error('Không tìm thấy products/promotions');
         if (window.renderOrder) window.renderOrder();
         if (window.renderAdm) window.renderAdm();
         if (window.renderKMTab) window.renderKMTab();
         if (window.renderDon) window.renderDon();
-        if (window.renderKH) window.renderKH();
-        alert('✅ Nhập data thành công');
-      } catch (err) { alert('Lỗi đọc file: ' + err.message); }
+        alert('✅ Nhập thành công');
+      } catch (err) { alert('Lỗi: ' + err.message); }
     };
     reader.readAsText(file);
   };
   input.click();
 }
 
-// Đưa các hàm và biến ra window
+// ============================================================
+// XUẤT products.json riêng (push lên GitHub để sync giá)
+// ============================================================
+function exportProductsJSON() {
+  var cleanProducts = SP.map(function(p) {
+    var clean = { ma: p.ma, ten: p.ten, nhom: p.nhom, donvi: p.donvi, slThung: p.slThung, giaNYLon: p.giaNYLon, giaNYThung: p.giaNYThung };
+    if (p.locSize) { clean.locSize = p.locSize; clean.locLabel = p.locLabel || 'Lốc'; }
+    if (p.kmRules && p.kmRules.length) clean.kmRules = p.kmRules;
+    if (p.kmText) clean.kmText = p.kmText;
+    return clean;
+  });
+  var str = JSON.stringify(cleanProducts, null, 2);
+  var blob = new Blob([str], { type: 'application/json' });
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a'); a.href = url;
+  a.download = 'products.json';
+  a.click(); URL.revokeObjectURL(url);
+  alert('✅ Đã xuất products.json (' + SP.length + ' SP)\nPush lên GitHub để cập nhật giá cho tất cả thiết bị.');
+}
+
 window.SP = () => SP;
 window.kmProgs = () => kmProgs;
 window.saveSP = saveSP;
@@ -178,3 +171,4 @@ window.initData = initData;
 window.syncFromGitHub = syncFromGitHub;
 window.exportData = exportData;
 window.importData = importData;
+window.exportProductsJSON = exportProductsJSON;

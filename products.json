@@ -1,0 +1,8 @@
+[
+  {
+    "_schema": "v2",
+    "_note": "File sản phẩm cho GitHub sync. Push lên repo để cập nhật giá cho tất cả thiết bị.",
+    "_brands": "Mỗi SP có field 'brand' để phân loại nhãn hàng con: STT, GF, ADM, Fino, Susu, Hero, Probi, Yomilk, SCA, SĐ, SBPS, ICY, Vfresh, v.v.",
+    "_howToUse": "1. Sửa giá/thêm SP trong file này. 2. Push lên GitHub. 3. Trong app nhấn Sync từ GitHub."
+  }
+]

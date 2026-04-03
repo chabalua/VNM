@@ -29,7 +29,8 @@
 
 <!-- ĐẶT HÀNG -->
 <div id="page-order" class="page on">
-  <div class="sbar">
+  <div class="sbar" style="padding-bottom:6px">
+    <div id="cus-selector" style="margin-bottom:6px"></div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
       <input type="text" id="order-q" placeholder="Tìm sản phẩm, mã SP..." oninput="debounceRender('order')">
@@ -41,6 +42,7 @@
       <div class="pill" onclick="setNhom(this,'order','C')">C·Nước</div>
       <div class="pill" onclick="setNhom(this,'order','D')">D·Chua</div>
     </div>
+    <div class="pills" id="brand-pills" style="margin-top:4px;display:none"></div>
   </div>
   <div id="order-list"></div>
 </div>
@@ -68,6 +70,7 @@
   <div class="adm-tools">
     <button class="btn-tool filled" onclick="exportData()">📤 Xuất data (JSON)</button>
     <button class="btn-tool" onclick="importData()">📥 Nhập data từ JSON</button>
+    <button class="btn-tool" onclick="exportProductsJSON()" style="border-color:var(--o);color:var(--o)">📋 Xuất products.json (GitHub)</button>
     <button class="btn-tool" onclick="syncFromGitHub()" style="background:var(--b); color:white; border-color:var(--b);">🔄 Sync từ GitHub</button>
   </div>
   <div id="adm-list" style="padding-bottom:72px"></div>

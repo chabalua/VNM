@@ -1,10 +1,83 @@
-// Giao diện đặt hàng và quản lý sản phẩm (admin)
+// ============================================================
+// UI v3 — Đặt hàng (brand filter + KH selector) + Quản lý SP
+// ============================================================
 
 let nhomF = { order: '', adm: '' };
+let brandF = ''; // brand sub-filter
 let _searchTimer = null;
-let _spEditMa = null; // null = thêm mới, string = đang sửa SP có mã này
+let _spEditMa = null;
+let _selectedCustomerMa = ''; // KH đang được chọn cho đơn hàng
 
-// Debounce search — 250ms delay
+// ============================================================
+// BRAND CLASSIFICATION — tự phát hiện từ tên/mã SP
+// ============================================================
+const BRAND_RULES = [
+  // Nhóm A — Sữa bột
+  { brand: 'Optimum',     nhom: 'A', match: function(p) { return /optimum|02.O/i.test(p.ten + p.ma); } },
+  { brand: 'Dielac Gold', nhom: 'A', match: function(p) { return /dielac.*gold|ridielac|03C/i.test(p.ten + p.ma) && !/alpha|grow/i.test(p.ten); } },
+  { brand: 'D.Alpha',     nhom: 'A', match: function(p) { return /alpha|02.A|02DA|02EA|02BA/i.test(p.ten + p.ma) && !/gold/i.test(p.ten); } },
+  { brand: 'D.Alpha Gold',nhom: 'A', match: function(p) { return /alpha.*gold|02DG|02EG/i.test(p.ten + p.ma); } },
+  { brand: 'Grow Plus',   nhom: 'A', match: function(p) { return /grow.*plus|02ER6|02ER7|02DR6|02DR7/i.test(p.ten + p.ma); } },
+  { brand: 'Yoko',        nhom: 'A', match: function(p) { return /yoko|02.Y/i.test(p.ten + p.ma) && p.nhom === 'A'; } },
+  { brand: 'Sure/Diecerna',nhom:'A', match: function(p) { return /sure|diecerna|02AD|02AU|02EU|02ED/i.test(p.ten + p.ma); } },
+  { brand: 'CanPro/Mama', nhom: 'A', match: function(p) { return /canxi|can.*pro|mama|02AC|02EC|02AM|02EM/i.test(p.ten + p.ma); } },
+  { brand: 'SBPS TE',     nhom: 'A', match: function(p) { return /pha sẵn|SBPS|03A|03C/i.test(p.ten + p.ma) && /110|180/i.test(p.ten); } },
+
+  // Nhóm B — Sữa đặc
+  { brand: 'Ông Thọ',     nhom: 'B', match: function(p) { return /ông thọ|ong tho|01T|01C/i.test(p.ten + p.ma) && p.nhom === 'B'; } },
+  { brand: 'NSPN',        nhom: 'B', match: function(p) { return /NSPN|ngôi sao|01S/i.test(p.ten + p.ma) && p.nhom === 'B'; } },
+  { brand: 'Tài Lộc',     nhom: 'B', match: function(p) { return /tài lộc|tai loc|01TL/i.test(p.ten + p.ma); } },
+
+  // Nhóm C — Sữa nước
+  { brand: 'STT 100%',    nhom: 'C', match: function(p) { return /STT|sữa tươi|tươi 100|04E/i.test(p.ten + p.ma) && !/green|GF|fino|ADM|flex/i.test(p.ten); } },
+  { brand: 'Green Farm',  nhom: 'C', match: function(p) { return /green.*farm|GF|04G|04AE|organic/i.test(p.ten + p.ma); } },
+  { brand: 'ADM',         nhom: 'C', match: function(p) { return /ADM|04C|04AD/i.test(p.ten + p.ma) && p.nhom === 'C'; } },
+  { brand: 'Fino',        nhom: 'C', match: function(p) { return /fino|04F/i.test(p.ten + p.ma) && p.nhom === 'C'; } },
+  { brand: 'Flex',        nhom: 'C', match: function(p) { return /flex|04L/i.test(p.ten + p.ma); } },
+  { brand: 'SĐN/Hạt',    nhom: 'C', match: function(p) { return /đậu nành|soy|hạt|hat|05A|05D|05B|05F|05M/i.test(p.ten + p.ma); } },
+  { brand: 'Cao đạm',     nhom: 'C', match: function(p) { return /cao đạm|05AD/i.test(p.ten + p.ma); } },
+
+  // Nhóm D — Sữa chua
+  { brand: 'Probi',       nhom: 'D', match: function(p) { return /probi|07U/i.test(p.ten + p.ma); } },
+  { brand: 'SCA Trắng',   nhom: 'D', match: function(p) { return /SCA.*trắng|SCA.*KĐ|SCA.*CĐ|07TR|07KD|07ID/i.test(p.ten + p.ma); } },
+  { brand: 'SCA Trái cây',nhom: 'D', match: function(p) { return /SCA.*dâu|SCA.*nha|SCA.*trái|SCA.*lựu|SCA.*nhãn|07DA|07NC|07ND|07CR|07PH|07NI|07TD/i.test(p.ten + p.ma) && !/star|green/i.test(p.ten); } },
+  { brand: 'SCA GF',      nhom: 'D', match: function(p) { return /SCA.*green|07GI|07OC|07OI|07OV/i.test(p.ten + p.ma); } },
+  { brand: 'Susu SCU',    nhom: 'D', match: function(p) { return /susu|06U|04SS|04US|08S/i.test(p.ten + p.ma) && p.nhom === 'D'; } },
+  { brand: 'Hero',        nhom: 'D', match: function(p) { return /hero|08H/i.test(p.ten + p.ma); } },
+  { brand: 'Yomilk',      nhom: 'D', match: function(p) { return /yomilk|06V/i.test(p.ten + p.ma); } },
+  { brand: 'SCA Star',    nhom: 'D', match: function(p) { return /star|07SR11/i.test(p.ten + p.ma) && p.nhom === 'D'; } },
+
+  // Khác
+  { brand: 'ICY',         nhom: '',  match: function(p) { return /ICY|15BN/i.test(p.ten + p.ma); } },
+  { brand: 'Vfresh',      nhom: '',  match: function(p) { return /vfresh|nước ép|14B|14A/i.test(p.ten + p.ma); } },
+  { brand: 'Kombucha',    nhom: '',  match: function(p) { return /kombucha|14GK/i.test(p.ten + p.ma); } },
+  { brand: 'Nước dừa',    nhom: '',  match: function(p) { return /nước dừa|14GC|14GU/i.test(p.ten + p.ma); } },
+  { brand: 'Phô mai',     nhom: '',  match: function(p) { return /phô mai|pho mai|cheese|10V/i.test(p.ten + p.ma); } },
+];
+
+function detectBrand(p) {
+  if (p._brand) return p._brand;
+  for (var i = 0; i < BRAND_RULES.length; i++) {
+    if (BRAND_RULES[i].match(p)) { p._brand = BRAND_RULES[i].brand; return p._brand; }
+  }
+  p._brand = '';
+  return '';
+}
+
+function getBrandsForNhom(nhom) {
+  var seen = {};
+  var brands = [];
+  SP.forEach(function(p) {
+    if (nhom && p.nhom !== nhom) return;
+    var b = detectBrand(p);
+    if (b && !seen[b]) { seen[b] = true; brands.push(b); }
+  });
+  return brands.sort();
+}
+
+// ============================================================
+// DEBOUNCE + FILTER
+// ============================================================
 function debounceRender(tab) {
   clearTimeout(_searchTimer);
   _searchTimer = setTimeout(function() {
@@ -13,7 +86,95 @@ function debounceRender(tab) {
   }, 250);
 }
 
-// Bảng giá
+function setNhom(el, tab, nhom) {
+  nhomF[tab] = nhom;
+  brandF = ''; // reset brand khi đổi nhóm
+  el.closest('.pills').querySelectorAll('.pill').forEach(function(p) { p.className = 'pill'; });
+  el.className = 'pill on-' + (nhom || 'all');
+  if (tab === 'order') { renderBrandPills(); renderOrder(); }
+  else renderAdm();
+}
+
+function setBrand(brand) {
+  brandF = (brandF === brand) ? '' : brand; // toggle
+  renderBrandPills();
+  renderOrder();
+}
+
+function renderBrandPills() {
+  var el = document.getElementById('brand-pills'); if (!el) return;
+  var brands = getBrandsForNhom(nhomF.order);
+  if (!brands.length) { el.innerHTML = ''; el.style.display = 'none'; return; }
+  el.style.display = 'flex';
+  el.innerHTML = brands.map(function(b) {
+    var active = brandF === b;
+    return '<div class="pill ' + (active ? 'on-C' : '') + '" onclick="setBrand(\'' + b.replace(/'/g, "\\'") + '\')">' + b + '</div>';
+  }).join('');
+}
+
+// ============================================================
+// CUSTOMER SELECTOR — chọn KH trước khi đặt hàng
+// ============================================================
+function renderCustomerSelector() {
+  var el = document.getElementById('cus-selector'); if (!el) return;
+  var cusList = (typeof CUS !== 'undefined') ? CUS : [];
+  if (!cusList.length) {
+    el.innerHTML = '<div style="font-size:11px;color:var(--t3);padding:4px 0">Chưa có KH. Vào tab 👥 KH để thêm.</div>';
+    return;
+  }
+  var selected = cusList.find(function(k) { return k.ma === _selectedCustomerMa; });
+  var html = '<div style="display:flex;gap:7px;align-items:center">';
+  html += '<select id="order-kh-select" onchange="onSelectCustomer(this.value)" style="flex:1;height:34px;border:1.5px solid ' + (selected ? 'var(--g)' : 'var(--l2)') + ';border-radius:var(--Rs);padding:0 8px;font-size:13px;font-weight:600;color:' + (selected ? 'var(--g)' : 'var(--t2)') + ';background:' + (selected ? '#f7fef9' : '#fff') + '">';
+  html += '<option value="">— Chọn khách hàng —</option>';
+
+  // Group by route
+  var routes = (typeof ROUTES !== 'undefined') ? ROUTES : [];
+  var grouped = {};
+  cusList.forEach(function(k) { var r = k.tuyen || '_'; if (!grouped[r]) grouped[r] = []; grouped[r].push(k); });
+  routes.forEach(function(r) {
+    if (!grouped[r.id]) return;
+    html += '<optgroup label="📍 ' + r.ten + '">';
+    grouped[r.id].forEach(function(k) {
+      html += '<option value="' + k.ma + '"' + (k.ma === _selectedCustomerMa ? ' selected' : '') + '>' + (k.ten || k.ma) + '</option>';
+    });
+    html += '</optgroup>';
+  });
+  if (grouped['_']) {
+    html += '<optgroup label="Chưa phân tuyến">';
+    grouped['_'].forEach(function(k) {
+      html += '<option value="' + k.ma + '"' + (k.ma === _selectedCustomerMa ? ' selected' : '') + '>' + (k.ten || k.ma) + '</option>';
+    });
+    html += '</optgroup>';
+  }
+  html += '</select>';
+  if (selected) html += '<button onclick="onSelectCustomer(\'\')" style="height:34px;padding:0 10px;border:1px solid var(--l2);border-radius:var(--Rs);background:#fff;font-size:11px;font-weight:700;color:var(--t3);cursor:pointer">✕</button>';
+  html += '</div>';
+
+  // Nếu đã chọn KH — hiện mini info
+  if (selected) {
+    var progs = [];
+    if (selected.programs) {
+      if (selected.programs.vnmShop && selected.programs.vnmShop.dangKy) progs.push('VNM ' + (selected.programs.vnmShop.mucBayBan || ''));
+      if (selected.programs.vipShop && selected.programs.vipShop.dangKy) progs.push('VIP ' + (selected.programs.vipShop.mucBayBan || ''));
+      if (selected.programs.sbpsShop && selected.programs.sbpsShop.dangKy) progs.push('SBPS M' + (selected.programs.sbpsShop.muc || ''));
+    }
+    html += '<div style="display:flex;gap:4px;flex-wrap:wrap;margin-top:4px">';
+    html += '<span style="font-size:10px;font-weight:700;color:var(--g);background:var(--gL);padding:1px 7px;border-radius:8px">👤 ' + (selected.ten || selected.ma) + '</span>';
+    progs.forEach(function(p) { html += '<span style="font-size:9px;font-weight:600;color:var(--t2);background:#f0f2f5;padding:1px 6px;border-radius:8px">' + p + '</span>'; });
+    html += '</div>';
+  }
+
+  el.innerHTML = html;
+}
+
+function onSelectCustomer(ma) {
+  _selectedCustomerMa = ma;
+  renderCustomerSelector();
+}
+
+// ============================================================
+// BẢNG GIÁ
+// ============================================================
 function ptbl(p, km) {
   var hasKM = km.hopKM < p.giaNYLon || km.bonus > 0;
   var hKM = hasKM ? km.hopKM : p.giaNYLon;
@@ -28,7 +189,53 @@ function ptbl(p, km) {
   if (p.locSize) html += row(p.locLabel || 'Lốc', p.giaNYLon * p.locSize, hKM * p.locSize);
   html += row(p.donvi, p.giaNYLon, hKM);
   html += '</div>';
+
+  // Thưởng CT (nếu KH đã chọn và SP thuộc nhóm C/DE)
+  var rewardLine = calcRewardLine(p);
+  if (rewardLine) {
+    html += '<div style="font-size:10px;color:var(--b);padding:3px 8px;background:#f0f5ff;border-radius:0 0 var(--Rs) var(--Rs);border-top:1px dashed var(--l1)">' + rewardLine + '</div>';
+  }
+
   return html;
+}
+
+// Tính dòng thưởng CT cho từng SP card
+function calcRewardLine(p) {
+  if (!_selectedCustomerMa) return '';
+  var cusList = (typeof CUS !== 'undefined') ? CUS : [];
+  var kh = cusList.find(function(k) { return k.ma === _selectedCustomerMa; });
+  if (!kh || !kh.programs) return '';
+
+  var lines = [];
+
+  // VNM Shop — nhóm C
+  if (p.nhom === 'C' && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
+    var muc = kh.programs.vnmShop.mucTichLuy;
+    var tl = (typeof VNM_SHOP_TICHLUY !== 'undefined') ? VNM_SHOP_TICHLUY.find(function(t) { return t.muc === muc; }) : null;
+    if (tl) {
+      var totalCK = tl.ckDS + tl.ckGD1; // ước tính tối đa GĐ1
+      lines.push('💰 VNM Shop: CK ~' + tl.ckDS + '% + GĐ tối đa ~' + totalCK.toFixed(1) + '%');
+    }
+    var bb = kh.programs.vnmShop.mucBayBan;
+    var bbInfo = (typeof VNM_SHOP_TRUNGBAY !== 'undefined') ? VNM_SHOP_TRUNGBAY[bb] : null;
+    if (bbInfo) lines.push('🏆 TB ' + bb + ': ' + fmt(bbInfo.thuong) + 'đ/tháng');
+  }
+
+  // VIP Shop — nhóm D
+  if (p.nhom === 'D' && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
+    var muc = kh.programs.vipShop.mucTichLuy;
+    var tl = (typeof VIP_SHOP_TICHLUY !== 'undefined') ? VIP_SHOP_TICHLUY.find(function(t) { return t.muc === muc; }) : null;
+    if (tl) lines.push('💰 VIP: N1 ' + tl.ckN1 + '% / N2 ' + tl.ckN2 + '%');
+  }
+
+  // SBPS — nhóm A (sữa bột pha sẵn)
+  if (p.nhom === 'A' && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
+    var muc = kh.programs.sbpsShop.muc;
+    var tl = (typeof SBPS_TICHLUY !== 'undefined') ? SBPS_TICHLUY.find(function(t) { return t.muc === muc; }) : null;
+    if (tl) lines.push('💰 SBPS M' + muc + ': N1 ' + tl.ckN1 + '% / N2 ' + tl.ckN2 + '%');
+  }
+
+  return lines.join(' · ');
 }
 
 function updKM(p, km, ma) {
@@ -40,7 +247,6 @@ function onQty(ma) {
   var p = spFind(ma); if (!p) return;
   var qT = parseInt(document.getElementById('qT_' + ma)?.value) || 0;
   var qL = parseInt(document.getElementById('qL_' + ma)?.value) || 0;
-  // Validation
   if (qT < 0) { document.getElementById('qT_' + ma).value = 0; qT = 0; }
   if (qL < 0) { document.getElementById('qL_' + ma).value = 0; qL = 0; }
   var pv = document.getElementById('pv_' + ma); if (!pv) return;
@@ -54,21 +260,35 @@ function onQty(ma) {
   pvHtml += '<div class="pv-row"><span class="pv-l">Thành tiền</span><span class="pv-v">' + fmt(after) + 'đ</span></div>';
   pvHtml += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(Math.round(after * 1.015)) + 'đ</span></div>';
   if (km.disc > 0) pvHtml += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span style="color:var(--r);font-weight:700">- ' + fmt(km.disc) + 'đ</span></div>';
-  pvHtml += '<button class="btn-ok" onclick="addCart(\'' + ma + '\')">✓ Xác nhận thêm vào đơn</button>';
+  pvHtml += '<button class="btn-ok" onclick="addCart(\'' + ma + '\')">✓ Thêm vào đơn</button>';
   pv.innerHTML = pvHtml;
   updKM(p, km, ma);
 }
 
-// Render danh sách sản phẩm
+// ============================================================
+// RENDER ĐẶT HÀNG — với brand filter + KH selector
+// ============================================================
 function renderOrder() {
   var q = (document.getElementById('order-q') || {}).value || '';
   var lq = q.toLowerCase();
   var favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
-  var f = SP.filter(function(p) { return (!nhomF.order || p.nhom === nhomF.order) && (!lq || p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq)); });
+
+  var f = SP.filter(function(p) {
+    if (nhomF.order && p.nhom !== nhomF.order) return false;
+    if (brandF && detectBrand(p) !== brandF) return false;
+    if (lq && !(p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq))) return false;
+    return true;
+  });
+
   var el = document.getElementById('order-list');
   if (!el) return;
-  if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm (kiểm tra kết nối hoặc sync từ GitHub)</div>'; return; }
-  if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy (lọc quá chặt)</div>'; return; }
+
+  // Render customer selector
+  renderCustomerSelector();
+  renderBrandPills();
+
+  if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm<br><small>Vào ⚙️ Quản lý → Sync từ GitHub</small></div>'; return; }
+  if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy SP</div>'; return; }
 
   f.sort(function(a, b) {
     var aFav = favorites.includes(a.ma);
@@ -84,11 +304,14 @@ function renderOrder() {
   sectionOrder.forEach(function(nhom) {
     if (!groups[nhom] || !groups[nhom].length) return;
     var label = nhom === 'X' ? 'Khác' : (NLBL[nhom] || nhom);
-    html += '<div class="order-section"><div class="order-sec-hd">' + label + ' (' + groups[nhom].length + ' SP)</div>';
+    html += '<div class="order-section"><div class="order-sec-hd">' + label + ' (' + groups[nhom].length + ')</div>';
     groups[nhom].forEach(function(p) {
       var inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
       var isFav = favorites.includes(p.ma);
       var kmInfo = calcKM(p, 0, 0);
+      var brand = detectBrand(p);
+
+      // CT KM badges
       var kmBadgeHtml = '';
       var appliedCTs = kmProgs.filter(function(prog) { return prog.active && (prog.spMas || []).includes(p.ma); });
       if (appliedCTs.length) {
@@ -99,8 +322,9 @@ function renderOrder() {
       html += '<div class="sp-card ' + (inCart ? 'inCart' : '') + '" id="card_' + p.ma + '">';
       html += '<div class="sp-top"><div class="sp-bar" style="background:' + NCOLOR[p.nhom] + '"></div>';
       html += '<div class="sp-body"><div class="sp-name">' + p.ten + '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + p.ma + '\')">★</span></div>';
-      html += '<div class="sp-meta"><span class="sp-chip">' + p.ma + '</span><span class="sp-chip">' + p.donvi + '·' + p.slThung + '/thùng</span></div>';
-      html += '</div></div>';
+      html += '<div class="sp-meta"><span class="sp-chip">' + p.ma + '</span><span class="sp-chip">' + p.donvi + '·' + p.slThung + '/thùng</span>';
+      if (brand) html += '<span class="sp-chip" style="' + NBG[p.nhom] + '">' + brand + '</span>';
+      html += '</div></div></div>';
       html += kmBadgeHtml;
       html += '<div id="pt_' + p.ma + '">' + ptbl(p, kmInfo) + '</div>';
       html += '<div class="qty-area"><div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" max="999" inputmode="numeric" placeholder="0" id="qT_' + p.ma + '" oninput="onQty(\'' + p.ma + '\')"></div>';
@@ -111,7 +335,6 @@ function renderOrder() {
     html += '</div>';
   });
 
-  if (!html) { el.innerHTML = '<div class="empty">Không tìm thấy</div>'; return; }
   el.innerHTML = html;
 
   // Restore cart values
@@ -124,78 +347,59 @@ function renderOrder() {
   }
 }
 
-// Scroll to top
 function scrollToTop() {
   var orderList = document.getElementById('order-list');
   if (orderList) orderList.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ============================================================
-// RENDER ADMIN — Redesigned với Sửa + Xóa buttons
+// RENDER ADMIN
 // ============================================================
 function renderAdm() {
   var q = (document.getElementById('adm-q') || {}).value || '';
   var lq = q.toLowerCase();
   var f = SP.filter(function(p) { return (!nhomF.adm || p.nhom === nhomF.adm) && (!lq || p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq)); });
   var el = document.getElementById('adm-list'); if (!el) return;
-  if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm<br><small>Nhấn ＋ để thêm hoặc sync từ GitHub</small></div>'; return; }
+  if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm</div>'; return; }
   if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy</div>'; return; }
   var groups = {};
   f.forEach(function(p) { if (!groups[p.nhom]) groups[p.nhom] = []; groups[p.nhom].push(p); });
   var html = '';
   ['A', 'B', 'C', 'D'].forEach(function(nhom) {
     if (!groups[nhom]) return;
-    html += '<div class="adm-section"><div class="adm-sec-hd"><span>' + NLBL[nhom] + ' (' + groups[nhom].length + ' SP)</span></div>';
+    html += '<div class="adm-section"><div class="adm-sec-hd"><span>' + NLBL[nhom] + ' (' + groups[nhom].length + ')</span></div>';
     groups[nhom].forEach(function(p) {
-      var locInfo = p.locSize ? ' · Lốc ' + p.locSize : '';
-      html += '<div class="adm-sp-row">';
-      // Header row: name + price
-      html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
-      html += '<div style="flex:1;min-width:0"><div class="adm-sp-name">' + p.ten + '</div>';
-      html += '<div class="adm-sp-info"><span class="adm-chip">' + p.ma + '</span><span class="adm-chip">' + p.donvi + ' · ' + p.slThung + '/thùng' + locInfo + '</span></div></div>';
-      html += '<div style="text-align:right;flex-shrink:0"><div style="font-size:13px;font-weight:800;color:var(--g)">' + fmt(p.giaNYLon) + 'đ</div><div style="font-size:10px;color:var(--t3)">' + fmt(p.giaNYThung) + 'đ/thùng</div></div>';
-      html += '</div>';
-      // Quick price edit
-      html += '<div style="display:flex;gap:7px;align-items:center;margin-bottom:6px">';
-      html += '<input type="number" inputmode="numeric" placeholder="Giá mới/' + p.donvi + '" id="adp-inp-' + p.ma + '" style="flex:1;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 11px;font-size:15px;color:var(--t1);">';
-      html += '<button onclick="saveAdmPrice(\'' + p.ma + '\')" style="height:36px;padding:0 12px;background:var(--g);color:#fff;border:none;border-radius:var(--Rs);font-size:12px;font-weight:700;cursor:pointer;">Lưu giá</button>';
-      html += '</div>';
-      // Action buttons: Sửa + Xóa
-      html += '<div style="display:flex;gap:7px">';
-      html += '<button class="btn-kme" onclick="spOpenModal(\'' + p.ma + '\')" style="flex:1">✏️ Sửa SP</button>';
-      html += '<button class="btn-kmd" onclick="spDelete(\'' + p.ma + '\')" style="flex:0 0 auto;padding:0 12px">✕ Xóa</button>';
-      html += '</div>';
-      html += '</div>';
+      html += admSpRow(p);
     });
     html += '</div><div style="height:8px"></div>';
   });
-
-  // Hiện SP không có nhóm (nếu có)
   var noGroup = f.filter(function(p) { return !p.nhom || !['A','B','C','D'].includes(p.nhom); });
   if (noGroup.length) {
-    html += '<div class="adm-section"><div class="adm-sec-hd"><span>Khác (' + noGroup.length + ' SP)</span></div>';
-    noGroup.forEach(function(p) {
-      var locInfo = p.locSize ? ' · Lốc ' + p.locSize : '';
-      html += '<div class="adm-sp-row">';
-      html += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
-      html += '<div style="flex:1;min-width:0"><div class="adm-sp-name">' + p.ten + '</div>';
-      html += '<div class="adm-sp-info"><span class="adm-chip">' + p.ma + '</span><span class="adm-chip">' + (p.donvi || '?') + ' · ' + (p.slThung || '?') + '/thùng' + locInfo + '</span></div></div>';
-      html += '<div style="text-align:right;flex-shrink:0"><div style="font-size:13px;font-weight:800;color:var(--g)">' + fmt(p.giaNYLon) + 'đ</div><div style="font-size:10px;color:var(--t3)">' + fmt(p.giaNYThung) + 'đ/thùng</div></div>';
-      html += '</div>';
-      html += '<div style="display:flex;gap:7px;align-items:center;margin-bottom:6px">';
-      html += '<input type="number" inputmode="numeric" placeholder="Giá mới/' + (p.donvi || 'lon') + '" id="adp-inp-' + p.ma + '" style="flex:1;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 11px;font-size:15px;color:var(--t1);">';
-      html += '<button onclick="saveAdmPrice(\'' + p.ma + '\')" style="height:36px;padding:0 12px;background:var(--g);color:#fff;border:none;border-radius:var(--Rs);font-size:12px;font-weight:700;cursor:pointer;">Lưu giá</button>';
-      html += '</div>';
-      html += '<div style="display:flex;gap:7px">';
-      html += '<button class="btn-kme" onclick="spOpenModal(\'' + p.ma + '\')" style="flex:1">✏️ Sửa SP</button>';
-      html += '<button class="btn-kmd" onclick="spDelete(\'' + p.ma + '\')" style="flex:0 0 auto;padding:0 12px">✕ Xóa</button>';
-      html += '</div>';
-      html += '</div>';
-    });
+    html += '<div class="adm-section"><div class="adm-sec-hd"><span>Khác (' + noGroup.length + ')</span></div>';
+    noGroup.forEach(function(p) { html += admSpRow(p); });
     html += '</div>';
   }
-
   el.innerHTML = html;
+}
+
+function admSpRow(p) {
+  var brand = detectBrand(p);
+  var locInfo = p.locSize ? ' · Lốc ' + p.locSize : '';
+  var h = '<div class="adm-sp-row">';
+  h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:4px">';
+  h += '<div style="flex:1;min-width:0"><div class="adm-sp-name">' + p.ten + '</div>';
+  h += '<div class="adm-sp-info"><span class="adm-chip">' + p.ma + '</span><span class="adm-chip">' + p.donvi + ' · ' + p.slThung + '/thùng' + locInfo + '</span>';
+  if (brand) h += '<span class="adm-chip" style="' + (NBG[p.nhom] || '') + '">' + brand + '</span>';
+  h += '</div></div>';
+  h += '<div style="text-align:right;flex-shrink:0"><div style="font-size:13px;font-weight:800;color:var(--g)">' + fmt(p.giaNYLon) + 'đ</div><div style="font-size:10px;color:var(--t3)">' + fmt(p.giaNYThung) + 'đ/thùng</div></div></div>';
+  h += '<div style="display:flex;gap:7px;align-items:center;margin-bottom:6px">';
+  h += '<input type="number" inputmode="numeric" placeholder="Giá mới/' + p.donvi + '" id="adp-inp-' + p.ma + '" style="flex:1;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 11px;font-size:15px;color:var(--t1);">';
+  h += '<button onclick="saveAdmPrice(\'' + p.ma + '\')" style="height:36px;padding:0 12px;background:var(--g);color:#fff;border:none;border-radius:var(--Rs);font-size:12px;font-weight:700;cursor:pointer;">Lưu giá</button></div>';
+  h += '<div style="display:flex;gap:7px">';
+  h += '<button class="btn-kme" onclick="spOpenModal(\'' + p.ma + '\')" style="flex:1">✏️ Sửa</button>';
+  h += '<button class="btn-kmd" onclick="spDelete(\'' + p.ma + '\')" style="flex:0 0 auto;padding:0 12px">✕ Xóa</button></div>';
+  h += '</div>';
+  return h;
 }
 
 function saveAdmPrice(ma) {
@@ -204,24 +408,18 @@ function saveAdmPrice(ma) {
   if (!val || val < 100) { alert('Giá không hợp lệ'); return; }
   var p = SP.find(function(x) { return x.ma === ma; }); if (!p) return;
   p.giaNYLon = val; p.giaNYThung = val * p.slThung;
-  saveSP();
-  inp.value = '';
-  alert('✓ Đã cập nhật giá: ' + p.ten + ' → ' + fmt(val) + 'đ/' + p.donvi);
-  renderAdm();
-  renderOrder();
+  saveSP(); inp.value = '';
+  alert('✓ ' + p.ten + ' → ' + fmt(val) + 'đ/' + p.donvi);
+  renderAdm(); renderOrder();
 }
 
 // ============================================================
-// SP MODAL — Thêm / Sửa sản phẩm
+// SP MODAL — Thêm / Sửa (giữ nguyên logic cũ)
 // ============================================================
 function spOpenModal(ma) {
   var p = null;
-  if (ma) {
-    p = SP.find(function(x) { return x.ma === ma; });
-    _spEditMa = ma;
-  } else {
-    _spEditMa = null;
-  }
+  if (ma) { p = SP.find(function(x) { return x.ma === ma; }); _spEditMa = ma; }
+  else { _spEditMa = null; }
   document.getElementById('sp-modal').style.display = 'block';
   document.getElementById('sp-modal-t').textContent = p ? 'Sửa sản phẩm' : 'Thêm sản phẩm mới';
   spRenderForm(p);
@@ -237,121 +435,39 @@ function spRenderForm(p) {
   var isEdit = !!p;
   var nhom = p ? p.nhom : 'C';
   var donvi = p ? p.donvi : 'hộp';
-
   var html = '';
-
-  // Mã SP
-  html += '<div class="kf"><div class="kfl">Mã sản phẩm</div>';
-  html += '<input type="text" id="spf-ma" value="' + (p ? p.ma : '') + '" placeholder="VD: 04ED32" ' + (isEdit ? 'readonly style="background:#f0f2f5;color:var(--t3);"' : '') + ' style="width:100%;height:44px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:16px;font-weight:700;color:var(--t1);text-transform:uppercase;' + (isEdit ? 'background:#f0f2f5;color:var(--t3);' : '') + '">';
-  if (isEdit) html += '<div style="font-size:10px;color:var(--t3);margin-top:3px">Mã SP không thể thay đổi</div>';
-  html += '</div>';
-
-  // Tên SP
-  html += '<div class="kf"><div class="kfl">Tên sản phẩm</div>';
-  html += '<input type="text" id="spf-ten" value="' + (p ? p.ten : '') + '" placeholder="VD: STT DB 100% có đường 180ml" style="width:100%;height:44px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--t1);">';
-  html += '</div>';
-
-  // Nhóm SP
-  html += '<div class="kf"><div class="kfl">Nhóm sản phẩm</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px">';
-  ['A', 'B', 'C', 'D'].forEach(function(n) {
-    var labels = { A: 'A·Bột', B: 'B·Đặc', C: 'C·Nước', D: 'D·Chua' };
-    var sel = (nhom === n) ? ' sel' : '';
-    html += '<button class="km-type-btn sp-nhom-sel' + sel + '" onclick="spSelectNhom(\'' + n + '\',this)">' + labels[n] + '</button>';
-  });
+  html += '<div class="kf"><div class="kfl">Mã SP</div><input type="text" id="spf-ma" value="' + (p ? p.ma : '') + '"' + (isEdit ? ' readonly style="background:#f0f2f5;color:var(--t3);"' : '') + ' placeholder="VD: 04ED32" style="width:100%;height:44px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:16px;font-weight:700;text-transform:uppercase;' + (isEdit ? 'background:#f0f2f5;color:var(--t3);' : '') + '"></div>';
+  html += '<div class="kf"><div class="kfl">Tên SP</div><input type="text" id="spf-ten" value="' + (p ? p.ten : '') + '" placeholder="VD: STT DB 100% có đường 180ml" style="width:100%;height:44px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:15px;"></div>';
+  html += '<div class="kf"><div class="kfl">Nhóm</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px">';
+  ['A', 'B', 'C', 'D'].forEach(function(n) { html += '<button class="km-type-btn sp-nhom-sel' + (nhom === n ? ' sel' : '') + '" onclick="spSelectNhom(\'' + n + '\',this)">' + { A: 'A·Bột', B: 'B·Đặc', C: 'C·Nước', D: 'D·Chua' }[n] + '</button>'; });
   html += '</div></div>';
-
-  // Đơn vị
-  html += '<div class="kf"><div class="kfl">Đơn vị tính</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px">';
-  ['hộp', 'lon', 'chai', 'bịch', 'tuýp', 'vỉ', 'hũ', 'lốc'].forEach(function(dv, i) {
-    if (i >= 4) return; // Show 4 per row
-    var sel = (donvi === dv) ? ' sel' : '';
-    html += '<button class="km-type-btn sp-dv-sel' + sel + '" onclick="spSelectDV(\'' + dv + '\',this)">' + dv + '</button>';
-  });
-  html += '</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px;margin-top:7px">';
-  ['tuýp', 'vỉ', 'hũ', 'lốc'].forEach(function(dv) {
-    var sel = (donvi === dv) ? ' sel' : '';
-    html += '<button class="km-type-btn sp-dv-sel' + sel + '" onclick="spSelectDV(\'' + dv + '\',this)">' + dv + '</button>';
-  });
-  html += '</div>';
-  // Custom đơn vị
-  html += '<input type="text" id="spf-dv-custom" placeholder="Hoặc nhập đơn vị khác..." value="" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:14px;color:var(--t1);margin-top:7px;">';
-  html += '</div>';
-
-  // SL / Thùng
-  html += '<div class="kf"><div class="kfl">Số lượng / thùng</div>';
-  html += '<input type="number" id="spf-slthung" value="' + (p ? p.slThung : 48) + '" min="1" max="999" inputmode="numeric" style="width:100%;height:44px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:18px;font-weight:700;text-align:center;color:var(--t1);">';
-  html += '</div>';
-
-  // Lốc (tuỳ chọn)
-  html += '<div class="kf"><div class="kfl">Lốc (tuỳ chọn — bỏ trống nếu không có)</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
-  html += '<div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">SL / lốc</div>';
-  html += '<input type="number" id="spf-locsize" value="' + (p && p.locSize ? p.locSize : '') + '" placeholder="VD: 4" min="0" max="99" inputmode="numeric" style="width:100%;height:40px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:16px;text-align:center;color:var(--t1);"></div>';
-  html += '<div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Nhãn lốc</div>';
-  html += '<input type="text" id="spf-loclabel" value="' + (p && p.locLabel ? p.locLabel : '') + '" placeholder="VD: Lốc" style="width:100%;height:40px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--t1);"></div>';
-  html += '</div></div>';
-
-  // Giá gốc / đơn vị
-  html += '<div class="kf"><div class="kfl">Giá gốc / đơn vị (VNĐ)</div>';
-  html += '<input type="number" id="spf-gia" value="' + (p ? p.giaNYLon : '') + '" placeholder="VD: 6900" min="100" inputmode="numeric" style="width:100%;height:48px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:22px;font-weight:800;text-align:center;color:var(--g);" oninput="spPreviewPrice()">';
-  html += '<div id="spf-price-preview" style="margin-top:6px"></div>';
-  html += '</div>';
-
-  // Nút lưu
-  html += '<button class="btn-km-save" onclick="spSaveForm()">' + (isEdit ? '💾 Cập nhật sản phẩm' : '✓ Thêm sản phẩm') + '</button>';
-
+  html += '<div class="kf"><div class="kfl">Đơn vị</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:7px">';
+  ['hộp', 'lon', 'chai', 'bịch'].forEach(function(dv) { html += '<button class="km-type-btn sp-dv-sel' + (donvi === dv ? ' sel' : '') + '" onclick="spSelectDV(\'' + dv + '\',this)">' + dv + '</button>'; });
+  html += '</div><input type="text" id="spf-dv-custom" placeholder="Hoặc đơn vị khác..." style="width:100%;height:34px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:13px;margin-top:6px"></div>';
+  html += '<div class="kf"><div class="kfl">SL/thùng</div><input type="number" id="spf-slthung" value="' + (p ? p.slThung : 48) + '" style="width:100%;height:44px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:18px;font-weight:700;text-align:center"></div>';
+  html += '<div class="kf"><div class="kfl">Lốc (tuỳ chọn)</div><div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:10px;color:var(--t3)">SL/lốc</div><input type="number" id="spf-locsize" value="' + (p && p.locSize ? p.locSize : '') + '" placeholder="VD: 4" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:15px;text-align:center"></div><div><div style="font-size:10px;color:var(--t3)">Nhãn</div><input type="text" id="spf-loclabel" value="' + (p && p.locLabel ? p.locLabel : '') + '" placeholder="Lốc" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:14px"></div></div></div>';
+  html += '<div class="kf"><div class="kfl">Giá gốc/đơn vị (VNĐ)</div><input type="number" id="spf-gia" value="' + (p ? p.giaNYLon : '') + '" placeholder="6900" style="width:100%;height:48px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 12px;font-size:22px;font-weight:800;text-align:center;color:var(--g)" oninput="spPreviewPrice()"><div id="spf-price-preview" style="margin-top:6px"></div></div>';
+  html += '<button class="btn-km-save" onclick="spSaveForm()">' + (isEdit ? '💾 Cập nhật' : '✓ Thêm SP') + '</button>';
   body.innerHTML = html;
-
-  // Init preview
   spPreviewPrice();
 }
 
-function spSelectNhom(n, btn) {
-  document.querySelectorAll('.sp-nhom-sel').forEach(function(b) { b.classList.remove('sel'); });
-  btn.classList.add('sel');
-}
-
-function spSelectDV(dv, btn) {
-  document.querySelectorAll('.sp-dv-sel').forEach(function(b) { b.classList.remove('sel'); });
-  btn.classList.add('sel');
-  var customInp = document.getElementById('spf-dv-custom');
-  if (customInp) customInp.value = '';
-}
-
-function spGetSelectedNhom() {
-  var sel = document.querySelector('.sp-nhom-sel.sel');
-  if (!sel) return 'C';
-  var t = sel.textContent.trim();
-  return t.charAt(0);
-}
-
-function spGetSelectedDV() {
-  var customInp = document.getElementById('spf-dv-custom');
-  if (customInp && customInp.value.trim()) return customInp.value.trim();
-  var sel = document.querySelector('.sp-dv-sel.sel');
-  if (!sel) return 'hộp';
-  return sel.textContent.trim();
-}
+function spSelectNhom(n, btn) { document.querySelectorAll('.sp-nhom-sel').forEach(function(b) { b.classList.remove('sel'); }); btn.classList.add('sel'); }
+function spSelectDV(dv, btn) { document.querySelectorAll('.sp-dv-sel').forEach(function(b) { b.classList.remove('sel'); }); btn.classList.add('sel'); var c = document.getElementById('spf-dv-custom'); if (c) c.value = ''; }
+function spGetSelectedNhom() { var sel = document.querySelector('.sp-nhom-sel.sel'); return sel ? sel.textContent.trim().charAt(0) : 'C'; }
+function spGetSelectedDV() { var c = document.getElementById('spf-dv-custom'); if (c && c.value.trim()) return c.value.trim(); var sel = document.querySelector('.sp-dv-sel.sel'); return sel ? sel.textContent.trim() : 'hộp'; }
 
 function spPreviewPrice() {
   var gia = parseInt((document.getElementById('spf-gia') || {}).value) || 0;
   var slThung = parseInt((document.getElementById('spf-slthung') || {}).value) || 48;
   var locSize = parseInt((document.getElementById('spf-locsize') || {}).value) || 0;
-  var el = document.getElementById('spf-price-preview');
-  if (!el) return;
-  if (!gia) { el.innerHTML = ''; return; }
+  var el = document.getElementById('spf-price-preview'); if (!el || !gia) { if (el) el.innerHTML = ''; return; }
   var thung = gia * slThung;
-  var html = '<div style="background:var(--gL);border-radius:var(--Rs);padding:8px 10px;border:1px solid #a3e6c0">';
-  html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:3px"><span>Giá/thùng</span><b style="color:var(--g)">' + fmt(thung) + 'đ</b></div>';
-  if (locSize > 0) {
-    html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2);margin-bottom:3px"><span>Giá/lốc (' + locSize + ')</span><b style="color:var(--b)">' + fmt(gia * locSize) + 'đ</b></div>';
-  }
-  html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2)"><span>Giá+VAT 1.5%</span><b>' + fmt(Math.round(gia * 1.015)) + 'đ/đvị · ' + fmt(Math.round(thung * 1.015)) + 'đ/thùng</b></div>';
-  html += '</div>';
-  el.innerHTML = html;
+  var h = '<div style="background:var(--gL);border-radius:var(--Rs);padding:8px 10px;border:1px solid #a3e6c0">';
+  h += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2)"><span>Thùng</span><b style="color:var(--g)">' + fmt(thung) + 'đ</b></div>';
+  if (locSize > 0) h += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2)"><span>Lốc (' + locSize + ')</span><b>' + fmt(gia * locSize) + 'đ</b></div>';
+  h += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--t2)"><span>+VAT 1.5%</span><b>' + fmt(Math.round(thung * 1.015)) + 'đ/thùng</b></div></div>';
+  el.innerHTML = h;
 }
 
 function spSaveForm() {
@@ -363,67 +479,32 @@ function spSaveForm() {
   var locSize = parseInt((document.getElementById('spf-locsize') || {}).value) || 0;
   var locLabel = (document.getElementById('spf-loclabel') || {}).value.trim();
   var gia = parseInt((document.getElementById('spf-gia') || {}).value) || 0;
-
-  // Validate
-  if (!ma) { alert('Nhập mã sản phẩm'); return; }
-  if (!ten) { alert('Nhập tên sản phẩm'); return; }
-  if (!slThung || slThung < 1) { alert('Số lượng/thùng phải ≥ 1'); return; }
-  if (!gia || gia < 100) { alert('Giá phải ≥ 100'); return; }
-
+  if (!ma) { alert('Nhập mã SP'); return; }
+  if (!ten) { alert('Nhập tên SP'); return; }
+  if (!slThung || slThung < 1) { alert('SL/thùng ≥ 1'); return; }
+  if (!gia || gia < 100) { alert('Giá ≥ 100'); return; }
   if (_spEditMa) {
-    // Đang sửa
-    var p = SP.find(function(x) { return x.ma === _spEditMa; });
-    if (!p) { alert('Không tìm thấy SP!'); return; }
-    p.ten = ten;
-    p.nhom = nhom;
-    p.donvi = donvi;
-    p.slThung = slThung;
-    p.giaNYLon = gia;
-    p.giaNYThung = gia * slThung;
-    if (locSize > 0) { p.locSize = locSize; p.locLabel = locLabel || 'Lốc'; }
-    else { delete p.locSize; delete p.locLabel; }
-    saveSP();
-    document.getElementById('sp-modal').style.display = 'none';
-    renderAdm(); renderOrder();
+    var p = SP.find(function(x) { return x.ma === _spEditMa; }); if (!p) return;
+    p.ten = ten; p.nhom = nhom; p.donvi = donvi; p.slThung = slThung; p.giaNYLon = gia; p.giaNYThung = gia * slThung;
+    if (locSize > 0) { p.locSize = locSize; p.locLabel = locLabel || 'Lốc'; } else { delete p.locSize; delete p.locLabel; }
+    delete p._brand; // reset brand cache
+    saveSP(); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
     alert('✅ Đã cập nhật: ' + ten);
   } else {
-    // Thêm mới — check trùng mã
-    if (SP.find(function(x) { return x.ma === ma; })) {
-      alert('Mã SP "' + ma + '" đã tồn tại! Dùng mã khác hoặc sửa SP hiện có.');
-      return;
-    }
-    var newP = {
-      ma: ma,
-      ten: ten,
-      nhom: nhom,
-      donvi: donvi,
-      slThung: slThung,
-      giaNYLon: gia,
-      giaNYThung: gia * slThung,
-      kmRules: [],
-      kmText: ''
-    };
+    if (SP.find(function(x) { return x.ma === ma; })) { alert('Mã đã tồn tại!'); return; }
+    var newP = { ma: ma, ten: ten, nhom: nhom, donvi: donvi, slThung: slThung, giaNYLon: gia, giaNYThung: gia * slThung, kmRules: [], kmText: '' };
     if (locSize > 0) { newP.locSize = locSize; newP.locLabel = locLabel || 'Lốc'; }
-    SP.push(newP);
-    saveSP();
-    document.getElementById('sp-modal').style.display = 'none';
-    renderAdm(); renderOrder();
-    alert('✅ Đã thêm SP mới: ' + ten + ' (' + ma + ')');
+    SP.push(newP); saveSP(); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
+    alert('✅ Đã thêm: ' + ten + ' (' + ma + ')');
   }
 }
 
-// Xóa SP
 function spDelete(ma) {
-  var p = SP.find(function(x) { return x.ma === ma; });
-  if (!p) return;
-  if (!confirm('Xóa sản phẩm "' + p.ten + '" (' + ma + ')?\n\nLưu ý: CT KM liên quan sẽ không tự xóa mã này.')) return;
-  var idx = SP.indexOf(p);
-  if (idx >= 0) SP.splice(idx, 1);
-  // Xóa khỏi giỏ hàng nếu có
+  var p = SP.find(function(x) { return x.ma === ma; }); if (!p) return;
+  if (!confirm('Xóa "' + p.ten + '" (' + ma + ')?')) return;
+  SP.splice(SP.indexOf(p), 1);
   if (cart[ma]) { delete cart[ma]; saveCart(); updateBadge(); }
-  saveSP();
-  renderAdm(); renderOrder();
-  alert('✅ Đã xóa: ' + p.ten);
+  saveSP(); renderAdm(); renderOrder();
 }
 
 function closeAdmModal(e) {
@@ -431,8 +512,11 @@ function closeAdmModal(e) {
   document.getElementById('adm-modal').style.display = 'none';
 }
 
-// Export
+// ============================================================
+// EXPORTS
+// ============================================================
 window.nhomF = nhomF;
+window.brandF = brandF;
 window.ptbl = ptbl;
 window.updKM = updKM;
 window.onQty = onQty;
@@ -442,6 +526,11 @@ window.saveAdmPrice = saveAdmPrice;
 window.closeAdmModal = closeAdmModal;
 window.scrollToTop = scrollToTop;
 window.debounceRender = debounceRender;
+window.setNhom = setNhom;
+window.setBrand = setBrand;
+window.renderBrandPills = renderBrandPills;
+window.renderCustomerSelector = renderCustomerSelector;
+window.onSelectCustomer = onSelectCustomer;
 window.spOpenModal = spOpenModal;
 window.spCloseModal = spCloseModal;
 window.spRenderForm = spRenderForm;
@@ -450,3 +539,5 @@ window.spSelectDV = spSelectDV;
 window.spPreviewPrice = spPreviewPrice;
 window.spSaveForm = spSaveForm;
 window.spDelete = spDelete;
+window.detectBrand = detectBrand;
+window._selectedCustomerMa = _selectedCustomerMa;
