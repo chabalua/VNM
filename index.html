@@ -6,23 +6,24 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VNM Order">
-<meta name="theme-color" content="#004d33">
+<meta name="theme-color" content="#006B3F">
 <title>VNM Order T04/2026</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
 <div id="loadingOverlay" class="loading-overlay">
-  <div>🔄 Đang tải dữ liệu từ GitHub...</div>
-  <div style="font-size:14px;">Lần đầu hơi lâu, vui lòng đợi</div>
+  <div class="spinner"></div>
+  <div style="font-size:17px;font-weight:700">Đang tải dữ liệu...</div>
+  <div style="font-size:13px;opacity:.7">Lần đầu hơi lâu, vui lòng đợi</div>
 </div>
 
 <div id="tabbar">
-  <button class="tb on" onclick="gotoTab('order')" id="tab-order">ĐẶT HÀNG</button>
-  <button class="tb" onclick="gotoTab('don')" id="tab-don">ĐƠN HÀNG<span class="tb-badge" id="don-badge"></span></button>
-  <button class="tb" onclick="gotoTab('adm')" id="tab-adm">⚙️ QUẢN LÝ</button>
-  <button class="tb" onclick="gotoTab('km')" id="tab-km">🎯 CT KM</button>
-  <button class="tb" onclick="gotoTab('kh')" id="tab-kh">👥 KH</button>
+  <button class="tb on" onclick="gotoTab('order')" id="tab-order"><span class="tb-icon">🛒</span>Đặt hàng</button>
+  <button class="tb" onclick="gotoTab('don')" id="tab-don"><span class="tb-icon">📋</span>Đơn hàng<span class="tb-badge" id="don-badge"></span></button>
+  <button class="tb" onclick="gotoTab('adm')" id="tab-adm"><span class="tb-icon">⚙️</span>Quản lý</button>
+  <button class="tb" onclick="gotoTab('km')" id="tab-km"><span class="tb-icon">🎯</span>CT KM</button>
+  <button class="tb" onclick="gotoTab('kh')" id="tab-kh"><span class="tb-icon">👥</span>KH</button>
 </div>
 
 <div id="main">
@@ -42,7 +43,7 @@
       <div class="pill" onclick="setNhom(this,'order','C')">C·Nước</div>
       <div class="pill" onclick="setNhom(this,'order','D')">D·Chua</div>
     </div>
-    <div class="pills" id="brand-pills" style="margin-top:4px;display:none"></div>
+    <div class="pills" id="brand-pills" style="margin-top:5px;display:none"></div>
   </div>
   <div id="order-list"></div>
 </div>
@@ -68,28 +69,25 @@
     </div>
   </div>
   <div class="adm-tools">
-    <button class="btn-tool filled" onclick="exportData()">📤 Xuất data (JSON)</button>
-    <button class="btn-tool" onclick="importData()">📥 Nhập data từ JSON</button>
-    <button class="btn-tool" onclick="exportProductsJSON()" style="border-color:var(--o);color:var(--o)">📋 Xuất products.json (GitHub)</button>
-    <button class="btn-tool" onclick="syncFromGitHub()" style="background:var(--b); color:white; border-color:var(--b);">🔄 Sync từ GitHub</button>
+    <button class="btn-tool filled" onclick="exportProductsJSON()">📤 Xuất products.json (GitHub)</button>
+    <button class="btn-tool" onclick="importProductsJSON()">📥 Nhập products.json</button>
+    <button class="btn-tool" onclick="syncFromGitHub()" style="background:var(--b);color:white;border-color:var(--b)">🔄 Sync từ GitHub</button>
   </div>
   <div id="adm-list" style="padding-bottom:72px"></div>
 </div>
 
-<!-- KHÁCH HÀNG (Redesigned v2 — DMS style) -->
+<!-- KHÁCH HÀNG -->
 <div id="page-kh" class="page">
   <div class="sbar" style="padding-bottom:5px">
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
       <input type="text" id="cus-search" placeholder="Tìm KH theo tên, mã..." oninput="cusFilterSearch(this.value)">
     </div>
-    <div class="pills" id="cus-route-pills" style="margin-bottom:5px">
-      <!-- Route pills rendered dynamically in renderCusTab -->
-    </div>
-    <div style="display:flex;gap:5px;flex-wrap:wrap">
-      <button onclick="cusExport()" style="flex:1;height:30px;border:1px solid var(--g);border-radius:14px;background:#fff;color:var(--g);font-size:11px;font-weight:700;cursor:pointer">📤 Xuất KH</button>
-      <button onclick="cusImport()" style="flex:1;height:30px;border:1px solid var(--b);border-radius:14px;background:#fff;color:var(--b);font-size:11px;font-weight:700;cursor:pointer">📥 Nhập KH</button>
-      <button onclick="cusManageRoutes()" style="flex:1;height:30px;border:1px solid var(--o);border-radius:14px;background:#fff;color:var(--o);font-size:11px;font-weight:700;cursor:pointer">📍 Tuyến</button>
+    <div class="pills" id="cus-route-pills" style="margin-bottom:5px"></div>
+    <div style="display:flex;gap:6px;flex-wrap:wrap">
+      <button onclick="cusExport()" style="flex:1;height:32px;border:1.5px solid var(--vm);border-radius:var(--Rr);background:#fff;color:var(--vm);font-size:11.5px;font-weight:700;cursor:pointer">📤 Xuất KH</button>
+      <button onclick="cusImport()" style="flex:1;height:32px;border:1.5px solid var(--b);border-radius:var(--Rr);background:#fff;color:var(--b);font-size:11.5px;font-weight:700;cursor:pointer">📥 Nhập KH</button>
+      <button onclick="cusManageRoutes()" style="flex:1;height:32px;border:1.5px solid var(--o);border-radius:var(--Rr);background:#fff;color:var(--o);font-size:11.5px;font-weight:700;cursor:pointer">📍 Tuyến</button>
     </div>
   </div>
   <div id="kh-list" style="padding-bottom:72px"></div>
@@ -97,16 +95,16 @@
 
 <!-- CT KM -->
 <div id="page-km" class="page">
-  <div style="background:var(--card); margin:8px 9px; border-radius:var(--R); padding:10px; display:flex; gap:8px; flex-wrap:wrap;">
-    <button onclick="exportKM()" class="btn-tool" style="flex:1; margin:0;">📤 Xuất CT KM</button>
-    <button onclick="importKM()" class="btn-tool" style="flex:1; margin:0;">📥 Nhập CT KM</button>
-    <button onclick="loadKMFromURL()" class="btn-tool" style="flex:1; margin:0;">🌐 Load từ URL</button>
+  <div style="background:var(--card);margin:8px 12px;border-radius:var(--R);padding:12px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:var(--shadow)">
+    <button onclick="exportKM()" class="btn-tool" style="flex:1;margin:0;height:42px">📤 Xuất CT KM</button>
+    <button onclick="importKM()" class="btn-tool" style="flex:1;margin:0;height:42px">📥 Nhập CT KM</button>
+    <button onclick="loadKMFromURL()" class="btn-tool" style="flex:1;margin:0;height:42px">🌐 Load từ URL</button>
   </div>
-  <div style="background:var(--card); margin:0 9px 8px; border-radius:var(--R); padding:10px; display:flex; gap:8px; flex-wrap:wrap; align-items:center;">
-    <input id="km-search-input" type="search" placeholder="Tìm theo tên CT KM..." oninput="kmSearchByName(this.value)" style="flex:1; min-width:170px; height:40px; border:1.5px solid var(--l2); border-radius:var(--Rs); padding:0 12px; font-size:14px;" />
-    <button onclick="kmClearSearch()" class="btn-tool" style="flex:0 0 auto; margin:0; min-width:86px;">✕ Xoá</button>
+  <div style="background:var(--card);margin:0 12px 8px;border-radius:var(--R);padding:10px 12px;display:flex;gap:8px;align-items:center;box-shadow:var(--shadow)">
+    <input id="km-search-input" type="search" placeholder="Tìm theo tên CT KM..." oninput="kmSearchByName(this.value)" style="flex:1;min-width:170px;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:14px;">
+    <button onclick="kmClearSearch()" class="btn-tool" style="flex:0 0 auto;margin:0;min-width:70px;height:40px;font-size:12px">✕ Xoá</button>
   </div>
-  <div class="pills" style="margin:0 9px 8px;">
+  <div class="pills" style="margin:0 12px 8px">
     <div class="pill on-all" onclick="kmSetFilterGroup('')">Tất cả</div>
     <div class="pill" onclick="kmSetFilterGroup('A')">A·Bột</div>
     <div class="pill" onclick="kmSetFilterGroup('B')">B·Đặc</div>
@@ -118,35 +116,35 @@
 </div>
 
 <!-- FABs -->
-<button id="km-fab" onclick="kmOpenModal()" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--g);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(0,77,51,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
-<button id="adm-fab" onclick="spOpenModal()" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--b);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(21,87,176,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
-<button id="kh-fab" onclick="cusEdit(-1)" style="display:none;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));right:16px;width:52px;height:52px;border-radius:26px;background:var(--g);color:#fff;border:none;font-size:26px;cursor:pointer;box-shadow:0 3px 12px rgba(0,77,51,.4);z-index:250;align-items:center;justify-content:center;">＋</button>
-<button id="scroll-top-btn" onclick="scrollToTop()" style="display:flex;position:fixed;bottom:calc(20px + env(safe-area-inset-bottom));left:16px;width:44px;height:44px;border-radius:22px;background:rgba(0,0,0,.5);color:#fff;border:none;font-size:18px;cursor:pointer;box-shadow:0 2px 8px rgba(0,0,0,.3);z-index:250;align-items:center;justify-content:center;">↑</button>
+<button id="km-fab" class="fab-btn green" onclick="kmOpenModal()" style="display:none">＋</button>
+<button id="adm-fab" class="fab-btn blue" onclick="spOpenModal()" style="display:none">＋</button>
+<button id="kh-fab" class="fab-btn green" onclick="cusEdit(-1)" style="display:none">＋</button>
+<button id="scroll-top-btn" onclick="scrollToTop()">↑</button>
 
 <!-- MODAL THÊM/SỬA SP -->
-<div id="sp-modal" onclick="spCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);">
-  <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom);">
-    <div style="padding:14px 15px 10px;border-bottom:1px solid var(--l1);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
-      <span id="sp-modal-t" style="font-size:17px;font-weight:800;">Thêm sản phẩm</span>
-      <button onclick="document.getElementById('sp-modal').style.display='none'" style="border:none;background:none;font-size:22px;color:var(--t3);cursor:pointer;padding:0;">✕</button>
+<div id="sp-modal" onclick="spCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)">
+  <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom)">
+    <div style="padding:16px 16px 12px;border-bottom:1px solid var(--n5);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+      <span id="sp-modal-t" style="font-size:17px;font-weight:800">Thêm sản phẩm</span>
+      <button onclick="document.getElementById('sp-modal').style.display='none'" style="border:none;background:none;font-size:22px;color:var(--n3);cursor:pointer;padding:0">✕</button>
     </div>
-    <div id="sp-modal-body" style="overflow-y:auto;padding:14px 15px;flex:1;"></div>
+    <div id="sp-modal-body" style="overflow-y:auto;padding:16px;flex:1"></div>
   </div>
 </div>
 
-<!-- KM MODAL (dùng chung cho KM + KH) -->
-<div id="km-modal" onclick="kmCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.55);">
-  <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:18px 18px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom);">
-    <div style="padding:14px 15px 10px;border-bottom:1px solid var(--l1);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;">
-      <span id="km-modal-t" style="font-size:17px;font-weight:800;">Tạo CT KM</span>
-      <button onclick="document.getElementById('km-modal').style.display='none'" style="border:none;background:none;font-size:22px;color:var(--t3);cursor:pointer;padding:0;">✕</button>
+<!-- KM MODAL -->
+<div id="km-modal" onclick="kmCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)">
+  <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom)">
+    <div style="padding:16px 16px 12px;border-bottom:1px solid var(--n5);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
+      <span id="km-modal-t" style="font-size:17px;font-weight:800">Tạo CT KM</span>
+      <button onclick="document.getElementById('km-modal').style.display='none'" style="border:none;background:none;font-size:22px;color:var(--n3);cursor:pointer;padding:0">✕</button>
     </div>
-    <div id="km-modal-body" style="overflow-y:auto;padding:14px 15px;flex:1;"></div>
+    <div id="km-modal-body" style="overflow-y:auto;padding:16px;flex:1"></div>
   </div>
 </div>
 </div><!-- #main -->
 
-<!-- ADMIN MODAL (cũ - giữ tương thích) -->
+<!-- ADMIN MODAL (legacy) -->
 <div id="adm-modal" onclick="closeAdmModal(event)">
   <div id="adm-panel">
     <div class="adm-drag"></div>
