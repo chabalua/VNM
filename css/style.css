@@ -41,10 +41,13 @@ input,button,select,textarea{font-family:inherit;font-size:16px}
 /* ============================================================
    MAIN LAYOUT
    ============================================================ */
-#main{padding-top:calc(52px + env(safe-area-inset-top) + 80px);padding-bottom:calc(16px + env(safe-area-inset-bottom))}
+#main{padding-top:calc(52px + env(safe-area-inset-top));padding-bottom:calc(16px + env(safe-area-inset-bottom))}
 .page{display:none}.page.on{display:block}
-#page-order{height:calc(100vh - calc(52px + env(safe-area-inset-top) + 80px) - calc(16px + env(safe-area-inset-bottom)));overflow:hidden}
-#order-list{height:100%;overflow-y:auto;-webkit-overflow-scrolling:touch}
+#page-order{height:calc(100vh - 52px - env(safe-area-inset-top));display:flex;flex-direction:column;overflow:hidden}
+#page-order .sbar{position:relative;top:auto;flex-shrink:0;z-index:1}
+#order-list{flex:1;overflow-y:auto;-webkit-overflow-scrolling:touch}
+/* Non-order pages still need padding for their fixed sbar */
+#page-adm,#page-km,#page-kh{padding-top:80px}
 
 /* ============================================================
    SEARCH BAR — Floating card style
