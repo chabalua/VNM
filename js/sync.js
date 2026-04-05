@@ -242,10 +242,10 @@ async function syncPushSelected(fileNames, options) {
     if (names.indexOf('orders.json') >= 0) cfg.lastOrdersPush = cfg.lastPush;
     syncSaveConfig(cfg);
     if (window.renderSettingsOverview) renderSettingsOverview();
-    if (showOverlay) alert('Đồng bộ lên thành công!\n\n' + results.join('\n'));
+    if (showOverlay) showToast('✅ Đồng bộ lên thành công (' + results.length + ' file)');
     return { ok: true, results: results };
   } catch (err) {
-    if (showOverlay) alert('Lỗi push: ' + err.message + '\n\nĐã push:\n' + results.join('\n'));
+    if (showOverlay) showToast('Lỗi push: ' + err.message);
     return { ok: false, error: err.message, results: results };
   } finally {
     if (showOverlay) syncResetOverlay();
@@ -283,10 +283,10 @@ async function syncPullSelected(fileNames, options) {
     if (names.indexOf('orders.json') >= 0) cfg.lastOrdersPull = cfg.lastPull;
     syncSaveConfig(cfg);
     rerenderAfterSync();
-    if (showOverlay) alert('Tải về thành công!\n\n' + results.join('\n'));
+    if (showOverlay) showToast('✅ Tải về thành công (' + results.length + ' file)');
     return { ok: true, results: results };
   } catch (err) {
-    if (showOverlay) alert('Lỗi pull: ' + err.message);
+    if (showOverlay) showToast('Lỗi pull: ' + err.message);
     return { ok: false, error: err.message, results: results };
   } finally {
     if (showOverlay) syncResetOverlay();
@@ -401,7 +401,7 @@ function syncSaveToken() {
   var input = document.getElementById('sync-token-input');
   var token = (input ? input.value : '').trim();
   if (!syncIsValidToken(token)) {
-    alert('Token không hợp lệ. Dùng GitHub token classic hoặc fine-grained.');
+    showToast('Token không hợp lệ. Dùng GitHub token classic hoặc fine-grained.');
     return;
   }
   var cfg = syncGetConfig();
@@ -409,11 +409,10 @@ function syncSaveToken() {
   syncSaveConfig(cfg);
   syncOpenSettings();
   if (window.renderSettingsOverview) renderSettingsOverview();
-  alert('✅ Đã lưu token');
+  showToast('✅ Đã lưu token');
 }
 
 function syncClearToken() {
-  if (!confirm('Xóa token GitHub?')) return;
   var cfg = syncGetConfig();
   delete cfg.token;
   syncSaveConfig(cfg);
@@ -426,9 +425,9 @@ async function syncTestConnection() {
     var res = await fetch(GH_API + '/repos/' + GH_OWNER + '/' + GH_REPO, { headers: ghHeaders() });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
-    alert('✅ Kết nối OK!\n\nRepo: ' + data.full_name + '\nVisibility: ' + (data.private ? 'Private' : 'Public') + '\nBranch: ' + GH_BRANCH);
+    showToast('✅ Kết nối OK! ' + data.full_name + ' (' + (data.private ? 'Private' : 'Public') + ')');
   } catch (err) {
-    alert('❌ Lỗi: ' + err.message);
+    showToast('❌ Lỗi: ' + err.message);
   }
 }
 
@@ -454,7 +453,7 @@ function backupAll() {
   a.download = 'vnm_backup_' + new Date().toISOString().slice(0, 10) + '.json';
   a.click();
   URL.revokeObjectURL(url);
-  alert('✅ Backup hoàn tất\n' + SP.length + ' SP · ' + kmProgs.length + ' KM · ' + CUS.length + ' KH · ' + getOrdersForSync().length + ' đơn');
+  showToast('✅ Backup hoàn tất · ' + SP.length + ' SP · ' + kmProgs.length + ' KM · ' + CUS.length + ' KH · ' + getOrdersForSync().length + ' đơn');
 }
 
 function restoreAll() {
@@ -468,7 +467,7 @@ function restoreAll() {
       try {
         var data = JSON.parse(ev.target.result);
         if (!data._backup) throw new Error('File không phải backup VNM Order');
-        if (!confirm('Khôi phục từ backup ngày ' + (data._date || '?').slice(0, 10) + '?\nDữ liệu hiện tại sẽ bị ghi đè.')) return;
+        // không hỏi confirm, tự động khôi phục
 
         if (data.products && Array.isArray(data.products)) {
           SP = data.products;
@@ -482,9 +481,9 @@ function restoreAll() {
         if (data.favorites) localStorage.setItem('vnm_favorites', JSON.stringify(data.favorites));
         if (data.kpiConfig && typeof setKpiConfig === 'function') setKpiConfig(data.kpiConfig);
         rerenderAfterSync();
-        alert('✅ Khôi phục thành công từ ' + (data._date || '').slice(0, 10));
+        showToast('✅ Khôi phục thành công từ ' + (data._date || '').slice(0, 10));
       } catch (err) {
-        alert('Lỗi: ' + err.message);
+        showToast('Lỗi: ' + err.message);
       }
     };
     reader.readAsText(file);

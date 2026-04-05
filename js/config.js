@@ -29,3 +29,21 @@ window.NCOLOR = NCOLOR;
 window.NBG = NBG;
 window.NLBL = NLBL;
 window.FALLBACK_PRODUCTS = FALLBACK_PRODUCTS;
+
+// ============================================================
+// TOAST — thay thế toàn bộ alert() trong app
+// ============================================================
+var _toastTimer = null;
+function showToast(msg, duration) {
+  var el = document.getElementById('vnm-toast');
+  if (!el) {
+    el = document.createElement('div');
+    el.id = 'vnm-toast';
+    document.body.appendChild(el);
+  }
+  el.textContent = String(msg || '');
+  el.classList.add('show');
+  clearTimeout(_toastTimer);
+  _toastTimer = setTimeout(function() { el.classList.remove('show'); }, duration || 2500);
+}
+window.showToast = showToast;

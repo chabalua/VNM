@@ -759,7 +759,7 @@ function cusSaveDS(idx) {
   document.getElementById('km-modal').style.display = 'none';
   renderCusTab();
   if (window.renderHomeDashboard) renderHomeDashboard();
-  alert('✅ Đã lưu tiến độ tháng ' + cusMonthLabelFromKey(mk) + ' cho ' + (kh.ten || kh.ma));
+  showToast('✅ Đã lưu tiến độ tháng ' + cusMonthLabelFromKey(mk) + ' cho ' + (kh.ten || kh.ma));
 }
 
 function cusEdit(idx) {
@@ -824,17 +824,17 @@ function cusSaveForm() {
   var c = function(id) { return (document.getElementById(id) || {}).checked || false; };
   var n = function(id) { return parseInt(g(id)) || 0; };
   var ma = g('ckh-ma').trim().toUpperCase();
-  if (!ma) { alert('Nhập mã KH'); return; }
+  if (!ma) { showToast('Nhập mã KH'); return; }
   var kh = { ma: ma, ten: g('ckh-ten'), tuyen: g('ckh-tuyen'), diachi: g('ckh-diachi'), sdt: g('ckh-sdt'), loaiCH: g('ckh-loai'), coTuVNM: c('ckh-tu'), loaiTu: g('ckh-loaitu'), dungTichTu: n('ckh-dungtich'), coKe: c('ckh-ke'), loaiKe: g('ckh-loaike'), ghiChu: g('ckh-ghichu'),
     programs: { vnmShop: { dangKy: c('ckh-vnm-dk'), mucBayBan: g('ckh-vnm-bb'), mucTichLuy: g('ckh-vnm-tl'), ngayDangKy: n('ckh-vnm-ngay') }, vipShop: { dangKy: c('ckh-vip-dk'), mucBayBan: g('ckh-vip-bb'), mucTichLuy: g('ckh-vip-tl'), ngayDangKy: n('ckh-vip-ngay') }, sbpsShop: { dangKy: c('ckh-sbps-dk'), muc: g('ckh-sbps-muc'), ngayDangKy: 0 } }, monthly: {} };
   if (window.markEntityUpdated) markEntityUpdated(kh);
   if (_cusEditIdx >= 0 && CUS[_cusEditIdx]) { kh.monthly = CUS[_cusEditIdx].monthly || {}; CUS[_cusEditIdx] = kh; }
-  else { if (CUS.find(function(k) { return k.ma === ma; })) { alert('Mã KH đã tồn tại!'); return; } CUS.push(kh); }
+  else { if (CUS.find(function(k) { return k.ma === ma; })) { showToast('Mã KH đã tồn tại!'); return; } CUS.push(kh); }
   cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
-  alert('✅ Đã lưu: ' + (kh.ten || kh.ma));
+  showToast('✅ Đã lưu: ' + (kh.ten || kh.ma));
 }
 function cusDel(idx) {
-  var kh = CUS[idx]; if (!kh || !confirm('Xóa KH "' + (kh.ten || kh.ma) + '"?')) return;
+  var kh = CUS[idx]; if (!kh) return;
   CUS.splice(idx, 1); cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
 }
 function cusExport() {
@@ -842,7 +842,7 @@ function cusExport() {
   var blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
   var url = URL.createObjectURL(blob); var a = document.createElement('a'); a.href = url;
   a.download = 'vnm_customers_' + new Date().toISOString().slice(0, 10) + '.json'; a.click(); URL.revokeObjectURL(url);
-  alert('✅ Đã xuất ' + CUS.length + ' KH + ' + ROUTES.length + ' tuyến');
+  showToast('✅ Đã xuất ' + CUS.length + ' KH + ' + ROUTES.length + ' tuyến');
 }
 function cusImport() {
   var input = document.createElement('input'); input.type = 'file'; input.accept = 'application/json';
@@ -852,11 +852,11 @@ function cusImport() {
     reader.onload = function(ev) {
       try {
         var data = JSON.parse(ev.target.result);
-        var replace = confirm('Thay thế toàn bộ? (OK = thay thế, Cancel = gộp thêm)');
+        var replace = true; // auto thay thế
         if (data.customers) { var newCus = data.customers.filter(function(k) { return k && k.ma; }); if (replace) CUS = newCus; else { newCus.forEach(function(k) { var ex = CUS.find(function(c) { return c.ma === k.ma; }); if (ex) Object.assign(ex, k); else CUS.push(k); }); } cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); }
         if (data.routes) { ROUTES = data.routes; routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); }
-        renderCusTab(); alert('✅ Đã nhập ' + (data.customers ? data.customers.length : 0) + ' KH');
-      } catch(e) { alert('Lỗi: ' + e.message); }
+        renderCusTab(); showToast('✅ Đã nhập ' + (data.customers ? data.customers.length : 0) + ' KH');
+      } catch(e) { showToast('Lỗi: ' + e.message); }
     }; reader.readAsText(file);
   }; input.click();
 }
@@ -874,13 +874,13 @@ function cusManageRoutes() {
 function cusAddRoute() {
   var id = (document.getElementById('new-route-id') || {}).value.trim();
   var ten = (document.getElementById('new-route-ten') || {}).value.trim();
-  if (!id || !ten) { alert('Nhập mã và tên tuyến'); return; }
-  if (ROUTES.find(function(r) { return r.id === id; })) { alert('Mã tuyến đã tồn tại'); return; }
+  if (!id || !ten) { showToast('Nhập mã và tên tuyến'); return; }
+  if (ROUTES.find(function(r) { return r.id === id; })) { showToast('Mã tuyến đã tồn tại'); return; }
   var route = { id: id, ten: ten, mota: '' };
   if (window.markEntityUpdated) markEntityUpdated(route);
   ROUTES.push(route); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab();
 }
-function cusDelRoute(i) { if (!confirm('Xóa tuyến "' + ROUTES[i].ten + '"?')) return; ROUTES.splice(i, 1); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab(); }
+function cusDelRoute(i) { ROUTES.splice(i, 1); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab(); }
 function cusFilterRoute(routeId) { _cusFilterRoute = routeId; renderCusTab(); }
 function cusFilterSearch(q) { _cusFilterQuery = (q || '').trim(); renderCusTab(); }
 

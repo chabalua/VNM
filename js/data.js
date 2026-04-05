@@ -97,7 +97,7 @@ async function initData() {
 }
 
 async function syncFromGitHub() {
-  if (!confirm('Tải lại toàn bộ SP và CT KM từ GitHub?\nDữ liệu local sẽ bị ghi đè.')) return;
+  // không cần confirm
   var overlay = document.getElementById('loadingOverlay');
   overlay.classList.add('show');
   try {
@@ -123,9 +123,9 @@ async function syncFromGitHub() {
     if (window.renderAdm) window.renderAdm();
     if (window.renderKMTab) window.renderKMTab();
     if (window.renderDon) window.renderDon();
-    alert('✅ Đồng bộ thành công: ' + SP.length + ' SP, ' + kmProgs.length + ' CT KM');
+    showToast('✅ Đồng bộ thành công: ' + SP.length + ' SP, ' + kmProgs.length + ' CT KM');
   } catch (err) {
-    alert('Lỗi đồng bộ: ' + err.message);
+    showToast('Lỗi đồng bộ: ' + err.message);
   } finally { overlay.classList.remove('show'); }
 }
 
@@ -147,7 +147,7 @@ function exportProductsJSON() {
   var a = document.createElement('a'); a.href = url;
   a.download = 'products.json';
   a.click(); URL.revokeObjectURL(url);
-  alert('✅ Đã xuất products.json (' + SP.length + ' SP)\nPush lên GitHub để cập nhật giá cho tất cả thiết bị.');
+  showToast('✅ Đã xuất products.json (' + SP.length + ' SP)');
 }
 
 // ============================================================
@@ -171,8 +171,8 @@ function importProductsJSON() {
         if (window.renderOrder) window.renderOrder();
         if (window.renderAdm) window.renderAdm();
         if (window.renderDon) window.renderDon();
-        alert('✅ Đã nhập ' + SP.length + ' sản phẩm');
-      } catch (err) { alert('Lỗi: ' + err.message); }
+        showToast('✅ Đã nhập ' + SP.length + ' sản phẩm');
+      } catch (err) { showToast('Lỗi: ' + err.message); }
     };
     reader.readAsText(file);
   };

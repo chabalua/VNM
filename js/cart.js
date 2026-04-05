@@ -106,7 +106,7 @@ function startEditOrder(orderRef) {
   if (!order) return;
   var currentItems = getItems();
   var isSameEditing = _editingOrderId && String(_editingOrderId) === String(order.id);
-  if (currentItems.length && !isSameEditing && !confirm('Giỏ hiện tại sẽ bị thay bằng dữ liệu của đơn này. Tiếp tục?')) return;
+  // auto-proceed (không hỏi confirm)
 
   var nextCart = {};
   (order.items || []).forEach(function(item) {
@@ -133,7 +133,7 @@ function startEditOrder(orderRef) {
   if (window.renderOrder) renderOrder();
   renderDon();
   if (typeof gotoTab === 'function') gotoTab('order');
-  alert('✏️ Đã nạp đơn vào giỏ để chỉnh sửa. Chỉnh số lượng ở tab Đặt hàng rồi bấm lưu lại trong tab Đơn hàng.');
+  showToast('✏️ Đã nạp đơn vào giỏ để chỉnh sửa');
 }
 
 function cancelEditOrder() {
@@ -607,9 +607,8 @@ async function submitOrder() {
     else if (cloudResult && cloudResult.error) cloudMessage = '\n⚠️ Đơn đã lưu máy này, nhưng chưa đẩy được lên GitHub: ' + cloudResult.error;
   }
 
-  // Hỏi copy Zalo không
-  var copyNow = confirm((existingOrder ? '✅ Đã cập nhật đơn ' : '✅ Đã tạo đơn ') + fmt(tong) + 'đ' + (khTen ? ' cho ' + khTen : '') + cloudMessage + '\n\nCopy đơn để gửi Zalo?');
-  if (copyNow) copyOrderZalo(order.id);
+  // Tạo đơn xong — thông báo toast, không hỏi copy
+  showToast((existingOrder ? '✅ Đã cập nhật đơn ' : '✅ Đã tạo đơn ') + fmt(tong) + 'đ' + (khTen ? ' · ' + khTen : '') + (cloudMessage ? '\n' + cloudMessage.trim() : ''));
 
   clearCart();
   if (window.renderCusTab) renderCusTab();
@@ -653,7 +652,7 @@ function copyOrderZalo(orderRef) {
   // Copy to clipboard
   if (navigator.clipboard && navigator.clipboard.writeText) {
     navigator.clipboard.writeText(text).then(function() {
-      alert('✅ Đã copy đơn!\nDán vào Zalo để gửi.');
+      showToast('✅ Đã copy đơn! Dán vào Zalo để gửi.');
     }).catch(function() {
       fallbackCopy(text);
     });
@@ -671,9 +670,9 @@ function fallbackCopy(text) {
   ta.setSelectionRange(0, text.length);
   try {
     document.execCommand('copy');
-    alert('✅ Đã copy đơn!\nDán vào Zalo để gửi.');
+    showToast('✅ Đã copy đơn! Dán vào Zalo để gửi.');
   } catch(e) {
-    alert('Không copy được tự động. Đây là nội dung:\n\n' + text);
+    showToast('Không copy được tự động. Vui lòng copy thủ công.');
   }
   document.body.removeChild(ta);
 }
@@ -725,7 +724,6 @@ function viewOrderDetail(orderRef) {
 function deleteOrder(orderRef) {
   var order = resolveOrder(orderRef);
   if (!order) return;
-  if (!confirm('Xóa đơn này?')) return;
   removeLegacyCustomerOrder(order);
   if (window.softDeleteOrder) softDeleteOrder(order.id);
   if (_editingOrderId && String(_editingOrderId) === String(order.id)) clearOrderDraftState();

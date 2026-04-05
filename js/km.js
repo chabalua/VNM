@@ -323,15 +323,15 @@ function kmSaveForm() {
   prog.spMas = kmGetChecked();
   prog.stackable = _kmStackable;
   if (window.markEntityUpdated) markEntityUpdated(prog);
-  if (!prog.name) { alert('Nhập tên chương trình'); return; }
-  if (prog.type !== 'order_money' && prog.type !== 'order_bonus' && !prog.spMas.length) { alert('Chọn ít nhất 1 sản phẩm'); return; }
+  if (!prog.name) { showToast('Nhập tên chương trình'); return; }
+  if (prog.type !== 'order_money' && prog.type !== 'order_bonus' && !prog.spMas.length) { showToast('Chọn ít nhất 1 sản phẩm'); return; }
   if (_kmEditIdx >= 0) kmProgs[_kmEditIdx] = prog;
   else kmProgs.push(prog);
   kmSave();
   if (window.syncAutoPushFile) syncAutoPushFile('promotions.json');
   document.getElementById('km-modal').style.display = 'none';
   renderKMTab(); renderOrder();
-  alert('✅ Đã lưu: ' + prog.name);
+  showToast('✅ Đã lưu: ' + prog.name);
 }
 
 function renderKMTab() {
@@ -393,7 +393,7 @@ function renderKMTab() {
 }
 
 function kmToggle(i) { kmProgs[i].active = !kmProgs[i].active; if (window.markEntityUpdated) markEntityUpdated(kmProgs[i]); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
-function kmDel(i) { if (confirm('Xóa "' + kmProgs[i].name + '"?')) { kmProgs.splice(i, 1); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); } }
+function kmDel(i) { kmProgs.splice(i, 1); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
 function kmEdit(i) { kmOpenModal(kmProgs[i], i); }
 
 function kmBuildText(prog) {
@@ -416,7 +416,7 @@ function kmBuildText(prog) {
 
 // Xuất/nhập CT KM
 function exportKM() {
-  if (!kmProgs.length) { alert('Chưa có CT KM'); return; }
+  if (!kmProgs.length) { showToast('Chưa có CT KM'); return; }
   var dataStr = JSON.stringify(kmProgs, null, 2);
   var blob = new Blob([dataStr], { type: 'application/json' });
   var url = URL.createObjectURL(blob);
@@ -427,7 +427,7 @@ function exportKM() {
   a.click();
   document.body.removeChild(a);
   URL.revokeObjectURL(url);
-  alert('✅ Đã xuất CT KM');
+  showToast('✅ Đã xuất CT KM');
 }
 
 function importKM() {
@@ -442,12 +442,12 @@ function importKM() {
         var data = JSON.parse(ev.target.result);
         if (!Array.isArray(data)) throw new Error('File không đúng định dạng');
         data = normalizePromotionList(data);
-        var action = confirm('Thay thế toàn bộ CT KM hiện tại? (OK = thay thế, Cancel = gộp thêm)');
+        var action = true; // auto thay thế
         if (action) kmProgs = data;
         else kmProgs.push.apply(kmProgs, data);
         kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder();
-        alert((action ? 'Thay thế' : 'Gộp thêm') + ' ' + data.length + ' CT KM');
-      } catch (err) { alert('Lỗi đọc file: ' + err.message); }
+        showToast('Thay thế ' + data.length + ' CT KM');
+      } catch (err) { showToast('Lỗi đọc file: ' + err.message); }
     };
     reader.readAsText(file);
   };
@@ -463,12 +463,12 @@ async function loadKMFromURL() {
     var data = await res.json();
     if (!Array.isArray(data)) throw new Error('Dữ liệu không phải mảng');
     data = normalizePromotionList(data);
-    var action = confirm('Thay thế toàn bộ CT KM hiện tại? (OK = thay thế, Cancel = gộp thêm)');
+    var action = true; // auto thay thế
     if (action) kmProgs = data;
     else kmProgs.push.apply(kmProgs, data);
     kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder();
-    alert('✅ Đã tải ' + data.length + ' CT KM');
-  } catch (err) { alert('Lỗi tải URL: ' + err.message); }
+    showToast('✅ Đã tải ' + data.length + ' CT KM');
+  } catch (err) { showToast('Lỗi tải URL: ' + err.message); }
 }
 
 // Export

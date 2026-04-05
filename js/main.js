@@ -258,7 +258,7 @@ function saveKpiSettings() {
   _homeMonthKey = monthKey;
   document.getElementById('km-modal').style.display = 'none';
   renderHomeDashboard();
-  alert('✅ Đã lưu cấu hình KPI cho ' + getMonthLabel(monthKey));
+  showToast('✅ Đã lưu cấu hình KPI cho ' + getMonthLabel(monthKey));
 }
 
 function setHomeMonth(monthKey) {
@@ -572,7 +572,7 @@ function brandRulesMove(index, direction) {
 }
 
 function brandRulesReset() {
-  if (!confirm('Xóa toàn bộ rule phân loại tùy chỉnh và quay về logic mặc định của app?')) return;
+  // không hỏi confirm, tự xóa
   _brandRuleDraft = [];
   if (typeof saveCustomBrandRules === 'function') saveCustomBrandRules([]);
   if (window.renderOrder) renderOrder();
@@ -596,7 +596,7 @@ function brandRulesSave() {
     return true;
   });
   if (hasInvalid) {
-    alert('Mỗi rule cần có tên phân loại và ít nhất 1 từ khóa. Các dòng trống hoàn toàn sẽ được bỏ qua.');
+    showToast('Mỗi rule cần có tên phân loại và ít nhất 1 từ khóa');
     return;
   }
   var normalized = saveCustomBrandRules(usableRules);
@@ -605,7 +605,7 @@ function brandRulesSave() {
   if (window.renderAdm) renderAdm();
   renderSettingsOverview();
   renderHomeDashboard();
-  alert('✅ Đã lưu ' + normalized.length + ' rule phân loại');
+  showToast('✅ Đã lưu ' + normalized.length + ' rule phân loại');
 }
 
 // Render route filter pills for KH tab

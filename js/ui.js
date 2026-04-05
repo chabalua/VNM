@@ -479,13 +479,13 @@ function admSpRow(p) {
 function saveAdmPrice(ma) {
   var inp = document.getElementById('adp-inp-' + ma);
   var val = parseInt(inp?.value);
-  if (!val || val < 100) { alert('Giá không hợp lệ'); return; }
+  if (!val || val < 100) { showToast('Giá không hợp lệ'); return; }
   var p = SP.find(function(x) { return x.ma === ma; }); if (!p) return;
   p.giaNYLon = val; p.giaNYThung = val * p.slThung;
   if (window.markEntityUpdated) markEntityUpdated(p);
   saveSP(); inp.value = '';
   if (window.syncAutoPushFile) syncAutoPushFile('products.json');
-  alert('✓ ' + p.ten + ' → ' + fmt(val) + 'đ/' + p.donvi);
+  showToast('✓ ' + p.ten + ' → ' + fmt(val) + 'đ/' + p.donvi);
   renderAdm(); renderOrder();
 }
 
@@ -562,10 +562,10 @@ function spSaveForm() {
   var locSize = parseInt((document.getElementById('spf-locsize') || {}).value) || 0;
   var locLabel = (document.getElementById('spf-loclabel') || {}).value.trim();
   var gia = parseInt((document.getElementById('spf-gia') || {}).value) || 0;
-  if (!ma) { alert('Nhập mã SP'); return; }
-  if (!ten) { alert('Nhập tên SP'); return; }
-  if (!slThung || slThung < 1) { alert('SL/thùng ≥ 1'); return; }
-  if (!gia || gia < 100) { alert('Giá ≥ 100'); return; }
+  if (!ma) { showToast('Nhập mã SP'); return; }
+  if (!ten) { showToast('Nhập tên SP'); return; }
+  if (!slThung || slThung < 1) { showToast('SL/thùng ≥ 1'); return; }
+  if (!gia || gia < 100) { showToast('Giá ≥ 100'); return; }
   if (_spEditMa) {
     var p = SP.find(function(x) { return x.ma === _spEditMa; }); if (!p) return;
     p.ten = ten; p.nhom = nhom; p.donvi = donvi; p.slThung = slThung; p.giaNYLon = gia; p.giaNYThung = gia * slThung;
@@ -574,21 +574,21 @@ function spSaveForm() {
     if (window.markEntityUpdated) markEntityUpdated(p);
     delete p._brand;
     saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
-    alert('✅ Đã cập nhật: ' + ten);
+    showToast('✅ Đã cập nhật: ' + ten);
   } else {
-    if (SP.find(function(x) { return x.ma === ma; })) { alert('Mã đã tồn tại!'); return; }
+    if (SP.find(function(x) { return x.ma === ma; })) { showToast('Mã đã tồn tại!'); return; }
     var newP = { ma: ma, ten: ten, nhom: nhom, donvi: donvi, slThung: slThung, giaNYLon: gia, giaNYThung: gia * slThung, kmRules: [], kmText: '' };
     if (phanLoai) { newP.phanLoai = phanLoai; newP.phanLoaiTuNhap = true; }
     if (locSize > 0) { newP.locSize = locSize; newP.locLabel = locLabel || 'Lốc'; }
     if (window.markEntityUpdated) markEntityUpdated(newP);
     SP.push(newP); saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
-    alert('✅ Đã thêm: ' + ten + ' (' + ma + ')');
+    showToast('✅ Đã thêm: ' + ten + ' (' + ma + ')');
   }
 }
 
 function spDelete(ma) {
   var p = SP.find(function(x) { return x.ma === ma; }); if (!p) return;
-  if (!confirm('Xóa "' + p.ten + '" (' + ma + ')?')) return;
+  // không hỏi confirm, tự xóa
   SP.splice(SP.indexOf(p), 1);
   if (cart[ma]) { delete cart[ma]; saveCart(); updateBadge(); }
   saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); renderAdm(); renderOrder();
