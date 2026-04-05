@@ -2306,7 +2306,7 @@
     ]
   },
   {
-    "name": "DGP - 1T tặng 8H",
+    "name": "1T tặng 8H",
     "type": "bonus",
     "nhoms": "A",
     "active": true,
@@ -2317,8 +2317,9 @@
     "bMax": 0,
     "bMa": "same",
     "spMas": [
-      "02HL37"
+      "02HL37",
+      "02HO38"
     ],
-    "_updatedAt": "2026-04-05T14:13:55.559Z"
+    "_updatedAt": "2026-04-05T14:19:29.112Z"
   }
 ]
