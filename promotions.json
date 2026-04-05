@@ -2321,5 +2321,21 @@
       "02HO38"
     ],
     "_updatedAt": "2026-04-05T14:19:29.112Z"
+  },
+  {
+    "name": "OP 48+2",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "02HO38"
+    ],
+    "_updatedAt": "2026-04-05T14:20:33.928Z"
   }
 ]
