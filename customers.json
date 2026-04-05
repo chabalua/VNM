@@ -1466,7 +1466,7 @@
   {
     "ma": "DL200412MO",
     "ten": "Ngô Thị Mậu (TH Diệu Mừng)",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "Đối diện Nhà Thờ, Giang Sơn",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1479,14 +1479,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1495,7 +1495,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:03:50.375Z"
   },
   {
     "ma": "DL200412MT",
