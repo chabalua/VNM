@@ -1,5 +1,34 @@
 [
   {
+    "id": 1775395592422,
+    "date": "2026-04-01T05:00:00.000Z",
+    "ngay": "1/4/2026",
+    "_updatedAt": "2026-04-05T13:26:32.422Z",
+    "khMa": "DL200412MO",
+    "khTen": "Ngô Thị Mậu (TH Diệu Mừng)",
+    "items": [
+      {
+        "ma": "04FD32",
+        "ten": "SDD có đường Vinamilk F220ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 3,
+        "qL": 0,
+        "totalLon": 144,
+        "gocTotal": 1104192,
+        "afterKM": 1104192,
+        "disc": 0,
+        "desc": "Tặng 9 Hộp",
+        "bonus": 9
+      }
+    ],
+    "tong": 1104192,
+    "tongGoc": 1104192,
+    "orderDisc": 0,
+    "bonusItems": [],
+    "_deleted": false
+  },
+  {
     "id": 1775391504971,
     "date": "2026-04-01T05:00:00.000Z",
     "ngay": "1/4/2026",
