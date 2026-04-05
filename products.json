@@ -87,13 +87,15 @@
     "ma": "01TL00",
     "ten": "Creamer đặc Tài Lộc 380g",
     "nhom": "B",
-    "donvi": "Lon",
+    "donvi": "hộp",
     "slThung": 48,
     "giaNYLon": 16092,
     "giaNYThung": 772416,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "phanLoai": "Tài Lộc",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T13:55:39.455Z"
   },
   {
     "ma": "01TH60",
