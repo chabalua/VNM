@@ -1,112 +1,33 @@
 [
   {
-    "_schema": "v1",
-    "_note": "File data khách hàng — sync qua GitHub. Mỗi KH là 1 object."
-  },
-  {
-    "ma": "DL200410WX",
-    "ten": "Tạp hóa Hồng Phúc",
-    "tuyen": "T1-BMT-Center",
-    "diachi": "123 Lê Duẩn, BMT",
-    "sdt": "0901234567",
-    "loaiCH": "tapHoa",
-    "coTuVNM": true,
-    "loaiTu": "1canh",
-    "dungTichTu": 300,
-    "coKe": true,
-    "loaiKe": "M6",
-    "ghiChu": "",
-    "programs": {
-      "vnmShop": {
-        "dangKy": true,
-        "mucBayBan": "M6",
-        "mucTichLuy": "5",
-        "dsMin": 10000000,
-        "dsMax": 20000000,
-        "ngayDangKy": 5
-      },
-      "vipShop": {
-        "dangKy": true,
-        "mucBayBan": "TB3",
-        "mucTichLuy": "TL4",
-        "ngayDangKy": 3
-      },
-      "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
-        "ngayDangKy": 0
-      }
-    },
-    "monthly": {}
-  },
-  {
-    "ma": "DL2004128H",
-    "ten": "Shop Sữa Thanh Hà",
-    "tuyen": "T2-BMT-North",
-    "diachi": "45 Nguyễn Tất Thành, BMT",
-    "sdt": "0912345678",
+    "ma": "43K",
+    "ten": "Bé Cưng",
+    "tuyen": "Tuyến 3",
+    "diachi": "55, ql 14",
+    "sdt": "0927781234",
     "loaiCH": "shopSua",
-    "coTuVNM": true,
-    "loaiTu": "2canh",
-    "dungTichTu": 600,
-    "coKe": true,
-    "loaiKe": "M4",
-    "ghiChu": "KH lớn, có ụ hotzone",
-    "programs": {
-      "vnmShop": {
-        "dangKy": true,
-        "mucBayBan": "M4",
-        "mucTichLuy": "3",
-        "dsMin": 65000000,
-        "dsMax": 100000000,
-        "ngayDangKy": 2
-      },
-      "vipShop": {
-        "dangKy": true,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL2",
-        "ngayDangKy": 2
-      },
-      "sbpsShop": {
-        "dangKy": true,
-        "muc": "5",
-        "dsMin": 17000000,
-        "ngayDangKy": 5
-      }
-    },
-    "monthly": {}
-  },
-  {
-    "ma": "FM2002109O",
-    "ten": "Tạp hóa Minh Châu",
-    "tuyen": "T3-EaKar",
-    "diachi": "Thị trấn Ea Kar",
-    "sdt": "0923456789",
-    "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
     "dungTichTu": 0,
-    "coKe": true,
+    "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M5",
-        "mucTichLuy": "6",
-        "dsMin": 8000000,
-        "dsMax": 20000000,
-        "ngayDangKy": 8
+        "mucBayBan": "M7",
+        "mucTichLuy": "7",
+        "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "dangKy": true,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL4",
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
+        "dangKy": true,
+        "muc": "7",
         "ngayDangKy": 0
       }
     },
