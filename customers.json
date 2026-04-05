@@ -1294,7 +1294,7 @@
   {
     "ma": "DL200412KR",
     "ten": "Cà phê Thạch Thủy",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "189/1, nguyễn tất thành",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1307,14 +1307,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1323,7 +1323,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:03:33.139Z"
   },
   {
     "ma": "DL200412KY",
