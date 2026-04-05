@@ -1,1 +1,45 @@
-[]
+[
+  {
+    "id": 1775391398898,
+    "date": "2026-04-05T05:00:00.000Z",
+    "ngay": "5/4/2026",
+    "_updatedAt": "2026-04-05T05:00:00.000Z",
+    "khMa": "DL200413QO",
+    "khTen": "Lê Thị Hoa (Bếp nhà Sóc)",
+    "items": [
+      {
+        "ma": "07KD12",
+        "ten": "SCA không đường VNM 100g",
+        "donvi": "hộp",
+        "nhom": "D",
+        "qT": 1,
+        "qL": 0,
+        "totalLon": 48,
+        "gocTotal": 298080,
+        "afterKM": 298080,
+        "disc": 0,
+        "desc": "Tặng 4 hộp",
+        "bonus": 4
+      },
+      {
+        "ma": "04FT2H",
+        "ten": "STTT không đường 100% Sữa tươi F220ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 0,
+        "qL": 25,
+        "totalLon": 25,
+        "gocTotal": 214650,
+        "afterKM": 214650,
+        "disc": 0,
+        "desc": "Tặng 2 Hộp",
+        "bonus": 2
+      }
+    ],
+    "tong": 512730,
+    "tongGoc": 512730,
+    "orderDisc": 0,
+    "bonusItems": [],
+    "_deleted": false
+  }
+]
