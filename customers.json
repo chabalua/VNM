@@ -317,7 +317,7 @@
   {
     "ma": "DL200412FB",
     "ten": "Bùi Thị Mai",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "Cạnh cô nga lý, Sau Chợ Krông Bông",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -330,14 +330,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -346,7 +346,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:17:32.906Z"
   },
   {
     "ma": "DL200412FF",
