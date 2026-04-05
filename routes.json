@@ -1,8 +1,17 @@
 [
-  { "id": "T1-BMT-Center", "ten": "Tuyến 1 - BMT Trung tâm", "mota": "Lê Duẩn, Phan Chu Trinh, Y Jut" },
-  { "id": "T2-BMT-North", "ten": "Tuyến 2 - BMT Bắc", "mota": "Nguyễn Tất Thành, Tân An, Tân Lợi" },
-  { "id": "T3-EaKar", "ten": "Tuyến 3 - Ea Kar", "mota": "Thị trấn Ea Kar và vùng lân cận" },
-  { "id": "T4-KrongPak", "ten": "Tuyến 4 - Krông Pắk", "mota": "Phước An, Ea Phê" },
-  { "id": "T5-CuMgar", "ten": "Tuyến 5 - Cư M'gar", "mota": "Quảng Phú, Ea Drông" },
-  { "id": "T6-BMT-South", "ten": "Tuyến 6 - BMT Nam", "mota": "Ea Tam, Khánh Xuân, Tân Hòa" }
+  {
+    "id": "Tuyến 1",
+    "ten": "Hòa Phong",
+    "mota": ""
+  },
+  {
+    "id": "Tuyến 2",
+    "ten": "Krông Bông",
+    "mota": ""
+  },
+  {
+    "id": "Tuyến 3",
+    "ten": "Kim Châu",
+    "mota": ""
+  }
 ]
