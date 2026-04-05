@@ -233,13 +233,15 @@
     "ma": "01TT02",
     "ten": "SĐCĐ Ông Thọ thượng hạng nắp khui 380g",
     "nhom": "B",
-    "donvi": "Lon",
+    "donvi": "hộp",
     "slThung": 48,
     "giaNYLon": 31860,
     "giaNYThung": 1529280,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "phanLoai": "Ông Thọ",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T13:55:03.467Z"
   },
   {
     "ma": "02EO18",
