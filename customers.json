@@ -490,7 +490,7 @@
   {
     "ma": "DL200412FN",
     "ten": "Nguyễn Thị Búp",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "Cổng Chợ, Krông Bông",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -503,14 +503,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -519,7 +519,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:18:47.682Z"
   },
   {
     "ma": "DL200412FO",
