@@ -8,11 +8,19 @@ var ROUTES = [];
 var _cusFilterRoute = '';
 var _cusFilterQuery = '';
 var _cusEditIdx = -1;
+var _cusViewMonthKey = '';
 
 var CUS_STORAGE_KEY = 'vnm_customers2';
 var ROUTES_STORAGE_KEY = 'vnm_routes';
 var CUSTOMERS_URL = REPO_RAW + 'customers.json';
 var ROUTES_URL = REPO_RAW + 'routes.json';
+var _cusInputMonthKey = '';
+
+var CUS_MONTHLY_MANUAL_FIELDS = {
+  dsNhomC: 'manualDsNhomC',
+  dsNhomDE: 'manualDsNhomDE',
+  dsSBPS: 'manualDsSBPS'
+};
 // ============================================================
 // BẢNG CƠ CẤU CHƯƠNG TRÌNH (từ 3 PDF)
 // ============================================================
@@ -241,11 +249,171 @@ function calcTotalReward(kh, monthData) {
   return { vnm: vnm, vip: vip, sbps: sbps, totalReward: totalReward, dsTotal: dsTotal };
 }
 
+function cusDateToMonthKey(dateValue) {
+  if (dateValue && /^\d{4}-\d{2}/.test(dateValue)) return dateValue.slice(0, 7);
+  var d = new Date();
+  return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0');
+}
+
+function cusMonthLabelFromKey(monthKey) {
+  var safe = cusDateToMonthKey(monthKey);
+  return safe.slice(5, 7) + '/' + safe.slice(0, 4);
+}
+
+function cusEditableMetricValue(md, key) {
+  if (!md) return '';
+  var manualKey = CUS_MONTHLY_MANUAL_FIELDS[key];
+  if (manualKey && md[manualKey] !== undefined && md[manualKey] !== null && md[manualKey] !== '') return md[manualKey];
+  if (md[key] !== undefined && md[key] !== null && md[key] !== '') return md[key];
+  return '';
+}
+
+function cusResolveMetricValue(md, key, autoValue) {
+  var manualKey = CUS_MONTHLY_MANUAL_FIELDS[key];
+  if (md && manualKey && md[manualKey] !== undefined && md[manualKey] !== null && md[manualKey] !== '') return +md[manualKey] || 0;
+  if (md && md[key] !== undefined && md[key] !== null && md[key] !== '') return +md[key] || 0;
+  return +autoValue || 0;
+}
+
+function cusNormalizeCustomProgress(entries) {
+  if (!Array.isArray(entries)) return [];
+  return entries.map(function(entry, idx) {
+    if (!entry || typeof entry !== 'object') return null;
+    var label = (entry.label || '').trim();
+    var target = +entry.target || 0;
+    var actual = +entry.actual || 0;
+    if (!label && !target && !actual) return null;
+    return {
+      id: entry.id || ('cp-' + idx),
+      label: label || 'Mục tiêu ' + (idx + 1),
+      actual: actual,
+      target: target,
+      unit: (entry.unit || '').trim(),
+      color: (entry.color || '').trim()
+    };
+  }).filter(Boolean);
+}
+
+function cusReadRawMonthData(kh, monthKey) {
+  var mk = cusDateToMonthKey(monthKey || cusCurrentMonthKey());
+  return (kh.monthly && kh.monthly[mk]) || {};
+}
+
+function cusAggregateOrdersMonth(khMa, monthKey) {
+  var result = { dsNhomC: 0, dsNhomDE: 0, dsSBPS: 0, orderCount: 0, lastOrderDate: '' };
+  if (!khMa || typeof getOrders !== 'function') return result;
+  var normalizedKhMa = String(khMa).trim().toUpperCase();
+  getOrders().forEach(function(order) {
+    if (!order || String(order.khMa || '').trim().toUpperCase() !== normalizedKhMa) return;
+    if (cusDateToMonthKey(order.date || '') !== monthKey) return;
+    result.orderCount += 1;
+    if (!result.lastOrderDate || String(order.date || '') > result.lastOrderDate) result.lastOrderDate = order.date || '';
+    var orderItems = Array.isArray(order.items) ? order.items : [];
+    var subtotal = orderItems.reduce(function(sum, item) {
+      return sum + (+item.afterKM || +item.gocTotal || 0);
+    }, 0);
+    var allocated = 0;
+    orderItems.forEach(function(item, idx) {
+      var base = +item.afterKM || +item.gocTotal || 0;
+      var share = 0;
+      if (subtotal > 0 && order.orderDisc > 0) {
+        if (idx === orderItems.length - 1) share = (+order.orderDisc || 0) - allocated;
+        else {
+          share = Math.round((+order.orderDisc || 0) * base / subtotal);
+          allocated += share;
+        }
+      }
+      var net = Math.max(0, base - share);
+      if (item.nhom === 'C') result.dsNhomC += net;
+      else if (item.nhom === 'D') result.dsNhomDE += net;
+      else if (item.nhom === 'A') result.dsSBPS += net;
+    });
+  });
+  return result;
+}
+
+function cusGetMonthData(kh, monthKey) {
+  var mk = cusDateToMonthKey(monthKey || cusCurrentMonthKey());
+  var md = cusReadRawMonthData(kh, mk);
+  var auto = cusAggregateOrdersMonth(kh.ma, mk);
+  var merged = Object.assign({}, md);
+  merged.dsNhomC = cusResolveMetricValue(md, 'dsNhomC', auto.dsNhomC);
+  merged.dsNhomDE = cusResolveMetricValue(md, 'dsNhomDE', auto.dsNhomDE);
+  merged.dsSBPS = cusResolveMetricValue(md, 'dsSBPS', auto.dsSBPS);
+  merged.customProgress = cusNormalizeCustomProgress(md.customProgress);
+  merged._autoSales = auto;
+  return merged;
+}
+
+function cusProgressValueText(value, unit) {
+  return fmt(value) + (unit ? ' ' + unit : '');
+}
+
+function cusProgressRowsHTML(entries) {
+  if (!entries.length) return '';
+  var html = '<div style="background:#F6FAFF;border-radius:10px;padding:10px 12px;border:1px dashed #C9D7FF">';
+  html += '<div style="font-size:11px;font-weight:800;color:var(--vm);margin-bottom:8px">Tiến độ khác</div>';
+  entries.forEach(function(entry) {
+    var pct = entry.target > 0 ? (entry.actual / entry.target * 100) : 0;
+    html += cusProgressBarHTML(entry.label, pct, entry.actual, entry.target, entry.color || '#0F766E', entry.unit);
+  });
+  html += '</div>';
+  return html;
+}
+
+function cusCustomProgressRowHTML(entry) {
+  var item = entry || {};
+  return '<div class="custom-progress-row">' +
+    '<input type="text" class="custom-progress-input cp-label" placeholder="Tên mục tiêu, VD: Green Farm phân phối" value="' + (item.label || '') + '">' +
+    '<input type="number" class="custom-progress-input cp-actual" placeholder="Thực hiện" value="' + (item.actual || '') + '" inputmode="numeric">' +
+    '<input type="number" class="custom-progress-input cp-target" placeholder="Mục tiêu" value="' + (item.target || '') + '" inputmode="numeric">' +
+    '<input type="text" class="custom-progress-input cp-unit" placeholder="Đơn vị" value="' + (item.unit || '') + '">' +
+    '<button type="button" class="custom-progress-remove" onclick="cusRemoveProgressRow(this)">✕</button>' +
+  '</div>';
+}
+
+function cusReadCustomProgressRows() {
+  var rows = [];
+  document.querySelectorAll('.custom-progress-row').forEach(function(row, idx) {
+    var label = ((row.querySelector('.cp-label') || {}).value || '').trim();
+    var actual = +(((row.querySelector('.cp-actual') || {}).value || '').trim()) || 0;
+    var target = +(((row.querySelector('.cp-target') || {}).value || '').trim()) || 0;
+    var unit = ((row.querySelector('.cp-unit') || {}).value || '').trim();
+    if (!label && !actual && !target) return;
+    rows.push({ id: 'cp-' + idx, label: label || ('Mục tiêu ' + (idx + 1)), actual: actual, target: target, unit: unit });
+  });
+  return rows;
+}
+
+function cusAddProgressRow(entry) {
+  var list = document.getElementById('custom-progress-list');
+  if (!list) return;
+  var wrapper = document.createElement('div');
+  wrapper.innerHTML = cusCustomProgressRowHTML(entry);
+  list.appendChild(wrapper.firstChild);
+  list.querySelectorAll('input').forEach(function(input) {
+    input.oninput = function() { cusPreviewDS(_cusEditIdx); };
+  });
+  cusPreviewDS(_cusEditIdx);
+}
+
+function cusRemoveProgressRow(btn) {
+  var row = btn && btn.closest('.custom-progress-row');
+  if (!row) return;
+  row.remove();
+  cusPreviewDS(_cusEditIdx);
+}
+
+function cusReopenInputDS(idx, monthKey) {
+  cusInputDS(idx, cusDateToMonthKey(monthKey));
+}
+
 // ============================================================
 // UI — Tab Khách Hàng
 // ============================================================
 function renderCusTab() {
   var el = document.getElementById('kh-list'); if (!el) return;
+  var viewMonthKey = _cusViewMonthKey || cusCurrentMonthKey();
   var filtered = CUS.filter(function(kh) {
     if (_cusFilterRoute && kh.tuyen !== _cusFilterRoute) return false;
     if (_cusFilterQuery) {
@@ -265,6 +433,11 @@ function renderCusTab() {
   var totalVNM = CUS.filter(function(k) { return k.programs && k.programs.vnmShop && k.programs.vnmShop.dangKy; }).length;
   var totalVIP = CUS.filter(function(k) { return k.programs && k.programs.vipShop && k.programs.vipShop.dangKy; }).length;
   var totalSBPS = CUS.filter(function(k) { return k.programs && k.programs.sbpsShop && k.programs.sbpsShop.dangKy; }).length;
+
+  html += '<div class="kh-month-toolbar">';
+  html += '<div><div class="kh-summary-kicker">Theo dõi tiến độ</div><div class="kh-month-title">' + cusMonthLabelFromKey(viewMonthKey) + '</div></div>';
+  html += '<label class="kh-month-filter"><span>Tháng xem</span><input type="month" value="' + viewMonthKey + '" onchange="cusSetViewMonth(this.value)"></label>';
+  html += '</div>';
 
   html += '<div class="kh-summary">';
   html += '<div class="kh-summary-kicker">Tổng quan khách hàng</div>';
@@ -286,16 +459,16 @@ function renderCusTab() {
     html += '<div class="adm-sec-hd kh-route-head"><span>📍 ' + label + ' (' + count + ' KH)</span></div>';
     groups[routeId].forEach(function(kh) {
       var idx = CUS.indexOf(kh);
-      html += cusCardHTML(kh, idx);
+      html += cusCardHTML(kh, idx, viewMonthKey);
     });
     html += '</div>';
   });
   el.innerHTML = html;
 }
 
-function cusCardHTML(kh, idx) {
-  var monthKey = cusCurrentMonthKey();
-  var md = (kh.monthly && kh.monthly[monthKey]) || {};
+function cusCardHTML(kh, idx, monthKey) {
+  monthKey = monthKey || _cusViewMonthKey || cusCurrentMonthKey();
+  var md = cusGetMonthData(kh, monthKey);
   var reward = calcTotalReward(kh, md);
   var vnmProg = cusProgressVNM(kh, md);
   var vipProg = cusProgressVIP(kh, md);
@@ -305,10 +478,10 @@ function cusCardHTML(kh, idx) {
   html += '<div class="customer-row-head">';
   html += '<div class="customer-row-title">';
   html += '<div style="font-size:15px;font-weight:800;color:var(--n1);line-height:1.2">' + (kh.ten || kh.ma) + '</div>';
-  html += '<div style="font-size:11px;color:var(--n3);margin-top:2px">' + kh.ma + (kh.diachi ? ' · ' + kh.diachi : '') + '</div>';
+  html += '<div style="font-size:11px;color:var(--n3);margin-top:2px">' + kh.ma + (kh.diachi ? ' · ' + kh.diachi : '') + ' · ' + cusMonthLabelFromKey(monthKey) + '</div>';
   html += '</div>';
   html += '<div class="customer-actions">';
-  html += '<button onclick="cusInputDS(' + idx + ')" class="customer-action-btn">📊 Nhập DS</button>';
+  html += '<button onclick="cusInputDS(' + idx + ', \'' + monthKey + '\')" class="customer-action-btn">📊 Nhập DS</button>';
   html += '<button onclick="cusEdit(' + idx + ')" class="customer-icon-btn">✏️</button>';
   html += '</div></div>';
 
@@ -379,11 +552,12 @@ function cusCardHTML(kh, idx) {
   }
 
   if (!hasCT) html += '<div style="font-size:11px;color:var(--n3);font-style:italic">Chưa đăng ký CT nào. Nhấn ✏️ để setup.</div>';
+  if (md.customProgress && md.customProgress.length) html += cusProgressRowsHTML(md.customProgress);
   html += '</div>';
 
   if (reward.totalReward > 0) {
     html += '<div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#1A4DFF,#3A73FF);color:#fff;border-radius:10px;padding:10px 14px;margin-top:8px;box-shadow:0 2px 8px rgba(26,77,255,.18)">';
-    html += '<div><div style="font-size:10.5px;opacity:.7">Tổng thưởng T' + cusCurrentMonthLabel() + '</div>';
+    html += '<div><div style="font-size:10.5px;opacity:.7">Tổng thưởng ' + cusMonthLabelFromKey(monthKey) + '</div>';
     if (reward.dsTotal > 0) html += '<div style="font-size:9px;opacity:.55">Giảm thêm ' + (reward.totalReward / reward.dsTotal * 100).toFixed(1) + '%</div>';
     html += '</div>';
     html += '<div style="font-size:22px;font-weight:900">' + fmt(reward.totalReward) + 'đ</div>';
@@ -401,14 +575,14 @@ function cusCardHTML(kh, idx) {
   return html;
 }
 
-function cusProgressBarHTML(label, pct, current, target, color) {
+function cusProgressBarHTML(label, pct, current, target, color, unit) {
   var pctClamped = Math.min(pct, 100);
   var pctDisplay = Math.round(pct);
   var barColor = pct >= 100 ? '#16a34a' : (pct >= 70 ? '#ca8a04' : color);
   var html = '<div style="margin-bottom:6px">';
   html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">';
   html += '<span style="font-size:10.5px;font-weight:700;color:var(--n2)">' + label + '</span>';
-  html += '<span style="font-size:10.5px;font-weight:700;color:' + barColor + '">' + fmt(current) + '/' + fmt(target) + ' (' + pctDisplay + '%)</span>';
+  html += '<span style="font-size:10.5px;font-weight:700;color:' + barColor + '">' + cusProgressValueText(current, unit) + '/' + cusProgressValueText(target, unit) + ' (' + pctDisplay + '%)</span>';
   html += '</div>';
   html += '<div style="height:6px;background:var(--n6);border-radius:3px;overflow:hidden">';
   html += '<div style="height:100%;width:' + pctClamped + '%;background:' + barColor + ';border-radius:3px;transition:width .3s"></div>';
@@ -431,24 +605,34 @@ function cusProgressVIP(kh, md) {
   var ds = (md && md.dsNhomDE) || 0;
   return { pct: dsMin > 0 ? (ds / dsMin * 100) : 0, ds: ds, target: dsMin };
 }
-function cusCurrentMonthKey() { var d = new Date(); return d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0'); }
-function cusCurrentMonthLabel() { var d = new Date(); return String(d.getMonth() + 1) + '/' + d.getFullYear(); }
+function cusCurrentMonthKey() { return cusDateToMonthKey(''); }
+function cusCurrentMonthLabel() { return cusMonthLabelFromKey(cusCurrentMonthKey()); }
+
+function cusSetViewMonth(monthKey) {
+  _cusViewMonthKey = cusDateToMonthKey(monthKey || cusCurrentMonthKey());
+  renderCusTab();
+}
 
 // ============================================================
 // NHẬP DOANH SỐ + THÊM/SỬA/XÓA KH + EXPORT/IMPORT + TUYẾN
 // ============================================================
-function cusInputDS(idx) {
+function cusInputDS(idx, monthKey) {
   var kh = CUS[idx]; if (!kh) return;
-  var mk = cusCurrentMonthKey();
-  var md = (kh.monthly && kh.monthly[mk]) || {};
+  _cusEditIdx = idx;
+  _cusInputMonthKey = cusDateToMonthKey(monthKey || cusCurrentMonthKey());
+  var mk = _cusInputMonthKey;
+  var rawMd = cusReadRawMonthData(kh, mk);
+  var md = cusGetMonthData(kh, mk);
+  var auto = md._autoSales || { dsNhomC: 0, dsNhomDE: 0, dsSBPS: 0, orderCount: 0 };
   var modal = document.getElementById('km-modal');
-  document.getElementById('km-modal-t').textContent = '📊 DS tháng ' + cusCurrentMonthLabel() + ' — ' + (kh.ten || kh.ma);
+  document.getElementById('km-modal-t').textContent = '📊 Tiến độ tháng ' + cusMonthLabelFromKey(mk) + ' — ' + (kh.ten || kh.ma);
   modal.style.display = 'block';
   var body = document.getElementById('km-modal-body');
   var html = '';
+  html += '<div class="kf"><div class="kfl">THÁNG THEO DÕI</div><input type="month" id="cds-month" value="' + mk + '" onchange="cusReopenInputDS(' + idx + ', this.value)" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1)"></div>';
   if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📦 NHÓM C (VNM Shop)</div>';
-    html += cusInputField('cds-c', 'DS nhóm C tháng', md.dsNhomC);
+    html += cusInputField('cds-c', 'DS nhóm C tháng', cusEditableMetricValue(rawMd, 'dsNhomC'), auto.dsNhomC);
     html += cusInputField('cds-gd1', 'DS GĐ1 (1-10)', md.dsGD1);
     html += cusInputField('cds-gd2', 'DS GĐ2 (11-20)', md.dsGD2);
     html += cusInputField('cds-gd3', 'DS GĐ3 (21-27)', md.dsGD3);
@@ -456,7 +640,7 @@ function cusInputDS(idx) {
   }
   if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#2563EB">🧊 NHÓM DE (VIP Shop)</div>';
-    html += cusInputField('cds-de', 'DS nhóm DE tháng', md.dsNhomDE);
+    html += cusInputField('cds-de', 'DS nhóm DE tháng', cusEditableMetricValue(rawMd, 'dsNhomDE'), auto.dsNhomDE);
     html += cusInputField('cds-vn1', 'DS SP Chủ lực (N1)', md.dsVipN1);
     html += cusInputField('cds-vn2', 'DS SP Tập trung (N2)', md.dsVipN2);
     html += cusInputField('cds-skud', 'Số SKU nhóm D', md.skuNhomD);
@@ -464,31 +648,60 @@ function cusInputDS(idx) {
   }
   if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#D97706">🍼 SBPS TE</div>';
-    html += cusInputField('cds-sbps', 'DS SBPS tháng', md.dsSBPS);
+    html += cusInputField('cds-sbps', 'DS SBPS tháng', cusEditableMetricValue(rawMd, 'dsSBPS'), auto.dsSBPS);
     html += cusInputField('cds-sbps-n1', 'DS SBPS N1 (DG/GP/A2)', md.sbpsN1);
     html += cusInputField('cds-sbps-n2', 'DS SBPS N2 (OG/DGP)', md.sbpsN2);
     html += cusInputField('cds-sbps-n3', 'DS SBPS N3 (Yoko/OC)', md.sbpsN3);
     html += cusInputField('cds-sbps-26', 'DS đến ngày 26', md.sbpsTo26);
     html += '</div>';
   }
+  html += '<div class="kf"><div class="kfl" style="color:#0F766E">🎯 TIẾN ĐỘ TÙY CHỈNH</div><div style="font-size:11px;color:var(--n3);margin-bottom:8px">Để trống doanh số tự lấy theo đơn hàng của cửa hàng trong tháng này.</div><div id="custom-progress-list"></div><button type="button" class="btn-atr" onclick="cusAddProgressRow()">+ Thêm mục tiêu tiến độ</button></div>';
   html += '<div id="cds-preview" style="margin-top:12px"></div>';
   html += '<button class="btn-km-save" onclick="cusSaveDS(' + idx + ')">💾 Lưu doanh số</button>';
   body.innerHTML = html;
+  (md.customProgress || []).forEach(function(entry) { cusAddProgressRow(entry); });
   body.querySelectorAll('input').forEach(function(inp) { inp.addEventListener('input', function() { cusPreviewDS(idx); }); });
   cusPreviewDS(idx);
 }
 
-function cusInputField(id, label, value) {
-  return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="number" id="' + id + '" value="' + (value || '') + '" placeholder="0" inputmode="numeric" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:16px;font-weight:700;color:var(--n1)"></div>';
+function cusInputField(id, label, value, autoValue) {
+  var placeholder = (autoValue || autoValue === 0) ? ('Tự lấy từ đơn: ' + fmt(autoValue)) : '0';
+  return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="number" id="' + id + '" value="' + (value || '') + '" placeholder="' + placeholder + '" inputmode="numeric" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:16px;font-weight:700;color:var(--n1)"></div>';
 }
 function cusReadDS() {
+  var gn = function(id) {
+    var raw = ((document.getElementById(id) || {}).value || '').trim();
+    if (raw === '') return null;
+    return parseInt(raw, 10) || 0;
+  };
   var g = function(id) { return parseInt((document.getElementById(id) || {}).value) || 0; };
   var c = function(id) { return (document.getElementById(id) || {}).checked || false; };
-  return { dsNhomC: g('cds-c'), dsGD1: g('cds-gd1'), dsGD2: g('cds-gd2'), dsGD3: g('cds-gd3'), vnmShopTrungBay: c('cds-trungbay-vnm'), dsNhomDE: g('cds-de'), dsVipN1: g('cds-vn1'), dsVipN2: g('cds-vn2'), skuNhomD: g('cds-skud'), vipShopTrungBay: c('cds-trungbay-vip'), dsSBPS: g('cds-sbps'), sbpsN1: g('cds-sbps-n1'), sbpsN2: g('cds-sbps-n2'), sbpsN3: g('cds-sbps-n3'), sbpsTo26: g('cds-sbps-26') };
+  return {
+    manualDsNhomC: gn('cds-c'),
+    dsGD1: g('cds-gd1'),
+    dsGD2: g('cds-gd2'),
+    dsGD3: g('cds-gd3'),
+    vnmShopTrungBay: c('cds-trungbay-vnm'),
+    manualDsNhomDE: gn('cds-de'),
+    dsVipN1: g('cds-vn1'),
+    dsVipN2: g('cds-vn2'),
+    skuNhomD: g('cds-skud'),
+    vipShopTrungBay: c('cds-trungbay-vip'),
+    manualDsSBPS: gn('cds-sbps'),
+    sbpsN1: g('cds-sbps-n1'),
+    sbpsN2: g('cds-sbps-n2'),
+    sbpsN3: g('cds-sbps-n3'),
+    sbpsTo26: g('cds-sbps-26'),
+    customProgress: cusReadCustomProgressRows()
+  };
 }
 function cusPreviewDS(idx) {
   var kh = CUS[idx]; if (!kh) return;
-  var md = cusReadDS();
+  var mk = _cusInputMonthKey || cusCurrentMonthKey();
+  var raw = cusReadDS();
+  var currentRaw = cusReadRawMonthData(kh, mk);
+  var previewRaw = Object.assign({}, currentRaw, raw);
+  var md = cusGetMonthData({ ma: kh.ma, monthly: (function() { var temp = {}; temp[mk] = previewRaw; return temp; })() }, mk);
   var reward = calcTotalReward(kh, md);
   var el = document.getElementById('cds-preview'); if (!el) return;
   var html = '<div style="background:var(--vmL);border:1px solid #C9D7FF;border-radius:var(--Rs);padding:12px 14px">';
@@ -496,6 +709,7 @@ function cusPreviewDS(idx) {
   if (reward.vnm && reward.vnm.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#1A4DFF">VNM Shop:</b> ' + fmt(reward.vnm.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vnm.details.join(' · ') + '</div>'; }
   if (reward.vip && reward.vip.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#2563EB">VIP Shop:</b> ' + fmt(reward.vip.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vip.details.join(' · ') + '</div>'; }
   if (reward.sbps && reward.sbps.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#D97706">SBPS:</b> ' + fmt(reward.sbps.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.sbps.details.join(' · ') + '</div>'; }
+  if (md.customProgress && md.customProgress.length) html += cusProgressRowsHTML(md.customProgress);
   html += '<div style="border-top:1px solid #C9D7FF;padding-top:8px;margin-top:4px;display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:800;color:var(--vm)">TỔNG THƯỞNG</span><span style="font-size:18px;font-weight:900;color:var(--vm)">' + fmt(reward.totalReward) + 'đ</span></div>';
   if (reward.dsTotal > 0 && reward.totalReward > 0) { html += '<div style="font-size:10.5px;color:var(--b);margin-top:5px">≈ Giảm thêm ' + (reward.totalReward / reward.dsTotal * 100).toFixed(1) + '% trên DS ' + fmt(reward.dsTotal) + 'đ</div>'; }
   html += '</div>';
@@ -503,15 +717,16 @@ function cusPreviewDS(idx) {
 }
 function cusSaveDS(idx) {
   var kh = CUS[idx]; if (!kh) return;
-  var mk = cusCurrentMonthKey();
+  var mk = _cusInputMonthKey || cusCurrentMonthKey();
   if (!kh.monthly) kh.monthly = {};
-  kh.monthly[mk] = cusReadDS();
+  kh.monthly[mk] = Object.assign({}, kh.monthly[mk] || {}, cusReadDS());
   if (window.markEntityUpdated) markEntityUpdated(kh);
   cusSave();
   if (window.syncAutoPushFile) syncAutoPushFile('customers.json');
   document.getElementById('km-modal').style.display = 'none';
   renderCusTab();
-  alert('✅ Đã lưu DS tháng ' + cusCurrentMonthLabel() + ' cho ' + (kh.ten || kh.ma));
+  if (window.renderHomeDashboard) renderHomeDashboard();
+  alert('✅ Đã lưu tiến độ tháng ' + cusMonthLabelFromKey(mk) + ' cho ' + (kh.ten || kh.ma));
 }
 
 function cusEdit(idx) {
@@ -654,6 +869,12 @@ window.cusAddRoute = cusAddRoute;
 window.cusDelRoute = cusDelRoute;
 window.cusFilterRoute = cusFilterRoute;
 window.cusFilterSearch = cusFilterSearch;
+window.cusSetViewMonth = cusSetViewMonth;
+window.cusAddProgressRow = cusAddProgressRow;
+window.cusRemoveProgressRow = cusRemoveProgressRow;
+window.cusReopenInputDS = cusReopenInputDS;
+window.cusGetMonthData = cusGetMonthData;
+window.cusMonthLabelFromKey = cusMonthLabelFromKey;
 window.calcVNMShopReward = calcVNMShopReward;
 window.calcVIPShopReward = calcVIPShopReward;
 window.calcSBPSReward = calcSBPSReward;

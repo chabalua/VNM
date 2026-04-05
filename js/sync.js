@@ -443,7 +443,8 @@ function backupAll() {
     routes: ROUTES,
     orders: getOrdersForSync(),
     favorites: JSON.parse(localStorage.getItem('vnm_favorites') || '[]'),
-    cart: cart
+    cart: cart,
+    kpiConfig: (typeof getKpiConfig === 'function') ? getKpiConfig() : null
   };
   var str = JSON.stringify(data, null, 2);
   var blob = new Blob([str], { type: 'application/json' });
@@ -479,6 +480,7 @@ function restoreAll() {
         if (data.routes) { ROUTES = data.routes; routesSave(); }
         if (data.orders) { saveOrders(mergeOrders(data.orders, [])); }
         if (data.favorites) localStorage.setItem('vnm_favorites', JSON.stringify(data.favorites));
+        if (data.kpiConfig && typeof setKpiConfig === 'function') setKpiConfig(data.kpiConfig);
         rerenderAfterSync();
         alert('✅ Khôi phục thành công từ ' + (data._date || '').slice(0, 10));
       } catch (err) {

@@ -1,9 +1,35 @@
 // Giỏ hàng và khách hàng (legacy - giữ tương thích)
 var cart = JSON.parse(localStorage.getItem('vnm_cart') || '{}');
 var customers = JSON.parse(localStorage.getItem('vnm_kh') || '[]');
+var _orderDraftDate = getTodayDateInputValue();
+var _ordersHistoryFilter = 'today';
 
 function saveCart() { localStorage.setItem('vnm_cart', JSON.stringify(cart)); }
 function fmt(n) { return Math.round(n).toLocaleString('vi-VN'); }
+
+function getTodayDateInputValue() {
+  var now = new Date();
+  var offset = now.getTimezoneOffset() * 60000;
+  return new Date(now.getTime() - offset).toISOString().slice(0, 10);
+}
+
+function buildOrderDateISO(dateValue) {
+  var safeDate = dateValue || getTodayDateInputValue();
+  return new Date(safeDate + 'T12:00:00').toISOString();
+}
+
+function getSelectedOrderDateValue() {
+  var input = document.getElementById('order-date-input');
+  if (input && input.value) {
+    _orderDraftDate = input.value;
+    return input.value;
+  }
+  return _orderDraftDate || getTodayDateInputValue();
+}
+
+function onOrderDateChange(value) {
+  _orderDraftDate = value || getTodayDateInputValue();
+}
 
 // ============================================================
 // KM ENGINE v2 (giữ nguyên)
@@ -249,6 +275,10 @@ function renderDon() {
     html += '<div class="ft-grand"><div class="ft-gr"><span class="ft-gl">Tổng cộng</span><span class="ft-gv">' + fmt(totAfterOrder) + 'đ</span></div>';
     html += '<div class="ft-gr"><span class="ft-vl">+VAT 1.5%</span><span class="ft-vv">' + fmt(Math.round(totAfterOrder * 1.015)) + 'đ</span></div></div>';
 
+    html += '<div class="order-meta-grid">';
+    html += '<label class="order-meta-field"><span class="order-meta-label">Ngày đặt hàng</span><input class="order-date-input" type="date" id="order-date-input" value="' + getSelectedOrderDateValue() + '" onchange="onOrderDateChange(this.value)"></label>';
+    html += '</div>';
+
     // KH
     html += '<div style="margin:12px 0 8px">';
     if (selKH) {
@@ -294,7 +324,7 @@ function renderDon() {
     }
 
     html += '<div id="orders-history">';
-    html += renderOrdersList(orders, 'today');
+    html += renderOrdersList(orders, _ordersHistoryFilter);
     html += '</div>';
   }
 
@@ -302,14 +332,15 @@ function renderDon() {
 }
 
 function filterOrders(period) {
+  _ordersHistoryFilter = period || 'all';
   var el = document.getElementById('orders-history'); if (!el) return;
   var orders = getOrders();
-  el.innerHTML = renderOrdersList(orders, period);
+  el.innerHTML = renderOrdersList(orders, _ordersHistoryFilter);
   // Update active pill
   var buttons = el.parentElement.querySelectorAll('.pill');
   var labels = { today: 'Hôm nay', week: 'Tuần này', month: 'Tháng này', all: 'Tất cả' };
   buttons.forEach(function(b) {
-    b.className = 'pill' + (b.textContent.trim() === labels[period] ? ' on-all' : '');
+    b.className = 'pill' + (b.textContent.trim() === labels[_ordersHistoryFilter] ? ' on-all' : '');
   });
 }
 
@@ -373,6 +404,8 @@ function renderOrdersList(orders, period) {
 async function submitOrder() {
   var items = getItems(); if (!items.length) return;
   var makh = (window._selectedCustomerMa) ? window._selectedCustomerMa : ((document.getElementById('makh-inp') || {}).value || '').trim().toUpperCase();
+  var orderDateValue = getSelectedOrderDateValue();
+  var orderDateISO = buildOrderDateISO(orderDateValue);
   var orderKM = calcOrderKM(items);
   var tong = items.reduce(function(s, x) { return s + x.afterKM; }, 0) - orderKM.disc;
 
@@ -387,8 +420,9 @@ async function submitOrder() {
   // Tạo order object
   var order = {
     id: Date.now(),
-    date: new Date().toISOString(),
-    ngay: new Date().toLocaleDateString('vi-VN'),
+    date: orderDateISO,
+    ngay: new Date(orderDateISO).toLocaleDateString('vi-VN'),
+    _updatedAt: orderDateISO,
     khMa: makh,
     khTen: khTen,
     items: items.map(function(it) {
@@ -405,6 +439,9 @@ async function submitOrder() {
   orders.unshift(order);
   if (orders.length > 200) orders = orders.slice(0, 200);
   saveOrders(orders);
+
+  var todayValue = getTodayDateInputValue();
+  _ordersHistoryFilter = orderDateValue === todayValue ? 'today' : (orderDateValue.slice(0, 7) === todayValue.slice(0, 7) ? 'month' : 'all');
 
   var cloudMessage = '';
   if (typeof syncAutoPushOrder === 'function') {
@@ -427,6 +464,8 @@ async function submitOrder() {
   if (copyNow) copyOrderZalo(order.id);
 
   clearCart();
+  if (window.renderCusTab) renderCusTab();
+  if (window.renderHomeDashboard) renderHomeDashboard();
 }
 
 // ============================================================
@@ -560,3 +599,4 @@ window.copyOrderZalo = copyOrderZalo;
 window.viewOrderDetail = viewOrderDetail;
 window.deleteOrder = deleteOrder;
 window.filterOrders = filterOrders;
+window.onOrderDateChange = onOrderDateChange;
