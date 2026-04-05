@@ -1154,7 +1154,7 @@
   {
     "ma": "DL200412JP",
     "ten": "Tạp Phẩm Minh Châu(Tâm Hằng)",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "ngay cổng chợ, Chợ Kim Châu",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1167,14 +1167,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1183,7 +1183,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:44:20.022Z"
   },
   {
     "ma": "DL200412KD",
