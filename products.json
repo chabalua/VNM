@@ -59,13 +59,15 @@
     "ma": "01SX05",
     "ten": "Creamer đặc NSPN xanh lá lon 380g",
     "nhom": "B",
-    "donvi": "Lon",
+    "donvi": "hộp",
     "slThung": 48,
     "giaNYLon": 19926,
     "giaNYThung": 956448,
     "kmRules": [],
     "kmText": "",
-    "_brand": "NSPN"
+    "phanLoai": "SĐ Xanh Lá",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T13:54:05.274Z"
   },
   {
     "ma": "01TL10",
