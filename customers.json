@@ -2018,7 +2018,7 @@
   {
     "ma": "DL200412XC",
     "ten": "Ngô Thị Uyển Nhi (tạp hoa nhi)",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "22, thôn Giang Sơn",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -2031,14 +2031,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2047,7 +2047,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:06:02.231Z"
   },
   {
     "ma": "DL20041318",
