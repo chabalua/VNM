@@ -2160,7 +2160,7 @@
   {
     "ma": "DL200413AK",
     "ten": "Huỳnh Thị Luận (Cà Phê PONY)",
-    "tuyen": "",
+    "tuyen": "Tuyến 1",
     "diachi": "Hòa Phong, gần Tíu Hạnh",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -2173,14 +2173,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2189,7 +2189,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:06:33.371Z"
   },
   {
     "ma": "DL200413C9",
