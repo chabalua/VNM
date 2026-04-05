@@ -2311,7 +2311,7 @@
     "nhoms": "A",
     "active": true,
     "stackable": true,
-    "bX": "24",
+    "bX": "48",
     "bY": "8",
     "bUnit": "lon",
     "bMax": 0,
@@ -2319,6 +2319,6 @@
     "spMas": [
       "02HL37"
     ],
-    "_updatedAt": "2026-04-05T14:13:33.130Z"
+    "_updatedAt": "2026-04-05T14:13:55.559Z"
   }
 ]
