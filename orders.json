@@ -1,5 +1,48 @@
 [
   {
+    "id": 1775395704472,
+    "date": "2026-04-01T05:00:00.000Z",
+    "ngay": "1/4/2026",
+    "_updatedAt": "2026-04-05T13:28:24.472Z",
+    "khMa": "DL200412JP",
+    "khTen": "Tạp Phẩm Minh Châu(Tâm Hằng)",
+    "items": [
+      {
+        "ma": "06UC32",
+        "ten": "Susu hương cam Hộp 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 6,
+        "qL": 0,
+        "totalLon": 288,
+        "gocTotal": 1244160,
+        "afterKM": 1244160,
+        "disc": 0,
+        "desc": "Tặng 30 Hộp",
+        "bonus": 30
+      },
+      {
+        "ma": "08HA31",
+        "ten": "Hero vị dâu 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 6,
+        "qL": 0,
+        "totalLon": 288,
+        "gocTotal": 1197504,
+        "afterKM": 1197504,
+        "disc": 0,
+        "desc": "Tặng 30 Hộp",
+        "bonus": 30
+      }
+    ],
+    "tong": 2441664,
+    "tongGoc": 2441664,
+    "orderDisc": 0,
+    "bonusItems": [],
+    "_deleted": false
+  },
+  {
     "id": 1775395592422,
     "date": "2026-04-01T05:00:00.000Z",
     "ngay": "1/4/2026",
