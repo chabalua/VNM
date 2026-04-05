@@ -9,6 +9,7 @@ var _cusFilterRoute = '';
 var _cusFilterQuery = '';
 var _cusEditIdx = -1;
 var _cusViewMonthKey = '';
+var _cusExpanded = {};
 
 var CUS_STORAGE_KEY = 'vnm_customers2';
 var ROUTES_STORAGE_KEY = 'vnm_routes';
@@ -408,6 +409,13 @@ function cusReopenInputDS(idx, monthKey) {
   cusInputDS(idx, cusDateToMonthKey(monthKey));
 }
 
+function cusToggleExpand(idx) {
+  var kh = CUS[idx];
+  if (!kh || !kh.ma) return;
+  _cusExpanded[kh.ma] = !_cusExpanded[kh.ma];
+  renderCusTab();
+}
+
 // ============================================================
 // UI — Tab Khách Hàng
 // ============================================================
@@ -473,17 +481,41 @@ function cusCardHTML(kh, idx, monthKey) {
   var vnmProg = cusProgressVNM(kh, md);
   var vipProg = cusProgressVIP(kh, md);
   var hasData = md.dsNhomC || md.dsNhomDE || md.dsSBPS;
+  var expanded = !!_cusExpanded[kh.ma];
+  var progCount = 0;
+  var summaryParts = [];
 
-  var html = '<div style="padding:14px 16px;border-bottom:1px solid var(--n5)">';
+  if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) progCount += 1;
+  if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) progCount += 1;
+  if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) progCount += 1;
+  if (progCount) summaryParts.push(progCount + ' CT');
+  if (reward.totalReward > 0) summaryParts.push('Thưởng ' + fmt(reward.totalReward) + 'đ');
+  if (!progCount) summaryParts.push('Chưa đăng ký CT');
+  if (!reward.totalReward && hasData) summaryParts.push('Có DS tháng ' + cusMonthLabelFromKey(monthKey));
+
+  var html = '<div class="customer-card-item' + (expanded ? ' expanded' : '') + '">';
   html += '<div class="customer-row-head">';
+  html += '<div class="customer-row-title-wrap">';
+  html += '<button type="button" class="customer-toggle-btn" onclick="cusToggleExpand(' + idx + ')" aria-label="' + (expanded ? 'Thu gọn khách hàng' : 'Mở rộng khách hàng') + '">';
+  html += '<span class="customer-toggle-icon">' + (expanded ? '▾' : '▸') + '</span>';
+  html += '</button>';
   html += '<div class="customer-row-title">';
   html += '<div style="font-size:15px;font-weight:800;color:var(--n1);line-height:1.2">' + (kh.ten || kh.ma) + '</div>';
   html += '<div style="font-size:11px;color:var(--n3);margin-top:2px">' + kh.ma + (kh.diachi ? ' · ' + kh.diachi : '') + ' · ' + cusMonthLabelFromKey(monthKey) + '</div>';
+  html += '<div class="customer-collapsed-summary">' + summaryParts.join(' · ') + '</div>';
+  html += '</div>';
   html += '</div>';
   html += '<div class="customer-actions">';
   html += '<button onclick="cusInputDS(' + idx + ', \'' + monthKey + '\')" class="customer-action-btn">📊 Nhập DS</button>';
   html += '<button onclick="cusEdit(' + idx + ')" class="customer-icon-btn">✏️</button>';
   html += '</div></div>';
+
+  if (!expanded) {
+    html += '</div>';
+    return html;
+  }
+
+  html += '<div class="customer-card-body">';
 
   var equipParts = [];
   if (kh.coTuVNM) equipParts.push('🧊 Tủ VNM ' + (kh.loaiTu === '2canh' ? '2 cánh' : kh.loaiTu === '1canh' ? '1 cánh' : kh.loaiTu || ''));
@@ -571,6 +603,7 @@ function cusCardHTML(kh, idx, monthKey) {
     var lo = oldKH.orders[0];
     html += '<div style="font-size:10.5px;color:var(--n3);margin-top:8px;padding-top:8px;border-top:1px dashed var(--n5)">🛒 Đơn gần nhất: ' + lo.ngay + ' · ' + fmt(lo.tong) + 'đ · ' + lo.items.length + ' SP</div>';
   }
+  html += '</div>';
   html += '</div>';
   return html;
 }
@@ -857,6 +890,7 @@ function cusFilterSearch(q) { _cusFilterQuery = (q || '').trim(); renderCusTab()
 window.cusLoad = cusLoad;
 window.cusSave = cusSave;
 window.renderCusTab = renderCusTab;
+window.cusToggleExpand = cusToggleExpand;
 window.cusEdit = cusEdit;
 window.cusInputDS = cusInputDS;
 window.cusSaveDS = cusSaveDS;

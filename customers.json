@@ -1,11 +1,11 @@
 [
   {
-    "ma": "43K",
-    "ten": "Bé Cưng",
-    "tuyen": "Tuyến 3",
-    "diachi": "55, ql 14",
-    "sdt": "0927781234",
-    "loaiCH": "shopSua",
+    "ma": "DL200412EA",
+    "ten": "Công ty TNHH Cà phê Ngon",
+    "tuyen": "",
+    "diachi": "Cụm Công Nghiệp, CuKuin",
+    "sdt": "",
+    "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
     "dungTichTu": 0,
@@ -14,20 +14,3318 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": true,
-        "mucBayBan": "M7",
-        "mucTichLuy": "7",
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL4",
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": true,
-        "muc": "7",
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412EH",
+    "ten": "Dương Quyết Thắng (TH cổng sau chợ, Trong chợ Thắng Hà)",
+    "tuyen": "",
+    "diachi": "19/8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412EI",
+    "ten": "Nguyễn Thị Hoa",
+    "tuyen": "",
+    "diachi": "cạnh cô vinh, Trong chợ 19/8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412EJ",
+    "ten": "HỘ KINH DOANH TẠP HÓA TÌNH PHƯƠNG",
+    "tuyen": "",
+    "diachi": "Cổng chợ, Chợ 19 8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412EK",
+    "ten": "Nguyễn Thị Vinh",
+    "tuyen": "",
+    "diachi": "Cạnh Chị Nga, Trong chợ Lòng 19/8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412EL",
+    "ten": "Bùi Thị Yến Nga (TP Chị Nga)",
+    "tuyen": "",
+    "diachi": "19/8, chợ",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412ER",
+    "ten": "Đặng Thị Tâm",
+    "tuyen": "",
+    "diachi": "19/8, chợ",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412F6",
+    "ten": "Lê Thị Nhỏ",
+    "tuyen": "",
+    "diachi": "cổng sau chợ, Chợ Krông Kma",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FA",
+    "ten": "Mai Văn Dũng (Trần Thị Tâm)",
+    "tuyen": "",
+    "diachi": "Đường, vào",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FB",
+    "ten": "Bùi Thị Mai",
+    "tuyen": "",
+    "diachi": "Cạnh cô nga lý, Sau Chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FF",
+    "ten": "Lê Thị Thanh (TH Thanh Bên hông chợ, Cổng sau chợ)",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FG",
+    "ten": "Huỳnh Thị Nga (Nga Lý)",
+    "tuyen": "",
+    "diachi": "bên cạnh cô cồn, cạnh chợ lồng",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FJ",
+    "ten": "TẠP HÓA - CHÂU ĐẠI (Lê Thị Thu)",
+    "tuyen": "",
+    "diachi": "Đối diện, Chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FM",
+    "ten": "Nguyễn Thị Thúy",
+    "tuyen": "",
+    "diachi": "Ngay Cổng, Chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FN",
+    "ten": "Nguyễn Thị Búp",
+    "tuyen": "",
+    "diachi": "Cổng Chợ, Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FO",
+    "ten": "Đoàn Thị Bội Hương",
+    "tuyen": "",
+    "diachi": "Cổng, Chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FQ",
+    "ten": "Lương Thị Mỹ Vân",
+    "tuyen": "",
+    "diachi": "02, lê lai",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412FY",
+    "ten": "Bùi Quang Văn (Cao Thị Thu Minh)",
+    "tuyen": "",
+    "diachi": "Gần cô Tha, trong chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412G0",
+    "ten": "Nguyễn Xuân Trung (Cà Đường, vào thác Phê Thảo Nguyên Xanh)",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412GY",
+    "ten": "Lê Thị Yến (Yến Lực)",
+    "tuyen": "",
+    "diachi": "chợ buôn lia, thôn 3",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412HI",
+    "ten": "Nguyễn Sửu (Tạp Hóa Hạnh sửu)",
+    "tuyen": "",
+    "diachi": "Thôn, 3",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412HK",
+    "ten": "Nông Thị Bảo (Nguyễn Văn Thanh)",
+    "tuyen": "",
+    "diachi": "258, 6",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412HR",
+    "ten": "Ngô Hải (TH Cô Lùng)",
+    "tuyen": "",
+    "diachi": "41, 4",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412IL",
+    "ten": "Trần Thị Hoa (TH Hoa Chín)",
+    "tuyen": "",
+    "diachi": "222, Hòa Phong",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412IR",
+    "ten": "Nguyễn Thị Xê",
+    "tuyen": "",
+    "diachi": "Trước, Chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412IW",
+    "ten": "Nguyễn Thị Thủy (TH Minh Tuyền)",
+    "tuyen": "",
+    "diachi": "124, 8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412IY",
+    "ten": "HKD Tạp hóa Hoàng Oanh",
+    "tuyen": "",
+    "diachi": "106, 7",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412J6",
+    "ten": "Cửa hàng tạp hóa Thanh Cao",
+    "tuyen": "",
+    "diachi": "cách cô ý 100m, thôn 1",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412J7",
+    "ten": "Nguyễn Thị Bích Liễu (TH Cô Liễu)",
+    "tuyen": "",
+    "diachi": "Thôn 9, Khuê Ngọc Điền",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412J8",
+    "ten": "Trần Thanh Vân (Tạp Hóa Mười Vân)",
+    "tuyen": "",
+    "diachi": "56, 2",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412J9",
+    "ten": "Trần Thị Minh (Tạp Phẩm Sơn Minh)",
+    "tuyen": "",
+    "diachi": "69, 5",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412JA",
+    "ten": "Lê Văn Bảy (Bảy Thanh)",
+    "tuyen": "",
+    "diachi": "gần sơn mình, thôn 7",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412JC",
+    "ten": "Tạp hóa Cô Ý",
+    "tuyen": "",
+    "diachi": "54, 10",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412JP",
+    "ten": "Tạp Phẩm Minh Châu(Tâm Hằng)",
+    "tuyen": "",
+    "diachi": "ngay cổng chợ, Chợ Kim Châu",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412KD",
+    "ten": "Đỗ Văn Trúc (Đặng Thị Ngọc Sương)",
+    "tuyen": "",
+    "diachi": "88, 5",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412KE",
+    "ten": "HKD TẠP HÓA HOA TOÁN",
+    "tuyen": "",
+    "diachi": "Cạnh Cổng, Buôn E Tam",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412KQ",
+    "ten": "Huỳnh Thị Ngọc Hà (Chị Thảo Hà)",
+    "tuyen": "",
+    "diachi": "Cuối chợ, Krông bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412KR",
+    "ten": "Cà phê Thạch Thủy",
+    "tuyen": "",
+    "diachi": "189/1, nguyễn tất thành",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412KY",
+    "ten": "Lê Thị Côn",
+    "tuyen": "",
+    "diachi": "cạnh cô nga lý, cạnh chợ lồng",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412MC",
+    "ten": "Nguyễn Thị Sương",
+    "tuyen": "",
+    "diachi": "10, lê lai",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412MD",
+    "ten": "Thái Thị Mỹ Hà",
+    "tuyen": "",
+    "diachi": "cạnh chợ rau, Cổng sau chợ",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412ME",
+    "ten": "Vũ Thị Liễu (Cửa Hàng Chợ Nhỏ)",
+    "tuyen": "",
+    "diachi": "146, Nguyễn Tất Thành",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412MO",
+    "ten": "Ngô Thị Mậu (TH Diệu Mừng)",
+    "tuyen": "",
+    "diachi": "Đối diện Nhà Thờ, Giang Sơn",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412MT",
+    "ten": "Vy",
+    "tuyen": "",
+    "diachi": "208, Hòa Phong",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412N3",
+    "ten": "Nguyễn Thị Liên (Tạp hóa Quốc Thiên)",
+    "tuyen": "",
+    "diachi": "Qua, Hanh Sửu",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412ND",
+    "ten": "Đoàn Văn Dũng (Chị Phúc)",
+    "tuyen": "",
+    "diachi": "71, 12",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412NQ",
+    "ten": "Nguyễn Thị Bích Vy (Chị Vy)",
+    "tuyen": "",
+    "diachi": "22, thon3",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412NR",
+    "ten": "HKD Lê Thị Thu (Cô Tuyết)",
+    "tuyen": "",
+    "diachi": "Đối diện trường tiểu học, Cẩm Phong Thôn 2",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412QL",
+    "ten": "Nguyễn Văn Thanh (Tạp hóa Việt)",
+    "tuyen": "",
+    "diachi": "Km18, Quốc Lộ 27",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412QR",
+    "ten": "Y LOET BYA (Cà Phê Thy Thy)",
+    "tuyen": "",
+    "diachi": "198, Nguyễn Tất Thành",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412RF",
+    "ten": "Nguyễn Thị Loan",
+    "tuyen": "",
+    "diachi": "14, 5 Hòa",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412S6",
+    "ten": "Hà Thị Hải (Tạp hóa Cô Xanh)",
+    "tuyen": "",
+    "diachi": "Đối diện, CP Thảo Nguyên",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412SI",
+    "ten": "Mai Thị Kim Trang",
+    "tuyen": "",
+    "diachi": "142, Hòa Phong",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412SS",
+    "ten": "Ngô Thị Mỹ Loan",
+    "tuyen": "",
+    "diachi": "3, thôn",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412TA",
+    "ten": "HKD Trần Thị Hạnh (Tíu Hạnh)",
+    "tuyen": "",
+    "diachi": "53, Hòa Phong",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412TO",
+    "ten": "HKD Hiền Tạp Hoá (Tạp hóa Đăng Khôi)",
+    "tuyen": "",
+    "diachi": "KM12, QL 27 Dray Bhang",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412W4",
+    "ten": "Trịnh Thị Ái",
+    "tuyen": "",
+    "diachi": "gần chị Hà, chợ krongbong",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412W7",
+    "ten": "Nguyễn Văn Lực (Thanh Dung)",
+    "tuyen": "",
+    "diachi": "67, nhà máy đá đi vô",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200412XC",
+    "ten": "Ngô Thị Uyển Nhi (tạp hoa nhi)",
+    "tuyen": "",
+    "diachi": "22, thôn Giang Sơn",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL20041318",
+    "ten": "Phạm Thị Cẩm Xuyên (Kiddy Store)",
+    "tuyen": "",
+    "diachi": "09, Nguyễn Tất Thành",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL2004133C",
+    "ten": "Ngô Thị Hưng (TH Cô Oanh)",
+    "tuyen": "",
+    "diachi": "42/5 thôn giang sơn, quốc lộ 27",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL2004136H",
+    "ten": "HKD Trần Sỹ Nguyên (Hoàng Nguyên)",
+    "tuyen": "",
+    "diachi": "314, hòa lê",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413AK",
+    "ten": "Huỳnh Thị Luận (Cà Phê PONY)",
+    "tuyen": "",
+    "diachi": "Hòa Phong, gần Tíu Hạnh",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413C9",
+    "ten": "KHD Cửa hàng tạp hóa Nam Hằng",
+    "tuyen": "",
+    "diachi": "05/Thôn12, Gần Chị Tâm",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413D3",
+    "ten": "Phạm Thị Trúc (Tạp hóa Kim Ánh)",
+    "tuyen": "",
+    "diachi": "Thôn, 3",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413E4",
+    "ten": "HKD Trần Thị Vân (Cô Bé)",
+    "tuyen": "",
+    "diachi": "9, 56",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413E5",
+    "ten": "Võ Văn Năm (Cúc Năm)",
+    "tuyen": "",
+    "diachi": "9, 12",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413FN",
+    "ten": "Cơ Hoàng Anh",
+    "tuyen": "",
+    "diachi": "hẻm, 19/8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413FW",
+    "ten": "Nguyễn Văn Lý (Cf Tony)",
+    "tuyen": "",
+    "diachi": "22B, Lê Anh Xuân",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413IO",
+    "ten": "Ngô Thị Ái Nga",
+    "tuyen": "",
+    "diachi": "thôn 4, yang red",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413JX",
+    "ten": "Bùi Thị Trúc Mai (Coffee & tea Meii)",
+    "tuyen": "",
+    "diachi": "ngã 4, đèn đỏ",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413JY",
+    "ten": "Lê Thị Huệ",
+    "tuyen": "",
+    "diachi": "11, Gần Cô Đào",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413K",
+    "ten": "ĐẶNG MINH HIẾU",
+    "tuyen": "",
+    "diachi": "55, ql 14",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413KQ",
+    "ten": "Lê Thị Yến Nhi (Cà phê - Thôn Nam Hà, QL27)",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413M2",
+    "ten": "Nguyễn Thị Lệ Thoa (Cửa hàng bao bì Hoàng Thoa)",
+    "tuyen": "",
+    "diachi": "Trong chợ lồng, Cổng sau chợ",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413N7",
+    "ten": "Nguyễn Thị Cúc",
+    "tuyen": "",
+    "diachi": "Thôn, 5",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413NP",
+    "ten": "HKD Nguyễn Thị Ngà (Lý Ngà)",
+    "tuyen": "",
+    "diachi": "Gần Chị Phúc, Thôn 12",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413OY",
+    "ten": "HKD Nhật Khang (Baby Kiss)",
+    "tuyen": "",
+    "diachi": "11, nam cao",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413OZ",
+    "ten": "Dương Thị Hạnh (Tạp hóa Hạnh)",
+    "tuyen": "",
+    "diachi": "buôn, Ciet",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413PI",
+    "ten": "HKD tạp hóa Tuấn Dưỡng",
+    "tuyen": "",
+    "diachi": "79 Thôn Giang Sơn, Đường bê tông đối diện nhà thờ giang sơn đi vô khoảng 1 km",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413PT",
+    "ten": "Nguyễn Thị Đào (Cô Đào)",
+    "tuyen": "",
+    "diachi": "Gần Cô Huệ, Thôn 1",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413QC",
+    "ten": "Nguyễn Thị Kim Ly (Tạp hóa Lan Anh)",
+    "tuyen": "",
+    "diachi": "79, thôn 4 yang reh",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413QO",
+    "ten": "Lê Thị Hoa (Bếp nhà Sóc)",
+    "tuyen": "",
+    "diachi": "Thôn, Nam Hòa",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413R5",
+    "ten": "Cửa Hàng Minh Hương\\_CN Krông Bông",
+    "tuyen": "",
+    "diachi": "Gần Chợ, Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413RU",
+    "ten": "HKD Bazan Coffee",
+    "tuyen": "",
+    "diachi": "150, Nguyễn Tất Thành",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413RV",
+    "ten": "Nguyễn Thị Mỹ Xuân",
+    "tuyen": "",
+    "diachi": "02, Nguyễn Công Trứ",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413SL",
+    "ten": "Nguyễn Thị Mỹ Xuân (Cf Nhà Tôi)",
+    "tuyen": "",
+    "diachi": "Xuân",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413TF",
+    "ten": "Hoàng Thị Thanh Thoa",
+    "tuyen": "",
+    "diachi": "Tổ dân phố 3, Lê Anh",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413TH",
+    "ten": "Phạm Xuân Hùng (Túi xốp Hùng Duyên)",
+    "tuyen": "",
+    "diachi": "08, Trong chợ Krông Bông",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413TK",
+    "ten": "Nguyễn Thị Thúy (Đông Thảo)",
+    "tuyen": "",
+    "diachi": "2, thôn 4",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413TL",
+    "ten": "TH Tự Chọn Lạc Phượng",
+    "tuyen": "",
+    "diachi": "09, thôn 3",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413TR",
+    "ten": "Bùi Thị Thiết (CH TC Phúc Thiết)",
+    "tuyen": "",
+    "diachi": "cách phương Thanh 100m, thôn 11",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413UI",
+    "ten": "H.NÊN NIE (Y Tiến)",
+    "tuyen": "",
+    "diachi": "Cách cổng chào Eamta, 500m",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413V2",
+    "ten": "Võ Thị Thanh Hoài (Tạp phẩm Hoài Khang)",
+    "tuyen": "",
+    "diachi": "3, Thôn",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413Y0",
+    "ten": "Lê Quỳnh Như (cà phê thêm xua)",
+    "tuyen": "",
+    "diachi": "232/3, Nguyễn Tất Thành",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413Y6",
+    "ten": "Nguyễn Thị Trang",
+    "tuyen": "",
+    "diachi": "79, chợ 19/8",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413Y7",
+    "ten": "Nguyễn Thị Lan",
+    "tuyen": "",
+    "diachi": "87, thôn 10",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "ngayDangKy": 0
+      }
+    },
+    "monthly": {}
+  },
+  {
+    "ma": "DL200413ZS",
+    "ten": "Võ Thị Bích Huyền",
+    "tuyen": "",
+    "diachi": "88, 88 hòa lê",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "M5",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
         "ngayDangKy": 0
       }
     },
