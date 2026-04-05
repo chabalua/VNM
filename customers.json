@@ -771,7 +771,7 @@
   {
     "ma": "DL200412HR",
     "ten": "Ngô Hải (TH Cô Lùng)",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "41, 4",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -784,14 +784,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -800,7 +800,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:42:02.177Z"
   },
   {
     "ma": "DL200412IL",
