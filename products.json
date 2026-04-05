@@ -111,13 +111,15 @@
     "ma": "01TD11",
     "ten": "SĐCĐ Ông Thọ Đỏ hộp lớn 1284g",
     "nhom": "B",
-    "donvi": "Hộp",
+    "donvi": "hộp",
     "slThung": 12,
     "giaNYLon": 78289,
     "giaNYThung": 939468,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "phanLoai": "Ông Thọ",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T13:54:15.208Z"
   },
   {
     "ma": "01TD12",
