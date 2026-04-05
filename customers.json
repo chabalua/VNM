@@ -2573,7 +2573,7 @@
   {
     "ma": "DL200413M2",
     "ten": "Nguyễn Thị Lệ Thoa (Cửa hàng bao bì Hoàng Thoa)",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "Trong chợ lồng, Cổng sau chợ",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -2586,14 +2586,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2602,7 +2602,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:07:42.199Z"
   },
   {
     "ma": "DL200413N7",
