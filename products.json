@@ -63,13 +63,15 @@
     "ma": "01TL10",
     "ten": "Creamer đặc Tài Lộc 1284g",
     "nhom": "B",
-    "donvi": "Hộp",
+    "donvi": "hộp",
     "slThung": 12,
     "giaNYLon": 47574,
     "giaNYThung": 570888,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "phanLoai": "Tài Lộc",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T10:21:48.920Z"
   },
   {
     "ma": "01TL00",
