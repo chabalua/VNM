@@ -1,5 +1,5 @@
 // Cấu hình hằng số
-var REPO_RAW = 'https://raw.githubusercontent.com/chabalua/VNM-PWD-1/main/';
+var REPO_RAW = 'https://raw.githubusercontent.com/chabalua/VNM/main/';
 var PRODUCTS_URL = REPO_RAW + 'products.json';
 
 var LOCAL_PROMOTIONS_URL = 'promotions.json';

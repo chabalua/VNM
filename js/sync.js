@@ -5,7 +5,7 @@
 
 var SYNC_KEY = 'vnm_github_sync';
 var GH_OWNER = 'chabalua';
-var GH_REPO = 'VNM-PWD-1';
+var GH_REPO = 'VNM';
 var GH_BRANCH = 'main';
 var GH_API = 'https://api.github.com';
 
