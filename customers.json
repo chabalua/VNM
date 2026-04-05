@@ -1328,8 +1328,8 @@
   },
   {
     "ma": "DL200412KY",
-    "ten": "Lê Thị Côn",
-    "tuyen": "",
+    "ten": "Cô Cồn",
+    "tuyen": "Tuyến 2",
     "diachi": "cạnh cô nga lý, cạnh chợ lồng",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1342,14 +1342,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1358,7 +1358,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:10:55.454Z"
   },
   {
     "ma": "DL200412MC",
