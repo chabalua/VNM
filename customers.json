@@ -2123,7 +2123,7 @@
   {
     "ma": "DL2004136H",
     "ten": "HKD Trần Sỹ Nguyên (Hoàng Nguyên)",
-    "tuyen": "",
+    "tuyen": "Tuyến 1",
     "diachi": "314, hòa lê",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -2136,14 +2136,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2152,7 +2152,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:06:08.342Z"
   },
   {
     "ma": "DL200413AK",
