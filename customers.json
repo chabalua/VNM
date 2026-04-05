@@ -1776,7 +1776,7 @@
   {
     "ma": "DL200412S6",
     "ten": "Hà Thị Hải (Tạp hóa Cô Xanh)",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "Đối diện, CP Thảo Nguyên",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1789,14 +1789,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1805,7 +1805,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:06:29.060Z"
   },
   {
     "ma": "DL200412SI",
