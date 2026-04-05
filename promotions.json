@@ -1,9 +1,5 @@
 [
   {
-    "_comment": "===== NHÓM B: SỮA ĐẶC =====",
-    "_note": "Nhóm B dùng preset KM (tặng Fino/hộp cùng loại), nhập vào app theo từng CT"
-  },
-  {
     "name": "SĐ NSPN XL 380g HT: 14h+1b Fino",
     "type": "bonus",
     "nhoms": "B",
@@ -14,7 +10,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01SX05", "01SC02"]
+    "spMas": [
+      "01SX05",
+      "01SC02"
+    ]
   },
   {
     "name": "SĐ NSPN XL 380g HT: 28h+1h cùng loại",
@@ -27,7 +26,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01SX05", "01SC02"]
+    "spMas": [
+      "01SX05",
+      "01SC02"
+    ]
   },
   {
     "name": "SĐ NSPN XL 380g HG: 8h+1b Fino",
@@ -40,7 +42,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01SX07"]
+    "spMas": [
+      "01SX07"
+    ]
   },
   {
     "name": "SĐ NSPN XL 380g HG: 18h+1h cùng loại",
@@ -53,7 +57,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01SX07"]
+    "spMas": [
+      "01SX07"
+    ]
   },
   {
     "name": "SĐ ÔT Xanh 380g: 12h+1b Fino",
@@ -66,7 +72,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01CX02"]
+    "spMas": [
+      "01CX02"
+    ]
   },
   {
     "name": "SĐ ÔT Xanh 380g: 28h+1h cùng loại",
@@ -79,7 +87,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01CX02"]
+    "spMas": [
+      "01CX02"
+    ]
   },
   {
     "name": "SĐ NSPN XB 380g: 7h+1b Fino",
@@ -92,7 +102,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01SB02"]
+    "spMas": [
+      "01SB02"
+    ]
   },
   {
     "name": "SĐ NSPN XB 380g: 15h+1h cùng loại",
@@ -105,7 +117,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01SB02"]
+    "spMas": [
+      "01SB02"
+    ]
   },
   {
     "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 12h+2b Fino",
@@ -118,7 +132,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01TD13", "01CX12"]
+    "spMas": [
+      "01TD13",
+      "01CX12"
+    ]
   },
   {
     "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 18h+1h cùng loại",
@@ -131,7 +148,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TD13", "01CX12"]
+    "spMas": [
+      "01TD13",
+      "01CX12"
+    ]
   },
   {
     "name": "SĐ ÔT XL 380g: 12h+2b Fino",
@@ -144,7 +164,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01TX03"]
+    "spMas": [
+      "01TX03"
+    ]
   },
   {
     "name": "SĐ ÔT XL 380g: 15h+1h cùng loại",
@@ -157,7 +179,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TX03"]
+    "spMas": [
+      "01TX03"
+    ]
   },
   {
     "name": "SĐ ÔT Tuýp Dâu/Sô/Trắng: 8+1",
@@ -170,7 +194,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TD60", "01TA60", "01TC60"]
+    "spMas": [
+      "01TD60",
+      "01TA60",
+      "01TC60"
+    ]
   },
   {
     "name": "SĐ ÔT Tuýp 9Hạt/MCha/Café: 6+1",
@@ -183,7 +211,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TM60", "01TF60", "01TH60"]
+    "spMas": [
+      "01TM60",
+      "01TF60",
+      "01TH60"
+    ]
   },
   {
     "name": "SĐ Ô/Thọ Vỉ 40g: 6 vỉ+1h ĐB 110ml",
@@ -196,7 +228,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04ED32",
-    "spMas": ["01VD41"]
+    "spMas": [
+      "01VD41"
+    ]
   },
   {
     "name": "SĐ Tài Lộc 380g: 11h+1b Fino",
@@ -209,7 +243,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
-    "spMas": ["01TL00"]
+    "spMas": [
+      "01TL00"
+    ]
   },
   {
     "name": "SĐ Tài Lộc 380g: 20h+1h cùng loại",
@@ -222,7 +258,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TL00"]
+    "spMas": [
+      "01TL00"
+    ]
   },
   {
     "name": "SĐ ÔT Đỏ 1284g: 8h+1h NSPN 380g",
@@ -235,7 +273,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "01SX05",
-    "spMas": ["01TD11"]
+    "spMas": [
+      "01TD11"
+    ]
   },
   {
     "name": "SĐ ÔT Đỏ 1284g: 23h+1h cùng loại",
@@ -248,7 +288,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TD11"]
+    "spMas": [
+      "01TD11"
+    ]
   },
   {
     "name": "SĐ NSPN XL 1284g: 8h+1h NSPN 380g",
@@ -261,7 +303,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "01SX05",
-    "spMas": ["01SX11"]
+    "spMas": [
+      "01SX11"
+    ]
   },
   {
     "name": "SĐ NSPN XL 1284g: 23h+1h cùng loại",
@@ -274,7 +318,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01SX11"]
+    "spMas": [
+      "01SX11"
+    ]
   },
   {
     "name": "SĐ ÔT Đỏ 1kg: 8h+1h NSPN 380g",
@@ -287,7 +333,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "01SX05",
-    "spMas": ["01TD12"]
+    "spMas": [
+      "01TD12"
+    ]
   },
   {
     "name": "SĐ ÔT Đỏ 1kg: 23h+1h cùng loại",
@@ -300,7 +348,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TD12"]
+    "spMas": [
+      "01TD12"
+    ]
   },
   {
     "name": "SĐ NSPN XB 1284g: 10h+1h NSPN cam/xanh",
@@ -313,7 +363,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "01SX05",
-    "spMas": ["01SB10"]
+    "spMas": [
+      "01SB10"
+    ]
   },
   {
     "name": "SĐ NSPN XB 1284g: 23h+1h cùng loại",
@@ -326,7 +378,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01SB10"]
+    "spMas": [
+      "01SB10"
+    ]
   },
   {
     "name": "SĐ Tài Lộc 1284g: 8h+1h NSPN 380g",
@@ -339,7 +393,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "01SX05",
-    "spMas": ["01TL10"]
+    "spMas": [
+      "01TL10"
+    ]
   },
   {
     "name": "SĐ Tài Lộc 1284g: 18h+1h cùng loại",
@@ -352,7 +408,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["01TL10"]
+    "spMas": [
+      "01TL10"
+    ]
   },
   {
     "name": "SĐ Tài Lộc 960g: CK 12%",
@@ -361,11 +419,9 @@
     "active": true,
     "stackable": true,
     "ck": "12",
-    "spMas": ["01TL20"]
-  },
-
-  {
-    "_comment": "===== NHÓM C: SỮA NƯỚC ====="
+    "spMas": [
+      "01TL20"
+    ]
   },
   {
     "name": "Fino 16+1",
@@ -378,7 +434,21 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04FD31", "04FA31", "04FT31", "04FC31", "04FD42", "04FI31", "04FA32", "04FC32", "04FD32", "04FT32", "04FI32", "04FD43", "04FH20"]
+    "spMas": [
+      "04FD31",
+      "04FA31",
+      "04FT31",
+      "04FC31",
+      "04FD42",
+      "04FI31",
+      "04FA32",
+      "04FC32",
+      "04FD32",
+      "04FT32",
+      "04FI32",
+      "04FD43",
+      "04FH20"
+    ]
   },
   {
     "name": "Fino Ontop: 96b+2b Fino bất kỳ",
@@ -391,7 +461,15 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04FA31", "04FC31", "04FD42", "04FA32", "04FC32", "04FD43", "04FH20"]
+    "spMas": [
+      "04FA31",
+      "04FC31",
+      "04FD42",
+      "04FA32",
+      "04FC32",
+      "04FD43",
+      "04FH20"
+    ]
   },
   {
     "name": "STTT Fino 220ml: 12b+1b",
@@ -404,7 +482,17 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04FD0H", "04FI0H", "04FT0H", "04FI1H", "04FT1H", "04FD1H", "04FT2H", "04FI2H", "04FD2H"]
+    "spMas": [
+      "04FD0H",
+      "04FI0H",
+      "04FT0H",
+      "04FI1H",
+      "04FT1H",
+      "04FD1H",
+      "04FT2H",
+      "04FI2H",
+      "04FD2H"
+    ]
   },
   {
     "name": "STTT Fino 220ml: 3 thùng+15 bịch",
@@ -417,7 +505,17 @@
     "bUnit": "lon",
     "bMax": 1,
     "bMa": "same",
-    "spMas": ["04FD0H", "04FI0H", "04FT0H", "04FI1H", "04FT1H", "04FD1H", "04FT2H", "04FI2H", "04FD2H"]
+    "spMas": [
+      "04FD0H",
+      "04FI0H",
+      "04FT0H",
+      "04FI1H",
+      "04FT1H",
+      "04FD1H",
+      "04FT2H",
+      "04FI2H",
+      "04FD2H"
+    ]
   },
   {
     "name": "Đàn Bò 110ml: 12+1",
@@ -430,7 +528,19 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04EA32", "04EA33", "04EC33", "04ED33", "04EI33", "04ET33", "04ED32", "04EC32", "04EI32", "04ET32", "04EC70"]
+    "spMas": [
+      "04EA32",
+      "04EA33",
+      "04EC33",
+      "04ED33",
+      "04EI33",
+      "04ET33",
+      "04ED32",
+      "04EC32",
+      "04EI32",
+      "04ET32",
+      "04EC70"
+    ]
   },
   {
     "name": "Đàn Bò 180ml: 12+1",
@@ -443,7 +553,32 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04ED12", "04EI12", "04ET12", "04ED13", "04EI13", "04ET13", "04ED11", "04EI11", "04ET11", "04ED1K", "04EA12", "04EB10", "04EC12", "04EU10", "04EA13", "04EB11", "04EC13", "04EM10", "04EN10", "04EA11", "04EC60", "04EU11", "04EI18", "04ET18"]
+    "spMas": [
+      "04ED12",
+      "04EI12",
+      "04ET12",
+      "04ED13",
+      "04EI13",
+      "04ET13",
+      "04ED11",
+      "04EI11",
+      "04ET11",
+      "04ED1K",
+      "04EA12",
+      "04EB10",
+      "04EC12",
+      "04EU10",
+      "04EA13",
+      "04EB11",
+      "04EC13",
+      "04EM10",
+      "04EN10",
+      "04EA11",
+      "04EC60",
+      "04EU11",
+      "04EI18",
+      "04ET18"
+    ]
   },
   {
     "name": "Đàn Bò 180ml Ontop FM vị: 48+1 (kèm 2 SKU)",
@@ -456,7 +591,14 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04EB10", "04EU10", "04EB11", "04EM10", "04EN10", "04EC60"]
+    "spMas": [
+      "04EB10",
+      "04EU10",
+      "04EB11",
+      "04EM10",
+      "04EN10",
+      "04EC60"
+    ]
   },
   {
     "name": "Đàn Bò 180ml Ontop FM vị: 96h+3h (kèm 3 SKU)",
@@ -469,7 +611,14 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04EB10", "04EU10", "04EB11", "04EM10", "04EN10", "04EC60"]
+    "spMas": [
+      "04EB10",
+      "04EU10",
+      "04EB11",
+      "04EM10",
+      "04EN10",
+      "04EC60"
+    ]
   },
   {
     "name": "Đàn Bò 110ml Ontop: 5T+4H",
@@ -482,7 +631,19 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04ED32", "04EA32", "04EC32", "04EI32", "04ED39", "04ED40", "04EI39", "04EA39", "04EC39", "04ET32", "04ET39"]
+    "spMas": [
+      "04ED32",
+      "04EA32",
+      "04EC32",
+      "04EI32",
+      "04ED39",
+      "04ED40",
+      "04EI39",
+      "04EA39",
+      "04EC39",
+      "04ET32",
+      "04ET39"
+    ]
   },
   {
     "name": "Đàn Bò 110ml Ontop: 10T+12H",
@@ -495,7 +656,19 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04ED32", "04EA32", "04EC32", "04EI32", "04ED39", "04ED40", "04EI39", "04EA39", "04EC39", "04ET32", "04ET39"]
+    "spMas": [
+      "04ED32",
+      "04EA32",
+      "04EC32",
+      "04EI32",
+      "04ED39",
+      "04ED40",
+      "04EI39",
+      "04EA39",
+      "04EC39",
+      "04ET32",
+      "04ET39"
+    ]
   },
   {
     "name": "Đàn Bò 180ml Ontop: 5T+4H",
@@ -508,7 +681,25 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04ED12", "04EA12", "04ET62", "04EI12", "04ET12", "04EC12", "04EA11", "04EA19", "04EC19", "04ED11", "04ED19", "04EI11", "04EI19", "04ET11", "04ET19", "04EU10", "04EB10"]
+    "spMas": [
+      "04ED12",
+      "04EA12",
+      "04ET62",
+      "04EI12",
+      "04ET12",
+      "04EC12",
+      "04EA11",
+      "04EA19",
+      "04EC19",
+      "04ED11",
+      "04ED19",
+      "04EI11",
+      "04EI19",
+      "04ET11",
+      "04ET19",
+      "04EU10",
+      "04EB10"
+    ]
   },
   {
     "name": "Đàn Bò 180ml Ontop: 10T+12H",
@@ -521,7 +712,25 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04ED12", "04EA12", "04ET62", "04EI12", "04ET12", "04EC12", "04EA11", "04EA19", "04EC19", "04ED11", "04ED19", "04EI11", "04EI19", "04ET11", "04ET19", "04EU10", "04EB10"]
+    "spMas": [
+      "04ED12",
+      "04EA12",
+      "04ET62",
+      "04EI12",
+      "04ET12",
+      "04EC12",
+      "04EA11",
+      "04EA19",
+      "04EC19",
+      "04ED11",
+      "04ED19",
+      "04EI11",
+      "04EI19",
+      "04ET11",
+      "04ET19",
+      "04EU10",
+      "04EB10"
+    ]
   },
   {
     "name": "Đàn Bò 1L: 12+1",
@@ -534,7 +743,20 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04ED02", "04ET02", "04EI02", "04ET20", "04ED03", "04EI03", "04ET03", "04ET21", "04ED04", "04EI04", "04ET04", "04ET22"]
+    "spMas": [
+      "04ED02",
+      "04ET02",
+      "04EI02",
+      "04ET20",
+      "04ED03",
+      "04EI03",
+      "04ET03",
+      "04ET21",
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22"
+    ]
   },
   {
     "name": "Đàn Bò 1L: CK 2%",
@@ -543,7 +765,20 @@
     "active": true,
     "stackable": true,
     "ck": "2",
-    "spMas": ["04ED02", "04ET02", "04EI02", "04ET20", "04ED03", "04EI03", "04ET03", "04ET21", "04ED04", "04EI04", "04ET04", "04ET22"]
+    "spMas": [
+      "04ED02",
+      "04ET02",
+      "04EI02",
+      "04ET20",
+      "04ED03",
+      "04EI03",
+      "04ET03",
+      "04ET21",
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22"
+    ]
   },
   {
     "name": "ADM 110ml: 12+1, 48+5, 192+24",
@@ -556,7 +791,20 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04CA32", "04CD34", "04CY32", "04AD31", "04CD31", "04CD35", "04CA33", "04CC33", "04CC34", "04CH30", "04CI30", "04CI31"]
+    "spMas": [
+      "04CA32",
+      "04CD34",
+      "04CY32",
+      "04AD31",
+      "04CD31",
+      "04CD35",
+      "04CA33",
+      "04CC33",
+      "04CC34",
+      "04CH30",
+      "04CI30",
+      "04CI31"
+    ]
   },
   {
     "name": "ADM 110ml: 48+5",
@@ -569,7 +817,20 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04CA32", "04CD34", "04CY32", "04AD31", "04CD31", "04CD35", "04CA33", "04CC33", "04CC34", "04CH30", "04CI30", "04CI31"]
+    "spMas": [
+      "04CA32",
+      "04CD34",
+      "04CY32",
+      "04AD31",
+      "04CD31",
+      "04CD35",
+      "04CA33",
+      "04CC33",
+      "04CC34",
+      "04CH30",
+      "04CI30",
+      "04CI31"
+    ]
   },
   {
     "name": "ADM 110ml: 192+24",
@@ -582,7 +843,20 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04CA32", "04CD34", "04CY32", "04AD31", "04CD31", "04CD35", "04CA33", "04CC33", "04CC34", "04CH30", "04CI30", "04CI31"]
+    "spMas": [
+      "04CA32",
+      "04CD34",
+      "04CY32",
+      "04AD31",
+      "04CD31",
+      "04CD35",
+      "04CA33",
+      "04CC33",
+      "04CC34",
+      "04CH30",
+      "04CI30",
+      "04CI31"
+    ]
   },
   {
     "name": "ADM 180ml: 12+1, 48+5, 192+24",
@@ -595,7 +869,23 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04CA13", "04CD12", "04CD13", "04CD14", "04CY11", "04CY12", "04AD19", "04CD10", "04CD15", "04CA14", "04CC15", "04CC16", "04CH10", "04CI10", "04CI11"]
+    "spMas": [
+      "04CA13",
+      "04CD12",
+      "04CD13",
+      "04CD14",
+      "04CY11",
+      "04CY12",
+      "04AD19",
+      "04CD10",
+      "04CD15",
+      "04CA14",
+      "04CC15",
+      "04CC16",
+      "04CH10",
+      "04CI10",
+      "04CI11"
+    ]
   },
   {
     "name": "ADM 180ml: 48+5",
@@ -608,7 +898,23 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04CA13", "04CD12", "04CD13", "04CD14", "04CY11", "04CY12", "04AD19", "04CD10", "04CD15", "04CA14", "04CC15", "04CC16", "04CH10", "04CI10", "04CI11"]
+    "spMas": [
+      "04CA13",
+      "04CD12",
+      "04CD13",
+      "04CD14",
+      "04CY11",
+      "04CY12",
+      "04AD19",
+      "04CD10",
+      "04CD15",
+      "04CA14",
+      "04CC15",
+      "04CC16",
+      "04CH10",
+      "04CI10",
+      "04CI11"
+    ]
   },
   {
     "name": "ADM 180ml: 192+24",
@@ -621,7 +927,23 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04CA13", "04CD12", "04CD13", "04CD14", "04CY11", "04CY12", "04AD19", "04CD10", "04CD15", "04CA14", "04CC15", "04CC16", "04CH10", "04CI10", "04CI11"]
+    "spMas": [
+      "04CA13",
+      "04CD12",
+      "04CD13",
+      "04CD14",
+      "04CY11",
+      "04CY12",
+      "04AD19",
+      "04CD10",
+      "04CD15",
+      "04CA14",
+      "04CC15",
+      "04CC16",
+      "04CH10",
+      "04CI10",
+      "04CI11"
+    ]
   },
   {
     "name": "Green Farm 110ml: 12+1",
@@ -634,7 +956,15 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04GD33", "04GI33", "04GD34", "04GI34", "04GT34", "04GD39", "04GI39"]
+    "spMas": [
+      "04GD33",
+      "04GI33",
+      "04GD34",
+      "04GI34",
+      "04GT34",
+      "04GD39",
+      "04GI39"
+    ]
   },
   {
     "name": "Green Farm 180ml: 12+1",
@@ -647,7 +977,18 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04GD13", "04GI13", "04GT13", "04GD14", "04GI14", "04GT14", "04GI18", "04GD19", "04GI19", "04GT19"]
+    "spMas": [
+      "04GD13",
+      "04GI13",
+      "04GT13",
+      "04GD14",
+      "04GI14",
+      "04GT14",
+      "04GI18",
+      "04GD19",
+      "04GI19",
+      "04GT19"
+    ]
   },
   {
     "name": "Green Farm CK theo tiền",
@@ -656,10 +997,36 @@
     "active": true,
     "stackable": true,
     "tiers": [
-      { "type": "above", "value": "1500", "ck": "1" },
-      { "type": "above", "value": "5000", "ck": "2" }
+      {
+        "type": "above",
+        "value": "1500",
+        "ck": "1"
+      },
+      {
+        "type": "above",
+        "value": "5000",
+        "ck": "2"
+      }
     ],
-    "spMas": ["04GD33", "04GI33", "04GD34", "04GI34", "04GT34", "04GD39", "04GI39", "04GD13", "04GI13", "04GT13", "04GD14", "04GI14", "04GT14", "04GI18", "04GD19", "04GI19", "04GT19"]
+    "spMas": [
+      "04GD33",
+      "04GI33",
+      "04GD34",
+      "04GI34",
+      "04GT34",
+      "04GD39",
+      "04GI39",
+      "04GD13",
+      "04GI13",
+      "04GT13",
+      "04GD14",
+      "04GI14",
+      "04GT14",
+      "04GI18",
+      "04GD19",
+      "04GI19",
+      "04GT19"
+    ]
   },
   {
     "name": "GF A2 110ml: 12+1 (tặng GF 110)",
@@ -672,7 +1039,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI33",
-    "spMas": ["04AE31", "04AE32"]
+    "spMas": [
+      "04AE31",
+      "04AE32"
+    ]
   },
   {
     "name": "GF A2 180ml: 12+1 (tặng GF 180)",
@@ -685,7 +1055,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI13",
-    "spMas": ["04AE11", "04AE12"]
+    "spMas": [
+      "04AE11",
+      "04AE12"
+    ]
   },
   {
     "name": "GF Tổ Yến 180: 12+1 (tặng GF 180)",
@@ -698,7 +1071,12 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI13",
-    "spMas": ["04GB10", "04GB11", "04GB18", "04BI18"]
+    "spMas": [
+      "04GB10",
+      "04GB11",
+      "04GB18",
+      "04BI18"
+    ]
   },
   {
     "name": "GF 1L: 6h+4h GF 110ml",
@@ -711,7 +1089,14 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI33",
-    "spMas": ["04GT03", "04GT04", "04GT05", "04GI03", "04GI04", "04GI05"]
+    "spMas": [
+      "04GT03",
+      "04GT04",
+      "04GT05",
+      "04GI03",
+      "04GI04",
+      "04GI05"
+    ]
   },
   {
     "name": "GF Cao đạm 250ml: 6h+2h GF 110ml",
@@ -724,7 +1109,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI33",
-    "spMas": ["04GP21", "04GP22"]
+    "spMas": [
+      "04GP21",
+      "04GP22"
+    ]
   },
   {
     "name": "Organic 180ml: 12+1 (tặng GF 180)",
@@ -737,7 +1125,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI13",
-    "spMas": ["04GO10", "04GO11"]
+    "spMas": [
+      "04GO10",
+      "04GO11"
+    ]
   },
   {
     "name": "Fino A2 220: 16+1",
@@ -750,11 +1141,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["04FH20"]
-  },
-
-  {
-    "_comment": "===== NHÓM D: SCA + PROBI + SCU ====="
+    "spMas": [
+      "04FH20"
+    ]
   },
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 22+2",
@@ -767,7 +1156,67 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["06UQ40", "06UA40", "06UC40", "06UN40", "06UQ45", "06UA45", "06UC45", "06UN45", "06UQ46", "06UA46", "06UC46", "06UN46", "06UQ48", "06UA48", "06UC48", "06UN48", "04SS82", "04SS83", "04SS85", "04SS86", "04SS88", "08SV30", "08SM30", "08HA31", "08HC31", "08HD31", "08HN31", "06SA71", "06SA77", "06SA79", "06SA73", "06SC71", "06SC77", "06SC79", "06SC73", "04SS72", "04SS77", "04SS79", "04SS73", "06UA32", "06UC32", "06UN32", "06UQ32", "06UA35", "06UC35", "06UN35", "06UQ35", "06UA36", "06UC36", "06UN36", "06UQ36", "06UA38", "06UC38", "06UN38", "06UQ38", "04US32", "04US35", "04US36", "04US38"]
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "06UQ45",
+      "06UA45",
+      "06UC45",
+      "06UN45",
+      "06UQ46",
+      "06UA46",
+      "06UC46",
+      "06UN46",
+      "06UQ48",
+      "06UA48",
+      "06UC48",
+      "06UN48",
+      "04SS82",
+      "04SS83",
+      "04SS85",
+      "04SS86",
+      "04SS88",
+      "08SV30",
+      "08SM30",
+      "08HA31",
+      "08HC31",
+      "08HD31",
+      "08HN31",
+      "06SA71",
+      "06SA77",
+      "06SA79",
+      "06SA73",
+      "06SC71",
+      "06SC77",
+      "06SC79",
+      "06SC73",
+      "04SS72",
+      "04SS77",
+      "04SS79",
+      "04SS73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32",
+      "06UA35",
+      "06UC35",
+      "06UN35",
+      "06UQ35",
+      "06UA36",
+      "06UC36",
+      "06UN36",
+      "06UQ36",
+      "06UA38",
+      "06UC38",
+      "06UN38",
+      "06UQ38",
+      "04US32",
+      "04US35",
+      "04US36",
+      "04US38"
+    ]
   },
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
@@ -780,7 +1229,67 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["06UQ40", "06UA40", "06UC40", "06UN40", "06UQ45", "06UA45", "06UC45", "06UN45", "06UQ46", "06UA46", "06UC46", "06UN46", "06UQ48", "06UA48", "06UC48", "06UN48", "04SS82", "04SS83", "04SS85", "04SS86", "04SS88", "08SV30", "08SM30", "08HA31", "08HC31", "08HD31", "08HN31", "06SA71", "06SA77", "06SA79", "06SA73", "06SC71", "06SC77", "06SC79", "06SC73", "04SS72", "04SS77", "04SS79", "04SS73", "06UA32", "06UC32", "06UN32", "06UQ32", "06UA35", "06UC35", "06UN35", "06UQ35", "06UA36", "06UC36", "06UN36", "06UQ36", "06UA38", "06UC38", "06UN38", "06UQ38", "04US32", "04US35", "04US36", "04US38"]
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "06UQ45",
+      "06UA45",
+      "06UC45",
+      "06UN45",
+      "06UQ46",
+      "06UA46",
+      "06UC46",
+      "06UN46",
+      "06UQ48",
+      "06UA48",
+      "06UC48",
+      "06UN48",
+      "04SS82",
+      "04SS83",
+      "04SS85",
+      "04SS86",
+      "04SS88",
+      "08SV30",
+      "08SM30",
+      "08HA31",
+      "08HC31",
+      "08HD31",
+      "08HN31",
+      "06SA71",
+      "06SA77",
+      "06SA79",
+      "06SA73",
+      "06SC71",
+      "06SC77",
+      "06SC79",
+      "06SC73",
+      "04SS72",
+      "04SS77",
+      "04SS79",
+      "04SS73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32",
+      "06UA35",
+      "06UC35",
+      "06UN35",
+      "06UQ35",
+      "06UA36",
+      "06UC36",
+      "06UN36",
+      "06UQ36",
+      "06UA38",
+      "06UC38",
+      "06UN38",
+      "06UQ38",
+      "04US32",
+      "04US35",
+      "04US36",
+      "04US38"
+    ]
   },
   {
     "name": "SCU Susu/Hero 170/180: 11+1",
@@ -793,7 +1302,21 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["14SA10", "14SD10", "06UK10", "08SK10", "08SV10", "08SM10", "08HA11", "08HC11", "08HD11", "08HN11", "06VA23", "06VC23", "06VQ23"]
+    "spMas": [
+      "14SA10",
+      "14SD10",
+      "06UK10",
+      "08SK10",
+      "08SV10",
+      "08SM10",
+      "08HA11",
+      "08HC11",
+      "08HD11",
+      "08HN11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ]
   },
   {
     "name": "SCU Susu/Hero 170/180: 86+10",
@@ -806,7 +1329,21 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["14SA10", "14SD10", "06UK10", "08SK10", "08SV10", "08SM10", "08HA11", "08HC11", "08HD11", "08HN11", "06VA23", "06VC23", "06VQ23"]
+    "spMas": [
+      "14SA10",
+      "14SD10",
+      "06UK10",
+      "08SK10",
+      "08SV10",
+      "08SM10",
+      "08HA11",
+      "08HC11",
+      "08HD11",
+      "08HN11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ]
   },
   {
     "name": "SCA Trắng (CĐ,KĐ)/Nha đam: 12+1",
@@ -819,7 +1356,15 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07TR32", "07KD12", "07TR33", "07ND12", "07ND13", "07ND14", "07ND15"]
+    "spMas": [
+      "07TR32",
+      "07KD12",
+      "07TR33",
+      "07ND12",
+      "07ND13",
+      "07ND14",
+      "07ND15"
+    ]
   },
   {
     "name": "SCA Trắng ID/NĐ ID: 16+1",
@@ -832,7 +1377,12 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07ID11", "07ID19", "07NH11", "07NH19"]
+    "spMas": [
+      "07ID11",
+      "07ID19",
+      "07NH11",
+      "07NH19"
+    ]
   },
   {
     "name": "SCA NĐ nhãn thân/TDLD/Táo đỏ/Nếp cẩm/Trân Châu: 12+1",
@@ -845,7 +1395,20 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07NC14", "07NC15", "07CR12", "07CR13", "07PH10", "07PX10", "07KT10", "07NI19", "07NI11", "07VQ11", "07NI12", "07TD10"]
+    "spMas": [
+      "07NC14",
+      "07NC15",
+      "07CR12",
+      "07CR13",
+      "07PH10",
+      "07PX10",
+      "07KT10",
+      "07NI19",
+      "07NI11",
+      "07VQ11",
+      "07NI12",
+      "07TD10"
+    ]
   },
   {
     "name": "SCA Green Farm: 7+1",
@@ -858,7 +1421,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07GI12"]
+    "spMas": [
+      "07GI12"
+    ]
   },
   {
     "name": "SCU Green Farm Vải/Bưởi: 3c+2h SCA GF",
@@ -871,7 +1436,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "07GI12",
-    "spMas": ["07OC20", "07OI20", "07OV20"]
+    "spMas": [
+      "07OC20",
+      "07OI20",
+      "07OV20"
+    ]
   },
   {
     "name": "SCA Dâu/Lựu đỏ/Trái Cây CTKD: 4+1",
@@ -884,7 +1453,13 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07DA10", "07DA11", "07TC11", "07TD10", "07TD19"]
+    "spMas": [
+      "07DA10",
+      "07DA11",
+      "07TC11",
+      "07TD10",
+      "07TD19"
+    ]
   },
   {
     "name": "SCA Susu + Cream 60g: 7+1",
@@ -897,7 +1472,12 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07SR84", "07SD84", "07ST84", "07SR60"]
+    "spMas": [
+      "07SR84",
+      "07SD84",
+      "07ST84",
+      "07SR60"
+    ]
   },
   {
     "name": "SCA Star: 22+2",
@@ -910,7 +1490,9 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07SR11"]
+    "spMas": [
+      "07SR11"
+    ]
   },
   {
     "name": "SCA Hy Lạp: 3+1",
@@ -923,7 +1505,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07FC10", "07FM10"]
+    "spMas": [
+      "07FC10",
+      "07FM10"
+    ]
   },
   {
     "name": "Probi 65ml: 23+2",
@@ -936,7 +1521,14 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07UR13", "07UD11", "07UG11", "07UQ11", "07UA11", "07UC11"]
+    "spMas": [
+      "07UR13",
+      "07UD11",
+      "07UG11",
+      "07UQ11",
+      "07UA11",
+      "07UC11"
+    ]
   },
   {
     "name": "Probi 65ml: 50+5",
@@ -949,7 +1541,14 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07UR13", "07UD11", "07UG11", "07UQ11", "07UA11", "07UC11"]
+    "spMas": [
+      "07UR13",
+      "07UD11",
+      "07UG11",
+      "07UQ11",
+      "07UA11",
+      "07UC11"
+    ]
   },
   {
     "name": "Probi 130ml CĐ/Đa vị: 11+1",
@@ -962,7 +1561,13 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["07UQ31", "07UM31", "07UR31", "07UL31", "07UD30"]
+    "spMas": [
+      "07UQ31",
+      "07UM31",
+      "07UR31",
+      "07UL31",
+      "07UD30"
+    ]
   },
   {
     "name": "Probi 400ml/700ml: CK 15%",
@@ -971,7 +1576,12 @@
     "active": true,
     "stackable": true,
     "ck": "15",
-    "spMas": ["07UR41", "07UR71", "07UI40", "07UI70"]
+    "spMas": [
+      "07UR41",
+      "07UR71",
+      "07UI40",
+      "07UI70"
+    ]
   },
   {
     "name": "STV 9 hạt 180ml: 24+2",
@@ -984,7 +1594,19 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["05AN20", "05AN21", "05AN22", "05AN23", "05AN30", "05AN24", "05AN28", "05AN25", "05AN31", "05AN27", "05AN37"]
+    "spMas": [
+      "05AN20",
+      "05AN21",
+      "05AN22",
+      "05AN23",
+      "05AN30",
+      "05AN24",
+      "05AN28",
+      "05AN25",
+      "05AN31",
+      "05AN27",
+      "05AN37"
+    ]
   },
   {
     "name": "Cao đạm 180ml: 12+1 (gom chung tặng hàng 10%)",
@@ -997,7 +1619,12 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["05AD10", "05AD30", "05AD11", "05AD31"]
+    "spMas": [
+      "05AD10",
+      "05AD30",
+      "05AD11",
+      "05AD31"
+    ]
   },
   {
     "name": "Cao đạm 240ml: 16+1 (gom chung tặng hàng 10%)",
@@ -1010,7 +1637,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["05AD20", "05AD21", "05AD22"]
+    "spMas": [
+      "05AD20",
+      "05AD21",
+      "05AD22"
+    ]
   },
   {
     "name": "SĐN/STV gom chung tặng hàng 10% (Super Soy 200/220, ĐĐ/HN/OC, SĐN Tươi, Yến mạch)",
@@ -1019,7 +1650,39 @@
     "active": true,
     "stackable": true,
     "ck": "10",
-    "spMas": ["05AV11", "05AV31", "05AV32", "05AV12", "05AV33", "05AV37", "05FV42", "05FV43", "05FV41", "05FV44", "05AV20", "05DH10", "05DD10", "05AV28", "05DH11", "05DD11", "05AV21", "05AV22", "05DH12", "05DD12", "05AV23", "05DH13", "05DD13", "05MD10", "05AV24", "05DH14", "05DD14", "05AT11", "05AT12", "05AT13", "05DY10"]
+    "spMas": [
+      "05AV11",
+      "05AV31",
+      "05AV32",
+      "05AV12",
+      "05AV33",
+      "05AV37",
+      "05FV42",
+      "05FV43",
+      "05FV41",
+      "05FV44",
+      "05AV20",
+      "05DH10",
+      "05DD10",
+      "05AV28",
+      "05DH11",
+      "05DD11",
+      "05AV21",
+      "05AV22",
+      "05DH12",
+      "05DD12",
+      "05AV23",
+      "05DH13",
+      "05DD13",
+      "05MD10",
+      "05AV24",
+      "05DH14",
+      "05DD14",
+      "05AT11",
+      "05AT12",
+      "05AT13",
+      "05DY10"
+    ]
   },
   {
     "name": "SDD Flex 180ml/1L: CK 8%",
@@ -1028,7 +1691,12 @@
     "active": true,
     "stackable": true,
     "ck": "8",
-    "spMas": ["04LL12", "04LL13", "04LT11", "04LT12"]
+    "spMas": [
+      "04LL12",
+      "04LL13",
+      "04LT11",
+      "04LT12"
+    ]
   },
   {
     "name": "STV 9 hạt 1L: CK 8%",
@@ -1037,11 +1705,19 @@
     "active": true,
     "stackable": true,
     "ck": "8",
-    "spMas": ["05AN01", "05AN02", "05AN03", "05AN04", "05BG11", "05BG21", "05BG13", "05BG23", "05BG22", "05BG24", "05AV04"]
-  },
-
-  {
-    "_comment": "===== NHÓM A: SỮA BỘT TE + NL ====="
+    "spMas": [
+      "05AN01",
+      "05AN02",
+      "05AN03",
+      "05AN04",
+      "05BG11",
+      "05BG21",
+      "05BG13",
+      "05BG23",
+      "05BG22",
+      "05BG24",
+      "05AV04"
+    ]
   },
   {
     "name": "BDD Ridielac - Mua 2 hộp CK 3%",
@@ -1050,8 +1726,66 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["03CA13", "03CA22", "03CA32", "03CA42", "03CA73", "03CA82", "03CY02", "03CY71", "03CA53", "03CM03", "03CM04", "03CA91", "03AA13", "03AA22", "03AA32", "03AA41", "03AA73", "03AY03", "03AY71", "03AA53", "03AA91", "03CA14", "03CA23", "03CA33", "03CA43", "03CA74", "03CA83", "03CY03", "03CY72", "03CA54", "03CM05", "03CM06", "03CA92", "03AA24", "03AA43", "03AA55", "03AA75", "03AA93", "03AB11", "03AH11", "03AY73", "03CA15", "03CA24", "03CA34", "03CA44", "03CA55", "03CA75", "03CA84", "03CA93", "03CM20", "03CY73", "03CM10"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "03CA13",
+      "03CA22",
+      "03CA32",
+      "03CA42",
+      "03CA73",
+      "03CA82",
+      "03CY02",
+      "03CY71",
+      "03CA53",
+      "03CM03",
+      "03CM04",
+      "03CA91",
+      "03AA13",
+      "03AA22",
+      "03AA32",
+      "03AA41",
+      "03AA73",
+      "03AY03",
+      "03AY71",
+      "03AA53",
+      "03AA91",
+      "03CA14",
+      "03CA23",
+      "03CA33",
+      "03CA43",
+      "03CA74",
+      "03CA83",
+      "03CY03",
+      "03CY72",
+      "03CA54",
+      "03CM05",
+      "03CM06",
+      "03CA92",
+      "03AA24",
+      "03AA43",
+      "03AA55",
+      "03AA75",
+      "03AA93",
+      "03AB11",
+      "03AH11",
+      "03AY73",
+      "03CA15",
+      "03CA24",
+      "03CA34",
+      "03CA44",
+      "03CA55",
+      "03CA75",
+      "03CA84",
+      "03CA93",
+      "03CM20",
+      "03CY73",
+      "03CM10"
+    ]
   },
   {
     "name": "BDD Optimum Gold - Mua 2 hộp CK 3%",
@@ -1060,8 +1794,22 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["03AB10", "03AA23", "03AH10", "03AA42", "03AA74", "03AY72", "03AA54", "03AA92"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "03AB10",
+      "03AA23",
+      "03AH10",
+      "03AA42",
+      "03AA74",
+      "03AY72",
+      "03AA54",
+      "03AA92"
+    ]
   },
   {
     "name": "SB D.Alpha Step 3,4 - CK 3%",
@@ -1070,8 +1818,24 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["02EA35", "02EA45", "02DA35", "02DA45", "02AA15", "02AA24", "02AA25", "02BA24", "02EA15", "02EA25"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EA35",
+      "02EA45",
+      "02DA35",
+      "02DA45",
+      "02AA15",
+      "02AA24",
+      "02AA25",
+      "02BA24",
+      "02EA15",
+      "02EA25"
+    ]
   },
   {
     "name": "SB D.Alpha Gold Step 3,4 - CK 3% (Ontop +4%)",
@@ -1080,8 +1844,28 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["02DG35", "02DG45", "02EG36", "02EG46", "02EG3A", "02EG4A", "02EG37", "02EG47", "02DG36", "02DG46", "02DG3A", "02DG4A", "02DG37", "02DG47"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02DG35",
+      "02DG45",
+      "02EG36",
+      "02EG46",
+      "02EG3A",
+      "02EG4A",
+      "02EG37",
+      "02EG47",
+      "02DG36",
+      "02DG46",
+      "02DG3A",
+      "02DG4A",
+      "02DG37",
+      "02DG47"
+    ]
   },
   {
     "name": "SB D.Alpha Gold Step 3,4 - Ontop CK 4%",
@@ -1090,8 +1874,28 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "4" }],
-    "spMas": ["02DG35", "02DG45", "02EG36", "02EG46", "02EG3A", "02EG4A", "02EG37", "02EG47", "02DG36", "02DG46", "02DG3A", "02DG4A", "02DG37", "02DG47"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "4"
+      }
+    ],
+    "spMas": [
+      "02DG35",
+      "02DG45",
+      "02EG36",
+      "02EG46",
+      "02EG3A",
+      "02EG4A",
+      "02EG37",
+      "02EG47",
+      "02DG36",
+      "02DG46",
+      "02DG3A",
+      "02DG4A",
+      "02DG37",
+      "02DG47"
+    ]
   },
   {
     "name": "SB Yoko Gold Step 3,4 - CK 3%",
@@ -1100,8 +1904,23 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["02EY30", "02EY39", "02AY10", "02AY19", "02AY20", "02EY10", "02EY19", "02EY20", "02EY29"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EY30",
+      "02EY39",
+      "02AY10",
+      "02AY19",
+      "02AY20",
+      "02EY10",
+      "02EY19",
+      "02EY20",
+      "02EY29"
+    ]
   },
   {
     "name": "SB Optimum Gold Step 3,4 - CK 7% (Ontop +3%)",
@@ -1110,8 +1929,52 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "7" }],
-    "spMas": ["02AO33", "02AO36", "02EO34", "02EO44", "02EO33", "02EO43", "02EO3A", "02EO4A", "02EO38", "02EO48", "02DO34", "02DO44", "02DO33", "02DO43", "02DO37", "02DO47", "02DO3A", "02DO4A", "02AO14", "02AO24", "02EO14", "02EO24", "02AO16", "02AO26", "02EO17", "02EO27", "02AO13", "02AO23", "02EO13", "02EO23", "02AO1A", "02AO2A", "02EO1A", "02EO2A", "02AO18", "02AO28", "02EO18", "02EO28"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02AO33",
+      "02AO36",
+      "02EO34",
+      "02EO44",
+      "02EO33",
+      "02EO43",
+      "02EO3A",
+      "02EO4A",
+      "02EO38",
+      "02EO48",
+      "02DO34",
+      "02DO44",
+      "02DO33",
+      "02DO43",
+      "02DO37",
+      "02DO47",
+      "02DO3A",
+      "02DO4A",
+      "02AO14",
+      "02AO24",
+      "02EO14",
+      "02EO24",
+      "02AO16",
+      "02AO26",
+      "02EO17",
+      "02EO27",
+      "02AO13",
+      "02AO23",
+      "02EO13",
+      "02EO23",
+      "02AO1A",
+      "02AO2A",
+      "02EO1A",
+      "02EO2A",
+      "02AO18",
+      "02AO28",
+      "02EO18",
+      "02EO28"
+    ]
   },
   {
     "name": "SB Optimum COLOS Step 3,4 - CK 7% (Ontop +3%)",
@@ -1120,8 +1983,31 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "7" }],
-    "spMas": ["02ES31", "02ES39", "02ES32", "02ES38", "02AS11", "02AS19", "02AS21", "02ES11", "02ES19", "02ES21", "02ES29", "02AS12", "02ES12", "02ES22", "02AS18", "02ES18", "02ES28"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02ES31",
+      "02ES39",
+      "02ES32",
+      "02ES38",
+      "02AS11",
+      "02AS19",
+      "02AS21",
+      "02ES11",
+      "02ES19",
+      "02ES21",
+      "02ES29",
+      "02AS12",
+      "02ES12",
+      "02ES22",
+      "02AS18",
+      "02ES18",
+      "02ES28"
+    ]
   },
   {
     "name": "SB Grow Plus Step 3,4 - CK 10%",
@@ -1130,8 +2016,24 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "10" }],
-    "spMas": ["02ER63", "02ER73", "02ER64", "02ER74", "02ER68", "02ER78", "02DR63", "02DR73", "02DR64", "02DR74"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "10"
+      }
+    ],
+    "spMas": [
+      "02ER63",
+      "02ER73",
+      "02ER64",
+      "02ER74",
+      "02ER68",
+      "02ER78",
+      "02DR63",
+      "02DR73",
+      "02DR64",
+      "02DR74"
+    ]
   },
   {
     "name": "SB D.Grow All Step - CK 3%",
@@ -1140,8 +2042,15 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["02ER20"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02ER20"
+    ]
   },
   {
     "name": "SBNL CanPro/Mama/SBNK - CK 3%",
@@ -1150,8 +2059,31 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["02AC13", "02EC13", "02EC14", "02AC14", "02EC90", "02AM11", "02EM11", "02EM12", "02AM12", "02AM21", "02EM21", "02EM22", "02AM22", "02BN20", "02EN20", "02BN22", "02EN22"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02AC13",
+      "02EC13",
+      "02EC14",
+      "02AC14",
+      "02EC90",
+      "02AM11",
+      "02EM11",
+      "02EM12",
+      "02AM12",
+      "02AM21",
+      "02EM21",
+      "02EM22",
+      "02AM22",
+      "02BN20",
+      "02EN20",
+      "02BN22",
+      "02EN22"
+    ]
   },
   {
     "name": "SBNL Sure Prevent/Diecerna (mẫu mới) - CK 7%",
@@ -1160,8 +2092,18 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "7" }],
-    "spMas": ["02AD11", "02AU14", "02EU14", "02ED11"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02AD11",
+      "02AU14",
+      "02EU14",
+      "02ED11"
+    ]
   },
   {
     "name": "SBNL Sure Prevent/Diecerna (mẫu cũ) - CK 10%",
@@ -1170,8 +2112,19 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "10" }],
-    "spMas": ["02EU15", "02ED12", "02AU15", "02AD12", "02EU90"]
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "10"
+      }
+    ],
+    "spMas": [
+      "02EU15",
+      "02ED12",
+      "02AU15",
+      "02AD12",
+      "02EU90"
+    ]
   },
   {
     "name": "SB Nguyên Kem - CK 3%",
@@ -1180,12 +2133,18 @@
     "active": true,
     "stackable": true,
     "tUnit": "lon",
-    "tiers": [{ "mn": "2", "ck": "3" }],
-    "spMas": ["02BN20", "02EN20", "02BN22", "02EN22"]
-  },
-
-  {
-    "_comment": "===== NGK + KEM + ĐƯỜNG ====="
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02BN20",
+      "02EN20",
+      "02BN22",
+      "02EN22"
+    ]
   },
   {
     "name": "Vfresh 1L: CK 12%",
@@ -1194,7 +2153,46 @@
     "active": true,
     "stackable": true,
     "ck": "12",
-    "spMas": ["14BA14", "14BA15", "14BL21", "14BA13", "14BB13", "14BB14", "14BD13", "14BC13", "14BK20", "14BL22", "14BN20", "14BN21", "14BO20", "14BT13", "14BK21", "14BS22", "14BS25", "14GC01", "14GC20", "14BT14", "14BL23", "14BD14", "14BO21", "14BS26", "14BS14", "14BB01", "14BL01", "14BD01", "14BO01", "14BK01", "14BA02", "14BB02", "14BD02", "14BO02", "14BA01", "14BN01", "14BT01", "14BF01"]
+    "spMas": [
+      "14BA14",
+      "14BA15",
+      "14BL21",
+      "14BA13",
+      "14BB13",
+      "14BB14",
+      "14BD13",
+      "14BC13",
+      "14BK20",
+      "14BL22",
+      "14BN20",
+      "14BN21",
+      "14BO20",
+      "14BT13",
+      "14BK21",
+      "14BS22",
+      "14BS25",
+      "14GC01",
+      "14GC20",
+      "14BT14",
+      "14BL23",
+      "14BD14",
+      "14BO21",
+      "14BS26",
+      "14BS14",
+      "14BB01",
+      "14BL01",
+      "14BD01",
+      "14BO01",
+      "14BK01",
+      "14BA02",
+      "14BB02",
+      "14BD02",
+      "14BO02",
+      "14BA01",
+      "14BN01",
+      "14BT01",
+      "14BF01"
+    ]
   },
   {
     "name": "Nước Ép 275ml: 6+1",
@@ -1207,7 +2205,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["14AA20", "14AK20", "14AL20"]
+    "spMas": [
+      "14AA20",
+      "14AK20",
+      "14AL20"
+    ]
   },
   {
     "name": "Nước dừa 330ml: 6+1",
@@ -1220,7 +2222,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["14GC02", "14GU30"]
+    "spMas": [
+      "14GC02",
+      "14GU30"
+    ]
   },
   {
     "name": "ICY: 6+1",
@@ -1233,7 +2238,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["15BN05", "15BN03", "15BN40"]
+    "spMas": [
+      "15BN05",
+      "15BN03",
+      "15BN40"
+    ]
   },
   {
     "name": "ICY: 20+4",
@@ -1246,7 +2255,11 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["15BN05", "15BN03", "15BN40"]
+    "spMas": [
+      "15BN05",
+      "15BN03",
+      "15BN40"
+    ]
   },
   {
     "name": "Kombucha: 6+1",
@@ -1259,7 +2272,15 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": ["14GK01", "14GK11", "14GK15", "14GK21", "14GK31", "14GK35", "14GK41"]
+    "spMas": [
+      "14GK01",
+      "14GK11",
+      "14GK15",
+      "14GK21",
+      "14GK31",
+      "14GK35",
+      "14GK41"
+    ]
   },
   {
     "name": "Đường: CK 5%",
@@ -1268,7 +2289,9 @@
     "active": true,
     "stackable": true,
     "ck": "5",
-    "spMas": ["16GD00"]
+    "spMas": [
+      "16GD00"
+    ]
   },
   {
     "name": "Que Susu TPM: CK 15%",
@@ -1277,6 +2300,9 @@
     "active": true,
     "stackable": true,
     "ck": "15",
-    "spMas": ["10VS01", "10VA01"]
+    "spMas": [
+      "10VS01",
+      "10VA01"
+    ]
   }
 ]
