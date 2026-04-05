@@ -51,6 +51,7 @@ var KPI_RULE_META = [
   { key: 'fm', label: 'FM ít đường/không đường', help: 'Mặc định nhận diện theo tên sản phẩm, có thể ghi đè bằng mã SP.' },
   { key: 'catD', label: 'cat D', help: 'Mặc định lấy toàn bộ nhóm D, có thể giới hạn bằng mã SP.' }
 ];
+var _brandRuleDraft = [];
 
 function gotoTab(t) {
   var activeNav = (t === 'km') ? 'adm' : t;
@@ -455,14 +456,128 @@ function renderSettingsOverview() {
   if (!el) return;
   var cfg = (typeof syncGetConfig === 'function') ? syncGetConfig() : {};
   var orders = (typeof getOrders === 'function') ? getOrders() : [];
+  var brandRules = (typeof getCustomBrandRules === 'function') ? getCustomBrandRules() : [];
   var lastPush = cfg.lastPush ? new Date(cfg.lastPush).toLocaleString('vi-VN') : 'Chưa';
   var lastPull = cfg.lastPull ? new Date(cfg.lastPull).toLocaleString('vi-VN') : 'Chưa';
   el.innerHTML = '' +
     '<div class="settings-info-card"><div class="settings-info-number">' + SP.length + '</div><div class="settings-info-label">Sản phẩm</div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + kmProgs.length + '</div><div class="settings-info-label">CTKM</div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + ((typeof CUS !== 'undefined' && Array.isArray(CUS)) ? CUS.length : 0) + '</div><div class="settings-info-label">Khách hàng</div></div>' +
+    '<div class="settings-info-card"><div class="settings-info-number">' + brandRules.length + '</div><div class="settings-info-label">Rule phân loại</div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + orders.length + '</div><div class="settings-info-label">Đơn đã lưu</div></div>' +
     '<div class="settings-sync-strip"><div><div class="settings-strip-title">Cloud status</div><div class="settings-strip-meta">Push: ' + lastPush + ' · Pull: ' + lastPull + '</div></div><div class="sync-pill ' + ((cfg.token || '') ? 'ready' : '') + '">' + ((cfg.token || '') ? 'Đã kết nối' : 'Chưa cấu hình') + '</div></div>';
+}
+
+function openBrandRulesSettings() {
+  _brandRuleDraft = ((typeof getCustomBrandRules === 'function') ? getCustomBrandRules() : []).map(function(rule) {
+    return { brand: rule.brand, nhom: rule.nhom, patterns: (rule.patterns || []).slice() };
+  });
+  var modal = document.getElementById('km-modal');
+  document.getElementById('km-modal-t').textContent = 'Quy tắc phân loại';
+  modal.style.display = 'block';
+  renderBrandRulesSettings();
+}
+
+function brandRulesSyncDraft() {
+  var cards = document.querySelectorAll('.brand-rule-card');
+  if (!cards.length) return;
+  _brandRuleDraft = Array.prototype.map.call(cards, function(card) {
+    var brand = ((card.querySelector('.brand-rule-brand') || {}).value || '').trim();
+    var nhom = ((card.querySelector('.brand-rule-group') || {}).value || '').trim().toUpperCase();
+    var patterns = ((card.querySelector('.brand-rule-patterns') || {}).value || '').split(/[\n,;]+/).map(function(token) { return token.trim(); }).filter(Boolean);
+    return { brand: brand, nhom: nhom, patterns: patterns };
+  });
+}
+
+function brandRulesEscape(value) {
+  return String(value || '')
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+function renderBrandRuleCard(rule, index) {
+  var brand = brandRulesEscape(rule.brand || '');
+  var patterns = brandRulesEscape(Array.isArray(rule.patterns) ? rule.patterns.join('\n') : '');
+  return '<div class="brand-rule-card">' +
+    '<div class="brand-rule-top"><div class="brand-rule-title">Rule ' + (index + 1) + '</div><div class="brand-rule-actions"><button class="brand-rule-action" onclick="brandRulesMove(' + index + ',-1)"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="brand-rule-action" onclick="brandRulesMove(' + index + ',1)"' + (index === _brandRuleDraft.length - 1 ? ' disabled' : '') + '>↓</button><button class="brand-rule-action danger" onclick="brandRulesDelete(' + index + ')">✕</button></div></div>' +
+    '<div class="brand-rule-grid"><div><div class="kfl">Tên phân loại</div><input class="brand-rule-brand" type="text" value="' + brand + '" placeholder="VD: Green Farm"></div><div><div class="kfl">Nhóm</div><select class="brand-rule-group"><option value=""' + (!rule.nhom ? ' selected' : '') + '>Tất cả nhóm</option><option value="A"' + (rule.nhom === 'A' ? ' selected' : '') + '>A · Bột</option><option value="B"' + (rule.nhom === 'B' ? ' selected' : '') + '>B · Đặc</option><option value="C"' + (rule.nhom === 'C' ? ' selected' : '') + '>C · Nước</option><option value="D"' + (rule.nhom === 'D' ? ' selected' : '') + '>D · Chua</option></select></div></div>' +
+    '<div><div class="kfl">Từ khóa hoặc mã nhận diện</div><textarea class="brand-rule-patterns" placeholder="Mỗi dòng 1 từ khóa hoặc mã SP\nVD:\ngreen farm\n04g\norganic">' + patterns + '</textarea></div>' +
+  '</div>';
+}
+
+function renderBrandRulesSettings() {
+  var body = document.getElementById('km-modal-body');
+  var html = '';
+  html += '<div class="rule-help-box"><div class="rule-help-title">Thứ tự ưu tiên hiện tại</div><div class="rule-help-text">1. Phân loại nhập tay trên từng sản phẩm. 2. Rule phân loại do bạn cấu hình ở đây. 3. Rule mặc định sẵn trong app.</div></div>';
+  html += '<div class="rule-help-box subtle"><div class="rule-help-title">Cách dùng</div><div class="rule-help-text">Mỗi rule đại diện cho một phân loại. App sẽ đọc từ trên xuống dưới, rule nào match trước sẽ được dùng trước. Chỉ cần nhập vài từ khóa hoặc mã SP dễ nhớ, không cần viết regex.</div></div>';
+  html += '<div style="display:flex;gap:8px;margin-bottom:10px"><button class="mini-action" onclick="brandRulesAdd()">+ Thêm rule</button><button class="mini-action" onclick="brandRulesReset()">Khôi phục mặc định</button></div>';
+  html += '<div id="brand-rule-list">';
+  if (_brandRuleDraft.length) html += _brandRuleDraft.map(renderBrandRuleCard).join('');
+  else html += '<div class="empty" style="padding:24px 12px">Chưa có rule tùy chỉnh<br><small>Nếu để trống, app sẽ dùng rule mặc định.</small></div>';
+  html += '</div>';
+  html += '<button class="btn-km-save" onclick="brandRulesSave()">💾 Lưu quy tắc phân loại</button>';
+  body.innerHTML = html;
+}
+
+function brandRulesAdd() {
+  brandRulesSyncDraft();
+  _brandRuleDraft.push({ brand: '', nhom: '', patterns: [] });
+  renderBrandRulesSettings();
+}
+
+function brandRulesDelete(index) {
+  brandRulesSyncDraft();
+  _brandRuleDraft.splice(index, 1);
+  renderBrandRulesSettings();
+}
+
+function brandRulesMove(index, direction) {
+  brandRulesSyncDraft();
+  var target = index + direction;
+  if (target < 0 || target >= _brandRuleDraft.length) return;
+  var current = _brandRuleDraft[index];
+  _brandRuleDraft[index] = _brandRuleDraft[target];
+  _brandRuleDraft[target] = current;
+  renderBrandRulesSettings();
+}
+
+function brandRulesReset() {
+  if (!confirm('Xóa toàn bộ rule phân loại tùy chỉnh và quay về logic mặc định của app?')) return;
+  _brandRuleDraft = [];
+  if (typeof saveCustomBrandRules === 'function') saveCustomBrandRules([]);
+  if (window.renderOrder) renderOrder();
+  if (window.renderAdm) renderAdm();
+  renderSettingsOverview();
+  renderBrandRulesSettings();
+}
+
+function brandRulesSave() {
+  brandRulesSyncDraft();
+  if (typeof saveCustomBrandRules !== 'function') return;
+  var hasInvalid = false;
+  var usableRules = _brandRuleDraft.filter(function(rule) {
+    var hasBrand = !!(rule.brand || '').trim();
+    var hasPatterns = Array.isArray(rule.patterns) && rule.patterns.length > 0;
+    if (!hasBrand && !hasPatterns) return false;
+    if (!hasBrand || !hasPatterns) {
+      hasInvalid = true;
+      return false;
+    }
+    return true;
+  });
+  if (hasInvalid) {
+    alert('Mỗi rule cần có tên phân loại và ít nhất 1 từ khóa. Các dòng trống hoàn toàn sẽ được bỏ qua.');
+    return;
+  }
+  var normalized = saveCustomBrandRules(usableRules);
+  document.getElementById('km-modal').style.display = 'none';
+  if (window.renderOrder) renderOrder();
+  if (window.renderAdm) renderAdm();
+  renderSettingsOverview();
+  renderHomeDashboard();
+  alert('✅ Đã lưu ' + normalized.length + ' rule phân loại');
 }
 
 // Render route filter pills for KH tab
@@ -501,3 +616,10 @@ window.openKpiSettings = openKpiSettings;
 window.saveKpiSettings = saveKpiSettings;
 window.getKpiConfig = getKpiConfig;
 window.setKpiConfig = setKpiConfig;
+window.openBrandRulesSettings = openBrandRulesSettings;
+window.renderBrandRulesSettings = renderBrandRulesSettings;
+window.brandRulesAdd = brandRulesAdd;
+window.brandRulesDelete = brandRulesDelete;
+window.brandRulesMove = brandRulesMove;
+window.brandRulesReset = brandRulesReset;
+window.brandRulesSave = brandRulesSave;

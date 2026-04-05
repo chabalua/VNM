@@ -8,6 +8,7 @@ var brandF = '';
 var _searchTimer = null;
 var _spEditMa = null;
 var _selectedCustomerMa = '';
+var CUSTOM_BRAND_RULES_KEY = 'vnm_custom_brand_rules_v1';
 
 // ============================================================
 // BRAND CLASSIFICATION
@@ -38,11 +39,87 @@ var BRAND_RULES = [
 ];
 
 function detectBrand(p) {
+  if (hasManualBrand(p)) return p.phanLoai;
+  var customBrand = detectCustomBrand(p);
+  if (customBrand) return customBrand;
   if (p._brand) return p._brand;
   for (var i = 0; i < BRAND_RULES.length; i++) {
     if (BRAND_RULES[i].match(p)) { p._brand = BRAND_RULES[i].brand; return p._brand; }
   }
   p._brand = '';
+  return '';
+}
+
+function hasManualBrand(p) {
+  return !!(p && p.phanLoai && p.phanLoaiTuNhap === true);
+}
+
+function normalizeBrandMatchText(value) {
+  return String(value || '')
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, ' ')
+    .replace(/đ/g, 'd')
+    .replace(/[^a-z0-9]+/g, ' ')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+
+function normalizeCustomBrandRule(rule) {
+  if (!rule || typeof rule !== 'object') return null;
+  var brand = String(rule.brand || '').trim();
+  var nhom = String(rule.nhom || '').trim().toUpperCase();
+  var rawPatterns = Array.isArray(rule.patterns) ? rule.patterns : String(rule.patterns || rule.keywords || '').split(/[\n,;]+/);
+  var seen = {};
+  var patterns = rawPatterns.map(function(token) {
+    return normalizeBrandMatchText(token);
+  }).filter(function(token) {
+    if (!token || seen[token]) return false;
+    seen[token] = true;
+    return true;
+  });
+  if (!brand || !patterns.length) return null;
+  if (!/^[ABCD]$/.test(nhom)) nhom = '';
+  return { brand: brand, nhom: nhom, patterns: patterns };
+}
+
+function getCustomBrandRules() {
+  try {
+    var data = JSON.parse(localStorage.getItem(CUSTOM_BRAND_RULES_KEY) || '[]');
+    if (!Array.isArray(data)) return [];
+    return data.map(normalizeCustomBrandRule).filter(Boolean);
+  } catch (e) {
+    return [];
+  }
+}
+
+function clearDetectedBrandCache() {
+  if (!Array.isArray(SP)) return;
+  SP.forEach(function(product) { delete product._brand; });
+}
+
+function saveCustomBrandRules(rules) {
+  var normalized = Array.isArray(rules) ? rules.map(normalizeCustomBrandRule).filter(Boolean) : [];
+  localStorage.setItem(CUSTOM_BRAND_RULES_KEY, JSON.stringify(normalized));
+  clearDetectedBrandCache();
+  return normalized;
+}
+
+function getBrandMatchSource(p) {
+  return normalizeBrandMatchText((p && p.ten) + ' ' + (p && p.ma));
+}
+
+function detectCustomBrand(p) {
+  var rules = getCustomBrandRules();
+  if (!rules.length) return '';
+  var source = getBrandMatchSource(p);
+  for (var i = 0; i < rules.length; i++) {
+    var rule = rules[i];
+    if (rule.nhom && p.nhom !== rule.nhom) continue;
+    for (var j = 0; j < rule.patterns.length; j++) {
+      if (source.indexOf(rule.patterns[j]) >= 0) return rule.brand;
+    }
+  }
   return '';
 }
 
@@ -55,6 +132,31 @@ function getBrandsForNhom(nhom) {
     if (b && !seen[b]) { seen[b] = true; brands.push(b); }
   });
   return brands.sort();
+}
+
+function getSuggestedBrands(nhom) {
+  var seen = {};
+  var brands = [];
+  BRAND_RULES.forEach(function(rule) {
+    if (nhom && rule.nhom !== nhom) return;
+    if (seen[rule.brand]) return;
+    seen[rule.brand] = true;
+    brands.push(rule.brand);
+  });
+  getBrandsForNhom(nhom).forEach(function(brand) {
+    if (seen[brand]) return;
+    seen[brand] = true;
+    brands.push(brand);
+  });
+  return brands.sort();
+}
+
+function spRefreshPhanLoaiSuggestions(nhom) {
+  var list = document.getElementById('spf-phanloai-list');
+  if (!list) return;
+  list.innerHTML = getSuggestedBrands(nhom).map(function(brand) {
+    return '<option value="' + brand.replace(/"/g, '&quot;') + '"></option>';
+  }).join('');
 }
 
 // ============================================================
@@ -246,9 +348,10 @@ function renderOrder() {
   var favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
 
   var f = SP.filter(function(p) {
+    var brand = detectBrand(p).toLowerCase();
     if (nhomF.order && p.nhom !== nhomF.order) return false;
     if (brandF && detectBrand(p) !== brandF) return false;
-    if (lq && !(p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq))) return false;
+    if (lq && !(p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq) || brand.includes(lq))) return false;
     return true;
   });
 
@@ -327,7 +430,10 @@ function scrollToTop() {
 function renderAdm() {
   var q = (document.getElementById('adm-q') || {}).value || '';
   var lq = q.toLowerCase();
-  var f = SP.filter(function(p) { return (!nhomF.adm || p.nhom === nhomF.adm) && (!lq || p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq)); });
+  var f = SP.filter(function(p) {
+    var brand = detectBrand(p).toLowerCase();
+    return (!nhomF.adm || p.nhom === nhomF.adm) && (!lq || p.ten.toLowerCase().includes(lq) || p.ma.toLowerCase().includes(lq) || brand.includes(lq));
+  });
   var el = document.getElementById('adm-list'); if (!el) return;
   if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm</div>'; return; }
   if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy</div>'; return; }
@@ -351,12 +457,13 @@ function renderAdm() {
 
 function admSpRow(p) {
   var brand = detectBrand(p);
+  var manualBrand = hasManualBrand(p);
   var locInfo = p.locSize ? ' · Lốc ' + p.locSize : '';
   var h = '<div class="adm-sp-row">';
   h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">';
   h += '<div style="flex:1;min-width:0"><div class="adm-sp-name">' + p.ten + '</div>';
   h += '<div class="adm-sp-info"><span class="adm-chip">' + p.ma + '</span><span class="adm-chip">' + p.donvi + ' · ' + p.slThung + '/thùng' + locInfo + '</span>';
-  if (brand) h += '<span class="adm-chip" style="' + (NBG[p.nhom] || '') + '">' + brand + '</span>';
+  if (brand) h += '<span class="adm-chip" style="' + (NBG[p.nhom] || '') + '">' + brand + (manualBrand ? ' · tay' : '') + '</span>';
   h += '</div></div>';
   h += '<div style="text-align:right;flex-shrink:0"><div style="font-size:14px;font-weight:800;color:var(--vm)">' + fmt(p.giaNYLon) + 'đ</div><div style="font-size:10.5px;color:var(--n3)">' + fmt(p.giaNYThung) + 'đ/thùng</div></div></div>';
   h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">';
@@ -404,12 +511,18 @@ function spRenderForm(p) {
   var isEdit = !!p;
   var nhom = p ? p.nhom : 'C';
   var donvi = p ? p.donvi : 'hộp';
+  var phanLoai = p && hasManualBrand(p) ? p.phanLoai : '';
+  var autoPhanLoai = p ? (detectBrand(p) || '') : '';
+  var suggestedBrands = getSuggestedBrands(nhom);
   var html = '';
   html += '<div class="kf"><div class="kfl">Mã SP</div><input type="text" id="spf-ma" value="' + (p ? p.ma : '') + '"' + (isEdit ? ' readonly style="background:var(--n6);color:var(--n3);"' : '') + ' placeholder="VD: 04ED32" style="width:100%;height:44px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:16px;font-weight:700;text-transform:uppercase;' + (isEdit ? 'background:var(--n6);color:var(--n3);' : '') + '"></div>';
   html += '<div class="kf"><div class="kfl">Tên SP</div><input type="text" id="spf-ten" value="' + (p ? p.ten : '') + '" placeholder="VD: STT DB 100% có đường 180ml" style="width:100%;height:44px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:15px"></div>';
   html += '<div class="kf"><div class="kfl">Nhóm</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">';
   ['A', 'B', 'C', 'D'].forEach(function(n) { html += '<button class="km-type-btn sp-nhom-sel' + (nhom === n ? ' sel' : '') + '" onclick="spSelectNhom(\'' + n + '\',this)">' + { A: 'A·Bột', B: 'B·Đặc', C: 'C·Nước', D: 'D·Chua' }[n] + '</button>'; });
   html += '</div></div>';
+  html += '<div class="kf"><div class="kfl">Phân loại</div><input type="text" id="spf-phanloai" value="' + phanLoai + '" placeholder="VD: Green Farm, Ông Thọ..." list="spf-phanloai-list" style="width:100%;height:44px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:15px">';
+  html += '<datalist id="spf-phanloai-list">' + suggestedBrands.map(function(brand) { return '<option value="' + brand.replace(/"/g, '&quot;') + '"></option>'; }).join('') + '</datalist>';
+  html += '<div style="font-size:10.5px;color:var(--n3);margin-top:6px">Có thể tự nhập phân loại. Để trống nếu muốn app tự nhận diện theo tên và mã.' + (autoPhanLoai ? ' Hiện tại app đang nhận là <b>' + autoPhanLoai + '</b>.' : '') + '</div></div>';
   html += '<div class="kf"><div class="kfl">Đơn vị</div><div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px">';
   ['hộp', 'lon', 'chai', 'bịch'].forEach(function(dv) { html += '<button class="km-type-btn sp-dv-sel' + (donvi === dv ? ' sel' : '') + '" onclick="spSelectDV(\'' + dv + '\',this)">' + dv + '</button>'; });
   html += '</div><input type="text" id="spf-dv-custom" placeholder="Hoặc đơn vị khác..." style="width:100%;height:36px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:13px;margin-top:6px"></div>';
@@ -421,7 +534,7 @@ function spRenderForm(p) {
   spPreviewPrice();
 }
 
-function spSelectNhom(n, btn) { document.querySelectorAll('.sp-nhom-sel').forEach(function(b) { b.classList.remove('sel'); }); btn.classList.add('sel'); }
+function spSelectNhom(n, btn) { document.querySelectorAll('.sp-nhom-sel').forEach(function(b) { b.classList.remove('sel'); }); btn.classList.add('sel'); spRefreshPhanLoaiSuggestions(n); }
 function spSelectDV(dv, btn) { document.querySelectorAll('.sp-dv-sel').forEach(function(b) { b.classList.remove('sel'); }); btn.classList.add('sel'); var c = document.getElementById('spf-dv-custom'); if (c) c.value = ''; }
 function spGetSelectedNhom() { var sel = document.querySelector('.sp-nhom-sel.sel'); return sel ? sel.textContent.trim().charAt(0) : 'C'; }
 function spGetSelectedDV() { var c = document.getElementById('spf-dv-custom'); if (c && c.value.trim()) return c.value.trim(); var sel = document.querySelector('.sp-dv-sel.sel'); return sel ? sel.textContent.trim() : 'hộp'; }
@@ -443,6 +556,7 @@ function spSaveForm() {
   var ma = (document.getElementById('spf-ma') || {}).value.trim().toUpperCase();
   var ten = (document.getElementById('spf-ten') || {}).value.trim();
   var nhom = spGetSelectedNhom();
+  var phanLoai = ((document.getElementById('spf-phanloai') || {}).value || '').trim();
   var donvi = spGetSelectedDV();
   var slThung = parseInt((document.getElementById('spf-slthung') || {}).value) || 0;
   var locSize = parseInt((document.getElementById('spf-locsize') || {}).value) || 0;
@@ -455,6 +569,7 @@ function spSaveForm() {
   if (_spEditMa) {
     var p = SP.find(function(x) { return x.ma === _spEditMa; }); if (!p) return;
     p.ten = ten; p.nhom = nhom; p.donvi = donvi; p.slThung = slThung; p.giaNYLon = gia; p.giaNYThung = gia * slThung;
+    if (phanLoai) { p.phanLoai = phanLoai; p.phanLoaiTuNhap = true; } else { delete p.phanLoai; delete p.phanLoaiTuNhap; }
     if (locSize > 0) { p.locSize = locSize; p.locLabel = locLabel || 'Lốc'; } else { delete p.locSize; delete p.locLabel; }
     if (window.markEntityUpdated) markEntityUpdated(p);
     delete p._brand;
@@ -463,6 +578,7 @@ function spSaveForm() {
   } else {
     if (SP.find(function(x) { return x.ma === ma; })) { alert('Mã đã tồn tại!'); return; }
     var newP = { ma: ma, ten: ten, nhom: nhom, donvi: donvi, slThung: slThung, giaNYLon: gia, giaNYThung: gia * slThung, kmRules: [], kmText: '' };
+    if (phanLoai) { newP.phanLoai = phanLoai; newP.phanLoaiTuNhap = true; }
     if (locSize > 0) { newP.locSize = locSize; newP.locLabel = locLabel || 'Lốc'; }
     if (window.markEntityUpdated) markEntityUpdated(newP);
     SP.push(newP); saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
@@ -506,7 +622,12 @@ window.spCloseModal = spCloseModal;
 window.spRenderForm = spRenderForm;
 window.spSelectNhom = spSelectNhom;
 window.spSelectDV = spSelectDV;
+window.spRefreshPhanLoaiSuggestions = spRefreshPhanLoaiSuggestions;
 window.spPreviewPrice = spPreviewPrice;
 window.spSaveForm = spSaveForm;
 window.spDelete = spDelete;
 window.detectBrand = detectBrand;
+window.hasManualBrand = hasManualBrand;
+window.getCustomBrandRules = getCustomBrandRules;
+window.saveCustomBrandRules = saveCustomBrandRules;
+window.clearDetectedBrandCache = clearDetectedBrandCache;

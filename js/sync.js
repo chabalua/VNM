@@ -16,7 +16,7 @@ var SYNC_DEFAULTS = {
 };
 
 var SYNC_FILES = [
-  { name: 'products.json', getLocal: function() { return SP; }, setLocal: function(d) { SP = Array.isArray(d) ? d : []; SP.forEach(function(p){ if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; }); saveSP(); } },
+  { name: 'products.json', getLocal: function() { return SP; }, setLocal: function(d) { SP = Array.isArray(d) ? d : []; SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } }); saveSP(); } },
   { name: 'promotions.json', getLocal: function() { return kmProgs; }, setLocal: function(d) { kmProgs = normalizePromotionList(d); kmSave(); } },
   { name: 'customers.json', getLocal: function() { return CUS; }, setLocal: function(d) { CUS = Array.isArray(d) ? d.filter(function(k){ return k && k.ma; }) : []; cusSave(); } },
   { name: 'routes.json', getLocal: function() { return ROUTES; }, setLocal: function(d) { ROUTES = Array.isArray(d) ? d : []; routesSave(); } },
@@ -472,7 +472,7 @@ function restoreAll() {
 
         if (data.products && Array.isArray(data.products)) {
           SP = data.products;
-          SP.forEach(function(p){ if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; });
+          SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } });
           saveSP();
         }
         if (data.promotions) { kmProgs = normalizePromotionList(data.promotions); kmSave(); }

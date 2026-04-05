@@ -2,6 +2,17 @@
 let SP = [];
 let kmProgs = [];
 
+function normalizeProduct(product) {
+  if (!product || typeof product !== 'object') return product;
+  if (!product.kmRules) product.kmRules = [];
+  if (!product.kmText) product.kmText = '';
+  if (product.phanLoaiTuNhap !== true) {
+    if (product._brand && product.phanLoai === product._brand) delete product.phanLoai;
+    delete product.phanLoaiTuNhap;
+  }
+  return product;
+}
+
 function validateProductList(data) {
   return Array.isArray(data) && data.length > 0 && data.every(item => item && typeof item.ma === 'string' && typeof item.giaNYLon === 'number');
 }
@@ -52,10 +63,7 @@ async function fetchJSON(url, storageKey, fallback) {
 async function loadProducts() {
   var raw = await fetchJSON(PRODUCTS_URL, 'vnm_sp', FALLBACK_PRODUCTS);
   SP = validateProductList(raw) ? raw : FALLBACK_PRODUCTS;
-  SP.forEach(function(p) {
-    if (!p.kmRules) p.kmRules = [];
-    if (!p.kmText) p.kmText = '';
-  });
+  SP.forEach(normalizeProduct);
   saveSP();
 }
 
@@ -99,7 +107,7 @@ async function syncFromGitHub() {
     var newPromos = results[1];
     if (validateProductList(newProducts)) {
       SP = newProducts;
-      SP.forEach(function(p) { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; });
+      SP.forEach(normalizeProduct);
       saveSP();
     } else {
       throw new Error('Products data không hợp lệ');
@@ -123,6 +131,7 @@ function exportProductsJSON() {
   var cleanProducts = SP.map(function(p) {
     var clean = { ma: p.ma, ten: p.ten, nhom: p.nhom, donvi: p.donvi, slThung: p.slThung, giaNYLon: p.giaNYLon, giaNYThung: p.giaNYThung };
     if (p.locSize) { clean.locSize = p.locSize; clean.locLabel = p.locLabel || 'Lốc'; }
+    if (p.phanLoai && p.phanLoaiTuNhap === true) { clean.phanLoai = p.phanLoai; clean.phanLoaiTuNhap = true; }
     if (p.kmRules && p.kmRules.length) clean.kmRules = p.kmRules;
     if (p.kmText) clean.kmText = p.kmText;
     return clean;
@@ -152,7 +161,7 @@ function importProductsJSON() {
         if (!Array.isArray(data)) throw new Error('File không phải mảng SP');
         if (!validateProductList(data)) throw new Error('Dữ liệu products không hợp lệ');
         SP = data;
-        SP.forEach(function(p) { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; });
+        SP.forEach(normalizeProduct);
         saveSP();
         if (window.renderOrder) window.renderOrder();
         if (window.renderAdm) window.renderAdm();
