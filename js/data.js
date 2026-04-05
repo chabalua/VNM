@@ -83,11 +83,16 @@ function spFind(ma) { return SP.find(function(x) { return x.ma === ma; }); }
 
 async function initData() {
   var overlay = document.getElementById('loadingOverlay');
-  overlay.classList.add('show');
-  await Promise.all([loadProducts(), loadPromotions()]);
-  overlay.classList.remove('show');
+  if (overlay) overlay.classList.add('show');
+  try {
+    await Promise.all([loadProducts(), loadPromotions()]);
+  } catch (err) {
+    console.error('initData error:', err);
+  } finally {
+    if (overlay) overlay.classList.remove('show');
+  }
   if (!localStorage.getItem('vnm_favorites')) {
-    localStorage.setItem('vnm_favorites', '[]');
+    try { localStorage.setItem('vnm_favorites', '[]'); } catch(e) {}
   }
 }
 

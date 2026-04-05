@@ -113,7 +113,7 @@ async function cusLoad() {
         { id: 'T1', ten: 'Tuyến 1', mota: '' },
         { id: 'T2', ten: 'Tuyến 2', mota: '' }
       ];
-      routesSave();
+      try { routesSave(); } catch(se) {}
     }
   }
 }

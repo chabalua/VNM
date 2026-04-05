@@ -8,6 +8,15 @@ var _editingOrderId = '';
 function saveCart() { localStorage.setItem('vnm_cart', JSON.stringify(cart)); }
 function fmt(n) { return Math.round(n).toLocaleString('vi-VN'); }
 
+function escapeHtmlAttr(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+
 function getTodayDateInputValue() {
   var now = new Date();
   var offset = now.getTimezoneOffset() * 60000;
@@ -474,14 +483,25 @@ function getVisibleOrderIndexById(orderId) {
 }
 
 function resolveOrder(orderRef) {
-  if (orderRef && typeof orderRef === 'object') return orderRef;
-  var orders = getOrders();
-  if (typeof orderRef === 'number') {
-    var byId = orders.find(function(order) { return String(order.id) === String(orderRef); });
-    if (byId) return byId;
-    return Number.isInteger(orderRef) ? (orders[orderRef] || null) : null;
+  if (orderRef && typeof orderRef === 'object') {
+    if (orderRef.id == null) return null;
+    return orderRef;
   }
+  if (orderRef == null || orderRef === '') return null;
+  var orders = getOrders();
   return orders.find(function(order) { return String(order.id) === String(orderRef); }) || null;
+}
+
+function handleOrderActionClick(button) {
+  if (!button) return;
+  var orderId = button.getAttribute('data-order-id');
+  var action = button.getAttribute('data-order-action');
+  if (!orderId || !action) return;
+
+  if (action === 'copy') copyOrderZalo(orderId);
+  else if (action === 'edit') startEditOrder(orderId);
+  else if (action === 'detail') viewOrderDetail(orderId);
+  else if (action === 'delete') deleteOrder(orderId);
 }
 
 function renderOrdersList(orders, period) {
@@ -503,28 +523,32 @@ function renderOrdersList(orders, period) {
 
   var html = '';
   filtered.forEach(function(o, i) {
-    var orderArg = '\'' + String(o.id).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\'';
+    var orderIdAttr = escapeHtmlAttr(o.id);
     var khName = o.khTen || o.khMa || 'Không rõ KH';
     var itemCount = (o.items || []).length;
     var ngay = o.date ? new Date(o.date).toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : o.ngay || '';
 
     html += '<div class="history-card">';
     html += '<div class="history-card-head">';
-    html += '<div><div class="history-card-total">' + fmt(o.tong) + 'đ</div>';
-    html += '<div class="history-card-meta">' + ngay + ' · ' + itemCount + ' SP · ' + khName + '</div></div>';
-    html += '<div class="history-card-actions">';
-    html += '<button onclick="copyOrderZalo(' + orderArg + ')" class="history-card-btn copy">📋 Copy</button>';
-    html += '<button onclick="startEditOrder(' + orderArg + ')" class="history-card-btn view">Sửa</button>';
-    html += '<button onclick="viewOrderDetail(' + orderArg + ')" class="history-card-btn view">Chi tiết</button>';
-    html += '<button onclick="deleteOrder(' + orderArg + ')" class="history-card-btn delete">✕</button>';
-    html += '</div></div>';
+    html += '<div class="history-card-total">' + fmt(o.tong) + 'đ</div>';
+    html += '<div class="history-card-meta">' + ngay + ' · ' + itemCount + ' SP · ' + khName + '</div>';
+    html += '</div>';
 
     html += '<div class="history-item-list">';
     (o.items || []).slice(0, 3).forEach(function(it) {
       html += '<div class="history-item-row"><span>' + it.ten + '</span><span style="font-weight:600">' + it.totalLon + ' ' + it.donvi + '</span></div>';
     });
     if (itemCount > 3) html += '<div class="history-more">... +' + (itemCount - 3) + ' SP khác</div>';
-    html += '</div></div>';
+    html += '</div>';
+
+    html += '<div class="history-card-actions">';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" class="history-card-btn copy">📋 Copy</button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" class="history-card-btn edit">✏️ Sửa đơn</button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="detail" onclick="handleOrderActionClick(this)" class="history-card-btn view">📄 Chi tiết</button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" class="history-card-btn delete">🗑</button>';
+    html += '</div>';
+
+    html += '</div>';
   });
   return html;
 }
@@ -566,11 +590,11 @@ async function submitOrder() {
     bonusItems: orderKM.bonusItems
   };
 
-  // Lưu vào orders history
-  var orders = getOrders();
-  orders.unshift(order);
-  if (orders.length > 200) orders = orders.slice(0, 200);
-  saveOrders(orders);
+  // Lưu vào orders history — giữ lại record _deleted cho sync cloud
+  var rawOrders = (typeof getOrdersRaw === 'function') ? getOrdersRaw() : getOrders();
+  var filteredRaw = rawOrders.filter(function(o) { return String(o.id) !== String(order.id); });
+  filteredRaw.unshift(order);
+  saveOrders(filteredRaw);
   syncLegacyCustomerOrder(order, existingOrder);
 
   var todayValue = getTodayDateInputValue();
@@ -659,7 +683,7 @@ function fallbackCopy(text) {
 // ============================================================
 function viewOrderDetail(orderRef) {
   var o = resolveOrder(orderRef); if (!o) return;
-  var orderArg = '\'' + String(o.id).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\'';
+  var orderIdAttr = escapeHtmlAttr(o.id);
   var orderIndex = getVisibleOrderIndexById(o.id);
 
   var modal = document.getElementById('km-modal');
@@ -690,10 +714,10 @@ function viewOrderDetail(orderRef) {
   html += '</div>';
 
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px">';
-  html += '<button onclick="startEditOrder(' + orderArg + ')" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:#fff;color:var(--o);font-size:14px;font-weight:800;cursor:pointer">✏️ Sửa đơn</button>';
-  html += '<button onclick="copyOrderZalo(' + orderArg + ')" style="height:46px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:14px;font-weight:800;cursor:pointer">📋 Copy gửi Zalo</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:#fff;color:var(--o);font-size:14px;font-weight:800;cursor:pointer">✏️ Sửa đơn</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" style="height:46px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:14px;font-weight:800;cursor:pointer">📋 Copy gửi Zalo</button>';
   html += '</div>';
-  html += '<button onclick="deleteOrder(' + orderArg + ')" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:#fff;color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px">🗑 Xóa đơn này</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:#fff;color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px">🗑 Xóa đơn này</button>';
 
   body.innerHTML = html;
 }
@@ -733,5 +757,6 @@ window.startEditOrder = startEditOrder;
 window.cancelEditOrder = cancelEditOrder;
 window.viewOrderDetail = viewOrderDetail;
 window.deleteOrder = deleteOrder;
+window.handleOrderActionClick = handleOrderActionClick;
 window.filterOrders = filterOrders;
 window.onOrderDateChange = onOrderDateChange;
