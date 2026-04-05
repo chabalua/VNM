@@ -69,9 +69,9 @@
     </div>
   </div>
   <div class="adm-tools">
-    <button class="btn-tool filled" onclick="exportProductsJSON()">📤 Xuất products.json (GitHub)</button>
+    <button class="btn-tool filled" onclick="syncOpenSettings()" style="background:linear-gradient(135deg,#2563EB,#3B82F6);border-color:#2563EB">☁️ Đồng bộ GitHub</button>
+    <button class="btn-tool" onclick="exportProductsJSON()">📤 Xuất products.json</button>
     <button class="btn-tool" onclick="importProductsJSON()">📥 Nhập products.json</button>
-    <button class="btn-tool" onclick="syncFromGitHub()" style="background:var(--b);color:white;border-color:var(--b)">🔄 Sync từ GitHub</button>
   </div>
   <div id="adm-list" style="padding-bottom:72px"></div>
 </div>
@@ -162,6 +162,7 @@
 <script src="js/ui.js"></script>
 <script src="js/km.js"></script>
 <script src="js/customer.js"></script>
+<script src="js/sync.js"></script>
 <script src="js/main.js"></script>
 </body>
 </html>
