@@ -191,13 +191,15 @@
     "ma": "01TC60",
     "ten": "Creamer Ông Thọ vị sôcôla tuýp 165g",
     "nhom": "B",
-    "donvi": "Tuýp",
+    "donvi": "hộp",
     "slThung": 24,
     "giaNYLon": 18360,
     "giaNYThung": 440640,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "phanLoai": "Ông Thọ",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T13:54:47.543Z"
   },
   {
     "ma": "01VD41",
