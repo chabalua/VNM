@@ -1049,7 +1049,7 @@
   {
     "ma": "DL200412J9",
     "ten": "Trần Thị Minh (Tạp Phẩm Sơn Minh)",
-    "tuyen": "",
+    "tuyen": "Tuyến 1",
     "diachi": "69, 5",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1062,14 +1062,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1078,7 +1078,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:44:01.457Z"
   },
   {
     "ma": "DL200412JA",
