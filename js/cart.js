@@ -3,6 +3,7 @@ var cart = JSON.parse(localStorage.getItem('vnm_cart') || '{}');
 var customers = JSON.parse(localStorage.getItem('vnm_kh') || '[]');
 var _orderDraftDate = getTodayDateInputValue();
 var _ordersHistoryFilter = 'today';
+var _editingOrderId = '';
 
 function saveCart() { localStorage.setItem('vnm_cart', JSON.stringify(cart)); }
 function fmt(n) { return Math.round(n).toLocaleString('vi-VN'); }
@@ -29,6 +30,112 @@ function getSelectedOrderDateValue() {
 
 function onOrderDateChange(value) {
   _orderDraftDate = value || getTodayDateInputValue();
+}
+
+function setEditingOrderId(orderId) {
+  _editingOrderId = orderId ? String(orderId) : '';
+}
+
+function clearOrderDraftState() {
+  setEditingOrderId('');
+  _orderDraftDate = getTodayDateInputValue();
+}
+
+function syncLegacyCustomerOrder(order, previousOrder) {
+  if (!order || !order.id) return;
+  var targetKhMa = order.khMa || '';
+  var previousKhMa = previousOrder && previousOrder.khMa ? previousOrder.khMa : '';
+
+  customers.forEach(function(customer) {
+    if (!customer || !Array.isArray(customer.orders)) return;
+    customer.orders = customer.orders.filter(function(existingOrder) {
+      return String(existingOrder.id) !== String(order.id);
+    });
+  });
+
+  if (targetKhMa) {
+    var targetCustomer = customers.find(function(customer) { return customer.ma === targetKhMa; });
+    if (!targetCustomer) {
+      targetCustomer = { ma: targetKhMa, orders: [] };
+      customers.push(targetCustomer);
+    }
+    if (!Array.isArray(targetCustomer.orders)) targetCustomer.orders = [];
+    targetCustomer.orders.unshift(order);
+    if (targetCustomer.orders.length > 30) targetCustomer.orders = targetCustomer.orders.slice(0, 30);
+  }
+
+  if (previousKhMa || targetKhMa) {
+    localStorage.setItem('vnm_kh', JSON.stringify(customers));
+  }
+}
+
+function removeLegacyCustomerOrder(orderRef) {
+  var order = resolveOrder(orderRef);
+  if (!order) return;
+  var changed = false;
+  customers.forEach(function(customer) {
+    if (!customer || !Array.isArray(customer.orders)) return;
+    var nextOrders = customer.orders.filter(function(existingOrder) {
+      return String(existingOrder.id) !== String(order.id);
+    });
+    if (nextOrders.length !== customer.orders.length) {
+      customer.orders = nextOrders;
+      changed = true;
+    }
+  });
+  if (changed) localStorage.setItem('vnm_kh', JSON.stringify(customers));
+}
+
+function getEditOrderSummary(order) {
+  if (!order) return '';
+  var dateText = order.ngay || (order.date ? new Date(order.date).toLocaleDateString('vi-VN') : '');
+  return 'Đang sửa đơn ' + (dateText ? 'ngày ' + dateText : '#' + order.id) + (order.khTen ? ' · ' + order.khTen : '');
+}
+
+function startEditOrder(orderRef) {
+  var order = resolveOrder(orderRef);
+  if (!order) return;
+  var currentItems = getItems();
+  var isSameEditing = _editingOrderId && String(_editingOrderId) === String(order.id);
+  if (currentItems.length && !isSameEditing && !confirm('Giỏ hiện tại sẽ bị thay bằng dữ liệu của đơn này. Tiếp tục?')) return;
+
+  var nextCart = {};
+  (order.items || []).forEach(function(item) {
+    if (!item || !item.ma) return;
+    var qT = Math.max(0, parseInt(item.qT, 10) || 0);
+    var qL = Math.max(0, parseInt(item.qL, 10) || 0);
+    if (!qT && !qL && item.totalLon) qL = Math.max(0, parseInt(item.totalLon, 10) || 0);
+    if (!qT && !qL) return;
+    nextCart[item.ma] = { qT: qT, qL: qL };
+  });
+
+  cart = nextCart;
+  saveCart();
+  updateBadge();
+  setEditingOrderId(order.id);
+  _orderDraftDate = (order.date || '').slice(0, 10) || getTodayDateInputValue();
+
+  if (typeof onSelectCustomer === 'function') onSelectCustomer(order.khMa || '');
+  else window._selectedCustomerMa = order.khMa || '';
+
+  var modal = document.getElementById('km-modal');
+  if (modal) modal.style.display = 'none';
+
+  if (window.renderOrder) renderOrder();
+  renderDon();
+  if (typeof gotoTab === 'function') gotoTab('order');
+  alert('✏️ Đã nạp đơn vào giỏ để chỉnh sửa. Chỉnh số lượng ở tab Đặt hàng rồi bấm lưu lại trong tab Đơn hàng.');
+}
+
+function cancelEditOrder() {
+  clearOrderDraftState();
+  if (typeof onSelectCustomer === 'function') onSelectCustomer('');
+  else window._selectedCustomerMa = '';
+  cart = {};
+  saveCart();
+  updateBadge();
+  if (window.renderOrder) renderOrder();
+  renderDon();
 }
 
 // ============================================================
@@ -228,7 +335,16 @@ function removeCart(ma) {
   renderDon();
 }
 
-function clearCart() { cart = {}; saveCart(); updateBadge(); if (window.renderOrder) window.renderOrder(); renderDon(); }
+function clearCart() {
+  cart = {};
+  saveCart();
+  updateBadge();
+  clearOrderDraftState();
+  if (typeof onSelectCustomer === 'function') onSelectCustomer('');
+  else window._selectedCustomerMa = '';
+  if (window.renderOrder) window.renderOrder();
+  renderDon();
+}
 function updateBadge() { var n = getItems().length; var b = document.getElementById('don-badge'); if (b) { b.style.display = n ? '' : 'none'; b.textContent = n; } }
 
 // ============================================================
@@ -240,6 +356,8 @@ function renderDon() {
   var cloudReady = typeof syncHasToken === 'function' && syncHasToken();
 
   var html = '';
+  var editingOrder = _editingOrderId ? resolveOrder(_editingOrderId) : null;
+  if (_editingOrderId && !editingOrder) clearOrderDraftState();
 
   // ─── PHẦN 1: Giỏ hàng hiện tại ───
   if (items.length) {
@@ -264,6 +382,13 @@ function renderDon() {
     });
 
     html += '<div class="ord-ft">';
+    if (editingOrder) {
+      html += '<div style="background:var(--oL);border:1.5px solid var(--o);border-radius:var(--Rs);padding:10px 12px;margin-bottom:12px">';
+      html += '<div style="font-size:12px;font-weight:800;color:var(--o);margin-bottom:4px">✏️ Chế độ sửa đơn</div>';
+      html += '<div style="font-size:11px;color:var(--n2);line-height:1.5">' + getEditOrderSummary(editingOrder) + '</div>';
+      html += '<button onclick="cancelEditOrder()" style="margin-top:8px;height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:#fff;color:var(--o);font-size:11px;font-weight:700;cursor:pointer">Huỷ sửa</button>';
+      html += '</div>';
+    }
     if (totSave > 0) {
       html += '<div class="ft-row"><span class="ft-l">Giá gốc</span><span class="ft-v">' + fmt(totGoc) + 'đ</span></div>';
       html += '<div class="ft-row"><span class="ft-l">Tiết kiệm KM</span><span class="ft-save">-' + fmt(totSave) + 'đ</span></div>';
@@ -291,7 +416,7 @@ function renderDon() {
     }
     html += '</div>';
 
-    html += '<button class="btn-submit" onclick="submitOrder()">📤 Tạo đơn hàng</button>';
+    html += '<button class="btn-submit" onclick="submitOrder()">' + (editingOrder ? '💾 Lưu chỉnh sửa đơn' : '📤 Tạo đơn hàng') + '</button>';
     html += '<button class="btn-clear" onclick="clearCart()">🗑 Xoá giỏ</button>';
     html += '</div></div>';
   }
@@ -316,10 +441,10 @@ function renderDon() {
     // Filter buttons
     if (orders.length) {
       html += '<div style="display:flex;gap:6px;padding:0 12px 8px;flex-wrap:wrap">';
-      html += '<button onclick="filterOrders(\'today\')" class="pill on-all" style="font-size:11px">Hôm nay</button>';
-      html += '<button onclick="filterOrders(\'week\')" class="pill" style="font-size:11px">Tuần này</button>';
-      html += '<button onclick="filterOrders(\'month\')" class="pill" style="font-size:11px">Tháng này</button>';
-      html += '<button onclick="filterOrders(\'all\')" class="pill" style="font-size:11px">Tất cả</button>';
+      html += '<button onclick="filterOrders(\'today\')" class="pill' + (_ordersHistoryFilter === 'today' ? ' on-all' : '') + '" style="font-size:11px">Hôm nay</button>';
+      html += '<button onclick="filterOrders(\'week\')" class="pill' + (_ordersHistoryFilter === 'week' ? ' on-all' : '') + '" style="font-size:11px">Tuần này</button>';
+      html += '<button onclick="filterOrders(\'month\')" class="pill' + (_ordersHistoryFilter === 'month' ? ' on-all' : '') + '" style="font-size:11px">Tháng này</button>';
+      html += '<button onclick="filterOrders(\'all\')" class="pill' + (_ordersHistoryFilter === 'all' ? ' on-all' : '') + '" style="font-size:11px">Tất cả</button>';
       html += '</div>';
     }
 
@@ -351,7 +476,11 @@ function getVisibleOrderIndexById(orderId) {
 function resolveOrder(orderRef) {
   if (orderRef && typeof orderRef === 'object') return orderRef;
   var orders = getOrders();
-  if (typeof orderRef === 'number') return orders[orderRef] || null;
+  if (typeof orderRef === 'number') {
+    var byId = orders.find(function(order) { return String(order.id) === String(orderRef); });
+    if (byId) return byId;
+    return Number.isInteger(orderRef) ? (orders[orderRef] || null) : null;
+  }
   return orders.find(function(order) { return String(order.id) === String(orderRef); }) || null;
 }
 
@@ -374,6 +503,7 @@ function renderOrdersList(orders, period) {
 
   var html = '';
   filtered.forEach(function(o, i) {
+    var orderArg = '\'' + String(o.id).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\'';
     var khName = o.khTen || o.khMa || 'Không rõ KH';
     var itemCount = (o.items || []).length;
     var ngay = o.date ? new Date(o.date).toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : o.ngay || '';
@@ -383,9 +513,10 @@ function renderOrdersList(orders, period) {
     html += '<div><div class="history-card-total">' + fmt(o.tong) + 'đ</div>';
     html += '<div class="history-card-meta">' + ngay + ' · ' + itemCount + ' SP · ' + khName + '</div></div>';
     html += '<div class="history-card-actions">';
-    html += '<button onclick="copyOrderZalo(' + o.id + ')" class="history-card-btn copy">📋 Copy</button>';
-    html += '<button onclick="viewOrderDetail(' + o.id + ')" class="history-card-btn view">Chi tiết</button>';
-    html += '<button onclick="deleteOrder(' + o.id + ')" class="history-card-btn delete">✕</button>';
+    html += '<button onclick="copyOrderZalo(' + orderArg + ')" class="history-card-btn copy">📋 Copy</button>';
+    html += '<button onclick="startEditOrder(' + orderArg + ')" class="history-card-btn view">Sửa</button>';
+    html += '<button onclick="viewOrderDetail(' + orderArg + ')" class="history-card-btn view">Chi tiết</button>';
+    html += '<button onclick="deleteOrder(' + orderArg + ')" class="history-card-btn delete">✕</button>';
     html += '</div></div>';
 
     html += '<div class="history-item-list">';
@@ -403,6 +534,7 @@ function renderOrdersList(orders, period) {
 // ============================================================
 async function submitOrder() {
   var items = getItems(); if (!items.length) return;
+  var existingOrder = _editingOrderId ? resolveOrder(_editingOrderId) : null;
   var makh = (window._selectedCustomerMa) ? window._selectedCustomerMa : ((document.getElementById('makh-inp') || {}).value || '').trim().toUpperCase();
   var orderDateValue = getSelectedOrderDateValue();
   var orderDateISO = buildOrderDateISO(orderDateValue);
@@ -419,10 +551,10 @@ async function submitOrder() {
 
   // Tạo order object
   var order = {
-    id: Date.now(),
+    id: existingOrder ? existingOrder.id : Date.now(),
     date: orderDateISO,
     ngay: new Date(orderDateISO).toLocaleDateString('vi-VN'),
-    _updatedAt: orderDateISO,
+    _updatedAt: new Date().toISOString(),
     khMa: makh,
     khTen: khTen,
     items: items.map(function(it) {
@@ -439,6 +571,7 @@ async function submitOrder() {
   orders.unshift(order);
   if (orders.length > 200) orders = orders.slice(0, 200);
   saveOrders(orders);
+  syncLegacyCustomerOrder(order, existingOrder);
 
   var todayValue = getTodayDateInputValue();
   _ordersHistoryFilter = orderDateValue === todayValue ? 'today' : (orderDateValue.slice(0, 7) === todayValue.slice(0, 7) ? 'month' : 'all');
@@ -450,17 +583,8 @@ async function submitOrder() {
     else if (cloudResult && cloudResult.error) cloudMessage = '\n⚠️ Đơn đã lưu máy này, nhưng chưa đẩy được lên GitHub: ' + cloudResult.error;
   }
 
-  // Legacy KH orders (tương thích)
-  if (makh) {
-    var khLegacy = customers.find(function(k) { return k.ma === makh; });
-    if (!khLegacy) { khLegacy = { ma: makh, orders: [] }; customers.push(khLegacy); }
-    khLegacy.orders.unshift(order);
-    if (khLegacy.orders.length > 30) khLegacy.orders = khLegacy.orders.slice(0, 30);
-    localStorage.setItem('vnm_kh', JSON.stringify(customers));
-  }
-
   // Hỏi copy Zalo không
-  var copyNow = confirm('✅ Đã tạo đơn ' + fmt(tong) + 'đ' + (khTen ? ' cho ' + khTen : '') + cloudMessage + '\n\nCopy đơn để gửi Zalo?');
+  var copyNow = confirm((existingOrder ? '✅ Đã cập nhật đơn ' : '✅ Đã tạo đơn ') + fmt(tong) + 'đ' + (khTen ? ' cho ' + khTen : '') + cloudMessage + '\n\nCopy đơn để gửi Zalo?');
   if (copyNow) copyOrderZalo(order.id);
 
   clearCart();
@@ -469,11 +593,8 @@ async function submitOrder() {
 }
 
 // ============================================================
-// COPY ĐƠN → ZALO (format text đẹp)
-// ============================================================
 function copyOrderZalo(orderRef) {
   var o = resolveOrder(orderRef); if (!o) return;
-
   var lines = [];
   lines.push('ĐƠN HÀNG' + (o.khTen ? ' — ' + o.khTen : '') + (o.khMa ? ' (' + o.khMa + ')' : ''));
   lines.push('Ngày: ' + (o.ngay || new Date(o.date).toLocaleDateString('vi-VN')));
@@ -538,6 +659,7 @@ function fallbackCopy(text) {
 // ============================================================
 function viewOrderDetail(orderRef) {
   var o = resolveOrder(orderRef); if (!o) return;
+  var orderArg = '\'' + String(o.id).replace(/\\/g, '\\\\').replace(/'/g, "\\'") + '\'';
   var orderIndex = getVisibleOrderIndexById(o.id);
 
   var modal = document.getElementById('km-modal');
@@ -567,7 +689,11 @@ function viewOrderDetail(orderRef) {
   html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--b);margin-top:4px"><span>+VAT 1.5%</span><span>' + fmt(Math.round(o.tong * 1.015)) + 'đ</span></div>';
   html += '</div>';
 
-  html += '<button onclick="copyOrderZalo(' + o.id + ')" style="width:100%;height:48px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;margin-top:16px">📋 Copy gửi Zalo</button>';
+  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px">';
+  html += '<button onclick="startEditOrder(' + orderArg + ')" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:#fff;color:var(--o);font-size:14px;font-weight:800;cursor:pointer">✏️ Sửa đơn</button>';
+  html += '<button onclick="copyOrderZalo(' + orderArg + ')" style="height:46px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:14px;font-weight:800;cursor:pointer">📋 Copy gửi Zalo</button>';
+  html += '</div>';
+  html += '<button onclick="deleteOrder(' + orderArg + ')" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:#fff;color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px">🗑 Xóa đơn này</button>';
 
   body.innerHTML = html;
 }
@@ -576,8 +702,15 @@ function deleteOrder(orderRef) {
   var order = resolveOrder(orderRef);
   if (!order) return;
   if (!confirm('Xóa đơn này?')) return;
+  removeLegacyCustomerOrder(order);
   if (window.softDeleteOrder) softDeleteOrder(order.id);
+  if (_editingOrderId && String(_editingOrderId) === String(order.id)) clearOrderDraftState();
+  var modal = document.getElementById('km-modal');
+  if (modal) modal.style.display = 'none';
   if (window.syncAutoPushOrder) syncAutoPushOrder();
+  if (window.renderHomeDashboard) renderHomeDashboard();
+  if (window.renderCusTab) renderCusTab();
+  if (window.renderOrder) renderOrder();
   renderDon();
 }
 
@@ -596,6 +729,8 @@ window.updateBadge = updateBadge;
 window.kmBuildRules = kmBuildRules;
 window._calcKM_orig = _calcKM_orig;
 window.copyOrderZalo = copyOrderZalo;
+window.startEditOrder = startEditOrder;
+window.cancelEditOrder = cancelEditOrder;
 window.viewOrderDetail = viewOrderDetail;
 window.deleteOrder = deleteOrder;
 window.filterOrders = filterOrders;
