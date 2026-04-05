@@ -351,9 +351,9 @@
   },
   {
     "ma": "DL200412FF",
-    "ten": "Lê Thị Thanh (TH Thanh Bên hông chợ, Cổng sau chợ)",
+    "ten": "Lê Thị Thanh (TH Thanh Hương) ",
     "tuyen": "",
-    "diachi": "",
+    "diachi": "Bên hông chợ, Cổng sau chợ",
     "sdt": "",
     "loaiCH": "tapHoa",
     "coTuVNM": false,
@@ -365,14 +365,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -381,7 +381,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:27:36.545Z"
   },
   {
     "ma": "DL200412FG",
