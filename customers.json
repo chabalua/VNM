@@ -1914,7 +1914,7 @@
   {
     "ma": "DL200412TO",
     "ten": "HKD Hiền Tạp Hoá (Tạp hóa Đăng Khôi)",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "KM12, QL 27 Dray Bhang",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1927,14 +1927,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1943,7 +1943,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:05:10.939Z"
   },
   {
     "ma": "DL200412W4",
