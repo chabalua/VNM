@@ -2504,7 +2504,7 @@
   {
     "ma": "DL200413K",
     "ten": "ĐẶNG MINH HIẾU",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "55, ql 14",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -2517,14 +2517,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2533,7 +2533,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:07:28.890Z"
   },
   {
     "ma": "DL200413KQ",
