@@ -219,13 +219,15 @@
     "ma": "01TX03",
     "ten": "Creamer Ông Thọ xanh lá 380g",
     "nhom": "B",
-    "donvi": "Lon",
+    "donvi": "hộp",
     "slThung": 48,
     "giaNYLon": 21838,
     "giaNYThung": 1048224,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "phanLoai": "Ông Thọ",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T13:55:00.112Z"
   },
   {
     "ma": "01TT02",
