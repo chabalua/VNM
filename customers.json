@@ -2642,7 +2642,7 @@
   {
     "ma": "DL200413NP",
     "ten": "HKD Nguyễn Thị Ngà (Lý Ngà)",
-    "tuyen": "",
+    "tuyen": "Tuyến 3",
     "diachi": "Gần Chị Phúc, Thôn 12",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -2655,14 +2655,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2671,7 +2671,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:08:11.055Z"
   },
   {
     "ma": "DL200413OY",
