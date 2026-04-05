@@ -2304,5 +2304,21 @@
       "10VS01",
       "10VA01"
     ]
+  },
+  {
+    "name": "DGP - 1T tặng 8H",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "24",
+    "bY": "8",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "02HL37"
+    ],
+    "_updatedAt": "2026-04-05T14:13:33.130Z"
   }
 ]
