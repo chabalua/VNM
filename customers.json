@@ -979,7 +979,7 @@
   {
     "ma": "DL200412J7",
     "ten": "Nguyễn Thị Bích Liễu (TH Cô Liễu)",
-    "tuyen": "",
+    "tuyen": "Tuyến 1",
     "diachi": "Thôn 9, Khuê Ngọc Điền",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -992,14 +992,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1008,7 +1008,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:43:24.674Z"
   },
   {
     "ma": "DL200412J8",
