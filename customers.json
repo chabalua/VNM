@@ -597,7 +597,7 @@
   {
     "ma": "DL200412FY",
     "ten": "Bùi Quang Văn (Cao Thị Thu Minh)",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "Gần cô Tha, trong chợ Krông Bông",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -610,14 +610,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -626,7 +626,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T11:40:08.420Z"
   },
   {
     "ma": "DL200412G0",
