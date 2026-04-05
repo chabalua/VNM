@@ -1570,7 +1570,7 @@
   {
     "ma": "DL200412ND",
     "ten": "Đoàn Văn Dũng (Chị Phúc)",
-    "tuyen": "",
+    "tuyen": "Tuyến 1",
     "diachi": "71, 12",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1583,14 +1583,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1599,7 +1599,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:04:13.169Z"
   },
   {
     "ma": "DL200412NQ",
