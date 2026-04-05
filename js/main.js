@@ -5,6 +5,8 @@ var ALL_PAGES = ['home', 'order', 'don', 'adm', 'km', 'kh'];
 var _homeMonthKey = getCurrentMonthKey();
 var _kpiEditorMonthKey = '';
 var KPI_CONFIG_KEY = 'vnm_kpi_config_v1';
+var THEME_STORAGE_KEY = 'vnm_theme_mode';
+var _themeMode = 'light';
 var KPI_DEFAULT_TARGETS = {
   totalSales: 1416533000,
   avgSku: 10.03,
@@ -102,6 +104,30 @@ function getMonthLabel(monthKey) {
 
 function cloneData(obj) {
   return JSON.parse(JSON.stringify(obj));
+}
+
+function getThemeMode() {
+  try {
+    var saved = localStorage.getItem(THEME_STORAGE_KEY) || 'light';
+    return saved === 'dark' ? 'dark' : 'light';
+  } catch (e) {
+    return 'light';
+  }
+}
+
+function applyTheme(mode, skipPersist) {
+  _themeMode = mode === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', _themeMode);
+  if (!skipPersist) {
+    try { localStorage.setItem(THEME_STORAGE_KEY, _themeMode); } catch (e) {}
+  }
+  var meta = document.getElementById('theme-color-meta') || document.querySelector('meta[name="theme-color"]');
+  if (meta) meta.setAttribute('content', _themeMode === 'dark' ? '#0b1220' : '#1A4DFF');
+}
+
+function setThemeMode(mode) {
+  applyTheme(mode, false);
+  renderSettingsOverview();
 }
 
 function normalizeCodeList(value) {
@@ -459,7 +485,9 @@ function renderSettingsOverview() {
   var brandRules = (typeof getCustomBrandRules === 'function') ? getCustomBrandRules() : [];
   var lastPush = cfg.lastPush ? new Date(cfg.lastPush).toLocaleString('vi-VN') : 'Chưa';
   var lastPull = cfg.lastPull ? new Date(cfg.lastPull).toLocaleString('vi-VN') : 'Chưa';
+  var themeMode = _themeMode || getThemeMode();
   el.innerHTML = '' +
+    '<div class="settings-theme-card"><div><div class="settings-strip-title">Giao diện</div><div class="settings-strip-meta">Đổi nhanh giữa chế độ sáng và tối.</div></div><div class="theme-toggle-group"><button class="theme-toggle-btn ' + (themeMode === 'light' ? 'active' : '') + '" onclick="setThemeMode(\'light\')">Sáng</button><button class="theme-toggle-btn ' + (themeMode === 'dark' ? 'active' : '') + '" onclick="setThemeMode(\'dark\')">Tối</button></div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + SP.length + '</div><div class="settings-info-label">Sản phẩm</div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + kmProgs.length + '</div><div class="settings-info-label">CTKM</div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + ((typeof CUS !== 'undefined' && Array.isArray(CUS)) ? CUS.length : 0) + '</div><div class="settings-info-label">Khách hàng</div></div>' +
@@ -594,6 +622,7 @@ function renderRoutePills() {
 }
 
 window.onload = async function() {
+  applyTheme(getThemeMode(), true);
   await initData();
   await cusLoad();
   if (window.syncAutoPullAllOnStart) await syncAutoPullAllOnStart();
@@ -611,6 +640,7 @@ window.gotoTab = gotoTab;
 window.renderRoutePills = renderRoutePills;
 window.renderHomeDashboard = renderHomeDashboard;
 window.renderSettingsOverview = renderSettingsOverview;
+window.setThemeMode = setThemeMode;
 window.setHomeMonth = setHomeMonth;
 window.openKpiSettings = openKpiSettings;
 window.saveKpiSettings = saveKpiSettings;
