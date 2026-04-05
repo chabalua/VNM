@@ -1949,7 +1949,7 @@
   {
     "ma": "DL200412W4",
     "ten": "Trịnh Thị Ái",
-    "tuyen": "",
+    "tuyen": "Tuyến 2",
     "diachi": "gần chị Hà, chợ krongbong",
     "sdt": "",
     "loaiCH": "tapHoa",
@@ -1962,14 +1962,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1978,7 +1978,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-05T12:06:15.380Z"
   },
   {
     "ma": "DL200412W7",
