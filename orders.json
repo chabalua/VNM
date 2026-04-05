@@ -43,6 +43,49 @@
     "_deleted": false
   },
   {
+    "id": 1775392785331,
+    "date": "2026-04-05T05:00:00.000Z",
+    "ngay": "5/4/2026",
+    "_updatedAt": "2026-04-05T05:00:00.000Z",
+    "khMa": "DL200412GY",
+    "khTen": "Lê Thị Yến (Yến Lực)",
+    "items": [
+      {
+        "ma": "03AO90",
+        "ten": "Bột AD Optimum Gold Yến Mạch Cá Hồi Rau Xanh HT 350g",
+        "donvi": "Lon",
+        "nhom": "A",
+        "qT": 0,
+        "qL": 2,
+        "totalLon": 2,
+        "gocTotal": 230920,
+        "afterKM": 230920,
+        "disc": 0,
+        "desc": "",
+        "bonus": 0
+      },
+      {
+        "ma": "03CM06",
+        "ten": "Bột AD Ridielac 4 gói vị mặn 4×50g",
+        "donvi": "Hộp",
+        "nhom": "A",
+        "qT": 0,
+        "qL": 2,
+        "totalLon": 2,
+        "gocTotal": 131112,
+        "afterKM": 127179,
+        "disc": 3933,
+        "desc": "CK 3%",
+        "bonus": 0
+      }
+    ],
+    "tong": 358099,
+    "tongGoc": 362032,
+    "orderDisc": 0,
+    "bonusItems": [],
+    "_deleted": false
+  },
+  {
     "id": 1775391504971,
     "date": "2026-04-01T05:00:00.000Z",
     "ngay": "1/4/2026",
