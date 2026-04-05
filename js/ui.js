@@ -258,7 +258,7 @@ function renderOrder() {
   renderCustomerSelector();
   renderBrandPills();
 
-  if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm<br><small>Vào ⚙️ Quản lý → Sync từ GitHub</small></div>'; return; }
+  if (!SP.length) { el.innerHTML = '<div class="empty">Chưa có sản phẩm<br><small>Vào Cài đặt để pull dữ liệu từ GitHub</small></div>'; return; }
   if (!f.length) { el.innerHTML = '<div class="empty">Không tìm thấy SP</div>'; return; }
 
   f.sort(function(a, b) {
@@ -375,7 +375,9 @@ function saveAdmPrice(ma) {
   if (!val || val < 100) { alert('Giá không hợp lệ'); return; }
   var p = SP.find(function(x) { return x.ma === ma; }); if (!p) return;
   p.giaNYLon = val; p.giaNYThung = val * p.slThung;
+  if (window.markEntityUpdated) markEntityUpdated(p);
   saveSP(); inp.value = '';
+  if (window.syncAutoPushFile) syncAutoPushFile('products.json');
   alert('✓ ' + p.ten + ' → ' + fmt(val) + 'đ/' + p.donvi);
   renderAdm(); renderOrder();
 }
@@ -430,7 +432,7 @@ function spPreviewPrice() {
   var locSize = parseInt((document.getElementById('spf-locsize') || {}).value) || 0;
   var el = document.getElementById('spf-price-preview'); if (!el || !gia) { if (el) el.innerHTML = ''; return; }
   var thung = gia * slThung;
-  var h = '<div style="background:var(--vmL);border-radius:var(--Rs);padding:10px 12px;border:1px solid #B8E0CB">';
+  var h = '<div style="background:var(--vmL);border-radius:var(--Rs);padding:10px 12px;border:1px solid #C9D7FF">';
   h += '<div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--n2)"><span>Thùng</span><b style="color:var(--vm)">' + fmt(thung) + 'đ</b></div>';
   if (locSize > 0) h += '<div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--n2)"><span>Lốc (' + locSize + ')</span><b>' + fmt(gia * locSize) + 'đ</b></div>';
   h += '<div style="display:flex;justify-content:space-between;font-size:12.5px;color:var(--n2)"><span>+VAT 1.5%</span><b>' + fmt(Math.round(thung * 1.015)) + 'đ/thùng</b></div></div>';
@@ -454,14 +456,16 @@ function spSaveForm() {
     var p = SP.find(function(x) { return x.ma === _spEditMa; }); if (!p) return;
     p.ten = ten; p.nhom = nhom; p.donvi = donvi; p.slThung = slThung; p.giaNYLon = gia; p.giaNYThung = gia * slThung;
     if (locSize > 0) { p.locSize = locSize; p.locLabel = locLabel || 'Lốc'; } else { delete p.locSize; delete p.locLabel; }
+    if (window.markEntityUpdated) markEntityUpdated(p);
     delete p._brand;
-    saveSP(); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
+    saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
     alert('✅ Đã cập nhật: ' + ten);
   } else {
     if (SP.find(function(x) { return x.ma === ma; })) { alert('Mã đã tồn tại!'); return; }
     var newP = { ma: ma, ten: ten, nhom: nhom, donvi: donvi, slThung: slThung, giaNYLon: gia, giaNYThung: gia * slThung, kmRules: [], kmText: '' };
     if (locSize > 0) { newP.locSize = locSize; newP.locLabel = locLabel || 'Lốc'; }
-    SP.push(newP); saveSP(); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
+    if (window.markEntityUpdated) markEntityUpdated(newP);
+    SP.push(newP); saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); document.getElementById('sp-modal').style.display = 'none'; renderAdm(); renderOrder();
     alert('✅ Đã thêm: ' + ten + ' (' + ma + ')');
   }
 }
@@ -471,7 +475,7 @@ function spDelete(ma) {
   if (!confirm('Xóa "' + p.ten + '" (' + ma + ')?')) return;
   SP.splice(SP.indexOf(p), 1);
   if (cart[ma]) { delete cart[ma]; saveCart(); updateBadge(); }
-  saveSP(); renderAdm(); renderOrder();
+  saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json'); renderAdm(); renderOrder();
 }
 
 function closeAdmModal(e) {

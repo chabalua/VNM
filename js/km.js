@@ -322,11 +322,13 @@ function kmSaveForm() {
   var prog = kmReadForm();
   prog.spMas = kmGetChecked();
   prog.stackable = _kmStackable;
+  if (window.markEntityUpdated) markEntityUpdated(prog);
   if (!prog.name) { alert('Nhập tên chương trình'); return; }
   if (prog.type !== 'order_money' && prog.type !== 'order_bonus' && !prog.spMas.length) { alert('Chọn ít nhất 1 sản phẩm'); return; }
   if (_kmEditIdx >= 0) kmProgs[_kmEditIdx] = prog;
   else kmProgs.push(prog);
   kmSave();
+  if (window.syncAutoPushFile) syncAutoPushFile('promotions.json');
   document.getElementById('km-modal').style.display = 'none';
   renderKMTab(); renderOrder();
   alert('✅ Đã lưu: ' + prog.name);
@@ -390,8 +392,8 @@ function renderKMTab() {
   el.innerHTML = html;
 }
 
-function kmToggle(i) { kmProgs[i].active = !kmProgs[i].active; kmSave(); renderKMTab(); renderOrder(); }
-function kmDel(i) { if (confirm('Xóa "' + kmProgs[i].name + '"?')) { kmProgs.splice(i, 1); kmSave(); renderKMTab(); renderOrder(); } }
+function kmToggle(i) { kmProgs[i].active = !kmProgs[i].active; if (window.markEntityUpdated) markEntityUpdated(kmProgs[i]); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
+function kmDel(i) { if (confirm('Xóa "' + kmProgs[i].name + '"?')) { kmProgs.splice(i, 1); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); } }
 function kmEdit(i) { kmOpenModal(kmProgs[i], i); }
 
 function kmBuildText(prog) {
@@ -443,7 +445,7 @@ function importKM() {
         var action = confirm('Thay thế toàn bộ CT KM hiện tại? (OK = thay thế, Cancel = gộp thêm)');
         if (action) kmProgs = data;
         else kmProgs.push.apply(kmProgs, data);
-        kmSave(); renderKMTab(); renderOrder();
+        kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder();
         alert((action ? 'Thay thế' : 'Gộp thêm') + ' ' + data.length + ' CT KM');
       } catch (err) { alert('Lỗi đọc file: ' + err.message); }
     };
@@ -464,7 +466,7 @@ async function loadKMFromURL() {
     var action = confirm('Thay thế toàn bộ CT KM hiện tại? (OK = thay thế, Cancel = gộp thêm)');
     if (action) kmProgs = data;
     else kmProgs.push.apply(kmProgs, data);
-    kmSave(); renderKMTab(); renderOrder();
+    kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder();
     alert('✅ Đã tải ' + data.length + ' CT KM');
   } catch (err) { alert('Lỗi tải URL: ' + err.message); }
 }

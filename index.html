@@ -6,7 +6,7 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VNM Order">
-<meta name="theme-color" content="#006B3F">
+<meta name="theme-color" content="#1A4DFF">
 <title>VNM Order T04/2026</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
@@ -18,19 +18,36 @@
   <div style="font-size:13px;opacity:.7">Lần đầu hơi lâu, vui lòng đợi</div>
 </div>
 
-<div id="tabbar">
-  <button class="tb on" onclick="gotoTab('order')" id="tab-order"><span class="tb-icon">🛒</span>Đặt hàng</button>
-  <button class="tb" onclick="gotoTab('don')" id="tab-don"><span class="tb-icon">📋</span>Đơn hàng<span class="tb-badge" id="don-badge"></span></button>
-  <button class="tb" onclick="gotoTab('adm')" id="tab-adm"><span class="tb-icon">⚙️</span>Quản lý</button>
-  <button class="tb" onclick="gotoTab('km')" id="tab-km"><span class="tb-icon">🎯</span>CT KM</button>
-  <button class="tb" onclick="gotoTab('kh')" id="tab-kh"><span class="tb-icon">👥</span>KH</button>
-</div>
-
 <div id="main">
 
+<!-- TRANG CHỦ KPI -->
+<div id="page-home" class="page on">
+  <div class="home-shell">
+    <div class="home-hero">
+      <div class="home-hero-top">
+        <div>
+          <div class="home-kicker">VNM Sales Dashboard</div>
+          <div class="home-title">Trang chủ KPI</div>
+        </div>
+        <button class="hero-sync-btn" onclick="syncOpenSettings()">☁️ Cloud</button>
+      </div>
+      <div class="home-subtitle">Tổng quan hiệu suất tháng, doanh số, đơn hàng và trạng thái đồng bộ GitHub.</div>
+      <div id="home-hero-metrics" class="hero-metrics"></div>
+    </div>
+    <div id="home-content"></div>
+  </div>
+</div>
+
 <!-- ĐẶT HÀNG -->
-<div id="page-order" class="page on">
+<div id="page-order" class="page">
   <div class="sbar" style="padding-bottom:6px">
+    <div class="page-head-inline">
+      <div>
+        <div class="page-kicker">Bán hàng</div>
+        <div class="page-title">Đặt hàng</div>
+      </div>
+      <button class="head-mini-btn" onclick="gotoTab('don')">Xem đơn</button>
+    </div>
     <div id="cus-selector" style="margin-bottom:6px"></div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
@@ -50,12 +67,44 @@
 
 <!-- ĐƠN HÀNG -->
 <div id="page-don" class="page">
+  <div class="page-section-head compact">
+    <div>
+      <div class="page-kicker">Lưu trữ và gửi đơn</div>
+      <div class="page-title">Đơn hàng</div>
+    </div>
+    <button class="head-mini-btn" onclick="gotoTab('order')">Tạo đơn</button>
+  </div>
   <div id="don-content"></div>
 </div>
 
-<!-- QUẢN LÝ (Admin) -->
+<!-- CÀI ĐẶT / QUẢN TRỊ -->
 <div id="page-adm" class="page">
+  <div class="page-section-head">
+    <div>
+      <div class="page-kicker">Quản trị dữ liệu</div>
+      <div class="page-title">Cài đặt và vận hành</div>
+    </div>
+    <button class="head-mini-btn primary" onclick="syncOpenSettings()">Đồng bộ</button>
+  </div>
+  <div id="settings-overview" class="settings-overview"></div>
+  <div class="settings-shortcuts">
+    <button class="settings-card accent-blue" onclick="syncOpenSettings()">
+      <span class="settings-card-title">Cloud GitHub</span>
+      <span class="settings-card-desc">Push, pull, token, backup và restore</span>
+    </button>
+    <button class="settings-card accent-gold" onclick="gotoTab('km')">
+      <span class="settings-card-title">Chương trình KM</span>
+      <span class="settings-card-desc">Xem và chỉnh CTKM trong màn hình riêng</span>
+    </button>
+  </div>
   <div class="sbar">
+    <div class="page-head-inline">
+      <div>
+        <div class="page-kicker">Danh mục bán hàng</div>
+        <div class="page-title">Quản lý sản phẩm</div>
+      </div>
+      <button class="head-mini-btn" onclick="gotoTab('km')">CTKM</button>
+    </div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
       <input type="text" id="adm-q" placeholder="Tìm SP để chỉnh sửa..." oninput="debounceRender('adm')">
@@ -79,6 +128,13 @@
 <!-- KHÁCH HÀNG -->
 <div id="page-kh" class="page">
   <div class="sbar" style="padding-bottom:5px">
+    <div class="page-head-inline">
+      <div>
+        <div class="page-kicker">Tuyến và độ phủ</div>
+        <div class="page-title">Khách hàng</div>
+      </div>
+      <button class="head-mini-btn" onclick="gotoTab('home')">KPI</button>
+    </div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
       <input type="text" id="cus-search" placeholder="Tìm KH theo tên, mã..." oninput="cusFilterSearch(this.value)">
@@ -95,6 +151,13 @@
 
 <!-- CT KM -->
 <div id="page-km" class="page">
+  <div class="page-section-head compact">
+    <div>
+      <div class="page-kicker">Marketing programs</div>
+      <div class="page-title">Chương trình khuyến mãi</div>
+    </div>
+    <button class="head-mini-btn" onclick="gotoTab('adm')">Cài đặt</button>
+  </div>
   <div style="background:var(--card);margin:8px 12px;border-radius:var(--R);padding:12px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:var(--shadow)">
     <button onclick="exportKM()" class="btn-tool" style="flex:1;margin:0;height:42px">📤 Xuất CT KM</button>
     <button onclick="importKM()" class="btn-tool" style="flex:1;margin:0;height:42px">📥 Nhập CT KM</button>
@@ -143,6 +206,14 @@
   </div>
 </div>
 </div><!-- #main -->
+
+<div id="tabbar">
+  <button class="tb on" onclick="gotoTab('home')" id="tab-home"><span class="tb-icon">▦</span><span class="tb-label">Trang chủ</span></button>
+  <button class="tb" onclick="gotoTab('order')" id="tab-order"><span class="tb-icon">◫</span><span class="tb-label">Đặt hàng</span></button>
+  <button class="tb" onclick="gotoTab('don')" id="tab-don"><span class="tb-icon">☰</span><span class="tb-label">Đơn hàng</span><span class="tb-badge" id="don-badge"></span></button>
+  <button class="tb" onclick="gotoTab('kh')" id="tab-kh"><span class="tb-icon">◎</span><span class="tb-label">Khách hàng</span></button>
+  <button class="tb" onclick="gotoTab('adm')" id="tab-adm"><span class="tb-icon">⋯</span><span class="tb-label">Cài đặt</span></button>
+</div>
 
 <!-- ADMIN MODAL (legacy) -->
 <div id="adm-modal" onclick="closeAdmModal(event)">

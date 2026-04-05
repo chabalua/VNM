@@ -266,13 +266,13 @@ function renderCusTab() {
   var totalVIP = CUS.filter(function(k) { return k.programs && k.programs.vipShop && k.programs.vipShop.dangKy; }).length;
   var totalSBPS = CUS.filter(function(k) { return k.programs && k.programs.sbpsShop && k.programs.sbpsShop.dangKy; }).length;
 
-  html += '<div style="background:linear-gradient(135deg,#006B3F,#008A50);margin:0 12px 10px;border-radius:var(--R);padding:16px 18px;color:#fff;box-shadow:0 4px 16px rgba(0,107,63,.25)">';
-  html += '<div style="font-size:11px;opacity:.65;margin-bottom:10px;letter-spacing:.5px;text-transform:uppercase">Tổng quan khách hàng</div>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:8px;text-align:center">';
-  html += '<div><div style="font-size:24px;font-weight:900">' + totalKH + '</div><div style="font-size:9px;opacity:.6">Tổng KH</div></div>';
-  html += '<div><div style="font-size:24px;font-weight:900;color:#a3e6c0">' + totalVNM + '</div><div style="font-size:9px;opacity:.6">VNM Shop</div></div>';
-  html += '<div><div style="font-size:24px;font-weight:900;color:#93c5fd">' + totalVIP + '</div><div style="font-size:9px;opacity:.6">VIP Shop</div></div>';
-  html += '<div><div style="font-size:24px;font-weight:900;color:#fcd34d">' + totalSBPS + '</div><div style="font-size:9px;opacity:.6">SBPS</div></div>';
+  html += '<div class="kh-summary">';
+  html += '<div class="kh-summary-kicker">Tổng quan khách hàng</div>';
+  html += '<div class="kh-summary-grid">';
+  html += '<div><div class="kh-summary-value">' + totalKH + '</div><div class="kh-summary-label">Tổng KH</div></div>';
+  html += '<div><div class="kh-summary-value green">' + totalVNM + '</div><div class="kh-summary-label">VNM Shop</div></div>';
+  html += '<div><div class="kh-summary-value blue">' + totalVIP + '</div><div class="kh-summary-label">VIP Shop</div></div>';
+  html += '<div><div class="kh-summary-value gold">' + totalSBPS + '</div><div class="kh-summary-label">SBPS</div></div>';
   html += '</div></div>';
 
   var routeOrder = ROUTES.map(function(r) { return r.id; });
@@ -283,7 +283,7 @@ function renderCusTab() {
     var label = route ? route.ten : 'Chưa phân tuyến';
     var count = groups[routeId].length;
     html += '<div class="adm-section" style="margin-top:8px">';
-    html += '<div class="adm-sec-hd" style="background:#1C1C1E"><span>📍 ' + label + ' (' + count + ' KH)</span></div>';
+    html += '<div class="adm-sec-hd kh-route-head"><span>📍 ' + label + ' (' + count + ' KH)</span></div>';
     groups[routeId].forEach(function(kh) {
       var idx = CUS.indexOf(kh);
       html += cusCardHTML(kh, idx);
@@ -302,14 +302,14 @@ function cusCardHTML(kh, idx) {
   var hasData = md.dsNhomC || md.dsNhomDE || md.dsSBPS;
 
   var html = '<div style="padding:14px 16px;border-bottom:1px solid var(--n5)">';
-  html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px">';
-  html += '<div style="flex:1;min-width:0">';
+  html += '<div class="customer-row-head">';
+  html += '<div class="customer-row-title">';
   html += '<div style="font-size:15px;font-weight:800;color:var(--n1);line-height:1.2">' + (kh.ten || kh.ma) + '</div>';
   html += '<div style="font-size:11px;color:var(--n3);margin-top:2px">' + kh.ma + (kh.diachi ? ' · ' + kh.diachi : '') + '</div>';
   html += '</div>';
-  html += '<div style="display:flex;gap:6px">';
-  html += '<button onclick="cusInputDS(' + idx + ')" style="height:34px;padding:0 12px;border:1.5px solid var(--vm);background:var(--vmL);border-radius:8px;font-size:11.5px;font-weight:700;color:var(--vm);cursor:pointer">📊 Nhập DS</button>';
-  html += '<button onclick="cusEdit(' + idx + ')" style="height:34px;width:34px;border:1px solid var(--n5);background:#fff;border-radius:8px;font-size:14px;color:var(--n3);cursor:pointer;display:flex;align-items:center;justify-content:center">✏️</button>';
+  html += '<div class="customer-actions">';
+  html += '<button onclick="cusInputDS(' + idx + ')" class="customer-action-btn">📊 Nhập DS</button>';
+  html += '<button onclick="cusEdit(' + idx + ')" class="customer-icon-btn">✏️</button>';
   html += '</div></div>';
 
   var equipParts = [];
@@ -327,10 +327,10 @@ function cusCardHTML(kh, idx) {
     var vnmTL = kh.programs.vnmShop.mucTichLuy || '';
     var vnmBBInfo = VNM_SHOP_TRUNGBAY[vnmBB];
     var vnmTLInfo = VNM_SHOP_TICHLUY.find(function(t) { return t.muc === vnmTL; });
-    html += '<div style="background:#f0faf4;border-radius:10px;padding:10px 12px;border-left:3.5px solid #006B3F">';
+    html += '<div style="background:#EEF3FF;border-radius:10px;padding:10px 12px;border-left:3.5px solid #1A4DFF">';
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
-    html += '<span style="font-size:12.5px;font-weight:800;color:#006B3F">VNM Shop · Nhóm C</span>';
-    if (vnmBBInfo) html += '<span style="font-size:10.5px;color:#006B3F;font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
+    html += '<span style="font-size:12.5px;font-weight:800;color:#1A4DFF">VNM Shop · Nhóm C</span>';
+    if (vnmBBInfo) html += '<span style="font-size:10.5px;color:#1A4DFF;font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
     html += '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Bày bán: <b>' + vnmBB + '</b>';
@@ -338,8 +338,8 @@ function cusCardHTML(kh, idx) {
     html += ' · Tích lũy: <b>Mức ' + vnmTL + '</b>';
     if (vnmTLInfo) html += ' (CK ' + vnmTLInfo.ckDS + '%)';
     html += '</div>';
-    if (vnmProg) html += cusProgressBarHTML('Tiến độ DS', vnmProg.pct, vnmProg.ds, vnmProg.target, '#006B3F');
-    if (reward.vnm && reward.vnm.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#006B3F;margin-top:3px">→ Thưởng: ' + fmt(reward.vnm.total) + 'đ</div>';
+    if (vnmProg) html += cusProgressBarHTML('Tiến độ DS', vnmProg.pct, vnmProg.ds, vnmProg.target, '#1A4DFF');
+    if (reward.vnm && reward.vnm.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#1A4DFF;margin-top:3px">→ Thưởng: ' + fmt(reward.vnm.total) + 'đ</div>';
     html += '</div>';
   }
 
@@ -382,7 +382,7 @@ function cusCardHTML(kh, idx) {
   html += '</div>';
 
   if (reward.totalReward > 0) {
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#006B3F,#008A50);color:#fff;border-radius:10px;padding:10px 14px;margin-top:8px;box-shadow:0 2px 8px rgba(0,107,63,.2)">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#1A4DFF,#3A73FF);color:#fff;border-radius:10px;padding:10px 14px;margin-top:8px;box-shadow:0 2px 8px rgba(26,77,255,.18)">';
     html += '<div><div style="font-size:10.5px;opacity:.7">Tổng thưởng T' + cusCurrentMonthLabel() + '</div>';
     if (reward.dsTotal > 0) html += '<div style="font-size:9px;opacity:.55">Giảm thêm ' + (reward.totalReward / reward.dsTotal * 100).toFixed(1) + '%</div>';
     html += '</div>';
@@ -447,12 +447,12 @@ function cusInputDS(idx) {
   var body = document.getElementById('km-modal-body');
   var html = '';
   if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
-    html += '<div class="kf"><div class="kfl" style="color:#006B3F">📦 NHÓM C (VNM Shop)</div>';
+    html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📦 NHÓM C (VNM Shop)</div>';
     html += cusInputField('cds-c', 'DS nhóm C tháng', md.dsNhomC);
     html += cusInputField('cds-gd1', 'DS GĐ1 (1-10)', md.dsGD1);
     html += cusInputField('cds-gd2', 'DS GĐ2 (11-20)', md.dsGD2);
     html += cusInputField('cds-gd3', 'DS GĐ3 (21-27)', md.dsGD3);
-    html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vnm" ' + (md.vnmShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#006B3F"> Đạt trưng bày VNM Shop</label></div>';
+    html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vnm" ' + (md.vnmShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#1A4DFF"> Đạt trưng bày VNM Shop</label></div>';
   }
   if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#2563EB">🧊 NHÓM DE (VIP Shop)</div>';
@@ -491,12 +491,12 @@ function cusPreviewDS(idx) {
   var md = cusReadDS();
   var reward = calcTotalReward(kh, md);
   var el = document.getElementById('cds-preview'); if (!el) return;
-  var html = '<div style="background:var(--vmL);border:1px solid #B8E0CB;border-radius:var(--Rs);padding:12px 14px">';
+  var html = '<div style="background:var(--vmL);border:1px solid #C9D7FF;border-radius:var(--Rs);padding:12px 14px">';
   html += '<div style="font-size:12px;font-weight:700;color:var(--vm);margin-bottom:8px">🔍 Dự tính thưởng</div>';
-  if (reward.vnm && reward.vnm.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#006B3F">VNM Shop:</b> ' + fmt(reward.vnm.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vnm.details.join(' · ') + '</div>'; }
+  if (reward.vnm && reward.vnm.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#1A4DFF">VNM Shop:</b> ' + fmt(reward.vnm.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vnm.details.join(' · ') + '</div>'; }
   if (reward.vip && reward.vip.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#2563EB">VIP Shop:</b> ' + fmt(reward.vip.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vip.details.join(' · ') + '</div>'; }
   if (reward.sbps && reward.sbps.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#D97706">SBPS:</b> ' + fmt(reward.sbps.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.sbps.details.join(' · ') + '</div>'; }
-  html += '<div style="border-top:1px solid #B8E0CB;padding-top:8px;margin-top:4px;display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:800;color:var(--vm)">TỔNG THƯỞNG</span><span style="font-size:18px;font-weight:900;color:var(--vm)">' + fmt(reward.totalReward) + 'đ</span></div>';
+  html += '<div style="border-top:1px solid #C9D7FF;padding-top:8px;margin-top:4px;display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:800;color:var(--vm)">TỔNG THƯỞNG</span><span style="font-size:18px;font-weight:900;color:var(--vm)">' + fmt(reward.totalReward) + 'đ</span></div>';
   if (reward.dsTotal > 0 && reward.totalReward > 0) { html += '<div style="font-size:10.5px;color:var(--b);margin-top:5px">≈ Giảm thêm ' + (reward.totalReward / reward.dsTotal * 100).toFixed(1) + '% trên DS ' + fmt(reward.dsTotal) + 'đ</div>'; }
   html += '</div>';
   el.innerHTML = html;
@@ -506,7 +506,9 @@ function cusSaveDS(idx) {
   var mk = cusCurrentMonthKey();
   if (!kh.monthly) kh.monthly = {};
   kh.monthly[mk] = cusReadDS();
+  if (window.markEntityUpdated) markEntityUpdated(kh);
   cusSave();
+  if (window.syncAutoPushFile) syncAutoPushFile('customers.json');
   document.getElementById('km-modal').style.display = 'none';
   renderCusTab();
   alert('✅ Đã lưu DS tháng ' + cusCurrentMonthLabel() + ' cho ' + (kh.ten || kh.ma));
@@ -540,8 +542,8 @@ function cusEdit(idx) {
   html += '<select id="ckh-loaike" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option>';
   Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (kh.loaiKe === m ? ' selected' : '') + '>' + m + ' — ' + VNM_SHOP_TRUNGBAY[m].ten + '</option>'; });
   html += '</select></div>';
-  html += '<div class="kf"><div class="kfl" style="color:#006B3F">📋 VNM SHOP (Nhóm C)</div>';
-  html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:10px"><input type="checkbox" id="ckh-vnm-dk" ' + (vnm.dangKy ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#006B3F"> Đăng ký tham gia</label>';
+  html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📋 VNM SHOP (Nhóm C)</div>';
+  html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:10px"><input type="checkbox" id="ckh-vnm-dk" ' + (vnm.dangKy ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#1A4DFF"> Đăng ký tham gia</label>';
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:10px;color:var(--n3)">Mức bày bán</div><select id="ckh-vnm-bb" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px">';
   Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (vnm.mucBayBan === m ? ' selected' : '') + '>' + m + '</option>'; });
   html += '</select></div><div><div style="font-size:10px;color:var(--n3)">Mức tích lũy</div><select id="ckh-vnm-tl" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px">';
@@ -577,14 +579,15 @@ function cusSaveForm() {
   if (!ma) { alert('Nhập mã KH'); return; }
   var kh = { ma: ma, ten: g('ckh-ten'), tuyen: g('ckh-tuyen'), diachi: g('ckh-diachi'), sdt: g('ckh-sdt'), loaiCH: g('ckh-loai'), coTuVNM: c('ckh-tu'), loaiTu: g('ckh-loaitu'), dungTichTu: n('ckh-dungtich'), coKe: c('ckh-ke'), loaiKe: g('ckh-loaike'), ghiChu: g('ckh-ghichu'),
     programs: { vnmShop: { dangKy: c('ckh-vnm-dk'), mucBayBan: g('ckh-vnm-bb'), mucTichLuy: g('ckh-vnm-tl'), ngayDangKy: n('ckh-vnm-ngay') }, vipShop: { dangKy: c('ckh-vip-dk'), mucBayBan: g('ckh-vip-bb'), mucTichLuy: g('ckh-vip-tl'), ngayDangKy: n('ckh-vip-ngay') }, sbpsShop: { dangKy: c('ckh-sbps-dk'), muc: g('ckh-sbps-muc'), ngayDangKy: 0 } }, monthly: {} };
+  if (window.markEntityUpdated) markEntityUpdated(kh);
   if (_cusEditIdx >= 0 && CUS[_cusEditIdx]) { kh.monthly = CUS[_cusEditIdx].monthly || {}; CUS[_cusEditIdx] = kh; }
   else { if (CUS.find(function(k) { return k.ma === ma; })) { alert('Mã KH đã tồn tại!'); return; } CUS.push(kh); }
-  cusSave(); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
+  cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
   alert('✅ Đã lưu: ' + (kh.ten || kh.ma));
 }
 function cusDel(idx) {
   var kh = CUS[idx]; if (!kh || !confirm('Xóa KH "' + (kh.ten || kh.ma) + '"?')) return;
-  CUS.splice(idx, 1); cusSave(); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
+  CUS.splice(idx, 1); cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
 }
 function cusExport() {
   var data = { customers: CUS, routes: ROUTES };
@@ -602,8 +605,8 @@ function cusImport() {
       try {
         var data = JSON.parse(ev.target.result);
         var replace = confirm('Thay thế toàn bộ? (OK = thay thế, Cancel = gộp thêm)');
-        if (data.customers) { var newCus = data.customers.filter(function(k) { return k && k.ma; }); if (replace) CUS = newCus; else { newCus.forEach(function(k) { var ex = CUS.find(function(c) { return c.ma === k.ma; }); if (ex) Object.assign(ex, k); else CUS.push(k); }); } cusSave(); }
-        if (data.routes) { ROUTES = data.routes; routesSave(); }
+        if (data.customers) { var newCus = data.customers.filter(function(k) { return k && k.ma; }); if (replace) CUS = newCus; else { newCus.forEach(function(k) { var ex = CUS.find(function(c) { return c.ma === k.ma; }); if (ex) Object.assign(ex, k); else CUS.push(k); }); } cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); }
+        if (data.routes) { ROUTES = data.routes; routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); }
         renderCusTab(); alert('✅ Đã nhập ' + (data.customers ? data.customers.length : 0) + ' KH');
       } catch(e) { alert('Lỗi: ' + e.message); }
     }; reader.readAsText(file);
@@ -625,9 +628,11 @@ function cusAddRoute() {
   var ten = (document.getElementById('new-route-ten') || {}).value.trim();
   if (!id || !ten) { alert('Nhập mã và tên tuyến'); return; }
   if (ROUTES.find(function(r) { return r.id === id; })) { alert('Mã tuyến đã tồn tại'); return; }
-  ROUTES.push({ id: id, ten: ten, mota: '' }); routesSave(); cusManageRoutes(); renderCusTab();
+  var route = { id: id, ten: ten, mota: '' };
+  if (window.markEntityUpdated) markEntityUpdated(route);
+  ROUTES.push(route); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab();
 }
-function cusDelRoute(i) { if (!confirm('Xóa tuyến "' + ROUTES[i].ten + '"?')) return; ROUTES.splice(i, 1); routesSave(); cusManageRoutes(); renderCusTab(); }
+function cusDelRoute(i) { if (!confirm('Xóa tuyến "' + ROUTES[i].ten + '"?')) return; ROUTES.splice(i, 1); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab(); }
 function cusFilterRoute(routeId) { _cusFilterRoute = routeId; renderCusTab(); }
 function cusFilterSearch(q) { _cusFilterQuery = (q || '').trim(); renderCusTab(); }
 

@@ -9,11 +9,11 @@ var PROMOTIONS_URL = REPO_RAW + 'promotions.json';
 var VAT = 0.015;
 
 // Màu sắc cho nhóm sản phẩm (updated Vinamilk brand)
-var NCOLOR = { A: '#2563EB', B: '#D97706', C: '#006B3F', D: '#DC2626' };
+var NCOLOR = { A: '#2563EB', B: '#D97706', C: '#1A4DFF', D: '#DC2626' };
 var NBG = {
   A: 'background:#EFF6FF;color:#2563EB',
   B: 'background:#FFFBEB;color:#D97706',
-  C: 'background:#E8F5EE;color:#006B3F',
+  C: 'background:#EEF3FF;color:#1A4DFF',
   D: 'background:#FEF2F2;color:#DC2626'
 };
 var NLBL = { A: 'Sữa bột', B: 'Sữa đặc', C: 'Sữa nước', D: 'Sữa chua' };

@@ -211,6 +211,7 @@ function updateBadge() { var n = getItems().length; var b = document.getElementB
 function renderDon() {
   var items = getItems();
   var el = document.getElementById('don-content'); if (!el) return;
+  var cloudReady = typeof syncHasToken === 'function' && syncHasToken();
 
   var html = '';
 
@@ -269,6 +270,14 @@ function renderDon() {
   var orders = getOrders();
   if (orders.length || !items.length) {
     html += '<div style="padding:16px 12px 8px"><div style="font-size:15px;font-weight:800;color:var(--n1)">📋 Lịch sử đơn hàng</div>';
+    html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">';
+    if (cloudReady) {
+      html += '<button onclick="syncPullOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--b);border-radius:8px;background:#fff;color:var(--b);font-size:11px;font-weight:700;cursor:pointer">⬇️ Tải đơn cloud</button>';
+      html += '<button onclick="syncPushOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--vm);border-radius:8px;background:#fff;color:var(--vm);font-size:11px;font-weight:700;cursor:pointer">⬆️ Lưu đơn cloud</button>';
+    } else {
+      html += '<button onclick="syncOpenSettings()" style="height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:#fff;color:var(--o);font-size:11px;font-weight:700;cursor:pointer">☁️ Cài cloud GitHub</button>';
+    }
+    html += '</div>';
     if (!orders.length) {
       html += '<div style="font-size:13px;color:var(--n3);margin-top:8px">Chưa có đơn nào' + (items.length ? '' : '<br><small>Vào Đặt hàng để thêm SP</small>') + '</div>';
     }
@@ -304,6 +313,17 @@ function filterOrders(period) {
   });
 }
 
+function getVisibleOrderIndexById(orderId) {
+  return getOrders().findIndex(function(order) { return String(order.id) === String(orderId); });
+}
+
+function resolveOrder(orderRef) {
+  if (orderRef && typeof orderRef === 'object') return orderRef;
+  var orders = getOrders();
+  if (typeof orderRef === 'number') return orders[orderRef] || null;
+  return orders.find(function(order) { return String(order.id) === String(orderRef); }) || null;
+}
+
 function renderOrdersList(orders, period) {
   var now = new Date();
   var today = now.toISOString().slice(0, 10);
@@ -327,22 +347,21 @@ function renderOrdersList(orders, period) {
     var itemCount = (o.items || []).length;
     var ngay = o.date ? new Date(o.date).toLocaleString('vi-VN', { day:'2-digit', month:'2-digit', hour:'2-digit', minute:'2-digit' }) : o.ngay || '';
 
-    html += '<div style="background:var(--card);margin:6px 12px;border-radius:var(--R);box-shadow:var(--shadow);overflow:hidden">';
-    html += '<div style="padding:12px 14px;display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid var(--n5)">';
-    html += '<div><div style="font-size:14px;font-weight:800;color:var(--vm)">' + fmt(o.tong) + 'đ</div>';
-    html += '<div style="font-size:11px;color:var(--n3)">' + ngay + ' · ' + itemCount + ' SP · ' + khName + '</div></div>';
-    html += '<div style="display:flex;gap:6px">';
-    html += '<button onclick="copyOrderZalo(' + i + ')" style="height:32px;padding:0 10px;border:1.5px solid var(--vm);background:var(--vmL);border-radius:8px;font-size:11px;font-weight:700;color:var(--vm);cursor:pointer">📋 Copy</button>';
-    html += '<button onclick="viewOrderDetail(' + i + ')" style="height:32px;padding:0 10px;border:1.5px solid var(--n5);background:#fff;border-radius:8px;font-size:11px;font-weight:700;color:var(--n2);cursor:pointer">Chi tiết</button>';
-    html += '<button onclick="deleteOrder(' + i + ')" style="height:32px;width:32px;border:1px solid var(--n5);background:#fff;border-radius:8px;font-size:12px;color:var(--n3);cursor:pointer;display:flex;align-items:center;justify-content:center">✕</button>';
+    html += '<div class="history-card">';
+    html += '<div class="history-card-head">';
+    html += '<div><div class="history-card-total">' + fmt(o.tong) + 'đ</div>';
+    html += '<div class="history-card-meta">' + ngay + ' · ' + itemCount + ' SP · ' + khName + '</div></div>';
+    html += '<div class="history-card-actions">';
+    html += '<button onclick="copyOrderZalo(' + o.id + ')" class="history-card-btn copy">📋 Copy</button>';
+    html += '<button onclick="viewOrderDetail(' + o.id + ')" class="history-card-btn view">Chi tiết</button>';
+    html += '<button onclick="deleteOrder(' + o.id + ')" class="history-card-btn delete">✕</button>';
     html += '</div></div>';
 
-    // Mini item list
-    html += '<div style="padding:8px 14px;font-size:11px;color:var(--n2)">';
+    html += '<div class="history-item-list">';
     (o.items || []).slice(0, 3).forEach(function(it) {
-      html += '<div style="display:flex;justify-content:space-between;margin-bottom:2px"><span>' + it.ten.slice(0, 30) + '</span><span style="font-weight:600">' + it.totalLon + ' ' + it.donvi + '</span></div>';
+      html += '<div class="history-item-row"><span>' + it.ten + '</span><span style="font-weight:600">' + it.totalLon + ' ' + it.donvi + '</span></div>';
     });
-    if (itemCount > 3) html += '<div style="color:var(--n3)">... +' + (itemCount - 3) + ' SP khác</div>';
+    if (itemCount > 3) html += '<div class="history-more">... +' + (itemCount - 3) + ' SP khác</div>';
     html += '</div></div>';
   });
   return html;
@@ -351,7 +370,7 @@ function renderOrdersList(orders, period) {
 // ============================================================
 // TẠO ĐƠN — Lưu vào orders + xóa giỏ
 // ============================================================
-function submitOrder() {
+async function submitOrder() {
   var items = getItems(); if (!items.length) return;
   var makh = (window._selectedCustomerMa) ? window._selectedCustomerMa : ((document.getElementById('makh-inp') || {}).value || '').trim().toUpperCase();
   var orderKM = calcOrderKM(items);
@@ -387,6 +406,13 @@ function submitOrder() {
   if (orders.length > 200) orders = orders.slice(0, 200);
   saveOrders(orders);
 
+  var cloudMessage = '';
+  if (typeof syncAutoPushOrder === 'function') {
+    var cloudResult = await syncAutoPushOrder(order);
+    if (cloudResult && cloudResult.ok) cloudMessage = '\n☁️ Đã lưu đơn lên GitHub';
+    else if (cloudResult && cloudResult.error) cloudMessage = '\n⚠️ Đơn đã lưu máy này, nhưng chưa đẩy được lên GitHub: ' + cloudResult.error;
+  }
+
   // Legacy KH orders (tương thích)
   if (makh) {
     var khLegacy = customers.find(function(k) { return k.ma === makh; });
@@ -397,8 +423,8 @@ function submitOrder() {
   }
 
   // Hỏi copy Zalo không
-  var copyNow = confirm('✅ Đã tạo đơn ' + fmt(tong) + 'đ' + (khTen ? ' cho ' + khTen : '') + '\n\nCopy đơn để gửi Zalo?');
-  if (copyNow) copyOrderZalo(0); // copy đơn vừa tạo (index 0 = mới nhất)
+  var copyNow = confirm('✅ Đã tạo đơn ' + fmt(tong) + 'đ' + (khTen ? ' cho ' + khTen : '') + cloudMessage + '\n\nCopy đơn để gửi Zalo?');
+  if (copyNow) copyOrderZalo(order.id);
 
   clearCart();
 }
@@ -406,9 +432,8 @@ function submitOrder() {
 // ============================================================
 // COPY ĐƠN → ZALO (format text đẹp)
 // ============================================================
-function copyOrderZalo(idx) {
-  var orders = getOrders();
-  var o = orders[idx]; if (!o) return;
+function copyOrderZalo(orderRef) {
+  var o = resolveOrder(orderRef); if (!o) return;
 
   var lines = [];
   lines.push('ĐƠN HÀNG' + (o.khTen ? ' — ' + o.khTen : '') + (o.khMa ? ' (' + o.khMa + ')' : ''));
@@ -472,18 +497,18 @@ function fallbackCopy(text) {
 // ============================================================
 // XEM CHI TIẾT / XÓA ĐƠN
 // ============================================================
-function viewOrderDetail(idx) {
-  var orders = getOrders();
-  var o = orders[idx]; if (!o) return;
+function viewOrderDetail(orderRef) {
+  var o = resolveOrder(orderRef); if (!o) return;
+  var orderIndex = getVisibleOrderIndexById(o.id);
 
   var modal = document.getElementById('km-modal');
-  document.getElementById('km-modal-t').textContent = '📋 Chi tiết đơn #' + (orders.length - idx);
+  document.getElementById('km-modal-t').textContent = '📋 Chi tiết đơn #' + ((orderIndex >= 0) ? (getOrders().length - orderIndex) : o.id);
   modal.style.display = 'block';
 
   var body = document.getElementById('km-modal-body');
   var html = '';
 
-  html += '<div style="background:var(--vmL);border-radius:var(--Rs);padding:12px 14px;margin-bottom:12px;border:1px solid #B8E0CB">';
+  html += '<div style="background:var(--vmL);border-radius:var(--Rs);padding:12px 14px;margin-bottom:12px;border:1px solid #C9D7FF">';
   html += '<div style="display:flex;justify-content:space-between;align-items:center">';
   html += '<div><div style="font-size:11px;color:var(--n3)">' + (o.ngay || '') + '</div>';
   html += '<div style="font-size:14px;font-weight:800;color:var(--vm)">' + (o.khTen || o.khMa || 'Không rõ KH') + '</div></div>';
@@ -503,17 +528,17 @@ function viewOrderDetail(idx) {
   html += '<div style="display:flex;justify-content:space-between;font-size:12px;color:var(--b);margin-top:4px"><span>+VAT 1.5%</span><span>' + fmt(Math.round(o.tong * 1.015)) + 'đ</span></div>';
   html += '</div>';
 
-  html += '<button onclick="copyOrderZalo(' + idx + ')" style="width:100%;height:48px;background:linear-gradient(135deg,var(--vm),#008A50);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;margin-top:16px">📋 Copy gửi Zalo</button>';
+  html += '<button onclick="copyOrderZalo(' + o.id + ')" style="width:100%;height:48px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;margin-top:16px">📋 Copy gửi Zalo</button>';
 
   body.innerHTML = html;
 }
 
-function deleteOrder(idx) {
-  var orders = getOrders();
-  if (!orders[idx]) return;
+function deleteOrder(orderRef) {
+  var order = resolveOrder(orderRef);
+  if (!order) return;
   if (!confirm('Xóa đơn này?')) return;
-  orders.splice(idx, 1);
-  saveOrders(orders);
+  if (window.softDeleteOrder) softDeleteOrder(order.id);
+  if (window.syncAutoPushOrder) syncAutoPushOrder();
   renderDon();
 }
 
