@@ -2280,5 +2280,19 @@
     "kmRules": [],
     "kmText": "",
     "_brand": "Susu/Hero"
+  },
+  {
+    "ma": "07KD12",
+    "ten": "SCA không đường VNM 100g",
+    "nhom": "D",
+    "donvi": "hộp",
+    "slThung": 48,
+    "giaNYLon": 6210,
+    "giaNYThung": 298080,
+    "kmRules": [],
+    "kmText": "",
+    "phanLoai": "Sữa Chua",
+    "phanLoaiTuNhap": true,
+    "_updatedAt": "2026-04-05T12:15:18.399Z"
   }
 ]
