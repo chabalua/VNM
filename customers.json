@@ -14,8 +14,8 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
@@ -32,7 +32,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:15:30.793Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412EH",
@@ -41,33 +41,35 @@
     "diachi": "19/8",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:18:19.332Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412EI",
@@ -111,24 +113,25 @@
     "diachi": "Cổng chợ, Chợ 19 8",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -137,7 +140,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:16:28.499Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412EK",
@@ -216,24 +219,25 @@
     "diachi": "19/8, chợ",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -242,7 +246,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:17:07.816Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412F6",
@@ -358,22 +362,23 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -382,7 +387,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:27:46.928Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412FG",
@@ -428,22 +433,23 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -452,7 +458,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:18:40.688Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412FM",
@@ -531,33 +537,35 @@
     "diachi": "Cổng, Chợ Krông Bông",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:39:24.240Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412FQ",
@@ -566,33 +574,35 @@
     "diachi": "02, lê lai",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 600,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=600L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:39:30.681Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412FY",
@@ -679,8 +689,8 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
@@ -691,13 +701,14 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:40:57.233Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412HI",
@@ -708,22 +719,23 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M4",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -732,7 +744,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:41:03.474Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412HK",
@@ -916,22 +928,23 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M4",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -940,7 +953,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:43:18.520Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412J6",
@@ -949,9 +962,9 @@
     "diachi": "cách cô ý 100m, thôn 1",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
@@ -963,10 +976,11 @@
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -975,7 +989,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:03:12.397Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412J7",
@@ -992,8 +1006,8 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M6",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
@@ -1010,7 +1024,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:43:24.674Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412J8",
@@ -1027,8 +1041,8 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
@@ -1039,13 +1053,14 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:43:29.549Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412J9",
@@ -1062,8 +1077,8 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
@@ -1074,13 +1089,14 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:44:01.457Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412JA",
@@ -1089,24 +1105,25 @@
     "diachi": "gần sơn mình, thôn 7",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1115,7 +1132,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:44:06.463Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412JC",
@@ -1126,7 +1143,7 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
@@ -1138,10 +1155,11 @@
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1150,7 +1168,7 @@
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:44:11.846Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412JP",
@@ -1159,33 +1177,35 @@
     "diachi": "ngay cổng chợ, Chợ Kim Châu",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 600,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=600L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M4"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:44:20.022Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412KD",
@@ -1228,33 +1248,35 @@
     "diachi": "Cạnh Cổng, Buôn E Tam",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M4",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:44:45.137Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412KQ",
@@ -1577,7 +1599,7 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
@@ -1589,19 +1611,21 @@
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:04:13.169Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412NQ",
@@ -1748,24 +1772,25 @@
     "diachi": "14, 5 Hòa",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "",
         "mucTichLuy": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1773,7 +1798,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412S6",
@@ -1819,31 +1845,33 @@
     "loaiCH": "tapHoa",
     "coTuVNM": false,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 200,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "KH<600L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:04:35.368Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412SS",
@@ -1852,24 +1880,25 @@
     "diachi": "3, thôn",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "",
+        "dangKy": true,
+        "mucBayBan": "M6",
         "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "",
         "mucTichLuy": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1877,7 +1906,8 @@
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200412TA",
@@ -2081,13 +2111,14 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:05:34.553Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL2004133C",
@@ -2530,13 +2561,14 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:07:28.890Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200413KQ",
@@ -2703,13 +2735,14 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:08:17.352Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200413OZ",
@@ -3130,33 +3163,35 @@
     "diachi": "09, thôn 3",
     "sdt": "",
     "loaiCH": "tapHoa",
-    "coTuVNM": false,
+    "coTuVNM": true,
     "loaiTu": "",
-    "dungTichTu": 0,
+    "dungTichTu": 210,
     "coKe": false,
     "loaiKe": "M5",
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
+        "dangKy": true,
+        "mucBayBan": "M5",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
-        "dangKy": false,
+        "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0
+        "ngayDangKy": 0,
+        "mucTrungBay": "TH-M5"
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:08:59.561Z"
+    "_updatedAt": "2026-04-06T14:34:16.000Z"
   },
   {
     "ma": "DL200413TR",
