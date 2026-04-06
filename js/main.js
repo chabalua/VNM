@@ -624,6 +624,7 @@ function renderRoutePills() {
 window.onload = async function() {
   applyTheme(getThemeMode(), true);
   await initData();
+  if (window.ctConfigLoad) ctConfigLoad();
   await cusLoad();
   if (window.syncAutoPullAllOnStart) await syncAutoPullAllOnStart();
   renderHomeDashboard();

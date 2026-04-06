@@ -398,6 +398,19 @@ html[data-theme='dark']{
 .settings-card.accent-green{background:linear-gradient(135deg,#ECFDF5,#F5FFFA)}
 .settings-card-title{font-size:14px;font-weight:800;color:var(--n1)}
 .settings-card-desc{font-size:12px;color:var(--n3);line-height:1.45}
+.settings-card.accent-red{background:linear-gradient(135deg,#FFF1F1,#FFF7F7)}
+html[data-theme='dark'] .settings-card.accent-red{background:linear-gradient(135deg,#2d0f0f,#3d1515)}
+.ct-edit-table{width:100%;border-collapse:collapse;font-size:12px}
+.ct-edit-table th{background:var(--n6);padding:6px 8px;font-size:10.5px;font-weight:700;color:var(--n2);text-align:center;border-bottom:2px solid var(--n5);white-space:nowrap}
+.ct-edit-table td{padding:5px 4px;border-bottom:1px solid var(--n6);text-align:center}
+.ct-edit-table tbody tr:hover td{background:var(--n6)}
+.ct-inp{height:34px;border:1.5px solid var(--n5);border-radius:8px;padding:0 7px;font-size:12px;color:var(--n1);background:var(--bg);width:100%;box-sizing:border-box}
+.ct-inp:focus{outline:none;border-color:var(--vm);background:#F0F4FF}
+.ct-group-tabs{display:flex;gap:6px;margin-bottom:10px}
+.ct-group-tab{flex:1;height:36px;border-radius:var(--Rs);font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--n5);background:var(--n6);color:var(--n2)}
+.ct-group-tab.on{border-color:var(--vm);background:var(--vm);color:#fff}
+.ct-type-tab{flex:1;height:32px;border-radius:var(--Rs);font-size:12px;font-weight:700;cursor:pointer;border:1.5px solid var(--n5);background:transparent;color:var(--n3)}
+.ct-type-tab.on{border-color:#2563EB;background:#2563EB;color:#fff}
 
 .rule-help-box{background:#F8FAFF;border:1px solid #E5ECFA;border-radius:16px;padding:12px 14px;margin-bottom:10px}
 .rule-help-box.subtle{background:#FFFCF5;border-color:#FDE7B1}
