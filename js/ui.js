@@ -8,6 +8,7 @@ var brandF = '';
 var _searchTimer = null;
 var _spEditMa = null;
 var _selectedCustomerMa = '';
+var _cardExpanded = {};
 var CUSTOM_BRAND_RULES_KEY = 'vnm_custom_brand_rules_v1';
 
 // ============================================================
@@ -340,6 +341,27 @@ function onQty(ma) {
 }
 
 // ============================================================
+// TOGGLE CARD (thu gọn / mở rộng)
+// ============================================================
+function toggleCard(ma) {
+  var inCart = !!(cart[ma] && (cart[ma].qT > 0 || cart[ma].qL > 0));
+  var currentEffective = _cardExpanded[ma] === undefined ? inCart : _cardExpanded[ma];
+  var isNowExpanded = !currentEffective;
+  _cardExpanded[ma] = isNowExpanded;
+  var card = document.getElementById('card_' + ma);
+  var expandEl = document.getElementById('expand_' + ma);
+  var btn = card ? card.querySelector('.sp-toggle') : null;
+  if (!card || !expandEl) return;
+  if (isNowExpanded) {
+    expandEl.style.display = '';
+    if (btn) btn.textContent = '▲';
+  } else {
+    expandEl.style.display = 'none';
+    if (btn) btn.textContent = '▼';
+  }
+}
+
+// ============================================================
 // RENDER ĐẶT HÀNG
 // ============================================================
 function renderOrder() {
@@ -392,18 +414,23 @@ function renderOrder() {
         kmBadgeHtml = '<div class="km-line">' + ctNames.join(' · ') + (appliedCTs.length > 2 ? ' +' + (appliedCTs.length - 2) : '') + '</div>';
       }
 
+      var isExpanded = _cardExpanded[p.ma] === undefined ? !!inCart : _cardExpanded[p.ma];
       html += '<div class="sp-card ' + (inCart ? 'inCart' : '') + '" id="card_' + p.ma + '">';
       html += '<div class="sp-top"><div class="sp-bar" style="background:' + NCOLOR[p.nhom] + '"></div>';
-      html += '<div class="sp-body"><div class="sp-name">' + p.ten + '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + p.ma + '\')">★</span></div>';
+      html += '<div class="sp-body"><div class="sp-name" onclick="toggleCard(\'' + p.ma + '\')">' + p.ten + '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + p.ma + '\')">★</span></div>';
       html += '<div class="sp-meta"><span class="sp-chip">' + p.ma + '</span><span class="sp-chip">' + p.donvi + '·' + p.slThung + '/thùng</span>';
       if (brand) html += '<span class="sp-chip" style="' + NBG[p.nhom] + '">' + brand + '</span>';
-      html += '</div></div></div>';
+      html += '</div></div>';
+      html += '<button class="sp-toggle" onclick="toggleCard(\'' + p.ma + '\')">' + (isExpanded ? '▲' : '▼') + '</button>';
+      html += '</div>';
       html += kmBadgeHtml;
+      html += '<div class="sp-expand" id="expand_' + p.ma + '"' + (isExpanded ? '' : ' style="display:none"') + '>';
       html += '<div id="pt_' + p.ma + '">' + ptbl(p, kmInfo) + '</div>';
       html += '<div class="qty-area"><div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" max="999" inputmode="numeric" placeholder="0" id="qT_' + p.ma + '" oninput="onQty(\'' + p.ma + '\')"></div>';
       html += '<div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" max="9999" inputmode="numeric" placeholder="0" id="qL_' + p.ma + '" oninput="onQty(\'' + p.ma + '\')"></div>';
       html += '<button class="btn-add" onclick="addCart(\'' + p.ma + '\')">＋</button></div>';
-      html += '<div class="pv-box" id="pv_' + p.ma + '"></div></div>';
+      html += '<div class="pv-box" id="pv_' + p.ma + '"></div>';
+      html += '</div></div>';
     });
     html += '</div>';
   });
@@ -606,6 +633,7 @@ window.nhomF = nhomF;
 window.ptbl = ptbl;
 window.updKM = updKM;
 window.onQty = onQty;
+window.toggleCard = toggleCard;
 window.renderOrder = renderOrder;
 window.renderAdm = renderAdm;
 window.saveAdmPrice = saveAdmPrice;

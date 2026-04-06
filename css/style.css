@@ -110,10 +110,12 @@ html[data-theme='dark']{
    ============================================================ */
 .sp-card{background:var(--card);margin:8px 12px;border-radius:var(--R);box-shadow:var(--shadow);overflow:hidden;border:1px solid #E8ECF6;transition:all .2s ease}
 .sp-card.inCart{border-color:var(--vm2);box-shadow:0 0 0 1px var(--vm2),var(--shadow)}
-.sp-top{display:flex;gap:10px;padding:14px 14px 0}
+.sp-top{display:flex;gap:10px;padding:12px 14px 10px}
 .sp-bar{width:3.5px;border-radius:2px;flex-shrink:0;align-self:stretch}
 .sp-body{flex:1;min-width:0}
-.sp-name{font-size:14px;font-weight:700;color:var(--n1);line-height:1.35;word-break:break-word;display:flex;align-items:center;gap:4px}
+.sp-toggle{flex-shrink:0;align-self:center;background:none;border:none;cursor:pointer;color:var(--n3);font-size:12px;padding:4px 2px 4px 4px;line-height:1;transition:opacity .15s}
+.sp-toggle:active{opacity:.5}
+.sp-name{font-size:14px;font-weight:700;color:var(--n1);line-height:1.35;word-break:break-word;display:flex;align-items:center;gap:4px;cursor:pointer}
 .sp-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
 .sp-chip{font-size:10.5px;font-weight:600;color:var(--n3);background:var(--n6);border-radius:6px;padding:2px 8px}
 .sp-kmbadge{font-size:10.5px;font-weight:700;color:var(--vm);background:var(--vmL);border-radius:6px;padding:2px 8px}
