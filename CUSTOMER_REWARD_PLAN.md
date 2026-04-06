@@ -427,3 +427,5 @@ Cuối tháng: Tab KH
 - [ ] Phase 3.2: Quick-view CT khi chọn KH ở tab Đặt hàng
 - [ ] Test: Tạo đơn cho KH → verify DS auto → verify thưởng tính đúng
 - [ ] Sync: Push `customers.json` lên GitHub sau mỗi thay đổi
+
+
