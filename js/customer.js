@@ -74,6 +74,172 @@ var SBPS_TICHLUY = [
   { muc: '8', dsMin: 3500000,   ckN1: 4.00, ckN2: 4.50, ckN3: 4.00, ck26: 0 }
 ];
 
+// SBPS Trưng Bày — mức TH-M (theo app Vinamilk, DS xác nhận từ thực tế)
+var SBPS_TRUNGBAY = {
+  'TH-M1': { dsMin: 105000000, thuong: 400000 },
+  'TH-M2': { dsMin: 75000000,  thuong: 400000 },
+  'TH-M3': { dsMin: 32000000,  thuong: 230000 },
+  'TH-M4': { dsMin: 17000000,  thuong: 250000 },
+  'TH-M5': { dsMin: 5500000,   thuong: 150000 },
+  'TH-M6': { dsMin: 10000000,  thuong: 150000 },
+  'TH-M7': { dsMin: 3500000,   thuong: 80000  },
+  'TH-M8': { dsMin: 0,         thuong: 0      }
+};
+
+// Bảng mã CT theo app Vinamilk → mapping sang programs nội bộ
+var VNM_APP_CODES = {
+  'MR_VIPSHOP26_TB': { prog: 'vipShop',  loai: 'TB', ten: 'VIP Shop Trưng Bày'  },
+  'MR_VIPSHOP26_TL': { prog: 'vipShop',  loai: 'TL', ten: 'VIP Shop Tích Lũy'   },
+  'MR_VNMS26_TB':    { prog: 'vnmShop',  loai: 'TB', ten: 'VNM Shop Trưng Bày'  },
+  'MR_VNMS26_TL':    { prog: 'vnmShop',  loai: 'TL', ten: 'VNM Shop Tích Lũy'   },
+  'MR_VSHOP26_TL':   { prog: 'vnmShop',  loai: 'TL', ten: 'V Shop Tích Lũy'     },
+  'MR_SBPS26_TB':    { prog: 'sbpsShop', loai: 'TB', ten: 'SBPS Trưng Bày'      },
+  'MR_SBPS26_TL':    { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS Tích Lũy'       }
+};
+
+// ============================================================
+// MÃ CT APP — Helper functions
+// ============================================================
+
+// Trả về HTML options cho dropdown mức của từng mã CT
+function cusAppCodeMucOptions(maCT, selectedMuc) {
+  var html = '';
+  if (maCT === 'MR_VIPSHOP26_TB') {
+    ['TB1','TB2','TB3','TB4'].forEach(function(m) {
+      var t = VIP_SHOP_TRUNGBAY[m];
+      html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+' — DS≥'+fmt(t.dsMin)+'đ</option>';
+    });
+  } else if (maCT === 'MR_VIPSHOP26_TL') {
+    VIP_SHOP_TICHLUY.forEach(function(t) {
+      html += '<option value="'+t.muc+'"'+(selectedMuc===t.muc?' selected':'')+'>'+t.muc+' — DS≥'+fmt(t.dsMin)+'đ</option>';
+    });
+  } else if (maCT === 'MR_VNMS26_TB') {
+    Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) {
+      var t = VNM_SHOP_TRUNGBAY[m];
+      html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+' — DS≥'+fmt(t.dsMin)+'đ</option>';
+    });
+  } else if (maCT === 'MR_VNMS26_TL' || maCT === 'MR_VSHOP26_TL') {
+    VNM_SHOP_TICHLUY.forEach(function(t) {
+      html += '<option value="'+t.muc+'"'+(selectedMuc===t.muc?' selected':'')+'>Mức '+t.muc+' — DS≥'+fmt(t.dsMin)+'đ</option>';
+    });
+  } else if (maCT === 'MR_SBPS26_TB') {
+    Object.keys(SBPS_TRUNGBAY).forEach(function(m) {
+      var t = SBPS_TRUNGBAY[m];
+      html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+' — DS≥'+fmt(t.dsMin)+'đ</option>';
+    });
+  } else if (maCT === 'MR_SBPS26_TL') {
+    SBPS_TICHLUY.forEach(function(t) {
+      html += '<option value="'+t.muc+'"'+(selectedMuc===t.muc?' selected':'')+'>Mức '+t.muc+' — DS≥'+fmt(t.dsMin)+'đ</option>';
+    });
+  }
+  return html;
+}
+
+// Tạo HTML cho 1 dòng nhập mã CT
+function cusAppCodeRowHTML(entry) {
+  var item = entry || { maCT: '', muc: '', ngayDk: '' };
+  var appCodeOpts = Object.keys(VNM_APP_CODES).map(function(k) {
+    return '<option value="'+k+'"'+(item.maCT===k?' selected':'')+'>'+k+'</option>';
+  }).join('');
+  var mucOpts = item.maCT ? cusAppCodeMucOptions(item.maCT, item.muc) : '';
+  return '<div class="appc-row" style="display:grid;grid-template-columns:1fr 1fr 60px 32px;gap:6px;margin-bottom:8px;align-items:center">' +
+    '<select class="appc-ma" onchange="cusAppCodeChangeMa(this)" style="height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 6px;font-size:12px;width:100%">' +
+    '<option value="">— Chọn mã CT —</option>' + appCodeOpts + '</select>' +
+    '<select class="appc-muc" style="height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 6px;font-size:12px;width:100%">' +
+    (mucOpts ? mucOpts : '<option value="">— Chọn mức —</option>') + '</select>' +
+    '<input type="number" class="appc-ngay" placeholder="Ngày ĐK" value="'+(item.ngayDk||'')+'" min="1" max="31" style="height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 5px;font-size:12px;text-align:center;width:100%">' +
+    '<button type="button" onclick="cusRemoveAppCodeRow(this)" style="height:38px;width:32px;border:none;background:none;color:var(--r);font-size:18px;cursor:pointer;line-height:1">✕</button>' +
+    '</div>';
+}
+
+// Thêm 1 dòng mã CT vào form
+function cusAddAppCodeRow(entry) {
+  var list = document.getElementById('appc-list');
+  if (!list) return;
+  var wrapper = document.createElement('div');
+  wrapper.innerHTML = cusAppCodeRowHTML(entry);
+  list.appendChild(wrapper.firstChild);
+}
+
+// Xóa 1 dòng mã CT
+function cusRemoveAppCodeRow(btn) {
+  var row = btn && btn.closest('.appc-row');
+  if (row) row.remove();
+}
+
+// Khi thay đổi mã CT → cập nhật mức dropdown
+function cusAppCodeChangeMa(sel) {
+  var row = sel && sel.closest('.appc-row');
+  if (!row) return;
+  var maCT = sel.value;
+  var mucSel = row.querySelector('.appc-muc');
+  if (mucSel) mucSel.innerHTML = maCT ? cusAppCodeMucOptions(maCT, '') : '<option value="">— Chọn mức —</option>';
+}
+
+// Đọc các mã CT từ form
+function cusReadAppCodes() {
+  var rows = [];
+  document.querySelectorAll('.appc-row').forEach(function(row) {
+    var maCT = ((row.querySelector('.appc-ma') || {}).value || '').trim();
+    var muc  = ((row.querySelector('.appc-muc') || {}).value || '').trim();
+    var ngayDk = parseInt(((row.querySelector('.appc-ngay') || {}).value || '').trim()) || 0;
+    if (maCT) rows.push({ maCT: maCT, muc: muc, ngayDk: ngayDk });
+  });
+  return rows;
+}
+
+// Chuyển appCodes → programs (để các hàm tính thưởng cũ vẫn chạy)
+function cusAppCodesToPrograms(appCodes) {
+  var progs = {
+    vnmShop:  { dangKy: false, mucBayBan: 'M1',  mucTichLuy: '1',   ngayDangKy: 0 },
+    vipShop:  { dangKy: false, mucBayBan: 'TB1', mucTichLuy: 'TL1', ngayDangKy: 0 },
+    sbpsShop: { dangKy: false, muc: '',           mucTrungBay: '',   ngayDangKy: 0 }
+  };
+  (appCodes || []).forEach(function(ac) {
+    var info = VNM_APP_CODES[ac.maCT];
+    if (!info) return;
+    var ngay = ac.ngayDk || 0;
+    if (info.prog === 'vnmShop') {
+      progs.vnmShop.dangKy = true;
+      if (!progs.vnmShop.ngayDangKy) progs.vnmShop.ngayDangKy = ngay;
+      if (info.loai === 'TB') progs.vnmShop.mucBayBan  = ac.muc;
+      if (info.loai === 'TL') progs.vnmShop.mucTichLuy = ac.muc;
+    } else if (info.prog === 'vipShop') {
+      progs.vipShop.dangKy = true;
+      if (!progs.vipShop.ngayDangKy) progs.vipShop.ngayDangKy = ngay;
+      if (info.loai === 'TB') progs.vipShop.mucBayBan  = ac.muc;
+      if (info.loai === 'TL') progs.vipShop.mucTichLuy = ac.muc;
+    } else if (info.prog === 'sbpsShop') {
+      progs.sbpsShop.dangKy = true;
+      if (!progs.sbpsShop.ngayDangKy) progs.sbpsShop.ngayDangKy = ngay;
+      if (info.loai === 'TL') progs.sbpsShop.muc        = ac.muc;
+      if (info.loai === 'TB') progs.sbpsShop.mucTrungBay = ac.muc;
+    }
+  });
+  return progs;
+}
+
+// Chuyển programs cũ → appCodes (dùng khi mở edit KH cũ chưa có appCodes)
+function cusProgamsToAppCodes(kh) {
+  if (kh.appCodes && kh.appCodes.length) return kh.appCodes;
+  var codes = [];
+  var prog = kh.programs || {};
+  var vnm = prog.vnmShop || {}; var vip = prog.vipShop || {}; var sbps = prog.sbpsShop || {};
+  if (vnm.dangKy) {
+    if (vnm.mucBayBan)  codes.push({ maCT: 'MR_VNMS26_TB', muc: vnm.mucBayBan,  ngayDk: vnm.ngayDangKy || 0 });
+    if (vnm.mucTichLuy) codes.push({ maCT: 'MR_VNMS26_TL', muc: vnm.mucTichLuy, ngayDk: vnm.ngayDangKy || 0 });
+  }
+  if (vip.dangKy) {
+    if (vip.mucBayBan)  codes.push({ maCT: 'MR_VIPSHOP26_TB', muc: vip.mucBayBan,  ngayDk: vip.ngayDangKy || 0 });
+    if (vip.mucTichLuy) codes.push({ maCT: 'MR_VIPSHOP26_TL', muc: vip.mucTichLuy, ngayDk: vip.ngayDangKy || 0 });
+  }
+  if (sbps.dangKy) {
+    if (sbps.mucTrungBay) codes.push({ maCT: 'MR_SBPS26_TB', muc: sbps.mucTrungBay, ngayDk: sbps.ngayDangKy || 0 });
+    if (sbps.muc)         codes.push({ maCT: 'MR_SBPS26_TL', muc: sbps.muc,         ngayDk: sbps.ngayDangKy || 0 });
+  }
+  return codes;
+}
+
 // ============================================================
 // LOAD / SAVE
 // ============================================================
@@ -219,11 +385,22 @@ function calcSBPSReward(kh, monthData) {
   var dsN2 = (monthData && monthData.sbpsN2) || 0;
   var dsN3 = (monthData && monthData.sbpsN3) || 0;
   var dsTo26 = (monthData && monthData.sbpsTo26) || 0;
+  var datTrungBay = (monthData && monthData.sbpsTrungBay) || false;
   var muc = cfg.muc;
-  var result = { tichLuy: 0, thuong26: 0, total: 0, details: [] };
+  var mucTB = cfg.mucTrungBay || '';
+  var result = { trungBay: 0, tichLuy: 0, thuong26: 0, total: 0, details: [] };
+  // Thưởng trưng bày SBPS (TH-Mx)
+  var tbInfo = SBPS_TRUNGBAY[mucTB];
+  if (tbInfo && tbInfo.thuong > 0 && datTrungBay && dsThang >= tbInfo.dsMin) {
+    var heSoTB = 1;
+    if (cfg.ngayDangKy > 15 && cfg.ngayDangKy <= 20) heSoTB = 0.5;
+    else if (cfg.ngayDangKy > 20) heSoTB = 0;
+    result.trungBay = Math.round(tbInfo.thuong * heSoTB);
+    if (result.trungBay > 0) result.details.push('Trưng bày ' + mucTB + ': ' + fmt(result.trungBay) + 'đ');
+  }
+  // Thưởng tích lũy SBPS
   var tl3 = SBPS_TICHLUY.find(function(t) { return t.muc === muc; });
-  if (!tl3) return result;
-  if (dsThang >= tl3.dsMin) {
+  if (tl3 && dsThang >= tl3.dsMin) {
     var t1 = Math.round(dsN1 * tl3.ckN1 / 100);
     var t2 = Math.round(dsN2 * tl3.ckN2 / 100);
     var t3 = Math.round(dsN3 * tl3.ckN3 / 100);
@@ -236,7 +413,7 @@ function calcSBPSReward(kh, monthData) {
       result.details.push('Thưởng đến 26: ' + fmt(result.thuong26) + 'đ');
     }
   }
-  result.total = result.tichLuy + result.thuong26;
+  result.total = result.trungBay + result.tichLuy + result.thuong26;
   return result;
 }
 
@@ -573,13 +750,17 @@ function cusCardHTML(kh, idx, monthKey) {
   if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
     hasCT = true;
     var sbpsMuc = kh.programs.sbpsShop.muc || '';
+    var sbpsMucTB = kh.programs.sbpsShop.mucTrungBay || '';
     var sbpsInfo = SBPS_TICHLUY.find(function(t) { return t.muc === sbpsMuc; });
+    var sbpsTBInfo = SBPS_TRUNGBAY[sbpsMucTB];
     html += '<div style="background:#FFFBEB;border-radius:10px;padding:10px 12px;border-left:3.5px solid #D97706">';
     html += '<div style="font-size:12.5px;font-weight:800;color:#D97706;margin-bottom:5px">SBPS · Sữa bột pha sẵn TE</div>';
-    html += '<div style="font-size:10.5px;color:var(--n2)">Mức <b>' + sbpsMuc + '</b>';
-    if (sbpsInfo) html += ' (DS≥' + fmt(sbpsInfo.dsMin) + ' · N1 ' + sbpsInfo.ckN1 + '% / N2 ' + sbpsInfo.ckN2 + '%)';
+    html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:4px">';
+    if (sbpsMucTB) html += 'Trưng bày: <b>' + sbpsMucTB + '</b>' + (sbpsTBInfo ? ' (DS≥' + fmt(sbpsTBInfo.dsMin) + ')' : '') + ' · ';
+    html += 'Tích lũy: <b>Mức ' + sbpsMuc + '</b>';
+    if (sbpsInfo) html += ' (DS≥' + fmt(sbpsInfo.dsMin) + ')';
     html += '</div>';
-    if (reward.sbps && reward.sbps.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#D97706;margin-top:5px">→ Thưởng: ' + fmt(reward.sbps.total) + 'đ</div>';
+    if (reward.sbps && reward.sbps.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#D97706;margin-top:3px">→ Thưởng: ' + fmt(reward.sbps.total) + 'đ</div>';
     html += '</div>';
   }
 
@@ -686,6 +867,7 @@ function cusInputDS(idx, monthKey) {
     html += cusInputField('cds-sbps-n2', 'DS SBPS N2 (OG/DGP)', md.sbpsN2);
     html += cusInputField('cds-sbps-n3', 'DS SBPS N3 (Yoko/OC)', md.sbpsN3);
     html += cusInputField('cds-sbps-26', 'DS đến ngày 26', md.sbpsTo26);
+    if (kh.programs.sbpsShop.mucTrungBay) html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-sbps" ' + (md.sbpsTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#D97706"> Đạt trưng bày SBPS (' + kh.programs.sbpsShop.mucTrungBay + ')</label>';
     html += '</div>';
   }
   html += '<div class="kf"><div class="kfl" style="color:#0F766E">🎯 TIẾN ĐỘ TÙY CHỈNH</div><div style="font-size:11px;color:var(--n3);margin-bottom:8px">Để trống doanh số tự lấy theo đơn hàng của cửa hàng trong tháng này.</div><div id="custom-progress-list"></div><button type="button" class="btn-atr" onclick="cusAddProgressRow()">+ Thêm mục tiêu tiến độ</button></div>';
@@ -753,6 +935,9 @@ function cusSaveDS(idx) {
   var mk = _cusInputMonthKey || cusCurrentMonthKey();
   if (!kh.monthly) kh.monthly = {};
   kh.monthly[mk] = Object.assign({}, kh.monthly[mk] || {}, cusReadDS());
+  // Cập nhật sbpsTrungBay từ checkbox
+  var cbSBPS = document.getElementById('cds-trungbay-sbps');
+  if (cbSBPS) kh.monthly[mk].sbpsTrungBay = cbSBPS.checked;
   if (window.markEntityUpdated) markEntityUpdated(kh);
   cusSave();
   if (window.syncAutoPushFile) syncAutoPushFile('customers.json');
@@ -790,31 +975,19 @@ function cusEdit(idx) {
   html += '<select id="ckh-loaike" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option>';
   Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (kh.loaiKe === m ? ' selected' : '') + '>' + m + ' — ' + VNM_SHOP_TRUNGBAY[m].ten + '</option>'; });
   html += '</select></div>';
-  html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📋 VNM SHOP (Nhóm C)</div>';
-  html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:10px"><input type="checkbox" id="ckh-vnm-dk" ' + (vnm.dangKy ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#1A4DFF"> Đăng ký tham gia</label>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:10px;color:var(--n3)">Mức bày bán</div><select id="ckh-vnm-bb" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px">';
-  Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (vnm.mucBayBan === m ? ' selected' : '') + '>' + m + '</option>'; });
-  html += '</select></div><div><div style="font-size:10px;color:var(--n3)">Mức tích lũy</div><select id="ckh-vnm-tl" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px">';
-  VNM_SHOP_TICHLUY.forEach(function(t) { html += '<option value="' + t.muc + '"' + (vnm.mucTichLuy === t.muc ? ' selected' : '') + '>Mức ' + t.muc + ' (≥' + fmt(t.dsMin) + 'đ)</option>'; });
-  html += '</select></div></div>';
-  html += '<div style="font-size:10px;color:var(--n3);margin-top:6px">Ngày ĐK: <input type="number" id="ckh-vnm-ngay" value="' + (vnm.ngayDangKy || '') + '" min="1" max="31" style="width:55px;height:30px;border:1px solid var(--n5);border-radius:6px;text-align:center;font-size:13px"></div></div>';
-  html += '<div class="kf"><div class="kfl" style="color:#2563EB">🧊 VIP SHOP (Nhóm DE)</div>';
-  html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:10px"><input type="checkbox" id="ckh-vip-dk" ' + (vip.dangKy ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#2563EB"> Đăng ký tham gia</label>';
-  html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:10px;color:var(--n3)">Mức bày bán</div><select id="ckh-vip-bb" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px">';
-  Object.keys(VIP_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (vip.mucBayBan === m ? ' selected' : '') + '>' + m + '</option>'; });
-  html += '</select></div><div><div style="font-size:10px;color:var(--n3)">Mức tích lũy</div><select id="ckh-vip-tl" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px">';
-  VIP_SHOP_TICHLUY.forEach(function(t) { html += '<option value="' + t.muc + '"' + (vip.mucTichLuy === t.muc ? ' selected' : '') + '>' + t.muc + ' (≥' + fmt(t.dsMin) + 'đ)</option>'; });
-  html += '</select></div></div>';
-  html += '<div style="font-size:10px;color:var(--n3);margin-top:6px">Ngày ĐK: <input type="number" id="ckh-vip-ngay" value="' + (vip.ngayDangKy || '') + '" min="1" max="31" style="width:55px;height:30px;border:1px solid var(--n5);border-radius:6px;text-align:center;font-size:13px"></div></div>';
-  html += '<div class="kf"><div class="kfl" style="color:#D97706">🍼 SBPS SHOP (SBPS TE)</div>';
-  html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:10px"><input type="checkbox" id="ckh-sbps-dk" ' + (sbps.dangKy ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#D97706"> Đăng ký tham gia</label>';
-  html += '<div><div style="font-size:10px;color:var(--n3)">Mức tích lũy</div><select id="ckh-sbps-muc" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option>';
-  SBPS_TICHLUY.forEach(function(t) { html += '<option value="' + t.muc + '"' + (sbps.muc === t.muc ? ' selected' : '') + '>Mức ' + t.muc + ' (≥' + fmt(t.dsMin) + 'đ)</option>'; });
-  html += '</select></div></div>';
+  html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📋 CHƯƠNG TRÌNH THAM GIA</div>';
+  html += '<div style="font-size:11px;color:var(--n3);margin-bottom:10px">Nhìn vào app Vinamilk → nhập đúng Mã CT và Mức như trên app. Hệ thống tự tính thưởng.</div>';
+  html += '<div style="font-size:10.5px;color:var(--n2);display:grid;grid-template-columns:1fr 1fr 60px 32px;gap:6px;margin-bottom:4px;font-weight:700">';
+  html += '<span>Mã CT (app)</span><span>Mức</span><span style="text-align:center">Ngày ĐK</span><span></span></div>';
+  html += '<div id="appc-list"></div>';
+  html += '<button type="button" onclick="cusAddAppCodeRow()" style="width:100%;height:38px;background:var(--n6);border:1.5px dashed var(--n4);border-radius:var(--Rs);font-size:13px;font-weight:600;color:var(--vm);cursor:pointer;margin-top:4px">+ Thêm mã CT từ app</button></div>';
   html += '<div class="kf"><div class="kfl">GHI CHÚ</div><textarea id="ckh-ghichu" placeholder="Ghi chú về KH..." style="width:100%;height:60px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:10px 12px;font-size:13px;color:var(--n1);resize:vertical">' + (kh.ghiChu || '') + '</textarea></div>';
   html += '<button class="btn-km-save" onclick="cusSaveForm()">' + (idx >= 0 && CUS[idx] ? '💾 Cập nhật KH' : '✓ Thêm KH') + '</button>';
   if (idx >= 0 && CUS[idx]) html += '<button onclick="cusDel(' + idx + ')" style="width:100%;height:42px;background:none;color:var(--r);border:1.5px solid var(--r);border-radius:var(--R);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px">✕ Xóa khách hàng</button>';
   body.innerHTML = html;
+  // Khởi tạo các dòng mã CT đã đăng ký (tương thích KH cũ)
+  var existingCodes = cusProgamsToAppCodes(kh);
+  existingCodes.forEach(function(ac) { cusAddAppCodeRow(ac); });
 }
 function cusFormField(id, label, value, readonly) {
   return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="text" id="' + id + '" value="' + (value || '') + '"' + (readonly ? ' readonly' : '') + ' style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1);' + (readonly ? 'background:var(--n6);color:var(--n3);' : '') + '"></div>';
@@ -825,8 +998,9 @@ function cusSaveForm() {
   var n = function(id) { return parseInt(g(id)) || 0; };
   var ma = g('ckh-ma').trim().toUpperCase();
   if (!ma) { showToast('Nhập mã KH'); return; }
+  var _appCodes = cusReadAppCodes();
   var kh = { ma: ma, ten: g('ckh-ten'), tuyen: g('ckh-tuyen'), diachi: g('ckh-diachi'), sdt: g('ckh-sdt'), loaiCH: g('ckh-loai'), coTuVNM: c('ckh-tu'), loaiTu: g('ckh-loaitu'), dungTichTu: n('ckh-dungtich'), coKe: c('ckh-ke'), loaiKe: g('ckh-loaike'), ghiChu: g('ckh-ghichu'),
-    programs: { vnmShop: { dangKy: c('ckh-vnm-dk'), mucBayBan: g('ckh-vnm-bb'), mucTichLuy: g('ckh-vnm-tl'), ngayDangKy: n('ckh-vnm-ngay') }, vipShop: { dangKy: c('ckh-vip-dk'), mucBayBan: g('ckh-vip-bb'), mucTichLuy: g('ckh-vip-tl'), ngayDangKy: n('ckh-vip-ngay') }, sbpsShop: { dangKy: c('ckh-sbps-dk'), muc: g('ckh-sbps-muc'), ngayDangKy: 0 } }, monthly: {} };
+    appCodes: _appCodes, programs: cusAppCodesToPrograms(_appCodes), monthly: {} };
   if (window.markEntityUpdated) markEntityUpdated(kh);
   if (_cusEditIdx >= 0 && CUS[_cusEditIdx]) { kh.monthly = CUS[_cusEditIdx].monthly || {}; CUS[_cusEditIdx] = kh; }
   else { if (CUS.find(function(k) { return k.ma === ma; })) { showToast('Mã KH đã tồn tại!'); return; } CUS.push(kh); }
@@ -887,6 +1061,9 @@ function cusFilterSearch(q) { _cusFilterQuery = (q || '').trim(); renderCusTab()
 // ============================================================
 // EXPORTS
 // ============================================================
+window.cusAddAppCodeRow = cusAddAppCodeRow;
+window.cusRemoveAppCodeRow = cusRemoveAppCodeRow;
+window.cusAppCodeChangeMa = cusAppCodeChangeMa;
 window.cusLoad = cusLoad;
 window.cusSave = cusSave;
 window.renderCusTab = renderCusTab;
