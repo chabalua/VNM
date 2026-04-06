@@ -26,26 +26,34 @@ var CUS_MONTHLY_MANUAL_FIELDS = {
 // BẢNG CƠ CẤU CHƯƠNG TRÌNH (từ 3 PDF)
 // ============================================================
 
+// VNM Shop Trưng Bày T3-6/2026
+// M1-M6: Tất cả cửa hàng kênh truyền thống | M7-M9: Siêu thị Mini/Minimart
 var VNM_SHOP_TRUNGBAY = {
-  M1: { ten: 'Ụ HZ + Kệ KH 24 mặt', dsMin: 45000000, thuong: 900000 },
-  M2: { ten: 'Ụ HZ + Kệ KH 18 mặt', dsMin: 38000000, thuong: 750000 },
-  M3: { ten: 'Ụ HZ + Kệ KH 8 mặt', dsMin: 30000000, thuong: 600000 },
-  M4: { ten: 'Kệ SN + Kệ KH 12 mặt', dsMin: 18000000, thuong: 350000 },
-  M5: { ten: 'Kệ KH 24 mặt', dsMin: 12000000, thuong: 240000 },
-  M6: { ten: 'Kệ KH 18 mặt', dsMin: 8000000, thuong: 150000 },
-  M7: { ten: 'Kệ Minimart 50 mặt', dsMin: 35000000, thuong: 700000 },
-  M8: { ten: 'Kệ Minimart 40 mặt', dsMin: 28000000, thuong: 550000 },
-  M9: { ten: 'Kệ Minimart 30 mặt', dsMin: 20000000, thuong: 400000 }
+  M1: { ten: 'Ụ HZ + Kệ KH 24 mặt', dsMin: 45000000, thuong: 900000, soMat: 24, loaiCH: 'Kênh TT' },
+  M2: { ten: 'Ụ HZ + Kệ KH 18 mặt', dsMin: 38000000, thuong: 750000, soMat: 18, loaiCH: 'Kênh TT' },
+  M3: { ten: 'Ụ HZ + Kệ KH 8 mặt',  dsMin: 30000000, thuong: 600000, soMat:  8, loaiCH: 'Kênh TT' },
+  M4: { ten: 'Kệ SN + Kệ KH 12 mặt', dsMin: 18000000, thuong: 350000, soMat: 12, loaiCH: 'Kênh TT' },
+  M5: { ten: 'Kệ KH 24 mặt',          dsMin: 12000000, thuong: 240000, soMat: 24, loaiCH: 'Kênh TT' },
+  M6: { ten: 'Kệ KH 18 mặt',          dsMin:  8000000, thuong: 150000, soMat: 18, loaiCH: 'Kênh TT' },
+  M7: { ten: 'Kệ Minimart 50 mặt',    dsMin: 35000000, thuong: 700000, soMat: 50, loaiCH: 'Minimart' },
+  M8: { ten: 'Kệ Minimart 40 mặt',    dsMin: 28000000, thuong: 550000, soMat: 40, loaiCH: 'Minimart' },
+  M9: { ten: 'Kệ Minimart 30 mặt',    dsMin: 20000000, thuong: 400000, soMat: 30, loaiCH: 'Minimart' }
 };
 
+// VNM Shop Tích Lũy T3-6/2026
+// - ckDS: thưởng tháng, tính trên TOÀN BỘ DS thực hiện, KHÔNG giới hạn tối đa
+// - ckGD1/2/3: thưởng hoàn thành giai đoạn, tính trên DS thực hiện trong GĐ nhưng có giới hạn:
+//   GĐ1 max = 40% dsMax (trừ Mức 1: max = 40% DS thực tế hết tháng)
+//   GĐ1+GĐ2 max = 70% dsMax (trừ Mức 1: max = 70% DS thực tế hết tháng)
+// - GĐ lưu ý: KHÔNG tính SP Sữa tươi tiệt trùng Vinamilk 100% 1L
 var VNM_SHOP_TICHLUY = [
   { muc: '1', dsMin: 200000000, dsMax: null,        ckDS: 1.80, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
   { muc: '2', dsMin: 100000000, dsMax: 200000000,   ckDS: 1.70, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
-  { muc: '3', dsMin: 65000000,  dsMax: 100000000,   ckDS: 1.60, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
-  { muc: '4', dsMin: 35000000,  dsMax: 65000000,    ckDS: 1.50, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
-  { muc: '5', dsMin: 20000000,  dsMax: 35000000,    ckDS: 1.40, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
-  { muc: '6', dsMin: 10000000,  dsMax: 20000000,    ckDS: 1.30, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
-  { muc: '7', dsMin: 5000000,   dsMax: 10000000,    ckDS: 1.20, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 }
+  { muc: '3', dsMin:  65000000, dsMax: 100000000,   ckDS: 1.60, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
+  { muc: '4', dsMin:  35000000, dsMax:  65000000,   ckDS: 1.50, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
+  { muc: '5', dsMin:  20000000, dsMax:  35000000,   ckDS: 1.40, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
+  { muc: '6', dsMin:  10000000, dsMax:  20000000,   ckDS: 1.30, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 },
+  { muc: '7', dsMin:   5000000, dsMax:  10000000,   ckDS: 1.20, ckGD1: 1.60, ckGD2: 1.20, ckGD3: 0.60 }
 ];
 
 var VIP_SHOP_TRUNGBAY = {
@@ -74,16 +82,17 @@ var SBPS_TICHLUY = [
   { muc: '8', dsMin: 3500000,   ckN1: 4.00, ckN2: 4.50, ckN3: 4.00, ck26: 0 }
 ];
 
-// SBPS Trưng Bày — mức TH-M (theo app Vinamilk, DS xác nhận từ thực tế)
+// SBPS Trưng Bày T3-6/2026 — Loại hình 1 (Tạp hóa/Khác) + Minimart/Mẹ&Bé
+// TH-M1..5: Tạp hóa/Khác | TH-M6..8: Minimart/Mẹ&Bé
 var SBPS_TRUNGBAY = {
-  'TH-M1': { dsMin: 105000000, thuong: 400000 },
-  'TH-M2': { dsMin: 75000000,  thuong: 400000 },
-  'TH-M3': { dsMin: 32000000,  thuong: 230000 },
-  'TH-M4': { dsMin: 17000000,  thuong: 250000 },
-  'TH-M5': { dsMin: 5500000,   thuong: 150000 },
-  'TH-M6': { dsMin: 10000000,  thuong: 150000 },
-  'TH-M7': { dsMin: 3500000,   thuong: 80000  },
-  'TH-M8': { dsMin: 0,         thuong: 0      }
+  'TH-M1': { dsMin: 105000000, thuong: 300000, loai: 'Tạp hóa/Khác',      soMat: 20 },
+  'TH-M2': { dsMin: 75000000,  thuong: 230000, loai: 'Tạp hóa/Khác',      soMat: 14 },
+  'TH-M3': { dsMin: 32000000,  thuong: 150000, loai: 'Tạp hóa/Khác',      soMat: 10 },
+  'TH-M4': { dsMin: 17000000,  thuong: 150000, loai: 'Tạp hóa/Khác',      soMat: 10 },
+  'TH-M5': { dsMin: 5500000,   thuong: 80000,  loai: 'Tạp hóa/Khác',      soMat: 8  },
+  'TH-M6': { dsMin: 75000000,  thuong: 400000, loai: 'Minimart/M&B Lớn',   soMat: 20 },
+  'TH-M7': { dsMin: 32000000,  thuong: 250000, loai: 'Minimart/M&B Vừa',   soMat: 14 },
+  'TH-M8': { dsMin: 10000000,  thuong: 150000, loai: 'Minimart/M&B Nhỏ',   soMat: 10 }
 };
 
 // Bảng mã CT theo app Vinamilk → mapping sang programs nội bộ

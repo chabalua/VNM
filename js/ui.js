@@ -281,36 +281,54 @@ function ptbl(p, km) {
   html += row(p.donvi, p.giaNYLon, hKM);
   html += '</div>';
 
-  var rewardLine = calcRewardLine(p);
-  if (rewardLine) {
-    html += '<div style="font-size:10.5px;color:var(--b);padding:4px 10px;background:var(--bL);border-radius:0 0 var(--Rs) var(--Rs);border-top:1px dashed var(--n5)">' + rewardLine + '</div>';
-  }
+  var tlBlock = calcTichLuyBlock(p, hKM, tKM);
+  if (tlBlock) html += tlBlock;
   return html;
 }
 
-function calcRewardLine(p) {
+function calcTichLuyBlock(p, hKM, tKM) {
   if (!_selectedCustomerMa) return '';
   var cusList = getCUS();
   var kh = cusList.find(function(k) { return k.ma === _selectedCustomerMa; });
   if (!kh || !kh.programs) return '';
 
-  var lines = [];
+  var baseStyle = 'font-size:10.5px;padding:5px 10px;border-radius:0 0 var(--Rs) var(--Rs);border-top:1px dashed var(--n5);';
+  // Thưởng TL = % × tổng DS tháng, hoàn cuối tháng bằng SP — KHÔNG trừ giá từng sản phẩm khi mua
+  var fmtHoan = function(pct, dsMin) { return '<b>~' + fmt(Math.round(dsMin * pct / 100)) + 'đ</b>'; };
+
   if (p.nhom === 'C' && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
     var muc = kh.programs.vnmShop.mucTichLuy;
     var tl = (typeof VNM_SHOP_TICHLUY !== 'undefined') ? VNM_SHOP_TICHLUY.find(function(t) { return t.muc === muc; }) : null;
-    if (tl) lines.push('💰 VNM: CK ~' + tl.ckDS + '% + GĐ ~' + (tl.ckDS + tl.ckGD1).toFixed(1) + '%');
+    if (!tl) return '';
+    var dsMaxText = tl.dsMax ? ' – ' + fmt(tl.dsMax) + 'đ' : '+';
+    return '<div style="' + baseStyle + 'background:#fff8e1;color:#795548">' +
+      '💰 VNM M' + muc + ' (DS ' + fmt(tl.dsMin) + dsMaxText + '): TL <b>' + tl.ckDS + '%</b> toàn bộ DS' +
+      ' + GĐ <b>' + tl.ckGD1 + '%·' + tl.ckGD2 + '%·' + tl.ckGD3 + '%</b>' +
+      ' <span style="font-size:9.5px;opacity:.65">(tính theo mức ĐK, không tự lên mức)</span>' +
+      '</div>';
   }
   if (p.nhom === 'D' && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
     var muc2 = kh.programs.vipShop.mucTichLuy;
     var tl2 = (typeof VIP_SHOP_TICHLUY !== 'undefined') ? VIP_SHOP_TICHLUY.find(function(t) { return t.muc === muc2; }) : null;
-    if (tl2) lines.push('💰 VIP: N1 ' + tl2.ckN1 + '% / N2 ' + tl2.ckN2 + '%');
+    if (!tl2) return '';
+    return '<div style="' + baseStyle + 'background:#e8f5e9;color:#2e7d32">' +
+      '💰 Hoàn cuối tháng VIP ' + muc2 + ': N1 <b>' + tl2.ckN1 + '%</b> / N2 <b>' + tl2.ckN2 + '%</b>' +
+      ' | Đăng ký ' + fmt(tl2.dsMin) + 'đ → N1 ' + fmtHoan(tl2.ckN1, tl2.dsMin) +
+      ' <span style="font-size:9.5px;opacity:.65">(tính theo mức ĐK, không tự lên mức)</span>' +
+      '</div>';
   }
   if (p.nhom === 'A' && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
     var muc3 = kh.programs.sbpsShop.muc;
     var tl3 = (typeof SBPS_TICHLUY !== 'undefined') ? SBPS_TICHLUY.find(function(t) { return t.muc === muc3; }) : null;
-    if (tl3) lines.push('💰 SBPS M' + muc3 + ': N1 ' + tl3.ckN1 + '%');
+    if (!tl3) return '';
+    return '<div style="' + baseStyle + 'background:#e3f2fd;color:#0d47a1">' +
+      '💰 Hoàn cuối tháng SBPS M' + muc3 + ': N1 <b>' + tl3.ckN1 + '%</b> / N2 <b>' + tl3.ckN2 + '%</b> | ' +
+      'Đăng ký ' + fmt(tl3.dsMin) + 'đ → N1 ' + fmtHoan(tl3.ckN1, tl3.dsMin) +
+      (tl3.ck26 > 0 ? ' <span style="opacity:.7">+ ngày 26: +' + tl3.ck26 + '%</span>' : '') +
+      ' <span style="font-size:9.5px;opacity:.65">(tính theo mức ĐK, không tự lên mức)</span>' +
+      '</div>';
   }
-  return lines.join(' · ');
+  return '';
 }
 
 function updKM(p, km, ma) {
