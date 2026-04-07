@@ -2342,22 +2342,22 @@
     "type": "order_bonus",
     "nhoms": "A",
     "active": true,
-    "stackable": false,
+    "stackable": true,
     "bonusMa": "02HL37",
     "bonusName": "Dielac Grow Plus 110ml",
     "repeat": true,
     "maxSets": 0,
+    "tiers": [
+      {
+        "value": "310",
+        "maxValue": "5000",
+        "bonusQty": "8"
+      }
+    ],
     "spMas": [
       "02HL37",
       "03HA38"
     ],
-    "tiers": [
-      {
-        "value": 310,
-        "maxValue": 5000,
-        "bonusQty": 8
-      }
-    ],
-    "_updatedAt": "2026-04-07T00:00:00.000Z"
+    "_updatedAt": "2026-04-07T15:38:58.948Z"
   }
 ]
