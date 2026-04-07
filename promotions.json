@@ -227,7 +227,7 @@
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04ED32",
+    "bMa": "04ED33",
     "spMas": [
       "01VD41"
     ]
@@ -1038,7 +1038,7 @@
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04GI33",
+    "bMa": "04GI34",
     "spMas": [
       "04AE31",
       "04AE32"
@@ -1054,7 +1054,7 @@
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04GI13",
+    "bMa": "04GI14",
     "spMas": [
       "04AE11",
       "04AE12"
@@ -1070,7 +1070,7 @@
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04GI13",
+    "bMa": "04GI14",
     "spMas": [
       "04GB10",
       "04GB11",
@@ -1088,7 +1088,7 @@
     "bY": "4",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04GI33",
+    "bMa": "04GI34",
     "spMas": [
       "04GT03",
       "04GT04",
@@ -1108,7 +1108,7 @@
     "bY": "2",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04GI33",
+    "bMa": "04GI34",
     "spMas": [
       "04GP21",
       "04GP22"
@@ -1124,7 +1124,7 @@
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04GI13",
+    "bMa": "04GI14",
     "spMas": [
       "04GO10",
       "04GO11"
@@ -1435,7 +1435,7 @@
     "bY": "2",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "07GI12",
+    "bMa": "07GR10",
     "spMas": [
       "07OC20",
       "07OI20",
@@ -2345,7 +2345,7 @@
     "stackable": true,
     "bonusMa": "02HL37",
     "bonusName": "Dielac Grow Plus 110ml",
-    "repeat": true,
+    "repeat": false,
     "maxSets": 0,
     "tiers": [
       {

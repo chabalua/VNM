@@ -20,7 +20,7 @@ function validateProductList(data) {
 function isPromotionMetadata(item) {
   if (!item || typeof item !== 'object') return false;
   const keys = Object.keys(item);
-  if (!keys.length) return false;
+  if (!keys.length) return true;  // object rỗng {} → bỏ qua (tránh làm fail validatePromotionList)
   return keys.every(key => key.startsWith('_'));
 }
 

@@ -154,7 +154,7 @@ function kmBuildRules(prog) {
   var rules = [];
   if (prog.type === 'bonus') {
     var r = { type: 'bonus', unit: prog.bUnit || 'lon', X: +prog.bX || 12, Y: +prog.bY || 1 };
-    if (prog.bMa && prog.bMa !== 'same') { var bp = spFind(prog.bMa); if (bp) r.giaBonus = bp.giaNYLon; }
+    if (prog.bMa && prog.bMa !== 'same') { var bp = spFind(prog.bMa); r.giaBonus = bp ? bp.giaNYLon : null; }
     if (+prog.bMax === 1) r.maxSets = 1;
     rules.push(r);
   } else if (prog.type === 'fixed') {
@@ -290,7 +290,9 @@ function buildOrderBonusResult(items, allMas, baseTotal, prog) {
   });
   if (!best) return null;
   var sets = 1;
-  if (best.repeat && best.minAmount > 0) {
+  if (best.repeat && best.minAmount > 0 && !best.maxAmount) {
+    // Chỉ repeat khi tier KHÔNG có cận trên (tức là "mỗi X đồng tặng Y");
+    // khi có maxAmount (range) thì luôn là 1 suất
     sets = Math.floor(total / best.minAmount);
     if (best.maxSets) sets = Math.min(sets, best.maxSets);
   }
