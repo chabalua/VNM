@@ -267,7 +267,7 @@ function onSelectCustomer(ma) {
 // PRICE TABLE
 // ============================================================
 function ptbl(p, km) {
-  var hasKM = km.hopKM < p.giaNYLon || km.bonus > 0;
+  var hasKM = km.hopKM < p.giaNYLon || km.bonus > 0 || (km.orderBonusQty || 0) > 0 || (km.orderDiscAllocated || 0) > 0;
   var hKM = hasKM ? km.hopKM : p.giaNYLon;
   var tKM = hasKM ? km.thungKM : p.giaNYThung;
   var row = function(lbl, goc, kv) {
@@ -281,9 +281,46 @@ function ptbl(p, km) {
   html += row(p.donvi, p.giaNYLon, hKM);
   html += '</div>';
 
+  if ((km.orderBonusQty || 0) > 0 || (km.orderDiscAllocated || 0) > 0) {
+    var notes = [];
+    if ((km.orderBonusQty || 0) > 0) notes.push('Giá KM hiệu dụng đã tính quà ĐH: +' + formatQtyByCarton(p, km.orderBonusQty));
+    if ((km.orderDiscAllocated || 0) > 0) notes.push('Đã phân bổ CK đơn hàng tạm tính: -' + fmt(km.orderDiscAllocated) + 'đ');
+    html += '<div style="font-size:10.5px;padding:6px 10px;border-top:1px dashed var(--n5);color:var(--vm);background:#f6f9ff">' + notes.join(' · ') + '</div>';
+  }
+
   var tlBlock = calcTichLuyBlock(p, hKM, tKM);
   if (tlBlock) html += tlBlock;
   return html;
+}
+
+function buildOrderAwareKmDisplay(p, km, draftItems, orderKM) {
+  var displayKm = Object.assign({}, km || {});
+  displayKm.orderBonusQty = 0;
+  displayKm.orderDiscAllocated = 0;
+  if (!p || !Array.isArray(draftItems) || !draftItems.length) return displayKm;
+
+  var targetItem = draftItems.find(function(it) { return it.ma === p.ma; });
+  if (!targetItem) return displayKm;
+
+  (orderKM && orderKM.bonusItems || []).forEach(function(bi) {
+    if (bi && bi.ma === p.ma) displayKm.orderBonusQty += Math.max(0, parseInt(bi.qty, 10) || 0);
+  });
+
+  if (orderKM && orderKM.disc > 0) {
+    var totalAfter = draftItems.reduce(function(sum, item) { return sum + (item.afterKM || 0); }, 0);
+    if (totalAfter > 0) displayKm.orderDiscAllocated = Math.round(orderKM.disc * ((targetItem.afterKM || 0) / totalAfter));
+  }
+
+  if (displayKm.orderBonusQty > 0 || displayKm.orderDiscAllocated > 0) {
+    var effectivePaid = Math.max(0, (targetItem.afterKM || 0) - displayKm.orderDiscAllocated);
+    var effectiveQty = Math.max(targetItem.totalLon || 0, displayKm.nhan || 0) + displayKm.orderBonusQty;
+    if (effectiveQty > 0) {
+      displayKm.hopKM = Math.round(effectivePaid / effectiveQty);
+      displayKm.thungKM = displayKm.hopKM * p.slThung;
+    }
+  }
+
+  return displayKm;
 }
 
 function calcTichLuyBlock(p, hKM, tKM) {
@@ -434,6 +471,7 @@ function onQty(ma) {
   var draftItems = (typeof getItemsFromCartState === 'function') ? getItemsFromCartState(draftCart) : [];
   var orderKM = (typeof calcOrderKM === 'function') ? calcOrderKM(draftItems) : { disc: 0, desc: '', bonusItems: [] };
   var orderBonusPreview = getOrderBonusPreview(orderKM, ma);
+  var displayKM = buildOrderAwareKmDisplay(p, km, draftItems, orderKM);
   var orderBonusQty = orderBonusPreview.sameProductQty;
   var totalLon = qT * p.slThung + qL;
   var totalNhan = totalLon + (km.bonus || 0) + orderBonusQty;
@@ -462,7 +500,7 @@ function onQty(ma) {
   if (km.disc > 0) pvHtml += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span style="color:var(--r);font-weight:700">- ' + fmt(km.disc) + 'đ</span></div>';
   pvHtml += '<button class="btn-ok" onclick="addCart(\'' + ma + '\')">✓ Thêm vào đơn</button>';
   pv.innerHTML = pvHtml;
-  updKM(p, km, ma);
+  updKM(p, displayKM, ma);
 }
 
 // ============================================================
