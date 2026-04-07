@@ -2,6 +2,7 @@
 
 let _kmEditIdx = -1;
 let _kmPickerNhom = '';
+let _kmPickerSearch = '';
 let _kmStackable = true;
 let _kmFilterGroup = '';
 let _kmFilterQuery = '';
@@ -9,6 +10,7 @@ let _kmFilterQuery = '';
 function kmOpenModal(prog, idx) {
   _kmEditIdx = (idx !== undefined) ? idx : -1;
   _kmPickerNhom = prog ? (prog.nhoms || '') : '';
+  _kmPickerSearch = '';
   _kmStackable = prog ? (prog.stackable !== false) : true;
   document.getElementById('km-modal').style.display = 'block';
   document.getElementById('km-modal-t').textContent = (_kmEditIdx >= 0) ? 'Sửa CT KM' : 'Tạo CT KM';
@@ -49,6 +51,7 @@ function kmRenderForm(prog) {
     html += '<button class="km-nhom-btn' + (_kmPickerNhom === n ? ' sel' : '') + '" onclick="kmPickNhom(\'' + n + '\')">' + lbl + '</button>';
   });
   html += '</div>';
+  html += '<input type="text" id="km-picker-search" value="' + _kmPickerSearch + '" placeholder="🔍 Tìm tên / mã SP..." oninput="kmPickerSearch(this.value)" autocomplete="off" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 11px;font-size:13px;margin-bottom:6px;box-sizing:border-box">';
   html += '<div style="display:flex;gap:7px;margin-bottom:6px"><button onclick="kmCheckAll(true)" style="flex:1;height:30px;border:1px solid var(--l2);border-radius:var(--Rs);background:#fff;font-size:11px;font-weight:700;color:var(--t2);cursor:pointer">Chọn tất cả</button><button onclick="kmCheckAll(false)" style="flex:1;height:30px;border:1px solid var(--l2);border-radius:var(--Rs);background:#fff;font-size:11px;font-weight:700;color:var(--t2);cursor:pointer">Bỏ chọn</button></div>';
   html += '<div class="km-picker" id="km-picker"></div></div>';
 
@@ -191,7 +194,14 @@ function kmRenderPicker(checked) {
   var selected = Array.isArray(checked) ? checked : [];
   var pickedProducts = selected.map(function(ma) { return SP.find(function(p) { return p.ma === ma; }); }).filter(Boolean);
   var missingCodes = selected.filter(function(ma) { return !pickedProducts.some(function(p) { return p.ma === ma; }); });
-  var list = SP.filter(function(p) { return !_kmPickerNhom || p.nhom === _kmPickerNhom; });
+  var list = SP.filter(function(p) {
+    if (_kmPickerNhom && p.nhom !== _kmPickerNhom) return false;
+    if (_kmPickerSearch) {
+      return p.ten.toLowerCase().indexOf(_kmPickerSearch) >= 0 ||
+             p.ma.toLowerCase().indexOf(_kmPickerSearch) >= 0;
+    }
+    return true;
+  });
   list.sort(function(a, b) {
     var aFav = favorites.includes(a.ma);
     var bFav = favorites.includes(b.ma);
@@ -227,6 +237,12 @@ function toggleFavorite(event, ma) {
   var currentChecked = kmGetChecked ? kmGetChecked() : [];
   if (window.kmRenderPicker) window.kmRenderPicker(currentChecked);
   if (window.renderOrder) window.renderOrder();
+}
+
+function kmPickerSearch(val) {
+  _kmPickerSearch = (val || '').trim().toLowerCase();
+  var cur = kmGetChecked ? kmGetChecked() : [];
+  kmRenderPicker(cur);
 }
 
 function kmCheckAll(val) { document.querySelectorAll('.km-pick-cb').forEach(function(cb) { cb.checked = val; }); kmPreview(); }
@@ -489,6 +505,7 @@ window.kmReadForm = kmReadForm;
 window.kmPreview = kmPreview;
 window.kmSearchByName = kmSearchByName;
 window.kmClearSearch = kmClearSearch;
+window.kmPickerSearch = kmPickerSearch;
 window.kmSetFilterGroup = kmSetFilterGroup;
 window.kmSaveForm = kmSaveForm;
 window.renderKMTab = renderKMTab;

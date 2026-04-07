@@ -83,14 +83,47 @@ function spFind(ma) { return SP.find(function(x) { return x.ma === ma; }); }
 
 async function initData() {
   var overlay = document.getElementById('loadingOverlay');
-  if (overlay) overlay.classList.add('show');
-  try {
-    await Promise.all([loadProducts(), loadPromotions()]);
-  } catch (err) {
-    console.error('initData error:', err);
-  } finally {
-    if (overlay) overlay.classList.remove('show');
+
+  // Bước 1: Thử load ngay từ localStorage (không cần network)
+  var hasCachedSP = false;
+  var cachedSP = localStorage.getItem('vnm_sp');
+  if (cachedSP) {
+    try {
+      var _raw = JSON.parse(cachedSP);
+      if (validateProductList(_raw)) {
+        SP = _raw;
+        SP.forEach(normalizeProduct);
+        hasCachedSP = true;
+      }
+    } catch(e) {}
   }
+  var cachedKM = localStorage.getItem('vnm_km3');
+  if (cachedKM) {
+    try {
+      var _rawK = JSON.parse(cachedKM);
+      var _norm = normalizePromotionList(_rawK);
+      if (validatePromotionList(_norm)) kmProgs = _norm;
+    } catch(e) {}
+  }
+
+  if (hasCachedSP) {
+    // Có cache: ẩn overlay ngay, boot tức thì, refresh ẩn ở nền
+    if (overlay) overlay.classList.remove('show');
+    Promise.all([loadProducts(), loadPromotions()]).catch(function(e) {
+      console.warn('Background refresh thất bại:', e);
+    });
+  } else {
+    // Lần đầu chưa có cache: hiện overlay, chờ fetch xong
+    if (overlay) overlay.classList.add('show');
+    try {
+      await Promise.all([loadProducts(), loadPromotions()]);
+    } catch (err) {
+      console.error('initData error:', err);
+    } finally {
+      if (overlay) overlay.classList.remove('show');
+    }
+  }
+
   if (!localStorage.getItem('vnm_favorites')) {
     try { localStorage.setItem('vnm_favorites', '[]'); } catch(e) {}
   }
