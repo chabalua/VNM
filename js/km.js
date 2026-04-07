@@ -87,7 +87,14 @@ function kmTypeFields(prog) {
 
   if (t === 'bonus') {
     var spOpts = '<option value="same"' + ((!prog.bMa || prog.bMa === 'same') ? ' selected' : '') + '>Cùng loại SP đó</option>';
-    SP.forEach(function(p) { if (p.nhom === 'B' || p.nhom === 'C' || p.nhom === 'D') spOpts += '<option value="' + p.ma + '"' + (prog.bMa === p.ma ? ' selected' : '') + '>' + p.ma + ' - ' + p.ten.slice(0, 28) + '</option>'; });
+    var nhomLabelsB = { A: 'A · Sữa bột', B: 'B · Sữa đặc', C: 'C · Sữa nước', D: 'D · Sữa chua' };
+    ['A', 'B', 'C', 'D'].forEach(function(nhom) {
+      var group = SP.filter(function(p) { return p.nhom === nhom; });
+      if (!group.length) return;
+      spOpts += '<optgroup label="' + (nhomLabelsB[nhom] || nhom) + '">';
+      group.forEach(function(p) { spOpts += '<option value="' + p.ma + '"' + (prog.bMa === p.ma ? ' selected' : '') + '>' + p.ma + ' - ' + p.ten.slice(0, 30) + '</option>'; });
+      spOpts += '</optgroup>';
+    });
     return '<div class="kf"><div class="kfl">Mua X → Tặng Y</div><div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:center;margin-bottom:10px"><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Mua X</div><input type="number" id="kf-bx" value="' + (prog.bX || 12) + '" min="1" style="width:100%;height:42px;border:1.5px solid var(--l2);border-radius:var(--Rs);text-align:center;font-size:20px;font-weight:800;" oninput="kmPreview()"></div><div style="text-align:center;color:var(--t3);font-size:18px">→</div><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tặng Y</div><input type="number" id="kf-by" value="' + (prog.bY || 1) + '" min="1" style="width:100%;height:42px;border:1.5px solid var(--l2);border-radius:var(--Rs);text-align:center;font-size:20px;font-weight:800;" oninput="kmPreview()"></div></div>' +
       '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px"><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Đơn vị</div><select id="kf-bunit" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:14px;"><option value="lon"' + (prog.bUnit !== 'thung' ? ' selected' : '') + '>Lon/Hộp</option><option value="thung"' + (prog.bUnit === 'thung' ? ' selected' : '') + '>Thùng</option></select></div><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Áp tối đa</div><select id="kf-bmax" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:14px;"><option value="0"' + (!prog.bMax ? ' selected' : '') + '>Không giới hạn</option><option value="1"' + (prog.bMax == 1 ? ' selected' : '') + '>1 lần</option></select></div></div>' +
       '<div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">SP được tặng</div><select id="kf-bma" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;" onchange="kmPreview()">' + spOpts + '</select></div></div>';
