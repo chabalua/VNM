@@ -98,6 +98,7 @@ var SBPS_TRUNGBAY = {
 // Bảng mã CT theo app Vinamilk → mapping sang programs nội bộ
 var VNM_APP_CODES = {
   'MR_VIPSHOP26_TB': { prog: 'vipShop',  loai: 'TB', ten: 'VIP Shop Trưng Bày'  },
+  'MR_VIPSHOP26_TU2':{ prog: 'vipShop',  loai: 'TB', ten: 'VIP Shop Trưng Bày Tủ 2' },
   'MR_VIPSHOP26_TL': { prog: 'vipShop',  loai: 'TL', ten: 'VIP Shop Tích Lũy'   },
   'MR_VNMS26_TB':    { prog: 'vnmShop',  loai: 'TB', ten: 'VNM Shop Trưng Bày'  },
   'MR_VNMS26_TL':    { prog: 'vnmShop',  loai: 'TL', ten: 'VNM Shop Tích Lũy'   },
@@ -364,7 +365,7 @@ function ctResetSettings() {
 // Trả về HTML options cho dropdown mức của từng mã CT
 function cusAppCodeMucOptions(maCT, selectedMuc) {
   var html = '';
-  if (maCT === 'MR_VIPSHOP26_TB') {
+  if (maCT === 'MR_VIPSHOP26_TB' || maCT === 'MR_VIPSHOP26_TU2') {
     ['TB1','TB2','TB3','TB4'].forEach(function(m) {
       var t = VIP_SHOP_TRUNGBAY[m];
       html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+' — DS≥'+fmt(t.dsMin)+'đ</option>';
@@ -490,7 +491,7 @@ function cusProgamsToAppCodes(kh) {
     if (vnm.mucTichLuy) codes.push({ maCT: 'MR_VNMS26_TL', muc: vnm.mucTichLuy, ngayDk: vnm.ngayDangKy || 0 });
   }
   if (vip.dangKy) {
-    if (vip.mucBayBan)  codes.push({ maCT: 'MR_VIPSHOP26_TB', muc: vip.mucBayBan,  ngayDk: vip.ngayDangKy || 0 });
+    if (vip.mucBayBan)  codes.push({ maCT: kh.loaiTu === '2canh' ? 'MR_VIPSHOP26_TU2' : 'MR_VIPSHOP26_TB', muc: vip.mucBayBan,  ngayDk: vip.ngayDangKy || 0 });
     if (vip.mucTichLuy) codes.push({ maCT: 'MR_VIPSHOP26_TL', muc: vip.mucTichLuy, ngayDk: vip.ngayDangKy || 0 });
   }
   if (sbps.dangKy) {
@@ -1038,6 +1039,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += ' · Tích lũy: <b>Mức ' + vnmTL + '</b>';
     if (vnmTLInfo) html += ' (CK ' + vnmTLInfo.ckDS + '%)';
     html += '</div>';
+    html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS tháng ' + fmt(md.dsNhomC || 0) + 'đ · GĐ1 ' + fmt(md.dsGD1 || 0) + 'đ · GĐ2 ' + fmt(md.dsGD2 || 0) + 'đ · GĐ3 ' + fmt(md.dsGD3 || 0) + 'đ</div>';
     if (vnmProg) html += cusProgressBarHTML('Tiến độ DS', vnmProg.pct, vnmProg.ds, vnmProg.target, '#1A4DFF');
     if (reward.vnm && reward.vnm.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#1A4DFF;margin-top:3px">→ Thưởng: ' + fmt(reward.vnm.total) + 'đ</div>';
     html += '</div>';
@@ -1061,6 +1063,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += ' · CL: <b>' + vipTL + '</b>';
     if (vipTLInfo) html += ' (N1 ' + vipTLInfo.ckN1 + '% / N2 ' + vipTLInfo.ckN2 + '%)';
     html += '</div>';
+    html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS DE ' + fmt(md.dsNhomDE || 0) + 'đ · N1 ' + fmt(md.dsVipN1 || 0) + 'đ · N2 ' + fmt(md.dsVipN2 || 0) + 'đ · SKU D ' + fmt(md.skuNhomD || 0) + '</div>';
     if (vipProg) html += cusProgressBarHTML('Tiến độ DS', vipProg.pct, vipProg.ds, vipProg.target, '#2563EB');
     if (reward.vip && reward.vip.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#2563EB;margin-top:3px">→ Thưởng: ' + fmt(reward.vip.total) + 'đ</div>';
     html += '</div>';
@@ -1080,6 +1083,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += 'Tích lũy: <b>Mức ' + sbpsMuc + '</b>';
     if (sbpsInfo) html += ' (DS≥' + fmt(sbpsInfo.dsMin) + ')';
     html += '</div>';
+    html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS tháng ' + fmt(md.dsSBPS || 0) + 'đ · N1 ' + fmt(md.sbpsN1 || 0) + 'đ · N2 ' + fmt(md.sbpsN2 || 0) + 'đ · N3 ' + fmt(md.sbpsN3 || 0) + 'đ · Đến 26 ' + fmt(md.sbpsTo26 || 0) + 'đ</div>';
     if (reward.sbps && reward.sbps.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#D97706;margin-top:3px">→ Thưởng: ' + fmt(reward.sbps.total) + 'đ</div>';
     html += '</div>';
   }
