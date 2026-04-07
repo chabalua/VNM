@@ -2337,5 +2337,27 @@
       "02HO38"
     ],
     "_updatedAt": "2026-04-05T14:20:33.928Z"
+  },
+  {
+    "name": "SBPS TE Dưới 5Tr",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "02HL37",
+    "bonusName": "",
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "310000",
+        "bonusQty": "8"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "02HO38"
+    ],
+    "_updatedAt": "2026-04-07T15:02:37.501Z"
   }
 ]
