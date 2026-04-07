@@ -84,6 +84,16 @@ function spFind(ma) { return SP.find(function(x) { return x.ma === ma; }); }
 async function initData() {
   var overlay = document.getElementById('loadingOverlay');
 
+  function rerenderAfterBackgroundRefresh() {
+    if (window.renderHomeDashboard) window.renderHomeDashboard();
+    if (window.renderSettingsOverview) window.renderSettingsOverview();
+    if (window.renderOrder) window.renderOrder();
+    if (window.renderAdm) window.renderAdm();
+    if (window.renderKMTab) window.renderKMTab();
+    if (window.renderDon) window.renderDon();
+    if (window.renderCusTab) window.renderCusTab();
+  }
+
   // Bước 1: Thử load ngay từ localStorage (không cần network)
   var hasCachedSP = false;
   var cachedSP = localStorage.getItem('vnm_sp');
@@ -109,9 +119,13 @@ async function initData() {
   if (hasCachedSP) {
     // Có cache: ẩn overlay ngay, boot tức thì, refresh ẩn ở nền
     if (overlay) overlay.classList.remove('show');
-    Promise.all([loadProducts(), loadPromotions()]).catch(function(e) {
-      console.warn('Background refresh thất bại:', e);
-    });
+    Promise.all([loadProducts(), loadPromotions()])
+      .then(function() {
+        rerenderAfterBackgroundRefresh();
+      })
+      .catch(function(e) {
+        console.warn('Background refresh thất bại:', e);
+      });
   } else {
     // Lần đầu chưa có cache: hiện overlay, chờ fetch xong
     if (overlay) overlay.classList.add('show');

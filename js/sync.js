@@ -155,7 +155,7 @@ function mergeOrders(localOrders, remoteOrders) {
     return map[key];
   }).sort(function(a, b) {
     return getOrderSortValue(b) - getOrderSortValue(a);
-  }).slice(0, 500);
+  });
 }
 
 function getOrders() {

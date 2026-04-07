@@ -251,8 +251,24 @@ function calcOrderKM(items) {
   orderPromos.filter(function(p) { return p.type === 'order_bonus'; }).forEach(function(prog) {
     var total = baseTotal; var progMas = prog.spMas || [];
     if (progMas.length) total = items.filter(function(it) { return progMas.includes(it.ma); }).reduce(function(s, it) { return s + it.gocTotal; }, 0);
-    if (prog.minSKU) { var unique = []; var seen = {}; allMas.forEach(function(ma) { if (progMas.includes(ma) && !seen[ma]) { seen[ma] = true; unique.push(ma); } }); if (unique.length < +prog.minSKU) return; }
-    var tiers = (prog.tiers || []).map(function(t) { return { minAmount: parsePromoMoneyValue(t.value || t.mn || 0), bonusQty: +t.bonusQty || +prog.bonusQty || 0, repeat: t.repeat !== false }; }).filter(function(t) { return t.minAmount > 0 && t.bonusQty > 0; }).sort(function(a, b) { return b.minAmount - a.minAmount; });
+    if (prog.minSKU) {
+      var unique = [];
+      var seen = {};
+      allMas.forEach(function(ma) {
+        if (progMas.length && !progMas.includes(ma)) return;
+        if (seen[ma]) return;
+        seen[ma] = true;
+        unique.push(ma);
+      });
+      if (unique.length < +prog.minSKU) return;
+    }
+    var tiers = (prog.tiers || []).map(function(t) {
+      return {
+        minAmount: parsePromoMoneyValue(t.value || t.mn || 0),
+        bonusQty: +t.bonusQty || +prog.bonusQty || 0,
+        repeat: (t.repeat == null) ? (prog.repeat !== false) : (t.repeat !== false)
+      };
+    }).filter(function(t) { return t.minAmount > 0 && t.bonusQty > 0; }).sort(function(a, b) { return b.minAmount - a.minAmount; });
     if (!tiers.length) return;
     var best = tiers.find(function(t) { return total >= t.minAmount; }); if (!best) return;
     var sets = 1; if (best.repeat && best.minAmount > 0) { sets = Math.floor(total / best.minAmount); if (prog.maxSets) sets = Math.min(sets, +prog.maxSets); }
