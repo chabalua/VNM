@@ -230,6 +230,93 @@ function orderPromoDiscount(baseTotal, prog) {
   return disc;
 }
 
+function getOrderPromoEligibleTotal(items, baseTotal, prog) {
+  var progMas = prog.spMas || [];
+  if (!progMas.length) return baseTotal;
+  return items.filter(function(it) { return progMas.includes(it.ma); }).reduce(function(sum, it) { return sum + it.gocTotal; }, 0);
+}
+
+function hasOrderPromoMinSKU(allMas, progMas, minSKU) {
+  if (!minSKU) return true;
+  var unique = [];
+  var seen = {};
+  allMas.forEach(function(ma) {
+    if (progMas.length && !progMas.includes(ma)) return;
+    if (seen[ma]) return;
+    seen[ma] = true;
+    unique.push(ma);
+  });
+  return unique.length >= +minSKU;
+}
+
+function normalizeOrderBonusTier(tier, prog) {
+  var rawMin = tier.value != null ? tier.value : (tier.mn != null ? tier.mn : 0);
+  var rawMax = tier.maxValue != null ? tier.maxValue : (tier.mx != null ? tier.mx : (tier.max != null ? tier.max : 0));
+  var minAmount = 0;
+  var maxAmount = 0;
+  if (rawMax) {
+    minAmount = parsePromoMoneyValue(rawMin);
+    maxAmount = parsePromoMoneyValue(rawMax);
+  } else if (tier.type === 'below') {
+    maxAmount = parsePromoMoneyValue(rawMin);
+  } else {
+    minAmount = parsePromoMoneyValue(rawMin);
+  }
+  if (maxAmount > 0 && minAmount > 0 && maxAmount <= minAmount) return null;
+  return {
+    minAmount: minAmount,
+    maxAmount: maxAmount,
+    bonusQty: +tier.bonusQty || +prog.bonusQty || 0,
+    repeat: (tier.repeat == null) ? (prog.repeat !== false) : (tier.repeat !== false),
+    maxSets: +tier.maxSets || +prog.maxSets || 0
+  };
+}
+
+function buildOrderBonusResult(items, allMas, baseTotal, prog) {
+  var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
+  var progMas = prog.spMas || [];
+  if (!hasOrderPromoMinSKU(allMas, progMas, prog.minSKU)) return null;
+  var tiers = (prog.tiers || []).map(function(t) {
+    return normalizeOrderBonusTier(t, prog);
+  }).filter(function(t) {
+    return t && t.bonusQty > 0 && (t.minAmount > 0 || t.maxAmount > 0);
+  }).sort(function(a, b) {
+    if (b.minAmount !== a.minAmount) return b.minAmount - a.minAmount;
+    return (a.maxAmount || Infinity) - (b.maxAmount || Infinity);
+  });
+  if (!tiers.length) return null;
+  var best = tiers.find(function(t) {
+    return total >= t.minAmount && (!t.maxAmount || total < t.maxAmount);
+  });
+  if (!best) return null;
+  var sets = 1;
+  if (best.repeat && best.minAmount > 0) {
+    sets = Math.floor(total / best.minAmount);
+    if (best.maxSets) sets = Math.min(sets, best.maxSets);
+  }
+  var totalBonus = sets * best.bonusQty;
+  if (totalBonus <= 0) return null;
+  var bonusProduct = prog.bonusMa ? spFind(prog.bonusMa) : null;
+  var bonusName = prog.bonusName || (bonusProduct ? bonusProduct.ten : '') || prog.bonusMa || 'SP tặng';
+  var unitValue = bonusProduct ? (+bonusProduct.giaNYLon || 0) : 0;
+  return {
+    ma: prog.bonusMa,
+    name: bonusName,
+    qty: totalBonus,
+    progName: prog.name || 'CT Ontop',
+    value: unitValue > 0 ? unitValue * totalBonus : totalBonus
+  };
+}
+
+function formatOrderBonusItemText(bi) {
+  if (!bi) return '';
+  var product = bi.ma ? spFind(bi.ma) : null;
+  if (product && typeof window.formatQtyByCarton === 'function') {
+    return window.formatQtyByCarton(product, bi.qty) + ' ' + (bi.name || product.ten || '');
+  }
+  return bi.qty + ' ' + (bi.name || 'SP tặng');
+}
+
 function calcOrderKM(items) {
   if (!items || !items.length) return { disc: 0, desc: '', bonusItems: [] };
   var baseTotal = items.reduce(function(sum, item) { return sum + item.gocTotal; }, 0);
@@ -239,42 +326,32 @@ function calcOrderKM(items) {
   var disc = 0; var descParts = []; var bonusItems = [];
   var moneyPromos = orderPromos.filter(function(p) { return p.type === 'order_money'; });
   moneyPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
-    var total = baseTotal; if (prog.spMas && prog.spMas.length) total = items.filter(function(it) { return prog.spMas.includes(it.ma); }).reduce(function(s, it) { return s + it.gocTotal; }, 0);
+    var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
     var d = orderPromoDiscount(total, prog); if (d > 0) { disc += d; descParts.push(prog.name || 'CK đơn'); }
   });
   var bestDisc = 0, bestProg = null;
   moneyPromos.filter(function(p) { return !p.stackable; }).forEach(function(prog) {
-    var total = baseTotal; if (prog.spMas && prog.spMas.length) total = items.filter(function(it) { return prog.spMas.includes(it.ma); }).reduce(function(s, it) { return s + it.gocTotal; }, 0);
+    var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
     var d = orderPromoDiscount(total, prog); if (d > bestDisc) { bestDisc = d; bestProg = prog; }
   });
   if (bestDisc > 0 && bestProg) { disc += bestDisc; descParts.push(bestProg.name || 'CK đơn'); }
-  orderPromos.filter(function(p) { return p.type === 'order_bonus'; }).forEach(function(prog) {
-    var total = baseTotal; var progMas = prog.spMas || [];
-    if (progMas.length) total = items.filter(function(it) { return progMas.includes(it.ma); }).reduce(function(s, it) { return s + it.gocTotal; }, 0);
-    if (prog.minSKU) {
-      var unique = [];
-      var seen = {};
-      allMas.forEach(function(ma) {
-        if (progMas.length && !progMas.includes(ma)) return;
-        if (seen[ma]) return;
-        seen[ma] = true;
-        unique.push(ma);
-      });
-      if (unique.length < +prog.minSKU) return;
-    }
-    var tiers = (prog.tiers || []).map(function(t) {
-      return {
-        minAmount: parsePromoMoneyValue(t.value || t.mn || 0),
-        bonusQty: +t.bonusQty || +prog.bonusQty || 0,
-        repeat: (t.repeat == null) ? (prog.repeat !== false) : (t.repeat !== false)
-      };
-    }).filter(function(t) { return t.minAmount > 0 && t.bonusQty > 0; }).sort(function(a, b) { return b.minAmount - a.minAmount; });
-    if (!tiers.length) return;
-    var best = tiers.find(function(t) { return total >= t.minAmount; }); if (!best) return;
-    var sets = 1; if (best.repeat && best.minAmount > 0) { sets = Math.floor(total / best.minAmount); if (prog.maxSets) sets = Math.min(sets, +prog.maxSets); }
-    var totalBonus = sets * best.bonusQty;
-    if (totalBonus > 0) { var bName = prog.bonusName || (prog.bonusMa ? (spFind(prog.bonusMa) || {}).ten || prog.bonusMa : 'SP tặng'); bonusItems.push({ ma: prog.bonusMa, name: bName, qty: totalBonus, progName: prog.name || 'CT Ontop' }); descParts.push(prog.name + ': +' + totalBonus + ' ' + bName); }
+  var bonusPromos = orderPromos.filter(function(p) { return p.type === 'order_bonus'; });
+  bonusPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
+    var result = buildOrderBonusResult(items, allMas, baseTotal, prog);
+    if (!result) return;
+    bonusItems.push({ ma: result.ma, name: result.name, qty: result.qty, progName: result.progName });
+    descParts.push(result.progName + ': +' + result.qty + ' ' + result.name);
   });
+  var bestBonus = null;
+  bonusPromos.filter(function(p) { return !p.stackable; }).forEach(function(prog) {
+    var result = buildOrderBonusResult(items, allMas, baseTotal, prog);
+    if (!result) return;
+    if (!bestBonus || result.value > bestBonus.value) bestBonus = result;
+  });
+  if (bestBonus) {
+    bonusItems.push({ ma: bestBonus.ma, name: bestBonus.name, qty: bestBonus.qty, progName: bestBonus.progName });
+    descParts.push(bestBonus.progName + ': +' + bestBonus.qty + ' ' + bestBonus.name);
+  }
   return { disc: disc, desc: descParts.join(' | '), bonusItems: bonusItems };
 }
 
@@ -420,7 +497,7 @@ function renderDon() {
     }
     if (orderKM.disc > 0) html += '<div class="ft-row"><span class="ft-l">CK đơn hàng</span><span class="ft-save">-' + fmt(orderKM.disc) + 'đ</span></div>';
     if (orderKM.bonusItems && orderKM.bonusItems.length) {
-      orderKM.bonusItems.forEach(function(bi) { html += '<div class="ft-row"><span class="ft-l" style="color:var(--vm)">🎁 ' + bi.progName + '</span><span style="color:var(--vm);font-weight:700">+' + bi.qty + ' ' + bi.name + '</span></div>'; });
+      orderKM.bonusItems.forEach(function(bi) { html += '<div class="ft-row"><span class="ft-l" style="color:var(--vm)">🎁 ' + bi.progName + '</span><span style="color:var(--vm);font-weight:700">+' + formatOrderBonusItemText(bi) + '</span></div>'; });
     }
     html += '<div class="ft-grand"><div class="ft-gr"><span class="ft-gl">Tổng cộng</span><span class="ft-gv">' + fmt(totAfterOrder) + 'đ</span></div>';
     html += '<div class="ft-gr"><span class="ft-vl">+VAT 1.5%</span><span class="ft-vv">' + fmt(Math.round(totAfterOrder * 1.015)) + 'đ</span></div></div>';
@@ -659,7 +736,7 @@ function copyOrderZalo(orderRef) {
   if (o.bonusItems && o.bonusItems.length) {
     lines.push('');
     o.bonusItems.forEach(function(bi) {
-      lines.push('🎁 ' + bi.progName + ': +' + bi.qty + ' ' + bi.name);
+      lines.push('🎁 ' + bi.progName + ': +' + formatOrderBonusItemText(bi));
     });
   }
 
@@ -722,6 +799,14 @@ function viewOrderDetail(orderRef) {
     if (it.desc) html += '<div style="font-size:11px;color:var(--vm);font-weight:600">' + it.desc + '</div>';
     html += '</div>';
   });
+
+  if (o.bonusItems && o.bonusItems.length) {
+    html += '<div style="margin-top:10px;padding:10px 0;border-top:1px solid var(--n5)">';
+    o.bonusItems.forEach(function(bi) {
+      html += '<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0"><div style="font-size:12px;font-weight:700;color:var(--vm)">🎁 ' + bi.progName + '</div><div style="font-size:12px;color:var(--vm);text-align:right">+' + formatOrderBonusItemText(bi) + '</div></div>';
+    });
+    html += '</div>';
+  }
 
   html += '<div style="margin-top:12px;padding-top:12px;border-top:2px solid var(--n5)">';
   html += '<div style="display:flex;justify-content:space-between;font-size:14px;font-weight:800"><span>Tổng cộng</span><span style="color:var(--vm)">' + fmt(o.tong) + 'đ</span></div>';

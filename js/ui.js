@@ -733,6 +733,7 @@ window.setBrand = setBrand;
 window.renderBrandPills = renderBrandPills;
 window.renderCustomerSelector = renderCustomerSelector;
 window.onSelectCustomer = onSelectCustomer;
+window.formatQtyByCarton = formatQtyByCarton;
 window.spOpenModal = spOpenModal;
 window.spCloseModal = spCloseModal;
 window.spRenderForm = spRenderForm;

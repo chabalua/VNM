@@ -2317,7 +2317,6 @@
     "bMax": 0,
     "bMa": "same",
     "spMas": [
-      "02HL37",
       "02HO38"
     ],
     "_updatedAt": "2026-04-05T14:19:29.112Z"
@@ -2339,25 +2338,26 @@
     "_updatedAt": "2026-04-05T14:20:33.928Z"
   },
   {
-    "name": "SBPS TE Dưới 5Tr",
+    "name": "MR04263012 - SBPS TE DƯỚI 5 TRIỆU",
     "type": "order_bonus",
     "nhoms": "A",
     "active": true,
-    "stackable": true,
+    "stackable": false,
     "bonusMa": "02HL37",
-    "bonusName": "",
+    "bonusName": "Dielac Grow Plus 110ml",
     "repeat": true,
     "maxSets": 0,
-    "tiers": [
-      {
-        "value": "310000",
-        "bonusQty": "8"
-      }
-    ],
     "spMas": [
       "02HL37",
-      "02HO38"
+      "03HA38"
     ],
-    "_updatedAt": "2026-04-07T15:02:37.501Z"
+    "tiers": [
+      {
+        "value": 310,
+        "maxValue": 5000,
+        "bonusQty": 8
+      }
+    ],
+    "_updatedAt": "2026-04-07T00:00:00.000Z"
   }
 ]
