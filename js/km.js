@@ -122,7 +122,14 @@ function kmTypeFields(prog) {
   if (t === 'order_bonus') {
     // Mới: Tặng SP khi đạt mức đơn hàng
     var spOpts = '<option value="">-- Chọn SP tặng --</option>';
-    SP.forEach(function(p) { spOpts += '<option value="' + p.ma + '"' + (prog.bonusMa === p.ma ? ' selected' : '') + '>' + p.ma + ' - ' + p.ten.slice(0, 35) + '</option>'; });
+    var _nhomLbls = { A: 'A · Sữa bột', B: 'B · Sữa đặc', C: 'C · Sữa nước', D: 'D · Sữa chua' };
+    ['A', 'B', 'C', 'D'].forEach(function(nhom) {
+      var grp = SP.filter(function(p) { return p.nhom === nhom; });
+      if (!grp.length) return;
+      spOpts += '<optgroup label="' + (_nhomLbls[nhom] || nhom) + '">';
+      grp.forEach(function(p) { spOpts += '<option value="' + p.ma + '"' + (prog.bonusMa === p.ma ? ' selected' : '') + '>' + p.ma + ' - ' + p.ten.slice(0, 35) + '</option>'; });
+      spOpts += '</optgroup>';
+    });
     var rows = (prog.tiers || [{ value: 250, bonusQty: 4, bonusMa: '', bonusName: '' }]).map(function(ti, i) {
       return '<div class="km-tier-row" style="flex-wrap:wrap" id="ktr-' + i + '"><label>Mua≥</label><input type="number" class="t-val" value="' + (ti.value || 0) + '" placeholder="K" style="width:70px" oninput="kmPreview()"><label>K→Tặng</label><input type="number" class="t-bqty" value="' + (ti.bonusQty || 0) + '" style="width:50px" oninput="kmPreview()"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>';
     }).join('');
