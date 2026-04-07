@@ -101,10 +101,84 @@ var VNM_APP_CODES = {
   'MR_VIPSHOP26_TL': { prog: 'vipShop',  loai: 'TL', ten: 'VIP Shop Tích Lũy'   },
   'MR_VNMS26_TB':    { prog: 'vnmShop',  loai: 'TB', ten: 'VNM Shop Trưng Bày'  },
   'MR_VNMS26_TL':    { prog: 'vnmShop',  loai: 'TL', ten: 'VNM Shop Tích Lũy'   },
+  'MR_VSHOP26_TB':   { prog: 'vnmShop',  loai: 'TB', ten: 'V Shop Trưng Bày'    },
   'MR_VSHOP26_TL':   { prog: 'vnmShop',  loai: 'TL', ten: 'V Shop Tích Lũy'     },
   'MR_SBPS26_TB':    { prog: 'sbpsShop', loai: 'TB', ten: 'SBPS Trưng Bày'      },
-  'MR_SBPS26_TL':    { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS Tích Lũy'       }
+  'MR_SBPS26_TL':    { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS Tích Lũy'       },
+  'MR_SBPS_TE26_TL': { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS TE Tích Lũy'    }
 };
+
+function cusResolveProductForOrderItem(item) {
+  if (!item || typeof item !== 'object') return null;
+  if (typeof spFind === 'function' && item.ma) {
+    var found = spFind(item.ma);
+    if (found) return found;
+  }
+  return item;
+}
+
+function cusGetProductCode(product) {
+  return String((product && product.ma) || '').trim().toUpperCase();
+}
+
+function cusGetProductName(product) {
+  return String((product && product.ten) || '').trim().toLowerCase();
+}
+
+function isVNMGiaiDoanProduct(product) {
+  if (!product || product.nhom !== 'C') return false;
+  return cusGetProductName(product).indexOf('1l') < 0;
+}
+
+function classifyVIPProduct(product) {
+  if (!product || product.nhom !== 'D') return '';
+  var code = cusGetProductCode(product);
+  var name = cusGetProductName(product);
+  if (!code && !name) return '';
+
+  if (/happy star|rau củ susu|rau cu susu|thạch phô mai que|thach pho mai que|bơ lạt|bo lat|học đường|hoc duong/.test(name)) return 'excluded';
+  if (/^10(BT|VS|VA)/.test(code) || /^14S[ACD]/.test(code) || /^07(TA|TC|TR)6/.test(code)) return 'excluded';
+
+  if (/phô mai|pho mai/.test(name)) return 'N1';
+  if (/probi/.test(name)) {
+    if (/(65ml|130ml)/.test(name) && /(ít đường|it duong|không đường|khong duong|truyền thống|truyen thong)/.test(name)) return 'N1';
+    return 'N2';
+  }
+  if (/green farm|kombucha|nước dừa|nuoc dua/.test(name)) return 'N2';
+  if (/sca/.test(name)) {
+    if (/green farm/.test(name)) return 'N2';
+    if (/không đường|khong duong|ít đường|it duong|nha đam|nha dam|star/.test(name) || /^07(KD|ID|NH|SR|SN)/.test(code)) return 'N1';
+    return 'N2';
+  }
+  return 'other';
+}
+
+function classifySBPSProduct(product) {
+  if (!product || product.nhom !== 'A') return '';
+  var name = cusGetProductName(product);
+  if (!/(110ml|180ml)/.test(name)) return '';
+  if (/sure|diecerna|mama|canxi|ridielac|bột|bot|nguyên kem|nguyen kem|phô mai|pho mai/.test(name)) return 'excluded';
+  if (/optimum gold|dielac grow plus/.test(name)) return 'N2';
+  if (/dielac gold|dielac grow(?! plus)|optimum a2|a2 pro/.test(name)) return 'N1';
+  if (/yoko|colos/.test(name)) return 'N3';
+  return 'excluded';
+}
+
+function cusGetOrderDay(order) {
+  var time = new Date((order && order.date) || '').getTime();
+  if (isNaN(time)) return 0;
+  return new Date(time).getDate();
+}
+
+function cusGetProgramCodes(kh, progKey) {
+  var appCodes = (kh && kh.appCodes && kh.appCodes.length) ? kh.appCodes : cusProgamsToAppCodes(kh || {});
+  return appCodes.filter(function(ac) {
+    var info = VNM_APP_CODES[ac.maCT];
+    return info && info.prog === progKey;
+  }).map(function(ac) {
+    return ac.maCT + (ac.muc ? ' · ' + ac.muc : '');
+  });
+}
 
 // ============================================================
 // QUẢN LÝ CẤU HÌNH CHƯƠNG TRÌNH TB & TL
@@ -299,7 +373,7 @@ function cusAppCodeMucOptions(maCT, selectedMuc) {
     VIP_SHOP_TICHLUY.forEach(function(t) {
       html += '<option value="'+t.muc+'"'+(selectedMuc===t.muc?' selected':'')+'>'+t.muc+' — DS≥'+fmt(t.dsMin)+'đ</option>';
     });
-  } else if (maCT === 'MR_VNMS26_TB') {
+  } else if (maCT === 'MR_VNMS26_TB' || maCT === 'MR_VSHOP26_TB') {
     Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) {
       var t = VNM_SHOP_TRUNGBAY[m];
       html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+' — DS≥'+fmt(t.dsMin)+'đ</option>';
@@ -313,7 +387,7 @@ function cusAppCodeMucOptions(maCT, selectedMuc) {
       var t = SBPS_TRUNGBAY[m];
       html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+' — DS≥'+fmt(t.dsMin)+'đ</option>';
     });
-  } else if (maCT === 'MR_SBPS26_TL') {
+  } else if (maCT === 'MR_SBPS26_TL' || maCT === 'MR_SBPS_TE26_TL') {
     SBPS_TICHLUY.forEach(function(t) {
       html += '<option value="'+t.muc+'"'+(selectedMuc===t.muc?' selected':'')+'>Mức '+t.muc+' — DS≥'+fmt(t.dsMin)+'đ</option>';
     });
@@ -664,14 +738,32 @@ function cusReadRawMonthData(kh, monthKey) {
 }
 
 function cusAggregateOrdersMonth(khMa, monthKey) {
-  var result = { dsNhomC: 0, dsNhomDE: 0, dsSBPS: 0, orderCount: 0, lastOrderDate: '' };
+  var result = {
+    dsNhomC: 0,
+    dsNhomDE: 0,
+    dsSBPS: 0,
+    dsGD1: 0,
+    dsGD2: 0,
+    dsGD3: 0,
+    dsVipN1: 0,
+    dsVipN2: 0,
+    skuNhomD: 0,
+    sbpsN1: 0,
+    sbpsN2: 0,
+    sbpsN3: 0,
+    sbpsTo26: 0,
+    orderCount: 0,
+    lastOrderDate: ''
+  };
   if (!khMa || typeof getOrders !== 'function') return result;
   var normalizedKhMa = String(khMa).trim().toUpperCase();
+  var vipSkuSeen = {};
   getOrders().forEach(function(order) {
     if (!order || String(order.khMa || '').trim().toUpperCase() !== normalizedKhMa) return;
     if (cusDateToMonthKey(order.date || '') !== monthKey) return;
     result.orderCount += 1;
     if (!result.lastOrderDate || String(order.date || '') > result.lastOrderDate) result.lastOrderDate = order.date || '';
+    var orderDay = cusGetOrderDay(order);
     var orderItems = Array.isArray(order.items) ? order.items : [];
     var subtotal = orderItems.reduce(function(sum, item) {
       return sum + (+item.afterKM || +item.gocTotal || 0);
@@ -688,11 +780,37 @@ function cusAggregateOrdersMonth(khMa, monthKey) {
         }
       }
       var net = Math.max(0, base - share);
-      if (item.nhom === 'C') result.dsNhomC += net;
-      else if (item.nhom === 'D') result.dsNhomDE += net;
-      else if (item.nhom === 'A') result.dsSBPS += net;
+      var product = cusResolveProductForOrderItem(item);
+      var nhom = (product && product.nhom) || item.nhom || '';
+
+      if (nhom === 'C') {
+        result.dsNhomC += net;
+        if (isVNMGiaiDoanProduct(product || item)) {
+          if (orderDay >= 1 && orderDay <= 10) result.dsGD1 += net;
+          else if (orderDay >= 11 && orderDay <= 20) result.dsGD2 += net;
+          else if (orderDay >= 21 && orderDay <= 27) result.dsGD3 += net;
+        }
+      }
+
+      if (nhom === 'D') {
+        result.dsNhomDE += net;
+        var vipClass = classifyVIPProduct(product || item);
+        if (vipClass !== 'excluded') vipSkuSeen[cusGetProductCode(product || item) || String(item.ma || item.ten || idx)] = true;
+        if (vipClass === 'N1') result.dsVipN1 += net;
+        else if (vipClass === 'N2') result.dsVipN2 += net;
+      }
+
+      var sbpsClass = classifySBPSProduct(product || item);
+      if (sbpsClass === 'N1' || sbpsClass === 'N2' || sbpsClass === 'N3') {
+        result.dsSBPS += net;
+        if (sbpsClass === 'N1') result.sbpsN1 += net;
+        else if (sbpsClass === 'N2') result.sbpsN2 += net;
+        else if (sbpsClass === 'N3') result.sbpsN3 += net;
+        if (orderDay > 0 && orderDay <= 26) result.sbpsTo26 += net;
+      }
     });
   });
+  result.skuNhomD = Object.keys(vipSkuSeen).length;
   return result;
 }
 
@@ -704,6 +822,16 @@ function cusGetMonthData(kh, monthKey) {
   merged.dsNhomC = cusResolveMetricValue(md, 'dsNhomC', auto.dsNhomC);
   merged.dsNhomDE = cusResolveMetricValue(md, 'dsNhomDE', auto.dsNhomDE);
   merged.dsSBPS = cusResolveMetricValue(md, 'dsSBPS', auto.dsSBPS);
+  merged.dsGD1 = cusResolveMetricValue(md, 'dsGD1', auto.dsGD1);
+  merged.dsGD2 = cusResolveMetricValue(md, 'dsGD2', auto.dsGD2);
+  merged.dsGD3 = cusResolveMetricValue(md, 'dsGD3', auto.dsGD3);
+  merged.dsVipN1 = cusResolveMetricValue(md, 'dsVipN1', auto.dsVipN1);
+  merged.dsVipN2 = cusResolveMetricValue(md, 'dsVipN2', auto.dsVipN2);
+  merged.skuNhomD = cusResolveMetricValue(md, 'skuNhomD', auto.skuNhomD);
+  merged.sbpsN1 = cusResolveMetricValue(md, 'sbpsN1', auto.sbpsN1);
+  merged.sbpsN2 = cusResolveMetricValue(md, 'sbpsN2', auto.sbpsN2);
+  merged.sbpsN3 = cusResolveMetricValue(md, 'sbpsN3', auto.sbpsN3);
+  merged.sbpsTo26 = cusResolveMetricValue(md, 'sbpsTo26', auto.sbpsTo26);
   merged.customProgress = cusNormalizeCustomProgress(md.customProgress);
   merged._autoSales = auto;
   return merged;
@@ -841,6 +969,9 @@ function cusCardHTML(kh, idx, monthKey) {
   monthKey = monthKey || _cusViewMonthKey || cusCurrentMonthKey();
   var md = cusGetMonthData(kh, monthKey);
   var reward = calcTotalReward(kh, md);
+  var vnmCodes = cusGetProgramCodes(kh, 'vnmShop');
+  var vipCodes = cusGetProgramCodes(kh, 'vipShop');
+  var sbpsCodes = cusGetProgramCodes(kh, 'sbpsShop');
   var vnmProg = cusProgressVNM(kh, md);
   var vipProg = cusProgressVIP(kh, md);
   var hasData = md.dsNhomC || md.dsNhomDE || md.dsSBPS;
@@ -900,6 +1031,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += '<span style="font-size:12.5px;font-weight:800;color:#1A4DFF">VNM Shop · Nhóm C</span>';
     if (vnmBBInfo) html += '<span style="font-size:10.5px;color:#1A4DFF;font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
     html += '</div>';
+    if (vnmCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + esc(vnmCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Bày bán: <b>' + vnmBB + '</b>';
     if (vnmBBInfo) html += ' (DS≥' + fmt(vnmBBInfo.dsMin) + ')';
@@ -922,6 +1054,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += '<span style="font-size:12.5px;font-weight:800;color:#2563EB">VIP Shop · Nhóm DE</span>';
     if (vipBBInfo) html += '<span style="font-size:10.5px;color:#2563EB;font-weight:600">TB: ' + fmt(kh.coTuVNM ? vipBBInfo.thuongVNM : vipBBInfo.thuongKH) + 'đ</span>';
     html += '</div>';
+    if (vipCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + esc(vipCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Tủ: <b>' + vipBB + '</b>';
     if (vipBBInfo) html += ' (DS≥' + fmt(vipBBInfo.dsMin) + ', ≥' + vipBBInfo.skuMin + ' SKU)';
@@ -941,6 +1074,7 @@ function cusCardHTML(kh, idx, monthKey) {
     var sbpsTBInfo = SBPS_TRUNGBAY[sbpsMucTB];
     html += '<div style="background:#FFFBEB;border-radius:10px;padding:10px 12px;border-left:3.5px solid #D97706">';
     html += '<div style="font-size:12.5px;font-weight:800;color:#D97706;margin-bottom:5px">SBPS · Sữa bột pha sẵn TE</div>';
+    if (sbpsCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + esc(sbpsCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:4px">';
     if (sbpsMucTB) html += 'Trưng bày: <b>' + sbpsMucTB + '</b>' + (sbpsTBInfo ? ' (DS≥' + fmt(sbpsTBInfo.dsMin) + ')' : '') + ' · ';
     html += 'Tích lũy: <b>Mức ' + sbpsMuc + '</b>';
@@ -1033,26 +1167,26 @@ function cusInputDS(idx, monthKey) {
   if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📦 NHÓM C (VNM Shop)</div>';
     html += cusInputField('cds-c', 'DS nhóm C tháng', cusEditableMetricValue(rawMd, 'dsNhomC'), auto.dsNhomC);
-    html += cusInputField('cds-gd1', 'DS GĐ1 (1-10)', md.dsGD1);
-    html += cusInputField('cds-gd2', 'DS GĐ2 (11-20)', md.dsGD2);
-    html += cusInputField('cds-gd3', 'DS GĐ3 (21-27)', md.dsGD3);
+    html += cusInputField('cds-gd1', 'DS GĐ1 (1-10)', cusEditableMetricValue(rawMd, 'dsGD1'), auto.dsGD1);
+    html += cusInputField('cds-gd2', 'DS GĐ2 (11-20)', cusEditableMetricValue(rawMd, 'dsGD2'), auto.dsGD2);
+    html += cusInputField('cds-gd3', 'DS GĐ3 (21-27)', cusEditableMetricValue(rawMd, 'dsGD3'), auto.dsGD3);
     html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vnm" ' + (md.vnmShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#1A4DFF"> Đạt trưng bày VNM Shop</label></div>';
   }
   if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#2563EB">🧊 NHÓM DE (VIP Shop)</div>';
     html += cusInputField('cds-de', 'DS nhóm DE tháng', cusEditableMetricValue(rawMd, 'dsNhomDE'), auto.dsNhomDE);
-    html += cusInputField('cds-vn1', 'DS SP Chủ lực (N1)', md.dsVipN1);
-    html += cusInputField('cds-vn2', 'DS SP Tập trung (N2)', md.dsVipN2);
-    html += cusInputField('cds-skud', 'Số SKU nhóm D', md.skuNhomD);
+    html += cusInputField('cds-vn1', 'DS SP Chủ lực (N1)', cusEditableMetricValue(rawMd, 'dsVipN1'), auto.dsVipN1);
+    html += cusInputField('cds-vn2', 'DS SP Tập trung (N2)', cusEditableMetricValue(rawMd, 'dsVipN2'), auto.dsVipN2);
+    html += cusInputField('cds-skud', 'Số SKU nhóm D', cusEditableMetricValue(rawMd, 'skuNhomD'), auto.skuNhomD);
     html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vip" ' + (md.vipShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#2563EB"> Đạt trưng bày VIP Shop</label></div>';
   }
   if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
     html += '<div class="kf"><div class="kfl" style="color:#D97706">🍼 SBPS TE</div>';
     html += cusInputField('cds-sbps', 'DS SBPS tháng', cusEditableMetricValue(rawMd, 'dsSBPS'), auto.dsSBPS);
-    html += cusInputField('cds-sbps-n1', 'DS SBPS N1 (DG/GP/A2)', md.sbpsN1);
-    html += cusInputField('cds-sbps-n2', 'DS SBPS N2 (OG/DGP)', md.sbpsN2);
-    html += cusInputField('cds-sbps-n3', 'DS SBPS N3 (Yoko/OC)', md.sbpsN3);
-    html += cusInputField('cds-sbps-26', 'DS đến ngày 26', md.sbpsTo26);
+    html += cusInputField('cds-sbps-n1', 'DS SBPS N1 (DG/GP/A2)', cusEditableMetricValue(rawMd, 'sbpsN1'), auto.sbpsN1);
+    html += cusInputField('cds-sbps-n2', 'DS SBPS N2 (OG/DGP)', cusEditableMetricValue(rawMd, 'sbpsN2'), auto.sbpsN2);
+    html += cusInputField('cds-sbps-n3', 'DS SBPS N3 (Yoko/OC)', cusEditableMetricValue(rawMd, 'sbpsN3'), auto.sbpsN3);
+    html += cusInputField('cds-sbps-26', 'DS đến ngày 26', cusEditableMetricValue(rawMd, 'sbpsTo26'), auto.sbpsTo26);
     if (kh.programs.sbpsShop.mucTrungBay) html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-sbps" ' + (md.sbpsTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#D97706"> Đạt trưng bày SBPS (' + kh.programs.sbpsShop.mucTrungBay + ')</label>';
     html += '</div>';
   }
@@ -1079,20 +1213,20 @@ function cusReadDS() {
   var c = function(id) { return (document.getElementById(id) || {}).checked || false; };
   return {
     manualDsNhomC: gn('cds-c'),
-    dsGD1: g('cds-gd1'),
-    dsGD2: g('cds-gd2'),
-    dsGD3: g('cds-gd3'),
+    dsGD1: gn('cds-gd1'),
+    dsGD2: gn('cds-gd2'),
+    dsGD3: gn('cds-gd3'),
     vnmShopTrungBay: c('cds-trungbay-vnm'),
     manualDsNhomDE: gn('cds-de'),
-    dsVipN1: g('cds-vn1'),
-    dsVipN2: g('cds-vn2'),
-    skuNhomD: g('cds-skud'),
+    dsVipN1: gn('cds-vn1'),
+    dsVipN2: gn('cds-vn2'),
+    skuNhomD: gn('cds-skud'),
     vipShopTrungBay: c('cds-trungbay-vip'),
     manualDsSBPS: gn('cds-sbps'),
-    sbpsN1: g('cds-sbps-n1'),
-    sbpsN2: g('cds-sbps-n2'),
-    sbpsN3: g('cds-sbps-n3'),
-    sbpsTo26: g('cds-sbps-26'),
+    sbpsN1: gn('cds-sbps-n1'),
+    sbpsN2: gn('cds-sbps-n2'),
+    sbpsN3: gn('cds-sbps-n3'),
+    sbpsTo26: gn('cds-sbps-26'),
     customProgress: cusReadCustomProgressRows()
   };
 }
