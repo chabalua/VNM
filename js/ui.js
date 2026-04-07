@@ -336,6 +336,70 @@ function updKM(p, km, ma) {
   if (pt) pt.innerHTML = ptbl(p, km);
 }
 
+function formatQtyByCarton(p, qty) {
+  var amount = Math.max(0, parseInt(qty, 10) || 0);
+  var unit = p && p.donvi ? p.donvi : 'đơn vị';
+  var cartonSize = p && +p.slThung > 0 ? +p.slThung : 0;
+  var text = amount + ' ' + unit;
+  if (!cartonSize || !amount) return text;
+  var cartons = Math.floor(amount / cartonSize);
+  var remainder = amount % cartonSize;
+  var parts = [];
+  if (cartons > 0) parts.push(cartons + ' thùng');
+  if (remainder > 0) parts.push(remainder + ' ' + unit);
+  if (!parts.length) parts.push('0 ' + unit);
+  return text + ' (' + parts.join(' + ') + ')';
+}
+
+function getCartonRoundHint(p, qty) {
+  var amount = Math.max(0, parseInt(qty, 10) || 0);
+  var cartonSize = p && +p.slThung > 0 ? +p.slThung : 0;
+  if (!cartonSize || !amount) return '';
+  var remainder = amount % cartonSize;
+  if (!remainder) return 'Đã chẵn thùng';
+  return 'Thiếu ' + (cartonSize - remainder) + ' ' + p.donvi + ' để tròn 1 thùng';
+}
+
+function getProductPromoRefs(ma) {
+  return kmProgs.map(function(prog, idx) {
+    return { prog: prog, idx: idx };
+  }).filter(function(item) {
+    return item.prog && item.prog.active && (item.prog.spMas || []).includes(ma);
+  });
+}
+
+function getAppliedPromoRefsByNames(names) {
+  var used = {};
+  return (names || []).map(function(name) {
+    var matchIdx = -1;
+    for (var i = 0; i < kmProgs.length; i++) {
+      if (used[i]) continue;
+      var prog = kmProgs[i];
+      if (!prog || !prog.active) continue;
+      if ((prog.name || 'CT KM') !== name) continue;
+      matchIdx = i;
+      used[i] = true;
+      break;
+    }
+    return { idx: matchIdx, name: name || 'CT KM' };
+  });
+}
+
+function renderPromoJumpChips(items, maxVisible) {
+  var list = Array.isArray(items) ? items : [];
+  if (!list.length) return '';
+  var limit = Math.max(1, maxVisible || list.length);
+  var html = '<div class="km-line">';
+  list.slice(0, limit).forEach(function(item) {
+    var name = escapeHtmlAttr(item.name || (item.prog && item.prog.name) || 'CT KM');
+    if (item.idx >= 0) html += '<button type="button" class="km-jump-chip" onclick="event.stopPropagation();kmOpenFromOrder(' + item.idx + ')">' + name + '</button>';
+    else html += '<span class="km-jump-chip muted">' + name + '</span>';
+  });
+  if (list.length > limit) html += '<button type="button" class="km-jump-chip muted" onclick="event.stopPropagation();gotoTab(\'km\')">+' + (list.length - limit) + ' CT</button>';
+  html += '</div>';
+  return html;
+}
+
 function onQty(ma) {
   var p = spFind(ma); if (!p) return;
   var qT = parseInt(document.getElementById('qT_' + ma)?.value) || 0;
@@ -346,10 +410,15 @@ function onQty(ma) {
   if (!qT && !qL) { pv.style.display = 'none'; updKM(p, calcKM(p, 0, 0), ma); return; }
   var km = calcKM(p, qT, qL);
   var totalLon = qT * p.slThung + qL;
+  var totalNhan = totalLon + (km.bonus || 0);
   var after = p.giaNYLon * totalLon - km.disc;
-  var ctName = (km.appliedPromos || []).length ? km.appliedPromos.join(' + ') : '';
+  var appliedPromoRefs = getAppliedPromoRefsByNames(km.appliedPromos || []);
   pv.style.display = 'block';
-  var pvHtml = '<div class="pv-row"><span class="pv-l">SL: ' + totalLon + ' ' + p.donvi + (km.bonus > 0 ? ' + tặng ' + km.bonus + ' ' + p.donvi : '') + '</span>' + (ctName ? '<span class="sp-kmbadge" style="font-size:11px">' + ctName + '</span>' : '') + '</div>';
+  var pvHtml = '<div class="pv-row"><span class="pv-l">SL mua</span><span class="pv-v-sm">' + formatQtyByCarton(p, totalLon) + '</span></div>';
+  if (km.bonus > 0) pvHtml += '<div class="pv-row"><span class="pv-l">SL KM</span><span class="pv-v-sm">' + formatQtyByCarton(p, km.bonus) + '</span></div>';
+  pvHtml += '<div class="pv-row"><span class="pv-l">Tổng nhận</span><span class="pv-v-sm">' + formatQtyByCarton(p, totalNhan) + '</span></div>';
+  if (p.slThung > 0) pvHtml += '<div class="pv-row pv-row-note"><span class="pv-l">Quy đổi</span><span class="pv-note">1 thùng = ' + p.slThung + ' ' + p.donvi + ' · ' + getCartonRoundHint(p, totalNhan) + '</span></div>';
+  if (appliedPromoRefs.length) pvHtml += renderPromoJumpChips(appliedPromoRefs, 3);
   pvHtml += '<div class="pv-row"><span class="pv-l">Thành tiền</span><span class="pv-v">' + fmt(after) + 'đ</span></div>';
   pvHtml += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(Math.round(after * 1.015)) + 'đ</span></div>';
   if (km.disc > 0) pvHtml += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span style="color:var(--r);font-weight:700">- ' + fmt(km.disc) + 'đ</span></div>';
@@ -426,10 +495,11 @@ function renderOrder() {
       var brand = detectBrand(p);
 
       var kmBadgeHtml = '';
-      var appliedCTs = kmProgs.filter(function(prog) { return prog.active && (prog.spMas || []).includes(p.ma); });
+      var appliedCTs = getProductPromoRefs(p.ma);
       if (appliedCTs.length) {
-        var ctNames = appliedCTs.slice(0, 2).map(function(ct) { return ct.name; });
-        kmBadgeHtml = '<div class="km-line">' + ctNames.join(' · ') + (appliedCTs.length > 2 ? ' +' + (appliedCTs.length - 2) : '') + '</div>';
+        kmBadgeHtml = renderPromoJumpChips(appliedCTs.map(function(item) {
+          return { idx: item.idx, name: item.prog.name || 'CT KM' };
+        }), 3);
       }
 
       var isExpanded = _cardExpanded[p.ma] === undefined ? !!inCart : _cardExpanded[p.ma];
@@ -460,7 +530,7 @@ function renderOrder() {
     if (!cq.qT && !cq.qL) continue;
     var iT = document.getElementById('qT_' + ma), iL = document.getElementById('qL_' + ma);
     if (iT) iT.value = cq.qT || ''; if (iL) iL.value = cq.qL || '';
-    var p = spFind(ma); if (p) updKM(p, calcKM(p, cq.qT || 0, cq.qL || 0), ma);
+    var p = spFind(ma); if (p) onQty(ma);
   }
 }
 

@@ -119,7 +119,10 @@ html[data-theme='dark']{
 .sp-meta{display:flex;gap:5px;flex-wrap:wrap;margin-top:5px}
 .sp-chip{font-size:10.5px;font-weight:600;color:var(--n3);background:var(--n6);border-radius:6px;padding:2px 8px}
 .sp-kmbadge{font-size:10.5px;font-weight:700;color:var(--vm);background:var(--vmL);border-radius:6px;padding:2px 8px}
-.km-line{font-size:11.5px;color:var(--vm2);font-weight:700;padding:4px 14px 0;line-height:1.4}
+.km-line{display:flex;gap:6px;flex-wrap:wrap;padding:4px 14px 0;line-height:1.4}
+.km-jump-chip{border:none;background:var(--vmL);color:var(--vm);font-size:11px;font-weight:800;padding:4px 9px;border-radius:999px;cursor:pointer;line-height:1.2}
+.km-jump-chip.muted{background:var(--n6);color:var(--n3)}
+.km-jump-chip:active{transform:scale(.97)}
 
 /* ============================================================
    PRICE TABLE — Refined grid
@@ -152,6 +155,9 @@ html[data-theme='dark']{
 .pv-box{margin:0 14px 12px;background:var(--vmL);border-radius:var(--Rs);padding:10px 12px;border:1px solid #C9D7FF;display:none}
 .pv-row{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:4px}
 .pv-l{font-size:12px;color:var(--vm2);font-weight:600}.pv-v{font-size:14px;font-weight:800;color:var(--vm)}.pv-vat{font-size:11.5px;color:var(--b)}
+.pv-v-sm{font-size:12.5px;font-weight:700;color:var(--vm);text-align:right;margin-left:10px}
+.pv-note{font-size:11px;color:var(--n2);text-align:right;margin-left:10px}
+.pv-row-note{align-items:flex-start}
 .btn-ok{width:100%;height:40px;background:var(--vm);color:#fff;border:none;border-radius:var(--Rs);font-size:14px;font-weight:700;cursor:pointer;margin-top:6px;transition:all .15s}
 .btn-ok:active{background:var(--vmD)}
 
@@ -229,6 +235,7 @@ html[data-theme='dark']{
    KM CARDS
    ============================================================ */
 .km-card{background:var(--card);margin:8px 12px;border-radius:var(--R);box-shadow:var(--shadow);overflow:hidden}
+.km-card.km-card-focus{box-shadow:0 0 0 2px rgba(26,77,255,.18),var(--shadow2);border:1px solid rgba(26,77,255,.28)}
 .km-card-h{padding:14px 16px;display:flex;justify-content:space-between;align-items:flex-start;gap:8px;border-bottom:1px solid var(--n5)}
 .km-card-nm{font-size:14.5px;font-weight:800;color:var(--n1);margin-bottom:3px}
 .km-card-sm{font-size:11.5px;color:var(--n3);line-height:1.4}

@@ -7,6 +7,60 @@ let _kmStackable = true;
 let _kmFilterGroup = '';
 let _kmFilterQuery = '';
 
+function kmBuildSearchHaystack(prog) {
+  if (!prog) return '';
+  var parts = [
+    prog.name || '',
+    kmBuildText(prog) || '',
+    prog.type || '',
+    (prog.spMas || []).join(' '),
+    prog.bonusMa || '',
+    prog.bonusName || '',
+    (prog.bMa && prog.bMa !== 'same') ? prog.bMa : ''
+  ];
+  (prog.spMas || []).forEach(function(ma) {
+    var sp = (typeof spFind === 'function') ? spFind(ma) : null;
+    if (sp) parts.push(sp.ten || '');
+  });
+  if (prog.bonusMa) {
+    var bonusProduct = (typeof spFind === 'function') ? spFind(prog.bonusMa) : null;
+    if (bonusProduct) parts.push(bonusProduct.ten || '');
+  }
+  if (prog.bMa && prog.bMa !== 'same') {
+    var giftedProduct = (typeof spFind === 'function') ? spFind(prog.bMa) : null;
+    if (giftedProduct) parts.push(giftedProduct.ten || '');
+  }
+  return parts.join(' ').toLowerCase();
+}
+
+function kmFlashCard(card) {
+  if (!card) return;
+  card.classList.remove('km-card-focus');
+  void card.offsetWidth;
+  card.classList.add('km-card-focus');
+  setTimeout(function() { card.classList.remove('km-card-focus'); }, 1800);
+}
+
+function kmFocusCard(idx) {
+  var card = document.getElementById('km-card-' + idx);
+  if (!card) return false;
+  card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  kmFlashCard(card);
+  return true;
+}
+
+function kmOpenFromOrder(idx) {
+  if (idx == null || !kmProgs[idx]) return;
+  _kmFilterGroup = '';
+  _kmFilterQuery = '';
+  if (typeof gotoTab === 'function') gotoTab('km');
+  var input = document.getElementById('km-search-input');
+  if (input) input.value = '';
+  setTimeout(function() {
+    kmFocusCard(idx);
+  }, 80);
+}
+
 function kmOpenModal(prog, idx) {
   _kmEditIdx = (idx !== undefined) ? idx : -1;
   _kmPickerNhom = prog ? (prog.nhoms || '') : '';
@@ -386,7 +440,7 @@ function renderKMTab() {
       }
     }
     if (_kmFilterQuery) {
-      return (item.prog.name || '').toLowerCase().indexOf(_kmFilterQuery) >= 0;
+      return kmBuildSearchHaystack(item.prog).indexOf(_kmFilterQuery) >= 0;
     }
     return true;
   });
@@ -415,7 +469,7 @@ function renderKMTab() {
       var txt = kmBuildText(prog);
       var stackLbl = prog.stackable ? '🔗 Gộp' : '🔒 Ko gộp';
       var minSKULbl = prog.minSKU ? ' · ≥' + prog.minSKU + ' SKU' : '';
-      html += '<div class="km-card"><div class="km-card-h"><div style="flex:1;min-width:0"><div class="km-card-nm">' + (prog.name || 'CT KM') + '</div><div class="km-card-sm">' + txt + ' · ' + cnt + ' SP · ' + stackLbl + minSKULbl + '</div></div><span class="km-badge ' + (prog.active ? 'on' : '') + '">' + (prog.active ? '✓ Bật' : '○ Tắt') + '</span></div><div class="km-card-f"><button class="btn-kme" onclick="kmEdit(' + i + ')">✏️ Sửa</button><button class="btn-kmt" onclick="kmToggle(' + i + ')">' + (prog.active ? '⏸ Tắt' : '▶ Bật') + '</button><button class="btn-kmd" onclick="kmDel(' + i + ')">✕</button></div></div>';
+      html += '<div class="km-card" id="km-card-' + i + '"><div class="km-card-h"><div style="flex:1;min-width:0"><div class="km-card-nm">' + (prog.name || 'CT KM') + '</div><div class="km-card-sm">' + txt + ' · ' + cnt + ' SP · ' + stackLbl + minSKULbl + '</div></div><span class="km-badge ' + (prog.active ? 'on' : '') + '">' + (prog.active ? '✓ Bật' : '○ Tắt') + '</span></div><div class="km-card-f"><button class="btn-kme" onclick="kmEdit(' + i + ')">✏️ Sửa</button><button class="btn-kmt" onclick="kmToggle(' + i + ')">' + (prog.active ? '⏸ Tắt' : '▶ Bật') + '</button><button class="btn-kmd" onclick="kmDel(' + i + ')">✕</button></div></div>';
     });
     html += '</div>';
   });
@@ -523,6 +577,7 @@ window.kmPickerSearch = kmPickerSearch;
 window.kmSetFilterGroup = kmSetFilterGroup;
 window.kmSaveForm = kmSaveForm;
 window.renderKMTab = renderKMTab;
+window.kmOpenFromOrder = kmOpenFromOrder;
 window.kmToggle = kmToggle;
 window.kmDel = kmDel;
 window.kmEdit = kmEdit;
