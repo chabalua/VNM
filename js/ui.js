@@ -400,6 +400,27 @@ function renderPromoJumpChips(items, maxVisible) {
   return html;
 }
 
+function buildDraftCartState(ma, qT, qL) {
+  var nextCart = {};
+  Object.keys(cart || {}).forEach(function(code) {
+    var item = cart[code] || {};
+    nextCart[code] = { qT: Math.max(0, parseInt(item.qT, 10) || 0), qL: Math.max(0, parseInt(item.qL, 10) || 0) };
+  });
+  if (qT > 0 || qL > 0) nextCart[ma] = { qT: qT, qL: qL };
+  else delete nextCart[ma];
+  return nextCart;
+}
+
+function getOrderBonusPreview(orderKM, ma) {
+  var sameProductQty = 0;
+  var otherItems = [];
+  (orderKM.bonusItems || []).forEach(function(bi) {
+    if (bi.ma === ma) sameProductQty += Math.max(0, parseInt(bi.qty, 10) || 0);
+    else otherItems.push(bi);
+  });
+  return { sameProductQty: sameProductQty, otherItems: otherItems };
+}
+
 function onQty(ma) {
   var p = spFind(ma); if (!p) return;
   var qT = parseInt(document.getElementById('qT_' + ma)?.value) || 0;
@@ -409,17 +430,34 @@ function onQty(ma) {
   var pv = document.getElementById('pv_' + ma); if (!pv) return;
   if (!qT && !qL) { pv.style.display = 'none'; updKM(p, calcKM(p, 0, 0), ma); return; }
   var km = calcKM(p, qT, qL);
+  var draftCart = buildDraftCartState(ma, qT, qL);
+  var draftItems = (typeof getItemsFromCartState === 'function') ? getItemsFromCartState(draftCart) : [];
+  var orderKM = (typeof calcOrderKM === 'function') ? calcOrderKM(draftItems) : { disc: 0, desc: '', bonusItems: [] };
+  var orderBonusPreview = getOrderBonusPreview(orderKM, ma);
+  var orderBonusQty = orderBonusPreview.sameProductQty;
   var totalLon = qT * p.slThung + qL;
-  var totalNhan = totalLon + (km.bonus || 0);
+  var totalNhan = totalLon + (km.bonus || 0) + orderBonusQty;
   var after = p.giaNYLon * totalLon - km.disc;
-  var appliedPromoRefs = getAppliedPromoRefsByNames(km.appliedPromos || []);
+  var appliedPromoNames = (km.appliedPromos || []).slice();
+  (orderKM.bonusItems || []).forEach(function(bi) {
+    if (bi && bi.progName && appliedPromoNames.indexOf(bi.progName) < 0) appliedPromoNames.push(bi.progName);
+  });
+  var appliedPromoRefs = getAppliedPromoRefsByNames(appliedPromoNames);
   pv.style.display = 'block';
   var pvHtml = '<div class="pv-row"><span class="pv-l">SL mua</span><span class="pv-v-sm">' + formatQtyByCarton(p, totalLon) + '</span></div>';
   if (km.bonus > 0) pvHtml += '<div class="pv-row"><span class="pv-l">SL KM</span><span class="pv-v-sm">' + formatQtyByCarton(p, km.bonus) + '</span></div>';
+  if (orderBonusQty > 0) pvHtml += '<div class="pv-row"><span class="pv-l">Quà ĐH</span><span class="pv-v-sm">' + formatQtyByCarton(p, orderBonusQty) + '</span></div>';
   pvHtml += '<div class="pv-row"><span class="pv-l">Tổng nhận</span><span class="pv-v-sm">' + formatQtyByCarton(p, totalNhan) + '</span></div>';
+  orderBonusPreview.otherItems.forEach(function(bi) {
+    pvHtml += '<div class="pv-row"><span class="pv-l">Quà ĐH khác</span><span class="pv-v-sm">' + formatOrderBonusItemText(bi) + '</span></div>';
+  });
   if (p.slThung > 0) pvHtml += '<div class="pv-row pv-row-note"><span class="pv-l">Quy đổi</span><span class="pv-note">1 thùng = ' + p.slThung + ' ' + p.donvi + ' · ' + getCartonRoundHint(p, totalNhan) + '</span></div>';
   if (appliedPromoRefs.length) pvHtml += renderPromoJumpChips(appliedPromoRefs, 3);
   pvHtml += '<div class="pv-row"><span class="pv-l">Thành tiền</span><span class="pv-v">' + fmt(after) + 'đ</span></div>';
+  if (orderKM.disc > 0) {
+    var draftTotal = draftItems.reduce(function(sum, item) { return sum + item.afterKM; }, 0) - orderKM.disc;
+    pvHtml += '<div class="pv-row"><span class="pv-l">Tạm tính đơn</span><span class="pv-v">' + fmt(draftTotal) + 'đ</span></div>';
+  }
   pvHtml += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(Math.round(after * 1.015)) + 'đ</span></div>';
   if (km.disc > 0) pvHtml += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span style="color:var(--r);font-weight:700">- ' + fmt(km.disc) + 'đ</span></div>';
   pvHtml += '<button class="btn-ok" onclick="addCart(\'' + ma + '\')">✓ Thêm vào đơn</button>';

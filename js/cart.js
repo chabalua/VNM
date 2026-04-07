@@ -399,16 +399,21 @@ function _calcKM_orig(p, qT, qL) {
 // ============================================================
 // GIỎ HÀNG — auto-link với KH đã chọn
 // ============================================================
-function getItems() {
-  var allMas = Object.entries(cart).filter(function(e) { return e[1].qT > 0 || e[1].qL > 0; }).map(function(e) { return e[0]; });
+function getItemsFromCartState(cartState) {
+  var sourceCart = cartState || {};
+  var allMas = Object.entries(sourceCart).filter(function(e) { return e[1].qT > 0 || e[1].qL > 0; }).map(function(e) { return e[0]; });
   var orderContext = { allMas: allMas, skuCount: allMas.length };
-  return Object.entries(cart).filter(function(e) { return e[1].qT > 0 || e[1].qL > 0; }).map(function(e) {
+  return Object.entries(sourceCart).filter(function(e) { return e[1].qT > 0 || e[1].qL > 0; }).map(function(e) {
     var ma = e[0], q = e[1];
     var p = spFind(ma); if (!p) return null;
     var totalLon = q.qT * p.slThung + q.qL; var gocTotal = p.giaNYLon * totalLon;
     var km = calcKM(p, q.qT, q.qL, orderContext);
     return { ma: p.ma, ten: p.ten, nhom: p.nhom, donvi: p.donvi, slThung: p.slThung, giaNYLon: p.giaNYLon, giaNYThung: p.giaNYThung, qT: q.qT, qL: q.qL, totalLon: totalLon, gocTotal: gocTotal, disc: km.disc, desc: km.desc, bonus: km.bonus, afterKM: gocTotal - km.disc, appliedPromos: km.appliedPromos };
   }).filter(Boolean);
+}
+
+function getItems() {
+  return getItemsFromCartState(cart);
 }
 
 function addCart(ma) {
@@ -845,6 +850,7 @@ window.cart = cart; window.customers = customers;
 window.saveCart = saveCart; window.fmt = fmt;
 window.calcKM = calcKM; window.calcOrderKM = calcOrderKM;
 window.getItems = getItems; window.addCart = addCart;
+window.getItemsFromCartState = getItemsFromCartState;
 window.removeCart = removeCart; window.clearCart = clearCart;
 window.renderDon = renderDon; window.submitOrder = submitOrder;
 window.renderKH = renderKH; window.addKH = addKH; window.delKH = delKH;
