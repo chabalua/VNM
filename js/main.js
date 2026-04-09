@@ -465,11 +465,11 @@ function renderHomeDashboard() {
   html += '<div class="dashboard-card">';
   html += '<div class="dashboard-card-head"><div><div class="dashboard-kicker">Hành động nhanh</div><div class="dashboard-title">Điều hướng</div></div></div>';
   html += '<div class="action-grid">';
-  html += '<button class="action-card" onclick="gotoTab(\'order\')"><span class="action-icon">◫</span><span>Đặt hàng</span></button>';
-  html += '<button class="action-card" onclick="gotoTab(\'kh\')"><span class="action-icon">◎</span><span>Khách hàng</span></button>';
-  html += '<button class="action-card" onclick="gotoTab(\'don\')"><span class="action-icon">☰</span><span>Đơn hàng</span></button>';
-  html += '<button class="action-card" onclick="openKpiSettings(\'' + data.monthKey + '\')"><span class="action-icon">◔</span><span>Mục tiêu KPI</span></button>';
-  html += '<button class="action-card" onclick="syncOpenSettings()"><span class="action-icon">☁</span><span>Cloud</span></button>';
+  html += '<button class="action-card" onclick="gotoTab(\'order\')"><span class="action-icon">🛒</span><span>Đặt hàng</span></button>';
+  html += '<button class="action-card" onclick="gotoTab(\'kh\')"><span class="action-icon">👥</span><span>Khách hàng</span></button>';
+  html += '<button class="action-card" onclick="gotoTab(\'don\')"><span class="action-icon">📋</span><span>Đơn hàng</span></button>';
+  html += '<button class="action-card" onclick="openKpiSettings(\'' + data.monthKey + '\')"><span class="action-icon">🎯</span><span>Mục tiêu KPI</span></button>';
+  html += '<button class="action-card" onclick="syncOpenSettings()"><span class="action-icon">☁️</span><span>Cloud</span></button>';
   html += '</div></div>';
 
   html += '<div class="dashboard-card">';
