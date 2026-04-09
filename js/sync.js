@@ -355,8 +355,8 @@ function syncOpenSettings() {
   html += '<div class="kf"><div class="kfl">GitHub Personal Access Token</div>';
   if (token) {
     html += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">';
-    html += '<div style="flex:1;height:40px;border:1.5px solid var(--vm);border-radius:var(--Rs);padding:0 12px;display:flex;align-items:center;font-size:13px;color:var(--vm);font-weight:600;background:#f0f6ff">🔑 ' + masked + '</div>';
-    html += '<button onclick="syncClearToken()" style="height:40px;padding:0 14px;border:1.5px solid var(--r);border-radius:var(--Rs);background:#fff;color:var(--r);font-size:12px;font-weight:700;cursor:pointer">Xóa</button>';
+    html += '<div style="flex:1;height:40px;border:1.5px solid var(--vm);border-radius:var(--Rs);padding:0 12px;display:flex;align-items:center;font-size:13px;color:var(--vm);font-weight:600;background:var(--surface-accent)">🔑 ' + masked + '</div>';
+    html += '<button onclick="syncClearToken()" style="height:40px;padding:0 14px;border:1.5px solid var(--r);border-radius:var(--Rs);background:var(--card);color:var(--r);font-size:12px;font-weight:700;cursor:pointer">Xóa</button>';
     html += '</div>';
   } else {
     html += '<input type="text" id="sync-token-input" placeholder="ghp_xxxxxxxxxxxx" style="width:100%;height:44px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:14px;font-family:monospace;color:var(--n1);margin-bottom:8px">';
@@ -374,22 +374,22 @@ function syncOpenSettings() {
     html += '</div>';
 
     html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">';
-    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPushOrdersOnly()" style="height:44px;border:1.5px solid var(--vm);border-radius:var(--Rs);background:#fff;color:var(--vm);font-size:13px;font-weight:700;cursor:pointer">⬆️ Push đơn hàng</button>';
-    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPullOrdersOnly()" style="height:44px;border:1.5px solid var(--b);border-radius:var(--Rs);background:#fff;color:var(--b);font-size:13px;font-weight:700;cursor:pointer">⬇️ Pull đơn hàng</button>';
+    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPushOrdersOnly()" style="height:44px;border:1.5px solid var(--vm);border-radius:var(--Rs);background:var(--card);color:var(--vm);font-size:13px;font-weight:700;cursor:pointer">⬆️ Push đơn hàng</button>';
+    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPullOrdersOnly()" style="height:44px;border:1.5px solid var(--b);border-radius:var(--Rs);background:var(--card);color:var(--b);font-size:13px;font-weight:700;cursor:pointer">⬇️ Pull đơn hàng</button>';
     html += '</div>';
 
     html += '<div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">';
     html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPush()" style="width:100%;height:52px;background:linear-gradient(135deg,var(--vm),#245bff);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(26,77,255,.22)">⬆️ Push toàn bộ dữ liệu</button>';
     html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPull()" style="width:100%;height:52px;background:linear-gradient(135deg,#111827,#2f3e63);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(17,24,39,.18)">⬇️ Pull toàn bộ dữ liệu</button>';
     html += '</div>';
-    html += '<button onclick="syncTestConnection()" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);background:#fff;color:var(--n2);font-size:12px;font-weight:600;cursor:pointer;margin-top:12px">🔍 Kiểm tra kết nối</button>';
+    html += '<button onclick="syncTestConnection()" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);background:var(--card);color:var(--n2);font-size:12px;font-weight:600;cursor:pointer;margin-top:12px">🔍 Kiểm tra kết nối</button>';
   }
 
   html += '<div style="border-top:1px solid var(--n5);margin-top:20px;padding-top:16px">';
   html += '<div class="kfl">💾 Backup / Restore offline</div>';
   html += '<div style="display:flex;gap:8px">';
-  html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';backupAll()" style="flex:1;height:44px;border:1.5px solid var(--o);border-radius:var(--Rs);background:#fff;color:var(--o);font-size:13px;font-weight:700;cursor:pointer">📤 Backup</button>';
-  html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';restoreAll()" style="flex:1;height:44px;border:1.5px solid var(--p);border-radius:var(--Rs);background:#fff;color:var(--p);font-size:13px;font-weight:700;cursor:pointer">📥 Restore</button>';
+  html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';backupAll()" style="flex:1;height:44px;border:1.5px solid var(--o);border-radius:var(--Rs);background:var(--card);color:var(--o);font-size:13px;font-weight:700;cursor:pointer">📤 Backup</button>';
+  html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';restoreAll()" style="flex:1;height:44px;border:1.5px solid var(--p);border-radius:var(--Rs);background:var(--card);color:var(--p);font-size:13px;font-weight:700;cursor:pointer">📥 Restore</button>';
   html += '</div>';
   html += '<div style="font-size:10px;color:var(--n3);margin-top:6px">Xuất/nhập toàn bộ dữ liệu (SP + KM + KH + Đơn) vào 1 file JSON</div>';
   html += '</div>';

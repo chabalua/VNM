@@ -506,7 +506,7 @@ function renderDon() {
       html += '<div style="background:var(--oL);border:1.5px solid var(--o);border-radius:var(--Rs);padding:10px 12px;margin-bottom:12px">';
       html += '<div style="font-size:12px;font-weight:800;color:var(--o);margin-bottom:4px">✏️ Chế độ sửa đơn</div>';
       html += '<div style="font-size:11px;color:var(--n2);line-height:1.5">' + getEditOrderSummary(editingOrder) + '</div>';
-      html += '<button onclick="cancelEditOrder()" style="margin-top:8px;height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:#fff;color:var(--o);font-size:11px;font-weight:700;cursor:pointer">Huỷ sửa</button>';
+      html += '<button onclick="cancelEditOrder()" style="margin-top:8px;height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:var(--card);color:var(--o);font-size:11px;font-weight:700;cursor:pointer">Huỷ sửa</button>';
       html += '</div>';
     }
     if (totSave > 0) {
@@ -547,10 +547,10 @@ function renderDon() {
     html += '<div style="padding:16px 12px 8px"><div style="font-size:15px;font-weight:800;color:var(--n1)">📋 Lịch sử đơn hàng</div>';
     html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">';
     if (cloudReady) {
-      html += '<button onclick="syncPullOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--b);border-radius:8px;background:#fff;color:var(--b);font-size:11px;font-weight:700;cursor:pointer">⬇️ Tải đơn cloud</button>';
-      html += '<button onclick="syncPushOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--vm);border-radius:8px;background:#fff;color:var(--vm);font-size:11px;font-weight:700;cursor:pointer">⬆️ Lưu đơn cloud</button>';
+      html += '<button onclick="syncPullOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--b);border-radius:8px;background:var(--card);color:var(--b);font-size:11px;font-weight:700;cursor:pointer">⬇️ Tải đơn cloud</button>';
+      html += '<button onclick="syncPushOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--vm);border-radius:8px;background:var(--card);color:var(--vm);font-size:11px;font-weight:700;cursor:pointer">⬆️ Lưu đơn cloud</button>';
     } else {
-      html += '<button onclick="syncOpenSettings()" style="height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:#fff;color:var(--o);font-size:11px;font-weight:700;cursor:pointer">☁️ Cài cloud GitHub</button>';
+      html += '<button onclick="syncOpenSettings()" style="height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:var(--card);color:var(--o);font-size:11px;font-weight:700;cursor:pointer">☁️ Cài cloud GitHub</button>';
     }
     html += '</div>';
     if (!orders.length) {
@@ -832,10 +832,10 @@ function viewOrderDetail(orderRef) {
   html += '</div>';
 
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px">';
-  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:#fff;color:var(--o);font-size:14px;font-weight:800;cursor:pointer">✏️ Sửa đơn</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:var(--card);color:var(--o);font-size:14px;font-weight:800;cursor:pointer">✏️ Sửa đơn</button>';
   html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" style="height:46px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:14px;font-weight:800;cursor:pointer">📋 Copy gửi Zalo</button>';
   html += '</div>';
-  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:#fff;color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px">🗑 Xóa đơn này</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:var(--card);color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px">🗑 Xóa đơn này</button>';
 
   body.innerHTML = html;
 }

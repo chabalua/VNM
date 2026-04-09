@@ -276,7 +276,7 @@ function ctTableHTML(g, tp) {
     html += '<table class="ct-edit-table"><thead><tr><th>Mức</th><th>DS min</th><th>SKU min</th><th>Thưởng Tủ VNM</th><th>Thưởng Tủ KH</th></tr></thead><tbody>';
     Object.keys(VIP_SHOP_TRUNGBAY).forEach(function(m) {
       var t = VIP_SHOP_TRUNGBAY[m];
-      html += '<tr data-key="'+m+'"><td style="font-weight:800;color:#2563EB">'+m+'</td>';
+      html += '<tr data-key="'+m+'"><td style="font-weight:800;color:var(--b)">'+m+'</td>';
       html += '<td><input class="ct-inp ct-dsmin" type="number" value="'+t.dsMin+'"></td>';
       html += '<td><input class="ct-inp ct-sku" type="number" value="'+t.skuMin+'"></td>';
       html += '<td><input class="ct-inp ct-tvnm" type="number" value="'+t.thuongVNM+'"></td>';
@@ -287,7 +287,7 @@ function ctTableHTML(g, tp) {
     html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:8px">VIP Shop — Tích Lũy DS (N1=Chủ lực, N2=Tập trung)</div>';
     html += '<table class="ct-edit-table"><thead><tr><th>Mức</th><th>DS min</th><th>CK N1 (Chủ lực)%</th><th>CK N2 (Tập trung)%</th></tr></thead><tbody>';
     VIP_SHOP_TICHLUY.forEach(function(t, i) {
-      html += '<tr data-idx="'+i+'"><td style="font-weight:800;color:#2563EB">'+t.muc+'</td>';
+      html += '<tr data-idx="'+i+'"><td style="font-weight:800;color:var(--b)">'+t.muc+'</td>';
       html += '<td><input class="ct-inp ct-dsmin" type="number" value="'+t.dsMin+'"></td>';
       html += '<td><input class="ct-inp ct-ckn1" type="number" step="0.01" value="'+t.ckN1+'"></td>';
       html += '<td><input class="ct-inp ct-ckn2" type="number" step="0.01" value="'+t.ckN2+'"></td></tr>';
@@ -298,7 +298,7 @@ function ctTableHTML(g, tp) {
     html += '<table class="ct-edit-table"><thead><tr><th>Mức</th><th>DS min (đ)</th><th>Thưởng (đ)</th></tr></thead><tbody>';
     Object.keys(SBPS_TRUNGBAY).forEach(function(m) {
       var t = SBPS_TRUNGBAY[m];
-      html += '<tr data-key="'+m+'"><td style="font-weight:800;color:#D97706">'+m+'</td>';
+      html += '<tr data-key="'+m+'"><td style="font-weight:800;color:var(--gold)">'+m+'</td>';
       html += '<td><input class="ct-inp ct-dsmin" type="number" value="'+t.dsMin+'"></td>';
       html += '<td><input class="ct-inp ct-thuong" type="number" value="'+t.thuong+'"></td></tr>';
     });
@@ -307,7 +307,7 @@ function ctTableHTML(g, tp) {
     html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:8px">SBPS — Tích Lũy DS (N1=DG/GP/A2, N2=OG/DGP, N3=Yoko/OC)</div>';
     html += '<table class="ct-edit-table"><thead><tr><th>Mức</th><th>DS min</th><th>N1%</th><th>N2%</th><th>N3%</th><th>Đến 26%</th></tr></thead><tbody>';
     SBPS_TICHLUY.forEach(function(t, i) {
-      html += '<tr data-idx="'+i+'"><td style="font-weight:800;color:#D97706">'+t.muc+'</td>';
+      html += '<tr data-idx="'+i+'"><td style="font-weight:800;color:var(--gold)">'+t.muc+'</td>';
       html += '<td><input class="ct-inp ct-dsmin" type="number" value="'+t.dsMin+'"></td>';
       html += '<td><input class="ct-inp ct-n1" type="number" step="0.01" value="'+t.ckN1+'"></td>';
       html += '<td><input class="ct-inp ct-n2" type="number" step="0.01" value="'+t.ckN2+'"></td>';
@@ -844,7 +844,7 @@ function cusProgressValueText(value, unit) {
 
 function cusProgressRowsHTML(entries) {
   if (!entries.length) return '';
-  var html = '<div style="background:#F6FAFF;border-radius:10px;padding:10px 12px;border:1px dashed #C9D7FF">';
+  var html = '<div style="background:var(--surface-accent);border-radius:10px;padding:10px 12px;border:1px dashed var(--preview-border)">';
   html += '<div style="font-size:11px;font-weight:800;color:var(--vm);margin-bottom:8px">Tiến độ khác</div>';
   entries.forEach(function(entry) {
     var pct = entry.target > 0 ? (entry.actual / entry.target * 100) : 0;
@@ -1027,12 +1027,12 @@ function cusCardHTML(kh, idx, monthKey) {
     var vnmTL = kh.programs.vnmShop.mucTichLuy || '';
     var vnmBBInfo = VNM_SHOP_TRUNGBAY[vnmBB];
     var vnmTLInfo = VNM_SHOP_TICHLUY.find(function(t) { return t.muc === vnmTL; });
-    html += '<div style="background:#EEF3FF;border-radius:10px;padding:10px 12px;border-left:3.5px solid #1A4DFF">';
+    html += '<div style="background:var(--vmL);border-radius:10px;padding:10px 12px;border-left:3.5px solid var(--vm)">';
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
-    html += '<span style="font-size:12.5px;font-weight:800;color:#1A4DFF">VNM Shop · Nhóm C</span>';
-    if (vnmBBInfo) html += '<span style="font-size:10.5px;color:#1A4DFF;font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
+    html += '<span style="font-size:12.5px;font-weight:800;color:var(--vm)">VNM Shop · Nhóm C</span>';
+    if (vnmBBInfo) html += '<span style="font-size:10.5px;color:var(--vm);font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
     html += '</div>';
-    if (vnmCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + escapeHtml(vnmCodes.join(', ')) + '</div>';
+    if (vnmCodes.length) html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:5px">Mã app: ' + escapeHtml(vnmCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Bày bán: <b>' + vnmBB + '</b>';
     if (vnmBBInfo) html += ' (DS≥' + fmt(vnmBBInfo.dsMin) + ')';
@@ -1041,7 +1041,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += '</div>';
     html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS tháng ' + fmt(md.dsNhomC || 0) + 'đ · GĐ1 ' + fmt(md.dsGD1 || 0) + 'đ · GĐ2 ' + fmt(md.dsGD2 || 0) + 'đ · GĐ3 ' + fmt(md.dsGD3 || 0) + 'đ</div>';
     if (vnmProg) html += cusProgressBarHTML('Tiến độ DS', vnmProg.pct, vnmProg.ds, vnmProg.target, '#1A4DFF');
-    if (reward.vnm && reward.vnm.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#1A4DFF;margin-top:3px">→ Thưởng: ' + fmt(reward.vnm.total) + 'đ</div>';
+    if (reward.vnm && reward.vnm.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:var(--vm);margin-top:3px">→ Thưởng: ' + fmt(reward.vnm.total) + 'đ</div>';
     html += '</div>';
   }
 
@@ -1051,12 +1051,12 @@ function cusCardHTML(kh, idx, monthKey) {
     var vipTL = kh.programs.vipShop.mucTichLuy || '';
     var vipBBInfo = VIP_SHOP_TRUNGBAY[vipBB];
     var vipTLInfo = VIP_SHOP_TICHLUY.find(function(t) { return t.muc === vipTL; });
-    html += '<div style="background:#EFF6FF;border-radius:10px;padding:10px 12px;border-left:3.5px solid #2563EB">';
+    html += '<div style="background:var(--bL);border-radius:10px;padding:10px 12px;border-left:3.5px solid var(--b)">';
     html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:5px">';
-    html += '<span style="font-size:12.5px;font-weight:800;color:#2563EB">VIP Shop · Nhóm DE</span>';
-    if (vipBBInfo) html += '<span style="font-size:10.5px;color:#2563EB;font-weight:600">TB: ' + fmt(kh.coTuVNM ? vipBBInfo.thuongVNM : vipBBInfo.thuongKH) + 'đ</span>';
+    html += '<span style="font-size:12.5px;font-weight:800;color:var(--b)">VIP Shop · Nhóm DE</span>';
+    if (vipBBInfo) html += '<span style="font-size:10.5px;color:var(--b);font-weight:600">TB: ' + fmt(kh.coTuVNM ? vipBBInfo.thuongVNM : vipBBInfo.thuongKH) + 'đ</span>';
     html += '</div>';
-    if (vipCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + escapeHtml(vipCodes.join(', ')) + '</div>';
+    if (vipCodes.length) html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:5px">Mã app: ' + escapeHtml(vipCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Tủ: <b>' + vipBB + '</b>';
     if (vipBBInfo) html += ' (DS≥' + fmt(vipBBInfo.dsMin) + ', ≥' + vipBBInfo.skuMin + ' SKU)';
@@ -1065,7 +1065,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += '</div>';
     html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS DE ' + fmt(md.dsNhomDE || 0) + 'đ · N1 ' + fmt(md.dsVipN1 || 0) + 'đ · N2 ' + fmt(md.dsVipN2 || 0) + 'đ · SKU D ' + fmt(md.skuNhomD || 0) + '</div>';
     if (vipProg) html += cusProgressBarHTML('Tiến độ DS', vipProg.pct, vipProg.ds, vipProg.target, '#2563EB');
-    if (reward.vip && reward.vip.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#2563EB;margin-top:3px">→ Thưởng: ' + fmt(reward.vip.total) + 'đ</div>';
+    if (reward.vip && reward.vip.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:var(--b);margin-top:3px">→ Thưởng: ' + fmt(reward.vip.total) + 'đ</div>';
     html += '</div>';
   }
 
@@ -1075,16 +1075,16 @@ function cusCardHTML(kh, idx, monthKey) {
     var sbpsMucTB = kh.programs.sbpsShop.mucTrungBay || '';
     var sbpsInfo = SBPS_TICHLUY.find(function(t) { return t.muc === sbpsMuc; });
     var sbpsTBInfo = SBPS_TRUNGBAY[sbpsMucTB];
-    html += '<div style="background:#FFFBEB;border-radius:10px;padding:10px 12px;border-left:3.5px solid #D97706">';
-    html += '<div style="font-size:12.5px;font-weight:800;color:#D97706;margin-bottom:5px">SBPS · Sữa bột pha sẵn TE</div>';
-    if (sbpsCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + escapeHtml(sbpsCodes.join(', ')) + '</div>';
+    html += '<div style="background:var(--goldL);border-radius:10px;padding:10px 12px;border-left:3.5px solid var(--gold)">';
+    html += '<div style="font-size:12.5px;font-weight:800;color:var(--gold);margin-bottom:5px">SBPS · Sữa bột pha sẵn TE</div>';
+    if (sbpsCodes.length) html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:5px">Mã app: ' + escapeHtml(sbpsCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:4px">';
     if (sbpsMucTB) html += 'Trưng bày: <b>' + sbpsMucTB + '</b>' + (sbpsTBInfo ? ' (DS≥' + fmt(sbpsTBInfo.dsMin) + ')' : '') + ' · ';
     html += 'Tích lũy: <b>Mức ' + sbpsMuc + '</b>';
     if (sbpsInfo) html += ' (DS≥' + fmt(sbpsInfo.dsMin) + ')';
     html += '</div>';
     html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS tháng ' + fmt(md.dsSBPS || 0) + 'đ · N1 ' + fmt(md.sbpsN1 || 0) + 'đ · N2 ' + fmt(md.sbpsN2 || 0) + 'đ · N3 ' + fmt(md.sbpsN3 || 0) + 'đ · Đến 26 ' + fmt(md.sbpsTo26 || 0) + 'đ</div>';
-    if (reward.sbps && reward.sbps.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:#D97706;margin-top:3px">→ Thưởng: ' + fmt(reward.sbps.total) + 'đ</div>';
+    if (reward.sbps && reward.sbps.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:var(--gold);margin-top:3px">→ Thưởng: ' + fmt(reward.sbps.total) + 'đ</div>';
     html += '</div>';
   }
 
@@ -1093,7 +1093,7 @@ function cusCardHTML(kh, idx, monthKey) {
   html += '</div>';
 
   if (reward.totalReward > 0) {
-    html += '<div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,#1A4DFF,#3A73FF);color:#fff;border-radius:10px;padding:10px 14px;margin-top:8px;box-shadow:0 2px 8px rgba(26,77,255,.18)">';
+    html += '<div style="display:flex;justify-content:space-between;align-items:center;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border-radius:10px;padding:10px 14px;margin-top:8px;box-shadow:0 2px 8px rgba(26,77,255,.18)">';
     html += '<div><div style="font-size:10.5px;opacity:.7">Tổng thưởng ' + cusMonthLabelFromKey(monthKey) + '</div>';
     if (reward.dsTotal > 0) html += '<div style="font-size:9px;opacity:.55">Giảm thêm ' + (reward.totalReward / reward.dsTotal * 100).toFixed(1) + '%</div>';
     html += '</div>';
@@ -1169,32 +1169,32 @@ function cusInputDS(idx, monthKey) {
   var html = '';
   html += '<div class="kf"><div class="kfl">THÁNG THEO DÕI</div><input type="month" id="cds-month" value="' + mk + '" onchange="cusReopenInputDS(' + idx + ', this.value)" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1)"></div>';
   if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
-    html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📦 NHÓM C (VNM Shop)</div>';
+    html += '<div class="kf"><div class="kfl" style="color:var(--vm)">📦 NHÓM C (VNM Shop)</div>';
     html += cusInputField('cds-c', 'DS nhóm C tháng', cusEditableMetricValue(rawMd, 'dsNhomC'), auto.dsNhomC);
     html += cusInputField('cds-gd1', 'DS GĐ1 (1-10)', cusEditableMetricValue(rawMd, 'dsGD1'), auto.dsGD1);
     html += cusInputField('cds-gd2', 'DS GĐ2 (11-20)', cusEditableMetricValue(rawMd, 'dsGD2'), auto.dsGD2);
     html += cusInputField('cds-gd3', 'DS GĐ3 (21-27)', cusEditableMetricValue(rawMd, 'dsGD3'), auto.dsGD3);
-    html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vnm" ' + (md.vnmShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#1A4DFF"> Đạt trưng bày VNM Shop</label></div>';
+    html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vnm" ' + (md.vnmShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:var(--vm)"> Đạt trưng bày VNM Shop</label></div>';
   }
   if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
-    html += '<div class="kf"><div class="kfl" style="color:#2563EB">🧊 NHÓM DE (VIP Shop)</div>';
+    html += '<div class="kf"><div class="kfl" style="color:var(--b)">🧊 NHÓM DE (VIP Shop)</div>';
     html += cusInputField('cds-de', 'DS nhóm DE tháng', cusEditableMetricValue(rawMd, 'dsNhomDE'), auto.dsNhomDE);
     html += cusInputField('cds-vn1', 'DS SP Chủ lực (N1)', cusEditableMetricValue(rawMd, 'dsVipN1'), auto.dsVipN1);
     html += cusInputField('cds-vn2', 'DS SP Tập trung (N2)', cusEditableMetricValue(rawMd, 'dsVipN2'), auto.dsVipN2);
     html += cusInputField('cds-skud', 'Số SKU nhóm D', cusEditableMetricValue(rawMd, 'skuNhomD'), auto.skuNhomD);
-    html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vip" ' + (md.vipShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#2563EB"> Đạt trưng bày VIP Shop</label></div>';
+    html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-vip" ' + (md.vipShopTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:var(--b)"> Đạt trưng bày VIP Shop</label></div>';
   }
   if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
-    html += '<div class="kf"><div class="kfl" style="color:#D97706">🍼 SBPS TE</div>';
+    html += '<div class="kf"><div class="kfl" style="color:var(--gold)">🍼 SBPS TE</div>';
     html += cusInputField('cds-sbps', 'DS SBPS tháng', cusEditableMetricValue(rawMd, 'dsSBPS'), auto.dsSBPS);
     html += cusInputField('cds-sbps-n1', 'DS SBPS N1 (DG/GP/A2)', cusEditableMetricValue(rawMd, 'sbpsN1'), auto.sbpsN1);
     html += cusInputField('cds-sbps-n2', 'DS SBPS N2 (OG/DGP)', cusEditableMetricValue(rawMd, 'sbpsN2'), auto.sbpsN2);
     html += cusInputField('cds-sbps-n3', 'DS SBPS N3 (Yoko/OC)', cusEditableMetricValue(rawMd, 'sbpsN3'), auto.sbpsN3);
     html += cusInputField('cds-sbps-26', 'DS đến ngày 26', cusEditableMetricValue(rawMd, 'sbpsTo26'), auto.sbpsTo26);
-    if (kh.programs.sbpsShop.mucTrungBay) html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-sbps" ' + (md.sbpsTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:#D97706"> Đạt trưng bày SBPS (' + kh.programs.sbpsShop.mucTrungBay + ')</label>';
+    if (kh.programs.sbpsShop.mucTrungBay) html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:8px"><input type="checkbox" id="cds-trungbay-sbps" ' + (md.sbpsTrungBay ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:var(--gold)"> Đạt trưng bày SBPS (' + kh.programs.sbpsShop.mucTrungBay + ')</label>';
     html += '</div>';
   }
-  html += '<div class="kf"><div class="kfl" style="color:#0F766E">🎯 TIẾN ĐỘ TÙY CHỈNH</div><div style="font-size:11px;color:var(--n3);margin-bottom:8px">Để trống doanh số tự lấy theo đơn hàng của cửa hàng trong tháng này.</div><div id="custom-progress-list"></div><button type="button" class="btn-atr" onclick="cusAddProgressRow()">+ Thêm mục tiêu tiến độ</button></div>';
+  html += '<div class="kf"><div class="kfl" style="color:var(--g)">🎯 TIẾN ĐỘ TÙY CHỈNH</div><div style="font-size:11px;color:var(--n3);margin-bottom:8px">Để trống doanh số tự lấy theo đơn hàng của cửa hàng trong tháng này.</div><div id="custom-progress-list"></div><button type="button" class="btn-atr" onclick="cusAddProgressRow()">+ Thêm mục tiêu tiến độ</button></div>';
   html += '<div id="cds-preview" style="margin-top:12px"></div>';
   html += '<button class="btn-km-save" onclick="cusSaveDS(' + idx + ')">💾 Lưu doanh số</button>';
   body.innerHTML = html;
@@ -1245,9 +1245,9 @@ function cusPreviewDS(idx) {
   var el = document.getElementById('cds-preview'); if (!el) return;
   var html = '<div style="background:var(--vmL);border:1px solid #C9D7FF;border-radius:var(--Rs);padding:12px 14px">';
   html += '<div style="font-size:12px;font-weight:700;color:var(--vm);margin-bottom:8px">🔍 Dự tính thưởng</div>';
-  if (reward.vnm && reward.vnm.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#1A4DFF">VNM Shop:</b> ' + fmt(reward.vnm.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vnm.details.join(' · ') + '</div>'; }
-  if (reward.vip && reward.vip.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#2563EB">VIP Shop:</b> ' + fmt(reward.vip.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vip.details.join(' · ') + '</div>'; }
-  if (reward.sbps && reward.sbps.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:#D97706">SBPS:</b> ' + fmt(reward.sbps.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.sbps.details.join(' · ') + '</div>'; }
+  if (reward.vnm && reward.vnm.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:var(--vm)">VNM Shop:</b> ' + fmt(reward.vnm.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vnm.details.join(' · ') + '</div>'; }
+  if (reward.vip && reward.vip.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:var(--b)">VIP Shop:</b> ' + fmt(reward.vip.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.vip.details.join(' · ') + '</div>'; }
+  if (reward.sbps && reward.sbps.total > 0) { html += '<div style="font-size:11px;color:var(--n2);margin-bottom:4px"><b style="color:var(--gold)">SBPS:</b> ' + fmt(reward.sbps.total) + 'đ</div><div style="font-size:9.5px;color:var(--n3);margin-bottom:6px">' + reward.sbps.details.join(' · ') + '</div>'; }
   if (md.customProgress && md.customProgress.length) html += cusProgressRowsHTML(md.customProgress);
   html += '<div style="border-top:1px solid #C9D7FF;padding-top:8px;margin-top:4px;display:flex;justify-content:space-between"><span style="font-size:14px;font-weight:800;color:var(--vm)">TỔNG THƯỞNG</span><span style="font-size:18px;font-weight:900;color:var(--vm)">' + fmt(reward.totalReward) + 'đ</span></div>';
   if (reward.dsTotal > 0 && reward.totalReward > 0) { html += '<div style="font-size:10.5px;color:var(--b);margin-top:5px">≈ Giảm thêm ' + (reward.totalReward / reward.dsTotal * 100).toFixed(1) + '% trên DS ' + fmt(reward.dsTotal) + 'đ</div>'; }
@@ -1299,7 +1299,7 @@ function cusEdit(idx) {
   html += '<select id="ckh-loaike" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option>';
   Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (kh.loaiKe === m ? ' selected' : '') + '>' + m + ' — ' + VNM_SHOP_TRUNGBAY[m].ten + '</option>'; });
   html += '</select></div>';
-  html += '<div class="kf"><div class="kfl" style="color:#1A4DFF">📋 CHƯƠNG TRÌNH THAM GIA</div>';
+  html += '<div class="kf"><div class="kfl" style="color:var(--vm)">📋 CHƯƠNG TRÌNH THAM GIA</div>';
   html += '<div style="font-size:11px;color:var(--n3);margin-bottom:10px">Nhìn vào app Vinamilk → nhập đúng Mã CT và Mức như trên app. Hệ thống tự tính thưởng.</div>';
   html += '<div style="font-size:10.5px;color:var(--n2);display:grid;grid-template-columns:1fr 1fr 60px 32px;gap:6px;margin-bottom:4px;font-weight:700">';
   html += '<span>Mã CT (app)</span><span>Mức</span><span style="text-align:center">Ngày ĐK</span><span></span></div>';

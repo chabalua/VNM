@@ -106,7 +106,7 @@ function kmRenderForm(prog) {
   });
   html += '</div>';
   html += '<input type="text" id="km-picker-search" value="' + _kmPickerSearch + '" placeholder="🔍 Tìm tên / mã SP..." oninput="kmPickerSearch(this.value)" autocomplete="off" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 11px;font-size:13px;margin-bottom:6px;box-sizing:border-box">';
-  html += '<div style="display:flex;gap:7px;margin-bottom:6px"><button onclick="kmCheckAll(true)" style="flex:1;height:30px;border:1px solid var(--l2);border-radius:var(--Rs);background:#fff;font-size:11px;font-weight:700;color:var(--t2);cursor:pointer">Chọn tất cả</button><button onclick="kmCheckAll(false)" style="flex:1;height:30px;border:1px solid var(--l2);border-radius:var(--Rs);background:#fff;font-size:11px;font-weight:700;color:var(--t2);cursor:pointer">Bỏ chọn</button></div>';
+  html += '<div style="display:flex;gap:7px;margin-bottom:6px"><button onclick="kmCheckAll(true)" style="flex:1;height:30px;border:1px solid var(--l2);border-radius:var(--Rs);background:var(--card);font-size:11px;font-weight:700;color:var(--t2);cursor:pointer">Chọn tất cả</button><button onclick="kmCheckAll(false)" style="flex:1;height:30px;border:1px solid var(--l2);border-radius:var(--Rs);background:var(--card);font-size:11px;font-weight:700;color:var(--t2);cursor:pointer">Bỏ chọn</button></div>';
   html += '<div class="km-picker" id="km-picker"></div></div>';
 
   html += '<div id="km-preview"></div>';

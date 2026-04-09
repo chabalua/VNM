@@ -155,9 +155,9 @@ try {
     </div>
     <div class="pills" id="cus-route-pills" style="margin-bottom:5px"></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
-      <button onclick="cusExport()" style="flex:1;height:32px;border:1.5px solid var(--vm);border-radius:var(--Rr);background:#fff;color:var(--vm);font-size:11.5px;font-weight:700;cursor:pointer">📤 Xuất KH</button>
-      <button onclick="cusImport()" style="flex:1;height:32px;border:1.5px solid var(--b);border-radius:var(--Rr);background:#fff;color:var(--b);font-size:11.5px;font-weight:700;cursor:pointer">📥 Nhập KH</button>
-      <button onclick="cusManageRoutes()" style="flex:1;height:32px;border:1.5px solid var(--o);border-radius:var(--Rr);background:#fff;color:var(--o);font-size:11.5px;font-weight:700;cursor:pointer">📍 Tuyến</button>
+      <button onclick="cusExport()" style="flex:1;height:32px;border:1.5px solid var(--vm);border-radius:var(--Rr);background:var(--card);color:var(--vm);font-size:11.5px;font-weight:700;cursor:pointer">📤 Xuất KH</button>
+      <button onclick="cusImport()" style="flex:1;height:32px;border:1.5px solid var(--b);border-radius:var(--Rr);background:var(--card);color:var(--b);font-size:11.5px;font-weight:700;cursor:pointer">📥 Nhập KH</button>
+      <button onclick="cusManageRoutes()" style="flex:1;height:32px;border:1.5px solid var(--o);border-radius:var(--Rr);background:var(--card);color:var(--o);font-size:11.5px;font-weight:700;cursor:pointer">📍 Tuyến</button>
     </div>
   </div>
   <div id="kh-list" style="padding-bottom:72px"></div>
@@ -200,7 +200,7 @@ try {
 
 <!-- MODAL THÊM/SỬA SP -->
 <div id="sp-modal" onclick="spCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)">
-  <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom)">
+  <div style="position:fixed;bottom:0;left:0;right:0;background:var(--card);border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom)">
     <div style="padding:16px 16px 12px;border-bottom:1px solid var(--n5);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
       <span id="sp-modal-t" style="font-size:17px;font-weight:800">Thêm sản phẩm</span>
       <button onclick="document.getElementById('sp-modal').style.display='none'" style="border:none;background:none;font-size:22px;color:var(--n3);cursor:pointer;padding:0">✕</button>
@@ -211,7 +211,7 @@ try {
 
 <!-- KM MODAL -->
 <div id="km-modal" onclick="kmCloseModal(event)" style="display:none;position:fixed;inset:0;z-index:500;background:rgba(0,0,0,.5);backdrop-filter:blur(2px)">
-  <div style="position:fixed;bottom:0;left:0;right:0;background:#fff;border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom)">
+  <div style="position:fixed;bottom:0;left:0;right:0;background:var(--card);border-radius:20px 20px 0 0;max-height:92vh;display:flex;flex-direction:column;padding-bottom:env(safe-area-inset-bottom)">
     <div style="padding:16px 16px 12px;border-bottom:1px solid var(--n5);display:flex;justify-content:space-between;align-items:center;flex-shrink:0">
       <span id="km-modal-t" style="font-size:17px;font-weight:800">Tạo CT KM</span>
       <button onclick="document.getElementById('km-modal').style.display='none'" style="border:none;background:none;font-size:22px;color:var(--n3);cursor:pointer;padding:0">✕</button>
