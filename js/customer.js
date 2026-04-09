@@ -11,8 +11,8 @@ var _cusEditIdx = -1;
 var _cusViewMonthKey = '';
 var _cusExpanded = {};
 
-var CUS_STORAGE_KEY = 'vnm_customers2';
-var ROUTES_STORAGE_KEY = 'vnm_routes';
+var CUS_STORAGE_KEY = LS_KEYS.CUSTOMERS;
+var ROUTES_STORAGE_KEY = LS_KEYS.ROUTES;
 var CUSTOMERS_URL = REPO_RAW + 'customers.json';
 var ROUTES_URL = REPO_RAW + 'routes.json';
 var _cusInputMonthKey = '';
@@ -184,7 +184,7 @@ function cusGetProgramCodes(kh, progKey) {
 // ============================================================
 // QUẢN LÝ CẤU HÌNH CHƯƠNG TRÌNH TB & TL
 // ============================================================
-var CT_CONFIG_STORAGE_KEY = 'vnm_ct_config';
+var CT_CONFIG_STORAGE_KEY = LS_KEYS.CT_CONFIG;
 var _ctActiveGroup = 'vnm';
 var _ctActiveType = 'TB';
 
@@ -953,7 +953,7 @@ function renderCusTab() {
   routeOrder.forEach(function(routeId) {
     if (!groups[routeId] || !groups[routeId].length) return;
     var route = ROUTES.find(function(r) { return r.id === routeId; });
-    var label = route ? route.ten : 'Chưa phân tuyến';
+    var label = route ? escapeHtml(route.ten) : 'Chưa phân tuyến';
     var count = groups[routeId].length;
     html += '<div class="adm-section" style="margin-top:8px">';
     html += '<div class="adm-sec-hd kh-route-head"><span>📍 ' + label + ' (' + count + ' KH)</span></div>';
@@ -995,8 +995,8 @@ function cusCardHTML(kh, idx, monthKey) {
   html += '<span class="customer-toggle-icon">' + (expanded ? '▾' : '▸') + '</span>';
   html += '</button>';
   html += '<div class="customer-row-title">';
-  html += '<div style="font-size:15px;font-weight:800;color:var(--n1);line-height:1.2">' + (kh.ten || kh.ma) + '</div>';
-  html += '<div style="font-size:11px;color:var(--n3);margin-top:2px">' + kh.ma + (kh.diachi ? ' · ' + kh.diachi : '') + ' · ' + cusMonthLabelFromKey(monthKey) + '</div>';
+  html += '<div style="font-size:15px;font-weight:800;color:var(--n1);line-height:1.2">' + escapeHtml(kh.ten || kh.ma) + '</div>';
+  html += '<div style="font-size:11px;color:var(--n3);margin-top:2px">' + escapeHtml(kh.ma) + (kh.diachi ? ' · ' + escapeHtml(kh.diachi) : '') + ' · ' + cusMonthLabelFromKey(monthKey) + '</div>';
   html += '<div class="customer-collapsed-summary">' + summaryParts.join(' · ') + '</div>';
   html += '</div>';
   html += '</div>';
@@ -1032,7 +1032,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += '<span style="font-size:12.5px;font-weight:800;color:#1A4DFF">VNM Shop · Nhóm C</span>';
     if (vnmBBInfo) html += '<span style="font-size:10.5px;color:#1A4DFF;font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
     html += '</div>';
-    if (vnmCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + esc(vnmCodes.join(', ')) + '</div>';
+    if (vnmCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + escapeHtml(vnmCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Bày bán: <b>' + vnmBB + '</b>';
     if (vnmBBInfo) html += ' (DS≥' + fmt(vnmBBInfo.dsMin) + ')';
@@ -1056,7 +1056,7 @@ function cusCardHTML(kh, idx, monthKey) {
     html += '<span style="font-size:12.5px;font-weight:800;color:#2563EB">VIP Shop · Nhóm DE</span>';
     if (vipBBInfo) html += '<span style="font-size:10.5px;color:#2563EB;font-weight:600">TB: ' + fmt(kh.coTuVNM ? vipBBInfo.thuongVNM : vipBBInfo.thuongKH) + 'đ</span>';
     html += '</div>';
-    if (vipCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + esc(vipCodes.join(', ')) + '</div>';
+    if (vipCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + escapeHtml(vipCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
     html += 'Tủ: <b>' + vipBB + '</b>';
     if (vipBBInfo) html += ' (DS≥' + fmt(vipBBInfo.dsMin) + ', ≥' + vipBBInfo.skuMin + ' SKU)';
@@ -1077,7 +1077,7 @@ function cusCardHTML(kh, idx, monthKey) {
     var sbpsTBInfo = SBPS_TRUNGBAY[sbpsMucTB];
     html += '<div style="background:#FFFBEB;border-radius:10px;padding:10px 12px;border-left:3.5px solid #D97706">';
     html += '<div style="font-size:12.5px;font-weight:800;color:#D97706;margin-bottom:5px">SBPS · Sữa bột pha sẵn TE</div>';
-    if (sbpsCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + esc(sbpsCodes.join(', ')) + '</div>';
+    if (sbpsCodes.length) html += '<div style="font-size:10.5px;color:#475569;margin-bottom:5px">Mã app: ' + escapeHtml(sbpsCodes.join(', ')) + '</div>';
     html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:4px">';
     if (sbpsMucTB) html += 'Trưng bày: <b>' + sbpsMucTB + '</b>' + (sbpsTBInfo ? ' (DS≥' + fmt(sbpsTBInfo.dsMin) + ')' : '') + ' · ';
     html += 'Tích lũy: <b>Mức ' + sbpsMuc + '</b>';

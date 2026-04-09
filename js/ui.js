@@ -9,7 +9,7 @@ var _searchTimer = null;
 var _spEditMa = null;
 var _selectedCustomerMa = '';
 var _cardExpanded = {};
-var CUSTOM_BRAND_RULES_KEY = 'vnm_custom_brand_rules_v1';
+var CUSTOM_BRAND_RULES_KEY = LS_KEYS.BRAND_RULES;
 
 // ============================================================
 // BRAND CLASSIFICATION
@@ -200,7 +200,7 @@ function renderBrandPills() {
   el.style.display = 'flex';
   el.innerHTML = brands.map(function(b) {
     var active = brandF === b;
-    return '<div class="pill ' + (active ? 'on-C' : '') + '" onclick="setBrand(\'' + b.replace(/'/g, "\\'") + '\')">' + b + '</div>';
+    return '<div class="pill ' + (active ? 'on-C' : '') + '" onclick="setBrand(\'' + escapeHtmlAttr(b) + '\')">' + escapeHtml(b) + '</div>';
   }).join('');
 }
 
@@ -224,16 +224,16 @@ function renderCustomerSelector() {
   cusList.forEach(function(k) { var r = k.tuyen || '_'; if (!grouped[r]) grouped[r] = []; grouped[r].push(k); });
   routes.forEach(function(r) {
     if (!grouped[r.id]) return;
-    html += '<optgroup label="📍 ' + r.ten + '">';
+    html += '<optgroup label="📍 ' + escapeHtmlAttr(r.ten) + '">';
     grouped[r.id].forEach(function(k) {
-      html += '<option value="' + k.ma + '"' + (k.ma === _selectedCustomerMa ? ' selected' : '') + '>' + (k.ten || k.ma) + '</option>';
+      html += '<option value="' + escapeHtmlAttr(k.ma) + '"' + (k.ma === _selectedCustomerMa ? ' selected' : '') + '>' + escapeHtml(k.ten || k.ma) + '</option>';
     });
     html += '</optgroup>';
   });
   if (grouped['_']) {
     html += '<optgroup label="Chưa phân tuyến">';
     grouped['_'].forEach(function(k) {
-      html += '<option value="' + k.ma + '"' + (k.ma === _selectedCustomerMa ? ' selected' : '') + '>' + (k.ten || k.ma) + '</option>';
+      html += '<option value="' + escapeHtmlAttr(k.ma) + '"' + (k.ma === _selectedCustomerMa ? ' selected' : '') + '>' + escapeHtml(k.ten || k.ma) + '</option>';
     });
     html += '</optgroup>';
   }
@@ -249,8 +249,8 @@ function renderCustomerSelector() {
       if (selected.programs.sbpsShop && selected.programs.sbpsShop.dangKy) progs.push('SBPS M' + (selected.programs.sbpsShop.muc || ''));
     }
     html += '<div style="display:flex;gap:5px;flex-wrap:wrap;margin-top:5px">';
-    html += '<span style="font-size:10.5px;font-weight:700;color:var(--vm);background:var(--vmL);padding:2px 8px;border-radius:10px">👤 ' + (selected.ten || selected.ma) + '</span>';
-    progs.forEach(function(p) { html += '<span style="font-size:9.5px;font-weight:600;color:var(--n2);background:var(--n6);padding:2px 7px;border-radius:10px">' + p + '</span>'; });
+    html += '<span style="font-size:10.5px;font-weight:700;color:var(--vm);background:var(--vmL);padding:2px 8px;border-radius:10px">👤 ' + escapeHtml(selected.ten || selected.ma) + '</span>';
+    progs.forEach(function(p) { html += '<span style="font-size:9.5px;font-weight:600;color:var(--n2);background:var(--n6);padding:2px 7px;border-radius:10px">' + escapeHtml(p) + '</span>'; });
     html += '</div>';
   }
   el.innerHTML = html;
@@ -530,7 +530,7 @@ function toggleCard(ma) {
 function renderOrder() {
   var q = (document.getElementById('order-q') || {}).value || '';
   var lq = q.toLowerCase();
-  var favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
+  var favorites = JSON.parse(localStorage.getItem(LS_KEYS.FAVORITES) || '[]');
 
   var f = SP.filter(function(p) {
     var brand = detectBrand(p).toLowerCase();
@@ -578,22 +578,23 @@ function renderOrder() {
         }), 3);
       }
 
+      var eMa = escapeHtmlAttr(p.ma);
       var isExpanded = _cardExpanded[p.ma] === undefined ? !!inCart : _cardExpanded[p.ma];
-      html += '<div class="sp-card ' + (inCart ? 'inCart' : '') + '" id="card_' + p.ma + '">';
+      html += '<div class="sp-card ' + (inCart ? 'inCart' : '') + '" id="card_' + eMa + '">';
       html += '<div class="sp-top"><div class="sp-bar" style="background:' + NCOLOR[p.nhom] + '"></div>';
-      html += '<div class="sp-body"><div class="sp-name" onclick="toggleCard(\'' + p.ma + '\')">' + p.ten + '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + p.ma + '\')">★</span></div>';
-      html += '<div class="sp-meta"><span class="sp-chip">' + p.ma + '</span><span class="sp-chip">' + p.donvi + '·' + p.slThung + '/thùng</span>';
-      if (brand) html += '<span class="sp-chip" style="' + NBG[p.nhom] + '">' + brand + '</span>';
+      html += '<div class="sp-body"><div class="sp-name" onclick="toggleCard(\'' + eMa + '\')">' + escapeHtml(p.ten) + '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + eMa + '\')">★</span></div>';
+      html += '<div class="sp-meta"><span class="sp-chip">' + escapeHtml(p.ma) + '</span><span class="sp-chip">' + escapeHtml(p.donvi) + '·' + p.slThung + '/thùng</span>';
+      if (brand) html += '<span class="sp-chip" style="' + NBG[p.nhom] + '">' + escapeHtml(brand) + '</span>';
       html += '</div></div>';
-      html += '<button class="sp-toggle" onclick="toggleCard(\'' + p.ma + '\')">' + (isExpanded ? '▲' : '▼') + '</button>';
+      html += '<button class="sp-toggle" onclick="toggleCard(\'' + eMa + '\')">' + (isExpanded ? '▲' : '▼') + '</button>';
       html += '</div>';
       html += kmBadgeHtml;
-      html += '<div class="sp-expand" id="expand_' + p.ma + '"' + (isExpanded ? '' : ' style="display:none"') + '>';
-      html += '<div id="pt_' + p.ma + '">' + ptbl(p, kmInfo) + '</div>';
-      html += '<div class="qty-area"><div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" max="999" inputmode="numeric" placeholder="0" id="qT_' + p.ma + '" oninput="onQty(\'' + p.ma + '\')"></div>';
-      html += '<div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" max="9999" inputmode="numeric" placeholder="0" id="qL_' + p.ma + '" oninput="onQty(\'' + p.ma + '\')"></div>';
-      html += '<button class="btn-add" onclick="addCart(\'' + p.ma + '\')">＋</button></div>';
-      html += '<div class="pv-box" id="pv_' + p.ma + '"></div>';
+      html += '<div class="sp-expand" id="expand_' + eMa + '"' + (isExpanded ? '' : ' style="display:none"') + '>';
+      html += '<div id="pt_' + eMa + '">' + ptbl(p, kmInfo) + '</div>';
+      html += '<div class="qty-area"><div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" max="999" inputmode="numeric" placeholder="0" id="qT_' + eMa + '" oninput="onQty(\'' + eMa + '\')"></div>';
+      html += '<div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" max="9999" inputmode="numeric" placeholder="0" id="qL_' + eMa + '" oninput="onQty(\'' + eMa + '\')"></div>';
+      html += '<button class="btn-add" onclick="addCart(\'' + eMa + '\')">＋</button></div>';
+      html += '<div class="pv-box" id="pv_' + eMa + '"></div>';
       html += '</div></div>';
     });
     html += '</div>';
@@ -650,19 +651,20 @@ function admSpRow(p) {
   var brand = detectBrand(p);
   var manualBrand = hasManualBrand(p);
   var locInfo = p.locSize ? ' · Lốc ' + p.locSize : '';
+  var eMa = escapeHtmlAttr(p.ma);
   var h = '<div class="adm-sp-row">';
   h += '<div style="display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px">';
-  h += '<div style="flex:1;min-width:0"><div class="adm-sp-name">' + p.ten + '</div>';
-  h += '<div class="adm-sp-info"><span class="adm-chip">' + p.ma + '</span><span class="adm-chip">' + p.donvi + ' · ' + p.slThung + '/thùng' + locInfo + '</span>';
-  if (brand) h += '<span class="adm-chip" style="' + (NBG[p.nhom] || '') + '">' + brand + (manualBrand ? ' · tay' : '') + '</span>';
+  h += '<div style="flex:1;min-width:0"><div class="adm-sp-name">' + escapeHtml(p.ten) + '</div>';
+  h += '<div class="adm-sp-info"><span class="adm-chip">' + escapeHtml(p.ma) + '</span><span class="adm-chip">' + escapeHtml(p.donvi) + ' · ' + p.slThung + '/thùng' + locInfo + '</span>';
+  if (brand) h += '<span class="adm-chip" style="' + (NBG[p.nhom] || '') + '">' + escapeHtml(brand) + (manualBrand ? ' · tay' : '') + '</span>';
   h += '</div></div>';
   h += '<div style="text-align:right;flex-shrink:0"><div style="font-size:14px;font-weight:800;color:var(--vm)">' + fmt(p.giaNYLon) + 'đ</div><div style="font-size:10.5px;color:var(--n3)">' + fmt(p.giaNYThung) + 'đ/thùng</div></div></div>';
   h += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px">';
-  h += '<input type="number" inputmode="numeric" placeholder="Giá mới/' + p.donvi + '" id="adp-inp-' + p.ma + '" style="flex:1;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1)">';
-  h += '<button onclick="saveAdmPrice(\'' + p.ma + '\')" style="height:38px;padding:0 14px;background:var(--vm);color:#fff;border:none;border-radius:var(--Rs);font-size:12.5px;font-weight:700;cursor:pointer">Lưu giá</button></div>';
+  h += '<input type="number" inputmode="numeric" placeholder="Giá mới/' + escapeHtmlAttr(p.donvi) + '" id="adp-inp-' + eMa + '" style="flex:1;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1)">';
+  h += '<button onclick="saveAdmPrice(\'' + eMa + '\')" style="height:38px;padding:0 14px;background:var(--vm);color:#fff;border:none;border-radius:var(--Rs);font-size:12.5px;font-weight:700;cursor:pointer">Lưu giá</button></div>';
   h += '<div style="display:flex;gap:8px">';
-  h += '<button class="btn-kme" onclick="spOpenModal(\'' + p.ma + '\')" style="flex:1">✏️ Sửa</button>';
-  h += '<button class="btn-kmd" onclick="spDelete(\'' + p.ma + '\')" style="flex:0 0 auto;padding:0 14px">✕ Xóa</button></div>';
+  h += '<button class="btn-kme" onclick="spOpenModal(\'' + eMa + '\')" style="flex:1">✏️ Sửa</button>';
+  h += '<button class="btn-kmd" onclick="spDelete(\'' + eMa + '\')" style="flex:0 0 auto;padding:0 14px">✕ Xóa</button></div>';
   h += '</div>';
   return h;
 }

@@ -20,6 +20,25 @@ var NLBL = { A: 'Sữa bột', B: 'Sữa đặc', C: 'Sữa nước', D: 'Sữa 
 
 var FALLBACK_PRODUCTS = [];
 
+// ============================================================
+// LOCALSTORAGE KEYS — Centralized constants
+// ============================================================
+var LS_KEYS = {
+  SP:            'vnm_sp',
+  KM:            'vnm_km3',
+  CART:          'vnm_cart',
+  FAVORITES:     'vnm_favorites',
+  CUSTOMERS:     'vnm_customers2',
+  ROUTES:        'vnm_routes',
+  ORDERS:        'vnm_orders_v2',
+  LEGACY_KH:     'vnm_kh',
+  GITHUB_SYNC:   'vnm_github_sync',
+  THEME:         'vnm_theme_mode',
+  KPI_CONFIG:    'vnm_kpi_config_v1',
+  CT_CONFIG:     'vnm_ct_config',
+  BRAND_RULES:   'vnm_custom_brand_rules_v1'
+};
+
 window.REPO_RAW = REPO_RAW;
 window.PRODUCTS_URL = PRODUCTS_URL;
 window.PROMOTIONS_URL = PROMOTIONS_URL;
@@ -29,9 +48,21 @@ window.NCOLOR = NCOLOR;
 window.NBG = NBG;
 window.NLBL = NLBL;
 window.FALLBACK_PRODUCTS = FALLBACK_PRODUCTS;
+// ============================================================
+// HTML ESCAPE — shared utilities for XSS prevention
+// ============================================================
+function escapeHtml(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+window.escapeHtml = escapeHtml;
 
 // ============================================================
-// TOAST — thay thế toàn bộ alert() trong app
+// TOAST
 // ============================================================
 var _toastTimer = null;
 function showToast(msg, duration) {

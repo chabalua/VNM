@@ -3,12 +3,12 @@
 // Repo: chabalua/VNM
 // ============================================================
 
-var SYNC_KEY = 'vnm_github_sync';
+var SYNC_KEY = LS_KEYS.GITHUB_SYNC;
 var GH_OWNER = 'chabalua';
 var GH_REPO = 'VNM';
 var GH_BRANCH = 'main';
 var GH_API = 'https://api.github.com';
-var ORDERS_KEY = 'vnm_orders_v2';
+var ORDERS_KEY = LS_KEYS.ORDERS;
 var SYNC_DEFAULTS = {
   autoPushOrders: true,
   autoPushMasterData: true,
@@ -441,7 +441,7 @@ function backupAll() {
     customers: CUS,
     routes: ROUTES,
     orders: getOrdersForSync(),
-    favorites: JSON.parse(localStorage.getItem('vnm_favorites') || '[]'),
+    favorites: JSON.parse(localStorage.getItem(LS_KEYS.FAVORITES) || '[]'),
     cart: cart,
     kpiConfig: (typeof getKpiConfig === 'function') ? getKpiConfig() : null
   };
@@ -478,7 +478,7 @@ function restoreAll() {
         if (data.customers) { CUS = data.customers.filter(function(k){ return k && k.ma; }); cusSave(); }
         if (data.routes) { ROUTES = data.routes; routesSave(); }
         if (data.orders) { saveOrders(mergeOrders(data.orders, [])); }
-        if (data.favorites) localStorage.setItem('vnm_favorites', JSON.stringify(data.favorites));
+        if (data.favorites) localStorage.setItem(LS_KEYS.FAVORITES, JSON.stringify(data.favorites));
         if (data.kpiConfig && typeof setKpiConfig === 'function') setKpiConfig(data.kpiConfig);
         rerenderAfterSync();
         showToast('✅ Khôi phục thành công từ ' + (data._date || '').slice(0, 10));

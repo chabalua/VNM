@@ -145,19 +145,24 @@ function kmSelType(tp) {
   kmPreview();
 }
 
+function _kmBuildSpOptgroups(selectedMa, defaultLabel) {
+  var nhomLabelsLocal = { A: 'A · Sữa bột', B: 'B · Sữa đặc', C: 'C · Sữa nước', D: 'D · Sữa chua' };
+  var opts = defaultLabel ? '<option value="' + (defaultLabel === 'same' ? 'same' : '') + '"' + (!selectedMa || selectedMa === (defaultLabel === 'same' ? 'same' : '') ? ' selected' : '') + '>' + (defaultLabel === 'same' ? 'Cùng loại SP đó' : defaultLabel) + '</option>' : '';
+  ['A', 'B', 'C', 'D'].forEach(function(nhom) {
+    var group = SP.filter(function(p) { return p.nhom === nhom; });
+    if (!group.length) return;
+    opts += '<optgroup label="' + (nhomLabelsLocal[nhom] || nhom) + '">';
+    group.forEach(function(p) { opts += '<option value="' + escapeHtmlAttr(p.ma) + '"' + (selectedMa === p.ma ? ' selected' : '') + '>' + escapeHtml(p.ma) + ' - ' + escapeHtml(p.ten.slice(0, 35)) + '</option>'; });
+    opts += '</optgroup>';
+  });
+  return opts;
+}
+
 function kmTypeFields(prog) {
   var t = prog.type || 'bonus';
 
   if (t === 'bonus') {
-    var spOpts = '<option value="same"' + ((!prog.bMa || prog.bMa === 'same') ? ' selected' : '') + '>Cùng loại SP đó</option>';
-    var nhomLabelsB = { A: 'A · Sữa bột', B: 'B · Sữa đặc', C: 'C · Sữa nước', D: 'D · Sữa chua' };
-    ['A', 'B', 'C', 'D'].forEach(function(nhom) {
-      var group = SP.filter(function(p) { return p.nhom === nhom; });
-      if (!group.length) return;
-      spOpts += '<optgroup label="' + (nhomLabelsB[nhom] || nhom) + '">';
-      group.forEach(function(p) { spOpts += '<option value="' + p.ma + '"' + (prog.bMa === p.ma ? ' selected' : '') + '>' + p.ma + ' - ' + p.ten.slice(0, 30) + '</option>'; });
-      spOpts += '</optgroup>';
-    });
+    var spOpts = _kmBuildSpOptgroups(prog.bMa, 'same');
     return '<div class="kf"><div class="kfl">Mua X → Tặng Y</div><div style="display:grid;grid-template-columns:1fr 24px 1fr;gap:8px;align-items:center;margin-bottom:10px"><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Mua X</div><input type="number" id="kf-bx" value="' + (prog.bX || 12) + '" min="1" style="width:100%;height:42px;border:1.5px solid var(--l2);border-radius:var(--Rs);text-align:center;font-size:20px;font-weight:800;" oninput="kmPreview()"></div><div style="text-align:center;color:var(--t3);font-size:18px">→</div><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tặng Y</div><input type="number" id="kf-by" value="' + (prog.bY || 1) + '" min="1" style="width:100%;height:42px;border:1.5px solid var(--l2);border-radius:var(--Rs);text-align:center;font-size:20px;font-weight:800;" oninput="kmPreview()"></div></div>' +
       '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:10px"><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Đơn vị</div><select id="kf-bunit" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:14px;"><option value="lon"' + (prog.bUnit !== 'thung' ? ' selected' : '') + '>Lon/Hộp</option><option value="thung"' + (prog.bUnit === 'thung' ? ' selected' : '') + '>Thùng</option></select></div><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Áp tối đa</div><select id="kf-bmax" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:14px;"><option value="0"' + (!prog.bMax ? ' selected' : '') + '>Không giới hạn</option><option value="1"' + (prog.bMax == 1 ? ' selected' : '') + '>1 lần</option></select></div></div>' +
       '<div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">SP được tặng</div><select id="kf-bma" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;" onchange="kmPreview()">' + spOpts + '</select></div></div>';
@@ -183,15 +188,7 @@ function kmTypeFields(prog) {
   }
 
   if (t === 'order_bonus') {
-    var spOpts = '<option value="">-- Chọn SP tặng --</option>';
-    var _nhomLbls = { A: 'A · Sữa bột', B: 'B · Sữa đặc', C: 'C · Sữa nước', D: 'D · Sữa chua' };
-    ['A', 'B', 'C', 'D'].forEach(function(nhom) {
-      var grp = SP.filter(function(p) { return p.nhom === nhom; });
-      if (!grp.length) return;
-      spOpts += '<optgroup label="' + (_nhomLbls[nhom] || nhom) + '">';
-      grp.forEach(function(p) { spOpts += '<option value="' + p.ma + '"' + (prog.bonusMa === p.ma ? ' selected' : '') + '>' + p.ma + ' - ' + p.ten.slice(0, 35) + '</option>'; });
-      spOpts += '</optgroup>';
-    });
+    var spOpts = _kmBuildSpOptgroups(prog.bonusMa, '-- Chọn SP tặng --');
     var rows = (prog.tiers || [{ value: 250, maxValue: '', bonusQty: 4 }]).map(function(ti, i) {
       var upperValue = ti.maxValue != null ? ti.maxValue : (ti.mx != null ? ti.mx : (ti.max != null ? ti.max : ''));
       return '<div class="km-tier-row" style="flex-wrap:wrap" id="ktr-' + i + '"><label>Từ</label><input type="number" class="t-val" value="' + (ti.value || 0) + '" placeholder="K" style="width:68px" oninput="kmPreview()"><label>Đến &lt;</label><input type="number" class="t-max" value="' + upperValue + '" placeholder="∞" style="width:78px" oninput="kmPreview()"><label>Tặng</label><input type="number" class="t-bqty" value="' + (ti.bonusQty || 0) + '" style="width:50px" oninput="kmPreview()"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>';
@@ -267,7 +264,7 @@ function kmUpdateFilterButtons() {
 
 function kmRenderPicker(checked) {
   var el = document.getElementById('km-picker'); if (!el) return;
-  var favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
+  var favorites = JSON.parse(localStorage.getItem(LS_KEYS.FAVORITES) || '[]');
   var selected = Array.isArray(checked) ? checked : [];
   var pickedProducts = selected.map(function(ma) { return SP.find(function(p) { return p.ma === ma; }); }).filter(Boolean);
   var missingCodes = selected.filter(function(ma) { return !pickedProducts.some(function(p) { return p.ma === ma; }); });
@@ -292,7 +289,7 @@ function kmRenderPicker(checked) {
   var nhomLabels = { A: 'Bột', B: 'Đặc', C: 'Nước', D: 'Chua' };
   var rows = visible.map(function(p) {
     var isFav = favorites.includes(p.ma);
-    return '<div class="km-pick-row" data-ma="' + p.ma + '"><input type="checkbox" class="km-pick-cb" id="kpk-' + p.ma + '" value="' + p.ma + '"' + (selected.indexOf(p.ma) >= 0 ? ' checked' : '') + ' onchange="kmPreview()"><label for="kpk-' + p.ma + '" style="flex:1;cursor:pointer;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:12px;color:var(--t1)">' + p.ten + '</div><div style="font-size:10px;color:var(--t3)">' + p.ma + ' · ' + fmt(p.giaNYLon) + 'đ/' + p.donvi + '</div></div><div style="display:flex;align-items:center;gap:6px;"><span class="sp-nhom-badge ' + p.nhom + '">' + (nhomLabels[p.nhom] || '') + '</span><span class="fav-star' + (isFav ? ' active' : '') + '" data-ma="' + p.ma + '" onclick="toggleFavorite(event, \'' + p.ma + '\')">★</span></div></label></div>';
+    return '<div class="km-pick-row" data-ma="' + escapeHtmlAttr(p.ma) + '"><input type="checkbox" class="km-pick-cb" id="kpk-' + escapeHtmlAttr(p.ma) + '" value="' + escapeHtmlAttr(p.ma) + '"' + (selected.indexOf(p.ma) >= 0 ? ' checked' : '') + ' onchange="kmPreview()"><label for="kpk-' + escapeHtmlAttr(p.ma) + '" style="flex:1;cursor:pointer;display:flex;align-items:center;justify-content:space-between;"><div><div style="font-size:12px;color:var(--t1)">' + escapeHtml(p.ten) + '</div><div style="font-size:10px;color:var(--t3)">' + escapeHtml(p.ma) + ' · ' + fmt(p.giaNYLon) + 'đ/' + escapeHtml(p.donvi) + '</div></div><div style="display:flex;align-items:center;gap:6px;"><span class="sp-nhom-badge ' + p.nhom + '">' + (nhomLabels[p.nhom] || '') + '</span><span class="fav-star' + (isFav ? ' active' : '') + '" data-ma="' + escapeHtmlAttr(p.ma) + '" onclick="toggleFavorite(event, \'' + escapeHtmlAttr(p.ma) + '\')">★</span></div></label></div>';
   });
   if (missingCodes.length) {
     var missingRows = missingCodes.map(function(ma) {
@@ -306,11 +303,11 @@ function kmRenderPicker(checked) {
 
 function toggleFavorite(event, ma) {
   if (event && event.stopPropagation) event.stopPropagation();
-  var favorites = JSON.parse(localStorage.getItem('vnm_favorites') || '[]');
+  var favorites = JSON.parse(localStorage.getItem(LS_KEYS.FAVORITES) || '[]');
   var idx = favorites.indexOf(ma);
   if (idx === -1) favorites.push(ma);
   else favorites.splice(idx, 1);
-  localStorage.setItem('vnm_favorites', JSON.stringify(favorites));
+  localStorage.setItem(LS_KEYS.FAVORITES, JSON.stringify(favorites));
   var currentChecked = kmGetChecked ? kmGetChecked() : [];
   if (window.kmRenderPicker) window.kmRenderPicker(currentChecked);
   if (window.renderOrder) window.renderOrder();
@@ -480,7 +477,7 @@ function renderKMTab() {
       var txt = kmBuildText(prog);
       var stackLbl = prog.stackable ? '🔗 Gộp' : '🔒 Ko gộp';
       var minSKULbl = prog.minSKU ? ' · ≥' + prog.minSKU + ' SKU' : '';
-      html += '<div class="km-card" id="km-card-' + i + '"><div class="km-card-h"><div style="flex:1;min-width:0"><div class="km-card-nm">' + (prog.name || 'CT KM') + '</div><div class="km-card-sm">' + txt + ' · ' + cnt + ' SP · ' + stackLbl + minSKULbl + '</div></div><span class="km-badge ' + (prog.active ? 'on' : '') + '">' + (prog.active ? '✓ Bật' : '○ Tắt') + '</span></div><div class="km-card-f"><button class="btn-kme" onclick="kmEdit(' + i + ')">✏️ Sửa</button><button class="btn-kmt" onclick="kmToggle(' + i + ')">' + (prog.active ? '⏸ Tắt' : '▶ Bật') + '</button><button class="btn-kmd" onclick="kmDel(' + i + ')">✕</button></div></div>';
+      html += '<div class="km-card" id="km-card-' + i + '"><div class="km-card-h"><div style="flex:1;min-width:0"><div class="km-card-nm">' + escapeHtml(prog.name || 'CT KM') + '</div><div class="km-card-sm">' + escapeHtml(txt) + ' · ' + cnt + ' SP · ' + stackLbl + minSKULbl + '</div></div><span class="km-badge ' + (prog.active ? 'on' : '') + '">' + (prog.active ? '✓ Bật' : '○ Tắt') + '</span></div><div class="km-card-f"><button class="btn-kme" onclick="kmEdit(' + i + ')">✏️ Sửa</button><button class="btn-kmt" onclick="kmToggle(' + i + ')">' + (prog.active ? '⏸ Tắt' : '▶ Bật') + '</button><button class="btn-kmd" onclick="kmDel(' + i + ')">✕</button></div></div>';
     });
     html += '</div>';
   });

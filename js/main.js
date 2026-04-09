@@ -4,8 +4,8 @@ var NAV_TABS = ['home', 'order', 'don', 'kh', 'adm'];
 var ALL_PAGES = ['home', 'order', 'don', 'adm', 'km', 'kh'];
 var _homeMonthKey = getCurrentMonthKey();
 var _kpiEditorMonthKey = '';
-var KPI_CONFIG_KEY = 'vnm_kpi_config_v1';
-var THEME_STORAGE_KEY = 'vnm_theme_mode';
+var KPI_CONFIG_KEY = LS_KEYS.KPI_CONFIG;
+var THEME_STORAGE_KEY = LS_KEYS.THEME;
 var _themeMode = 'light';
 var KPI_DEFAULT_TARGETS = {
   totalSales: 1416533000,
@@ -63,7 +63,10 @@ function gotoTab(t) {
   });
   NAV_TABS.forEach(function(x) {
     var tab = document.getElementById('tab-' + x);
-    if (tab) tab.className = 'tb' + (x === activeNav ? ' on' : '');
+    if (tab) {
+      tab.className = 'tb' + (x === activeNav ? ' on' : '');
+      tab.setAttribute('aria-selected', x === activeNav ? 'true' : 'false');
+    }
   });
 
   if (t === 'home') renderHomeDashboard();
@@ -298,28 +301,21 @@ function calcProgress(actual, target) {
   return Math.max(0, Math.min(100, Math.round(actual / target * 100)));
 }
 
-function getDashboardData(monthKey) {
-  monthKey = normalizeMonthKey(monthKey || _homeMonthKey);
-  var targets = getKpiTargets(monthKey);
-  var orders = (typeof getOrders === 'function' ? getOrders() : []);
-  var monthOrders = orders.filter(function(order) {
-    return (order.date || '').slice(0, 7) === monthKey;
-  });
-  var customers = (typeof CUS !== 'undefined' && Array.isArray(CUS)) ? CUS : [];
-  var customerMetrics = customers.map(function(kh) {
-    var md = (typeof cusGetMonthData === 'function') ? cusGetMonthData(kh, monthKey) : ((kh.monthly && kh.monthly[monthKey]) || {});
-    return { kh: kh, md: md };
-  });
-  var totalSalesByCustomers = customers.reduce(function(sum, kh) {
-    var md = (typeof cusGetMonthData === 'function') ? cusGetMonthData(kh, monthKey) : ((kh.monthly && kh.monthly[monthKey]) || {});
+function _calcSalesMetrics(customerMetrics, monthOrders) {
+  var totalSalesByCustomers = customerMetrics.reduce(function(sum, entry) {
+    var md = entry.md;
     return sum + (md.dsNhomC || 0) + (md.dsNhomDE || 0) + (md.dsSBPS || 0);
   }, 0);
   var totalSalesByOrders = monthOrders.reduce(function(sum, order) { return sum + (+order.tong || 0); }, 0);
-  var totalSales = Math.max(totalSalesByCustomers, totalSalesByOrders);
+  var dsNhomC = customerMetrics.reduce(function(sum, e) { return sum + (e.md.dsNhomC || 0); }, 0);
+  var dsNhomDE = customerMetrics.reduce(function(sum, e) { return sum + (e.md.dsNhomDE || 0); }, 0);
+  var dsSBPS = customerMetrics.reduce(function(sum, e) { return sum + (e.md.dsSBPS || 0); }, 0);
+  return { totalSales: Math.max(totalSalesByCustomers, totalSalesByOrders), dsNhomC: dsNhomC, dsNhomDE: dsNhomDE, dsSBPS: dsSBPS };
+}
+
+function _calcCustomerEngagement(customerMetrics, monthOrders) {
   var rewardTotal = customerMetrics.reduce(function(sum, entry) {
-    var kh = entry.kh;
-    var md = entry.md;
-    var reward = (typeof calcTotalReward === 'function') ? calcTotalReward(kh, md) : { totalReward: 0 };
+    var reward = (typeof calcTotalReward === 'function') ? calcTotalReward(entry.kh, entry.md) : { totalReward: 0 };
     return sum + (reward.totalReward || 0);
   }, 0);
   var activeCustomers = customerMetrics.filter(function(entry) {
@@ -328,19 +324,7 @@ function getDashboardData(monthKey) {
   }).length;
   var totalItems = monthOrders.reduce(function(sum, order) { return sum + ((order.items || []).length || 0); }, 0);
   var avgSku = monthOrders.length ? (totalItems / monthOrders.length) : 0;
-  var dsNhomC = customerMetrics.reduce(function(sum, entry) {
-    var md = entry.md;
-    return sum + (md.dsNhomC || 0);
-  }, 0);
-  var dsNhomDE = customerMetrics.reduce(function(sum, entry) {
-    var md = entry.md;
-    return sum + (md.dsNhomDE || 0);
-  }, 0);
-  var dsSBPS = customerMetrics.reduce(function(sum, entry) {
-    var md = entry.md;
-    return sum + (md.dsSBPS || 0);
-  }, 0);
-  var activeRate = customers.length ? (activeCustomers / customers.length * 100) : 0;
+  var activeRate = customerMetrics.length ? (activeCustomers / customerMetrics.length * 100) : 0;
   var asoWithSales400k = customerMetrics.filter(function(entry) {
     var md = entry.md;
     return ((md.dsNhomC || 0) + (md.dsNhomDE || 0) + (md.dsSBPS || 0)) >= 400000;
@@ -353,15 +337,14 @@ function getDashboardData(monthKey) {
     return sum + (md.dsNhomC || 0) + (md.dsNhomDE || 0);
   }, 0);
   var displayImageStores = customerMetrics.filter(function(entry) {
-    var md = entry.md;
-    return !!(md.vnmShopTrungBay || md.vipShopTrungBay);
+    return !!(entry.md.vnmShopTrungBay || entry.md.vipShopTrungBay);
   }).length;
-  var greenFarmCustomers = {};
-  var fmCustomers = {};
-  var catDCustomers = {};
-  var greenFarmSales = 0;
-  var fmSales = 0;
-  var catDSales = 0;
+  return { rewardTotal: rewardTotal, activeCustomers: activeCustomers, avgSku: avgSku, activeRate: activeRate, asoWithSales400k: asoWithSales400k, displaySales: displaySales, displayImageStores: displayImageStores };
+}
+
+function _calcBrandPerformance(monthOrders) {
+  var greenFarmCustomers = {}, fmCustomers = {}, catDCustomers = {};
+  var greenFarmSales = 0, fmSales = 0, catDSales = 0;
   monthOrders.forEach(function(order) {
     (order.items || []).forEach(function(item) {
       var itemValue = +item.afterKM || +item.gocTotal || 0;
@@ -379,29 +362,51 @@ function getDashboardData(monthKey) {
       }
     });
   });
+  return {
+    greenFarmDistribution: Object.keys(greenFarmCustomers).length, greenFarmSales: greenFarmSales,
+    fmDistribution: Object.keys(fmCustomers).length, fmSales: fmSales,
+    catDDistribution: Object.keys(catDCustomers).length, catDSales: catDSales
+  };
+}
+
+function getDashboardData(monthKey) {
+  monthKey = normalizeMonthKey(monthKey || _homeMonthKey);
+  var targets = getKpiTargets(monthKey);
+  var orders = (typeof getOrders === 'function' ? getOrders() : []);
+  var monthOrders = orders.filter(function(order) {
+    return (order.date || '').slice(0, 7) === monthKey;
+  });
+  var customers = (typeof CUS !== 'undefined' && Array.isArray(CUS)) ? CUS : [];
+  var customerMetrics = customers.map(function(kh) {
+    var md = (typeof cusGetMonthData === 'function') ? cusGetMonthData(kh, monthKey) : ((kh.monthly && kh.monthly[monthKey]) || {});
+    return { kh: kh, md: md };
+  });
+  var sales = _calcSalesMetrics(customerMetrics, monthOrders);
+  var engagement = _calcCustomerEngagement(customerMetrics, monthOrders);
+  var brand = _calcBrandPerformance(monthOrders);
   var cfg = (typeof syncGetConfig === 'function') ? syncGetConfig() : {};
 
   return {
     monthKey: monthKey,
     monthLabel: getMonthLabel(monthKey),
-    totalSales: totalSales,
+    totalSales: sales.totalSales,
     monthOrders: monthOrders.length,
-    activeCustomers: activeCustomers,
-    rewardTotal: rewardTotal,
-    avgSku: avgSku,
-    validOrderRate: activeRate,
-    asoWithSales400k: asoWithSales400k,
-    displaySales: displaySales,
-    displayImageStores: displayImageStores,
-    greenFarmDistribution: Object.keys(greenFarmCustomers).length,
-    greenFarmSales: greenFarmSales,
-    fmDistribution: Object.keys(fmCustomers).length,
-    fmSales: fmSales,
-    catDDistribution: Object.keys(catDCustomers).length,
-    catDSales: catDSales,
-    dsNhomC: dsNhomC,
-    dsNhomDE: dsNhomDE,
-    dsSBPS: dsSBPS,
+    activeCustomers: engagement.activeCustomers,
+    rewardTotal: engagement.rewardTotal,
+    avgSku: engagement.avgSku,
+    validOrderRate: engagement.activeRate,
+    asoWithSales400k: engagement.asoWithSales400k,
+    displaySales: engagement.displaySales,
+    displayImageStores: engagement.displayImageStores,
+    greenFarmDistribution: brand.greenFarmDistribution,
+    greenFarmSales: brand.greenFarmSales,
+    fmDistribution: brand.fmDistribution,
+    fmSales: brand.fmSales,
+    catDDistribution: brand.catDDistribution,
+    catDSales: brand.catDSales,
+    dsNhomC: sales.dsNhomC,
+    dsNhomDE: sales.dsNhomDE,
+    dsSBPS: sales.dsSBPS,
     targets: targets,
     syncState: {
       hasToken: !!(cfg.token || ''),

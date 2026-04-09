@@ -526,24 +526,6 @@ html[data-theme='dark'] .rule-help-box.subtle{background:#2a2211;border-color:#5
 html[data-theme='dark'] .dashboard-status{background:#dbe7ff;color:#102348}
 html[data-theme='dark'] #scroll-top-btn{background:rgba(9,16,30,.82)}
 
-#sp-modal > div,#km-modal > div{background:var(--card) !important}
-html[data-theme='dark'] .dashboard-card,
-html[data-theme='dark'] .settings-info-card,
-html[data-theme='dark'] .settings-card,
-html[data-theme='dark'] .brand-rule-card,
-html[data-theme='dark'] .adm-section,
-html[data-theme='dark'] .ord-wrap,
-html[data-theme='dark'] .km-card,
-html[data-theme='dark'] .kh-card,
-html[data-theme='dark'] .sp-card{border-color:var(--n5)}
-html[data-theme='dark'] .settings-card.accent-blue{background:linear-gradient(135deg,#0f2346,#112d5f)}
-html[data-theme='dark'] .settings-card.accent-gold{background:linear-gradient(135deg,#33280f,#433514)}
-html[data-theme='dark'] .settings-card.accent-green{background:linear-gradient(135deg,#0d2f2a,#11453d)}
-html[data-theme='dark'] .rule-help-box{background:#12274a;border-color:#2a4d84}
-html[data-theme='dark'] .rule-help-box.subtle{background:#2a2211;border-color:#5f4a18}
-html[data-theme='dark'] .dashboard-status{background:#dbe7ff;color:#102348}
-html[data-theme='dark'] #scroll-top-btn{background:rgba(9,16,30,.82)}
-
 @media (max-width:420px){
    .home-title,.page-title,.dashboard-title{font-size:24px}
    .hero-metrics{grid-template-columns:1fr 1fr 1fr}

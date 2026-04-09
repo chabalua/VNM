@@ -27,7 +27,7 @@ try {
 <div id="main">
 
 <!-- TRANG CHỦ KPI -->
-<div id="page-home" class="page on">
+<div id="page-home" class="page on" role="tabpanel" aria-labelledby="tab-home">
   <div class="home-shell">
     <div class="home-hero">
       <div class="home-hero-top">
@@ -45,7 +45,7 @@ try {
 </div>
 
 <!-- ĐẶT HÀNG -->
-<div id="page-order" class="page">
+<div id="page-order" class="page" role="tabpanel" aria-labelledby="tab-order">
   <div class="sbar" style="padding-bottom:6px">
     <div class="page-head-inline">
       <div>
@@ -57,7 +57,7 @@ try {
     <div id="cus-selector" style="margin-bottom:6px"></div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
-      <input type="text" id="order-q" placeholder="Tìm sản phẩm, mã SP..." oninput="debounceRender('order')">
+      <input type="text" id="order-q" placeholder="Tìm sản phẩm, mã SP..." oninput="debounceRender('order')" aria-label="Tìm sản phẩm">
     </div>
     <div class="pills">
       <div class="pill on-all" onclick="setNhom(this,'order','')">Tất cả</div>
@@ -72,7 +72,7 @@ try {
 </div>
 
 <!-- ĐƠN HÀNG -->
-<div id="page-don" class="page">
+<div id="page-don" class="page" role="tabpanel" aria-labelledby="tab-don">
   <div class="page-section-head compact">
     <div>
       <div class="page-kicker">Lưu trữ và gửi đơn</div>
@@ -84,7 +84,7 @@ try {
 </div>
 
 <!-- CÀI ĐẶT / QUẢN TRỊ -->
-<div id="page-adm" class="page">
+<div id="page-adm" class="page" role="tabpanel" aria-labelledby="tab-adm">
   <div class="page-section-head">
     <div>
       <div class="page-kicker">Quản trị dữ liệu</div>
@@ -121,7 +121,7 @@ try {
     </div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
-      <input type="text" id="adm-q" placeholder="Tìm SP để chỉnh sửa..." oninput="debounceRender('adm')">
+      <input type="text" id="adm-q" placeholder="Tìm SP để chỉnh sửa..." oninput="debounceRender('adm')" aria-label="Tìm sản phẩm quản trị">
     </div>
     <div class="pills">
       <div class="pill on-all" onclick="setNhom(this,'adm','')">Tất cả</div>
@@ -140,7 +140,7 @@ try {
 </div>
 
 <!-- KHÁCH HÀNG -->
-<div id="page-kh" class="page">
+<div id="page-kh" class="page" role="tabpanel" aria-labelledby="tab-kh">
   <div class="sbar" style="padding-bottom:5px">
     <div class="page-head-inline">
       <div>
@@ -151,7 +151,7 @@ try {
     </div>
     <div class="sinp-wrap">
       <span class="sico">🔍</span>
-      <input type="text" id="cus-search" placeholder="Tìm KH theo tên, mã..." oninput="cusFilterSearch(this.value)">
+      <input type="text" id="cus-search" placeholder="Tìm KH theo tên, mã..." oninput="cusFilterSearch(this.value)" aria-label="Tìm khách hàng">
     </div>
     <div class="pills" id="cus-route-pills" style="margin-bottom:5px"></div>
     <div style="display:flex;gap:6px;flex-wrap:wrap">
@@ -164,7 +164,7 @@ try {
 </div>
 
 <!-- CT KM -->
-<div id="page-km" class="page">
+<div id="page-km" class="page" role="tabpanel">
   <div class="page-section-head compact">
     <div>
       <div class="page-kicker">Marketing programs</div>
@@ -178,7 +178,7 @@ try {
     <button onclick="loadKMFromURL()" class="btn-tool" style="flex:1;margin:0;height:42px">🌐 Load từ URL</button>
   </div>
   <div style="background:var(--card);margin:0 12px 8px;border-radius:var(--R);padding:10px 12px;display:flex;gap:8px;align-items:center;box-shadow:var(--shadow)">
-    <input id="km-search-input" type="search" placeholder="Tìm theo tên CT KM..." oninput="kmSearchByName(this.value)" style="flex:1;min-width:170px;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:14px;">
+    <input id="km-search-input" type="search" placeholder="Tìm theo tên CT KM..." oninput="kmSearchByName(this.value)" aria-label="Tìm chương trình khuyến mãi" style="flex:1;min-width:170px;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:14px;">
     <button onclick="kmClearSearch()" class="btn-tool" style="flex:0 0 auto;margin:0;min-width:70px;height:40px;font-size:12px">✕ Xoá</button>
   </div>
   <div class="pills" style="margin:0 12px 8px">
@@ -221,12 +221,12 @@ try {
 </div>
 </div><!-- #main -->
 
-<div id="tabbar">
-  <button class="tb on" onclick="gotoTab('home')" id="tab-home"><span class="tb-icon">▦</span><span class="tb-label">Trang chủ</span></button>
-  <button class="tb" onclick="gotoTab('order')" id="tab-order"><span class="tb-icon">◫</span><span class="tb-label">Đặt hàng</span></button>
-  <button class="tb" onclick="gotoTab('don')" id="tab-don"><span class="tb-icon">☰</span><span class="tb-label">Đơn hàng</span><span class="tb-badge" id="don-badge"></span></button>
-  <button class="tb" onclick="gotoTab('kh')" id="tab-kh"><span class="tb-icon">◎</span><span class="tb-label">Khách hàng</span></button>
-  <button class="tb" onclick="gotoTab('adm')" id="tab-adm"><span class="tb-icon">⋯</span><span class="tb-label">Cài đặt</span></button>
+<div id="tabbar" role="tablist" aria-label="Điều hướng chính">
+  <button class="tb on" onclick="gotoTab('home')" id="tab-home" role="tab" aria-selected="true" aria-controls="page-home"><span class="tb-icon">▦</span><span class="tb-label">Trang chủ</span></button>
+  <button class="tb" onclick="gotoTab('order')" id="tab-order" role="tab" aria-selected="false" aria-controls="page-order"><span class="tb-icon">◫</span><span class="tb-label">Đặt hàng</span></button>
+  <button class="tb" onclick="gotoTab('don')" id="tab-don" role="tab" aria-selected="false" aria-controls="page-don"><span class="tb-icon">☰</span><span class="tb-label">Đơn hàng</span><span class="tb-badge" id="don-badge"></span></button>
+  <button class="tb" onclick="gotoTab('kh')" id="tab-kh" role="tab" aria-selected="false" aria-controls="page-kh"><span class="tb-icon">◎</span><span class="tb-label">Khách hàng</span></button>
+  <button class="tb" onclick="gotoTab('adm')" id="tab-adm" role="tab" aria-selected="false" aria-controls="page-adm"><span class="tb-icon">⋯</span><span class="tb-label">Cài đặt</span></button>
 </div>
 
 <!-- ADMIN MODAL (legacy) -->

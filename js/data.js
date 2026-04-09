@@ -77,8 +77,8 @@ async function loadPromotions() {
   kmSave();
 }
 
-function saveSP() { localStorage.setItem('vnm_sp', JSON.stringify(SP)); }
-function kmSave() { localStorage.setItem('vnm_km3', JSON.stringify(kmProgs)); }
+function saveSP() { localStorage.setItem(LS_KEYS.SP, JSON.stringify(SP)); }
+function kmSave() { localStorage.setItem(LS_KEYS.KM, JSON.stringify(kmProgs)); }
 function spFind(ma) { return SP.find(function(x) { return x.ma === ma; }); }
 
 async function initData() {
@@ -96,7 +96,7 @@ async function initData() {
 
   // Bước 1: Thử load ngay từ localStorage (không cần network)
   var hasCachedSP = false;
-  var cachedSP = localStorage.getItem('vnm_sp');
+  var cachedSP = localStorage.getItem(LS_KEYS.SP);
   if (cachedSP) {
     try {
       var _raw = JSON.parse(cachedSP);
@@ -107,7 +107,7 @@ async function initData() {
       }
     } catch(e) {}
   }
-  var cachedKM = localStorage.getItem('vnm_km3');
+  var cachedKM = localStorage.getItem(LS_KEYS.KM);
   if (cachedKM) {
     try {
       var _rawK = JSON.parse(cachedKM);
@@ -138,8 +138,8 @@ async function initData() {
     }
   }
 
-  if (!localStorage.getItem('vnm_favorites')) {
-    try { localStorage.setItem('vnm_favorites', '[]'); } catch(e) {}
+  if (!localStorage.getItem(LS_KEYS.FAVORITES)) {
+    try { localStorage.setItem(LS_KEYS.FAVORITES, '[]'); } catch(e) {}
   }
 }
 
