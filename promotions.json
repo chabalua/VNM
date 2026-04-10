@@ -36,7 +36,7 @@
     "type": "bonus",
     "nhoms": "B",
     "active": true,
-    "stackable": true,
+    "stackable": false,
     "bX": "8",
     "bY": "1",
     "bUnit": "lon",
@@ -44,7 +44,8 @@
     "bMa": "04FT32",
     "spMas": [
       "01SX07"
-    ]
+    ],
+    "_updatedAt": "2026-04-10T13:30:46.601Z"
   },
   {
     "name": "SĐ NSPN XL 380g HG: 18h+1h cùng loại",
