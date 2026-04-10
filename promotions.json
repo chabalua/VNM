@@ -297,7 +297,7 @@
     "type": "bonus",
     "nhoms": "B",
     "active": true,
-    "stackable": true,
+    "stackable": false,
     "bX": "8",
     "bY": "1",
     "bUnit": "lon",
@@ -305,7 +305,8 @@
     "bMa": "01SX05",
     "spMas": [
       "01SX11"
-    ]
+    ],
+    "_updatedAt": "2026-04-10T12:59:06.925Z"
   },
   {
     "name": "SĐ NSPN XL 1284g: 23h+1h cùng loại",
