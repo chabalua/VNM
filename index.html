@@ -173,13 +173,14 @@ try {
     <button class="head-mini-btn" onclick="gotoTab('adm')">Cài đặt</button>
   </div>
   <div style="background:var(--card);margin:8px 12px;border-radius:var(--R);padding:12px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:var(--shadow)">
+    <button onclick="kmOpenModal()" class="btn-tool filled" style="flex:1;margin:0;height:42px;background:linear-gradient(135deg,#16A34A,#22C55E);border-color:#16A34A">＋ Thêm CT KM</button>
     <button onclick="exportKM()" class="btn-tool" style="flex:1;margin:0;height:42px">📤 Xuất CT KM</button>
     <button onclick="importKM()" class="btn-tool" style="flex:1;margin:0;height:42px">📥 Nhập CT KM</button>
     <button onclick="loadKMFromURL()" class="btn-tool" style="flex:1;margin:0;height:42px">🌐 Load từ URL</button>
   </div>
   <div style="background:var(--card);margin:0 12px 8px;border-radius:var(--R);padding:10px 12px;display:flex;gap:8px;align-items:center;box-shadow:var(--shadow)">
     <input id="km-search-input" type="search" placeholder="Tìm theo tên CT KM..." oninput="kmSearchByName(this.value)" aria-label="Tìm chương trình khuyến mãi" style="flex:1;min-width:170px;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 14px;font-size:14px;">
-    <button onclick="kmClearSearch()" class="btn-tool" style="flex:0 0 auto;margin:0;min-width:70px;height:40px;font-size:12px">✕ Xoá</button>
+    <button onclick="kmClearSearch()" class="btn-tool inline">✕ Xoá</button>
   </div>
   <div class="pills" style="margin:0 12px 8px">
     <div class="pill on-all" onclick="kmSetFilterGroup('')">Tất cả</div>
@@ -193,7 +194,6 @@ try {
 </div>
 
 <!-- FABs -->
-<button id="km-fab" class="fab-btn green" onclick="kmOpenModal()" style="display:none">＋</button>
 <button id="adm-fab" class="fab-btn blue" onclick="spOpenModal()" style="display:none">＋</button>
 <button id="kh-fab" class="fab-btn green" onclick="cusEdit(-1)" style="display:none">＋</button>
 <button id="scroll-top-btn" onclick="scrollToTop()">↑</button>

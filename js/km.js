@@ -427,14 +427,12 @@ function kmSaveForm() {
 }
 
 function renderKMTab() {
-  var fab = document.getElementById('km-fab');
-  if (fab) fab.style.display = 'flex';
   kmUpdateFilterButtons();
   var el = document.getElementById('km-list');
   if (!el) return;
 
   if (!kmProgs.length) {
-    el.innerHTML = '<div class="empty">Chưa có CT KM nào<br><small>Nhấn ＋ để tạo</small></div>';
+    el.innerHTML = '<div class="empty">Chưa có CT KM nào<br><small>Dùng nút "＋ Thêm CT KM" ở đầu trang để tạo.</small></div>';
     return;
   }
 

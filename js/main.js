@@ -75,7 +75,7 @@ function gotoTab(t) {
   if (t === 'km') renderKMTab();
   if (t === 'kh') { renderRoutePills(); renderCusTab(); }
 
-  var fabs = { km: 'km-fab', adm: 'adm-fab', kh: 'kh-fab' };
+  var fabs = { adm: 'adm-fab', kh: 'kh-fab' };
   Object.keys(fabs).forEach(function(tab) {
     var fab = document.getElementById(fabs[tab]);
     if (fab) fab.style.display = (t === tab ? 'flex' : 'none');

@@ -242,6 +242,7 @@ html[data-theme='dark']{
 .btn-tool{width:100%;height:48px;border:1.5px solid var(--vm);border-radius:var(--R);background:var(--card);color:var(--vm);font-size:14px;font-weight:700;cursor:pointer;margin-top:8px;transition:all .15s}
 .btn-tool:active{transform:scale(.98)}
 .btn-tool.filled{background:var(--vm);color:#fff;box-shadow:0 2px 8px rgba(26,77,255,.18)}
+.btn-tool.inline{width:auto;min-width:84px;height:40px;border-radius:var(--Rs);margin-top:0;padding:0 12px;font-size:12px;flex:0 0 auto}
 
 /* ============================================================
    KH (Customer) CARDS
@@ -263,11 +264,11 @@ html[data-theme='dark']{
 .km-card-sm{font-size:11.5px;color:var(--n3);line-height:1.4}
 .km-badge{font-size:10.5px;font-weight:700;padding:3px 10px;border-radius:var(--Rr);background:var(--n6);color:var(--n3);white-space:nowrap;flex-shrink:0}
 .km-badge.on{background:var(--vmL);color:var(--vm)}
-.km-card-f{padding:10px 16px;display:flex;gap:8px}
-.btn-kme{flex:1;height:36px;border:1.5px solid var(--vm);border-radius:var(--Rs);background:var(--card);color:var(--vm);font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s}
+.km-card-f{padding:10px 16px;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.btn-kme{flex:1 1 160px;min-width:120px;height:36px;border:1.5px solid var(--vm);border-radius:var(--Rs);background:var(--card);color:var(--vm);font-size:12.5px;font-weight:700;cursor:pointer;transition:all .15s}
 .btn-kme:active{background:var(--vmL)}
-.btn-kmt{height:36px;padding:0 14px;border:1.5px solid var(--n5);border-radius:var(--Rs);background:var(--card);color:var(--n2);font-size:12.5px;font-weight:700;cursor:pointer}
-.btn-kmd{height:36px;padding:0 14px;border:1.5px solid var(--r);border-radius:var(--Rs);background:var(--card);color:var(--r);font-size:12.5px;font-weight:700;cursor:pointer}
+.btn-kmt{height:36px;padding:0 12px;border:1.5px solid var(--n5);border-radius:var(--Rs);background:var(--card);color:var(--n2);font-size:12.5px;font-weight:700;cursor:pointer;flex:0 0 auto}
+.btn-kmd{height:36px;min-width:40px;padding:0 10px;border:1.5px solid var(--r);border-radius:var(--Rs);background:var(--card);color:var(--r);font-size:12.5px;font-weight:700;cursor:pointer;flex:0 0 auto}
 
 /* KM Section Header */
 .km-sec-hd{padding:10px 16px;font-weight:700;color:var(--n1);background:var(--n6);border-bottom:1px solid var(--n5);font-size:13.5px}
@@ -408,6 +409,7 @@ html[data-theme='dark']{
 .page-section-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;padding:6px 12px 10px}
 .page-section-head.compact{padding-bottom:0}
 .page-head-inline{display:flex;justify-content:space-between;align-items:flex-start;gap:8px;margin-bottom:8px}
+.page-head-inline > div{min-width:0}
 
 .settings-overview{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;padding:0 12px 10px}
 .settings-info-card{background:var(--card);border:1px solid var(--border-card);border-radius:20px;box-shadow:var(--shadow);padding:14px}
@@ -499,6 +501,8 @@ html[data-theme='dark'] .settings-card.accent-red{background:linear-gradient(135
    .settings-theme-card{flex-direction:column;align-items:flex-start}
    .theme-toggle-group{width:100%}
    .theme-toggle-btn{flex:1}
+   .sync-actions{flex-wrap:wrap}
+   .mini-action{flex:1 1 140px}
 }
 .history-item-list{padding:8px 14px;font-size:11px;color:var(--n2)}
 .history-item-row{display:flex;justify-content:space-between;margin-bottom:2px;gap:8px}
@@ -550,4 +554,8 @@ html[data-theme='dark'] #tabbar{box-shadow:0 12px 34px rgba(0,0,0,.3)}
    .home-title,.page-title,.dashboard-title{font-size:24px}
    .hero-metrics{grid-template-columns:1fr 1fr 1fr}
    .kpi-row{grid-template-columns:1fr 64px}
+   .km-card-f{gap:6px}
+   .btn-kme{flex:1 1 100%}
+   .btn-kmt{flex:1 1 calc(100% - 48px)}
+   .btn-kmd{flex:0 0 42px;padding:0}
 }

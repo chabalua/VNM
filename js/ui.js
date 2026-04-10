@@ -473,6 +473,7 @@ function onQty(ma) {
   var orderBonusPreview = getOrderBonusPreview(orderKM, ma);
   var displayKM = buildOrderAwareKmDisplay(p, km, draftItems, orderKM);
   var orderBonusQty = orderBonusPreview.sameProductQty;
+  var lineBonusItems = Array.isArray(km.bonusItems) ? km.bonusItems : [];
   var totalLon = qT * p.slThung + qL;
   var totalNhan = totalLon + (km.bonus || 0) + orderBonusQty;
   var after = p.giaNYLon * totalLon - km.disc;
@@ -484,6 +485,9 @@ function onQty(ma) {
   pv.style.display = 'block';
   var pvHtml = '<div class="pv-row"><span class="pv-l">SL mua</span><span class="pv-v-sm">' + formatQtyByCarton(p, totalLon) + '</span></div>';
   if (km.bonus > 0) pvHtml += '<div class="pv-row"><span class="pv-l">SL KM</span><span class="pv-v-sm">' + formatQtyByCarton(p, km.bonus) + '</span></div>';
+  lineBonusItems.forEach(function(bi) {
+    pvHtml += '<div class="pv-row"><span class="pv-l">SP tặng</span><span class="pv-v-sm">' + formatOrderBonusItemText(bi) + '</span></div>';
+  });
   if (orderBonusQty > 0) pvHtml += '<div class="pv-row"><span class="pv-l">Quà ĐH</span><span class="pv-v-sm">' + formatQtyByCarton(p, orderBonusQty) + '</span></div>';
   pvHtml += '<div class="pv-row"><span class="pv-l">Tổng nhận</span><span class="pv-v-sm">' + formatQtyByCarton(p, totalNhan) + '</span></div>';
   orderBonusPreview.otherItems.forEach(function(bi) {

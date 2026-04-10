@@ -178,6 +178,48 @@ function kmBuildRules(prog) {
   return rules;
 }
 
+function calcBonusGiftItemFromProgram(prog, p, qT, qL) {
+  if (!prog || prog.type !== 'bonus') return null;
+  if (!prog.bMa || prog.bMa === 'same') return null;
+  var X = Math.max(1, parseInt(prog.bX, 10) || 12);
+  var Y = Math.max(0, parseInt(prog.bY, 10) || 0);
+  if (!Y) return null;
+  var unit = prog.bUnit || 'lon';
+  var cqb = unit === 'thung' ? qT : (qT * p.slThung + qL);
+  var sets = Math.floor(cqb / X);
+  if (+prog.bMax === 1) sets = Math.min(sets, 1);
+  if (sets <= 0) return null;
+  var qty = sets * Y;
+  if (qty <= 0) return null;
+  var bonusProduct = spFind(prog.bMa);
+  return {
+    ma: prog.bMa,
+    name: (bonusProduct && bonusProduct.ten) || prog.bonusName || prog.bMa || 'SP tặng',
+    qty: qty,
+    progName: prog.name || 'CT KM'
+  };
+}
+
+function mergeBonusGiftItems(items) {
+  if (!Array.isArray(items) || !items.length) return [];
+  var merged = {};
+  items.forEach(function(item) {
+    if (!item || !item.ma || !item.qty) return;
+    var key = item.ma;
+    if (!merged[key]) merged[key] = { ma: item.ma, name: item.name || 'SP tặng', qty: 0, progNames: [] };
+    merged[key].qty += Math.max(0, parseInt(item.qty, 10) || 0);
+    if (item.progName && merged[key].progNames.indexOf(item.progName) < 0) merged[key].progNames.push(item.progName);
+  });
+  return Object.keys(merged).map(function(key) {
+    return {
+      ma: merged[key].ma,
+      name: merged[key].name,
+      qty: merged[key].qty,
+      progName: merged[key].progNames.join(' + ')
+    };
+  }).filter(function(item) { return item.qty > 0; });
+}
+
 function calcKM(p, qT, qL, orderContext) {
   var applicable = kmProgs.filter(function(prog) {
     if (!prog.active) return false;
@@ -194,6 +236,7 @@ function calcKM(p, qT, qL, orderContext) {
   var stackable = applicable.filter(function(prog) { return prog.stackable; });
   var nonStackable = applicable.filter(function(prog) { return !prog.stackable; });
   var allRules = [], appliedProgs = [];
+  var selectedPromoObjects = [];
   stackable.forEach(function(prog) { allRules.push.apply(allRules, kmBuildRules(prog)); });
 
   var bestNonStack = null, bestHop = p.giaNYLon;
@@ -208,13 +251,20 @@ function calcKM(p, qT, qL, orderContext) {
   var pFinal = {}; for (var k2 in p) pFinal[k2] = p[k2]; pFinal.kmRules = allRules;
   var kmFinal = _calcKM_orig(pFinal, qT, qL);
   if (kmFinal.disc > 0 || kmFinal.bonus > 0) {
-    appliedProgs = stackable.filter(function(prog) {
+    selectedPromoObjects = stackable.filter(function(prog) {
       var pTest = {}; for (var k3 in p) pTest[k3] = p[k3]; pTest.kmRules = kmBuildRules(prog);
       var t = _calcKM_orig(pTest, qT, qL); return t.disc > 0 || t.bonus > 0;
-    }).map(function(prog) { return prog.name || 'CT KM'; });
-    if (bestNonStack) appliedProgs.push(bestNonStack.prog.name || 'CT KM');
+    });
+    appliedProgs = selectedPromoObjects.map(function(prog) { return prog.name || 'CT KM'; });
+    if (bestNonStack) {
+      selectedPromoObjects.push(bestNonStack.prog);
+      appliedProgs.push(bestNonStack.prog.name || 'CT KM');
+    }
   }
-  return { disc: kmFinal.disc, bonus: kmFinal.bonus, nhan: kmFinal.nhan, hopKM: kmFinal.hopKM, thungKM: kmFinal.thungKM, desc: kmFinal.desc, appliedPromos: appliedProgs };
+  var bonusItems = mergeBonusGiftItems(selectedPromoObjects.map(function(prog) {
+    return calcBonusGiftItemFromProgram(prog, p, qT, qL);
+  }));
+  return { disc: kmFinal.disc, bonus: kmFinal.bonus, nhan: kmFinal.nhan, hopKM: kmFinal.hopKM, thungKM: kmFinal.thungKM, desc: kmFinal.desc, appliedPromos: appliedProgs, bonusItems: bonusItems };
 }
 
 function parsePromoMoneyValue(value) { var num = +value; if (isNaN(num) || num <= 0) return 0; return num < 10000 ? num * 1000 : num; }
