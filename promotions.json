@@ -1,19 +1,19 @@
 [
   {
-    "name": "SĐ NSPN XL 380g HT: 14h+1b Fino",
+    "name": "NSPN XL 380g HT: 14h+1b Fino",
     "type": "bonus",
     "nhoms": "B",
     "active": true,
-    "stackable": true,
+    "stackable": false,
     "bX": "14",
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04FT32",
     "spMas": [
-      "01SX05",
-      "01SC02"
-    ]
+      "01SX05"
+    ],
+    "_updatedAt": "2026-04-10T13:26:41.621Z"
   },
   {
     "name": "SĐ NSPN XL 380g HT: 28h+1h cùng loại",
