@@ -1,19 +1,19 @@
 [
   {
-    "name": "NSPN XL 380g HT: 14h+1b Fino",
+    "name": "Sữa đặc 15h+ 1 Hộp Ông thọ xanh lá",
     "type": "bonus",
     "nhoms": "B",
     "active": true,
     "stackable": false,
-    "bX": "14",
+    "bX": "15",
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "04FT32",
+    "bMa": "01TX03",
     "spMas": [
       "01SX05"
     ],
-    "_updatedAt": "2026-04-10T13:26:41.621Z"
+    "_updatedAt": "2026-04-12T06:17:27.737Z"
   },
   {
     "name": "SĐ NSPN XL 380g HT: 28h+1h cùng loại",
