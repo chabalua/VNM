@@ -456,7 +456,11 @@ function onQty(ma) {
   }
   if (orderKM.disc > 0) {
     var draftTotal = draftItems.reduce(function(s, x) { return s + x.afterKM; }, 0) - orderKM.disc;
-    html += '<div class="pv-row" style="margin-top:4px;padding-top:4px;border-top:0.5px solid var(--orangeMid)"><span class="pv-l">Tạm tính đơn</span><span class="pv-v">' + fmt(draftTotal) + 'đ</span></div>';
+    html += '<div class="pv-divider" style="margin:4px 0;border-top:0.5px solid var(--orangeMid)"></div>';
+    html += '<div class="pv-row"><span class="pv-l" style="color:var(--vm)">CK đơn hàng</span><span class="pv-save">-' + fmt(orderKM.disc) + 'đ</span></div>';
+    if (orderKM.desc) html += '<div style="font-size:10px;color:var(--n3);margin:-2px 0 2px;line-height:1.3">' + escapeHtml(orderKM.desc) + '</div>';
+    html += '<div class="pv-row"><span class="pv-l" style="font-weight:700">Tạm tính đơn</span><span class="pv-v">' + fmt(draftTotal) + 'đ</span></div>';
+    html += '<div class="pv-row"><span class="pv-l">+VAT 1.5%</span><span class="pv-vat">' + fmt(Math.round(draftTotal * (1 + (typeof VAT !== 'undefined' ? VAT : 0.015)))) + 'đ</span></div>';
   }
   html += '<button class="btn-ok" onclick="addCart(\'' + escapeHtmlAttr(ma) + '\')">✓ Thêm vào đơn</button>';
 
