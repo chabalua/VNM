@@ -21,8 +21,8 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -69,10 +69,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -132,14 +131,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -173,10 +172,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -216,14 +214,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -251,14 +249,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -286,16 +284,15 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -330,14 +327,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -365,14 +362,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -400,14 +397,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -441,10 +438,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -484,14 +480,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -525,10 +521,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -568,14 +563,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -603,14 +598,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -644,10 +639,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -703,10 +697,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=600L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -761,14 +754,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -796,14 +789,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -831,14 +824,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -890,10 +883,9 @@
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -977,14 +969,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1012,14 +1004,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1060,14 +1052,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1135,10 +1127,9 @@
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -1188,16 +1179,15 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1243,7 +1233,7 @@
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
@@ -1306,7 +1296,7 @@
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
@@ -1358,13 +1348,13 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
@@ -1421,16 +1411,15 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1470,16 +1459,15 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -1520,10 +1508,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=600L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -1623,10 +1610,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -1676,14 +1662,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1711,14 +1697,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1746,14 +1732,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1815,14 +1801,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1884,14 +1870,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -1966,14 +1952,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2001,16 +1987,15 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -2104,14 +2089,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2173,14 +2158,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2208,16 +2193,15 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -2252,14 +2236,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2293,10 +2277,9 @@
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "KH<600L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -2357,10 +2340,9 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "mucBayBan": "",
+        "mucTichLuy": "",
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
@@ -2400,14 +2382,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2435,14 +2417,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2470,14 +2452,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2505,14 +2487,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2540,14 +2522,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2581,8 +2563,8 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2638,14 +2620,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2673,14 +2655,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2708,14 +2690,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -2845,13 +2827,13 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
@@ -2932,14 +2914,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3001,14 +2983,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3070,13 +3052,13 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL4",
         "ngayDangKy": 0
       },
@@ -3162,14 +3144,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3239,14 +3221,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3280,8 +3262,8 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3332,14 +3314,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3367,14 +3349,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M1",
+        "mucBayBan": "",
         "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3478,14 +3460,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3649,14 +3631,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3684,14 +3666,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -3759,10 +3741,9 @@
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
-        "ngayDangKy": 0,
-        "loaiTu": "VNM>=210L"
+        "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
@@ -3919,14 +3900,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -4022,14 +4003,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -4057,13 +4038,13 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
@@ -4100,13 +4081,13 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "TB1",
+        "mucBayBan": "",
         "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
@@ -4143,14 +4124,14 @@
     "programs": {
       "vnmShop": {
         "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -4197,8 +4178,8 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {
@@ -4245,8 +4226,8 @@
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucBayBan": "",
+        "mucTichLuy": "",
         "ngayDangKy": 0
       },
       "sbpsShop": {

@@ -463,8 +463,8 @@ function cusReadAppCodes() {
 // Chuyển appCodes → programs (để các hàm tính thưởng cũ vẫn chạy)
 function cusAppCodesToPrograms(appCodes) {
   var progs = {
-    vnmShop:  { dangKy: false, mucBayBan: 'M1',  mucTichLuy: '1',   ngayDangKy: 0 },
-    vipShop:  { dangKy: false, mucBayBan: 'TB1', mucTichLuy: 'TL1', ngayDangKy: 0 },
+    vnmShop:  { dangKy: false, mucBayBan: '',  mucTichLuy: '',   ngayDangKy: 0 },
+    vipShop:  { dangKy: false, mucBayBan: '', mucTichLuy: '', ngayDangKy: 0 },
     sbpsShop: { dangKy: false, muc: '',           mucTrungBay: '',   ngayDangKy: 0 }
   };
   (appCodes || []).forEach(function(ac) {
@@ -1044,12 +1044,10 @@ function cusCardHTML(kh, idx, monthKey) {
     if (vnmBBInfo) html += '<span style="font-size:10.5px;color:var(--vm);font-weight:600">TB: ' + fmt(vnmBBInfo.thuong) + 'đ</span>';
     html += '</div>';
     if (vnmCodes.length) html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:5px">Mã app: ' + escapeHtml(vnmCodes.join(', ')) + '</div>';
-    html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
-    html += 'Bày bán: <b>' + vnmBB + '</b>';
-    if (vnmBBInfo) html += ' (DS≥' + fmt(vnmBBInfo.dsMin) + ')';
-    html += ' · Tích lũy: <b>Mức ' + vnmTL + '</b>';
-    if (vnmTLInfo) html += ' (CK ' + vnmTLInfo.ckDS + '%)';
-    html += '</div>';
+    var vnmParts = [];
+    if (vnmBB) { vnmParts.push('Bày bán: <b>' + vnmBB + '</b>' + (vnmBBInfo ? ' (DS≥' + fmt(vnmBBInfo.dsMin) + ')' : '')); }
+    if (vnmTL) { vnmParts.push('Tích lũy: <b>Mức ' + vnmTL + '</b>' + (vnmTLInfo ? ' (CK ' + vnmTLInfo.ckDS + '%)' : '')); }
+    if (vnmParts.length) html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">' + vnmParts.join(' · ') + '</div>';
     html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS tháng ' + fmt(md.dsNhomC || 0) + 'đ · GĐ1 ' + fmt(md.dsGD1 || 0) + 'đ · GĐ2 ' + fmt(md.dsGD2 || 0) + 'đ · GĐ3 ' + fmt(md.dsGD3 || 0) + 'đ</div>';
     if (vnmProg) html += cusProgressBarHTML('Tiến độ DS', vnmProg.pct, vnmProg.ds, vnmProg.target, '#1A4DFF');
     if (reward.vnm && reward.vnm.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:var(--vm);margin-top:3px">→ Thưởng: ' + fmt(reward.vnm.total) + 'đ</div>';
@@ -1068,12 +1066,10 @@ function cusCardHTML(kh, idx, monthKey) {
     if (vipBBInfo) html += '<span style="font-size:10.5px;color:var(--b);font-weight:600">TB: ' + fmt(kh.coTuVNM ? vipBBInfo.thuongVNM : vipBBInfo.thuongKH) + 'đ</span>';
     html += '</div>';
     if (vipCodes.length) html += '<div style="font-size:10.5px;color:var(--n3);margin-bottom:5px">Mã app: ' + escapeHtml(vipCodes.join(', ')) + '</div>';
-    html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">';
-    html += 'Tủ: <b>' + vipBB + '</b>';
-    if (vipBBInfo) html += ' (DS≥' + fmt(vipBBInfo.dsMin) + ', ≥' + vipBBInfo.skuMin + ' SKU)';
-    html += ' · CL: <b>' + vipTL + '</b>';
-    if (vipTLInfo) html += ' (N1 ' + vipTLInfo.ckN1 + '% / N2 ' + vipTLInfo.ckN2 + '%)';
-    html += '</div>';
+    var vipParts = [];
+    if (vipBB) { vipParts.push('Tủ: <b>' + vipBB + '</b>' + (vipBBInfo ? ' (DS≥' + fmt(vipBBInfo.dsMin) + ', ≥' + vipBBInfo.skuMin + ' SKU)' : '')); }
+    if (vipTL) { vipParts.push('CL: <b>' + vipTL + '</b>' + (vipTLInfo ? ' (N1 ' + vipTLInfo.ckN1 + '% / N2 ' + vipTLInfo.ckN2 + '%)' : '')); }
+    if (vipParts.length) html += '<div style="font-size:10.5px;color:var(--n2);margin-bottom:5px">' + vipParts.join(' · ') + '</div>';
     html += '<div style="font-size:10px;color:var(--n3);margin-bottom:5px">DS DE ' + fmt(md.dsNhomDE || 0) + 'đ · N1 ' + fmt(md.dsVipN1 || 0) + 'đ · N2 ' + fmt(md.dsVipN2 || 0) + 'đ · SKU D ' + fmt(md.skuNhomD || 0) + '</div>';
     if (vipProg) html += cusProgressBarHTML('Tiến độ DS', vipProg.pct, vipProg.ds, vipProg.target, '#2563EB');
     if (reward.vip && reward.vip.total > 0) html += '<div style="font-size:11.5px;font-weight:700;color:var(--b);margin-top:3px">→ Thưởng: ' + fmt(reward.vip.total) + 'đ</div>';
