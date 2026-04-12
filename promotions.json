@@ -355,19 +355,20 @@
     ]
   },
   {
-    "name": "SĐ NSPN XB 1284g: 10h+1h NSPN cam/xanh",
+    "name": "SĐ NSPN XB 1284g: 10h+1h NSPN 380g",
     "type": "bonus",
     "nhoms": "B",
     "active": true,
-    "stackable": true,
+    "stackable": false,
     "bX": "10",
     "bY": "1",
     "bUnit": "lon",
     "bMax": 0,
-    "bMa": "01SX05",
+    "bMa": "01SX07",
     "spMas": [
       "01SB10"
-    ]
+    ],
+    "_updatedAt": "2026-04-12T06:11:14.692Z"
   },
   {
     "name": "SĐ NSPN XB 1284g: 23h+1h cùng loại",
