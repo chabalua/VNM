@@ -267,8 +267,8 @@ function buildPriceTable(p, km) {
   // Thùng row (highlight)
   rows += '<tr class="ptbl-row ptbl-main">';
   rows += '<td>Thùng ' + p.slThung + '</td>';
-  rows += '<td>' + (hasDiscount ? fmt(thungGoc) + 'đ' : '—') + '</td>';
-  rows += '<td>' + fmt(thungKM) + 'đ</td>';
+  rows += '<td>' + fmt(thungGoc) + 'đ</td>';
+  rows += '<td>' + (hasDiscount ? fmt(thungKM) + 'đ' : '—') + '</td>';
   rows += '<td>' + fmt(thungVat) + 'đ</td>';
   rows += '</tr>';
 
@@ -279,8 +279,8 @@ function buildPriceTable(p, km) {
     var locVat = Math.round(locKM * (1 + VAT_RATE));
     rows += '<tr class="ptbl-row">';
     rows += '<td>' + (p.locLabel || 'Lốc') + ' ' + p.locSize + '</td>';
-    rows += '<td>' + (hasDiscount ? fmt(locGoc) + 'đ' : '—') + '</td>';
-    rows += '<td>' + fmt(locKM) + 'đ</td>';
+    rows += '<td>' + fmt(locGoc) + 'đ</td>';
+    rows += '<td>' + (hasDiscount ? fmt(locKM) + 'đ' : '—') + '</td>';
     rows += '<td>' + fmt(locVat) + 'đ</td>';
     rows += '</tr>';
   }
@@ -288,8 +288,8 @@ function buildPriceTable(p, km) {
   // Đơn vị lẻ
   rows += '<tr class="ptbl-row">';
   rows += '<td>' + escapeHtml(p.donvi) + '</td>';
-  rows += '<td>' + (hasDiscount ? fmt(hopGoc) + 'đ' : '—') + '</td>';
-  rows += '<td>' + fmt(hopKM) + 'đ</td>';
+  rows += '<td>' + fmt(hopGoc) + 'đ</td>';
+  rows += '<td>' + (hasDiscount ? fmt(hopKM) + 'đ' : '—') + '</td>';
   rows += '<td>' + fmt(hopVat) + 'đ</td>';
   rows += '</tr>';
 
@@ -394,7 +394,16 @@ function onQty(ma) {
   if (qL < 0) { var eLQ = document.getElementById('qL_' + ma); if (eLQ) eLQ.value = 0; qL = 0; }
 
   var pv = document.getElementById('pv_' + ma); if (!pv) return;
-  if (!qT && !qL) { pv.classList.remove('show'); return; }
+  if (!qT && !qL) {
+    pv.classList.remove('show');
+    // Khôi phục km-line về tất cả CT khi xóa số lượng
+    var kmLineReset = document.getElementById('km-line_' + ma);
+    if (kmLineReset) {
+      var allRefsReset = getProductPromoRefs(ma);
+      kmLineReset.innerHTML = allRefsReset.length ? renderPromoJumpChips(allRefsReset.map(function(r) { return { idx: r.idx, name: r.prog.name || 'CT KM' }; }), 4) : '';
+    }
+    return;
+  }
 
   var km = calcKM(p, qT, qL);
   var draftCart = buildDraftCartState(ma, qT, qL);
@@ -458,6 +467,17 @@ function onQty(ma) {
   var draftKm = buildOrderAwareKmDisplay(p, km, draftItems, orderKM);
   var ptEl = document.getElementById('pt_' + ma);
   if (ptEl) ptEl.innerHTML = buildPriceTable(p, draftKm);
+
+  // Cập nhật km-line: chỉ hiện CT đang áp dụng
+  var kmLine = document.getElementById('km-line_' + ma);
+  if (kmLine) {
+    if (km.appliedPromos && km.appliedPromos.length) {
+      kmLine.innerHTML = renderPromoJumpChips(getAppliedPromoRefsByNames(km.appliedPromos), 4);
+    } else {
+      var allRefs = getProductPromoRefs(ma);
+      kmLine.innerHTML = allRefs.length ? renderPromoJumpChips(allRefs.map(function(r) { return { idx: r.idx, name: r.prog.name || 'CT KM' }; }), 4) : '';
+    }
+  }
 }
 
 function buildDraftCartState(ma, qT, qL) {
@@ -667,9 +687,11 @@ function renderOrder() {
 
       // KM jump chips
       if (appliedCTs.length) {
+        html += '<div id="km-line_' + eMa + '">';
         html += renderPromoJumpChips(appliedCTs.map(function(item) {
           return { idx: item.idx, name: item.prog.name || 'CT KM' };
         }), 4);
+        html += '</div>';
       }
 
       // Tích lũy CT (chỉ khi có KH)
