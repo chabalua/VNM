@@ -16,7 +16,7 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "5",
         "ngayDangKy": 0
       },
       "vipShop": {
@@ -28,11 +28,24 @@
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "5",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412EH",
@@ -51,11 +64,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "5",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -63,13 +76,45 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VSHOP26_TB",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VSHOP26_TL",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412EI",
@@ -123,11 +168,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "5",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -136,11 +181,24 @@
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "5",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412EK",
@@ -227,26 +285,34 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": true,
-        "mucBayBan": "M5",
+        "dangKy": false,
+        "mucBayBan": "M1",
         "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412F6",
@@ -370,11 +436,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -383,11 +449,24 @@
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412FG",
@@ -441,11 +520,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -454,11 +533,24 @@
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412FM",
@@ -547,11 +639,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -559,13 +651,35 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412FQ",
@@ -584,11 +698,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "4",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -596,13 +710,40 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VSHOP26_TL",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "4",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412FY",
@@ -690,8 +831,8 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucBayBan": "M1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
@@ -702,13 +843,30 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412HI",
@@ -727,24 +885,47 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M4",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "KH<600L"
       },
       "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
+        "dangKy": true,
+        "muc": "7",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M4",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412HK",
@@ -842,13 +1023,26 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
+        "dangKy": true,
+        "muc": "8",
+        "mucTrungBay": "TH-M5",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T11:42:09.593Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "8",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412IR",
@@ -936,24 +1130,47 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M4",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "KH<600L"
       },
       "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
+        "dangKy": true,
+        "muc": "8",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M4",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "8",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412J6",
@@ -970,26 +1187,39 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412J7",
@@ -1008,23 +1238,51 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M6",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MRKEMSHOP26TB",
+        "muc": "VNM",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MRKEMSHOP26TL",
+        "muc": "3",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412J8",
@@ -1043,24 +1301,46 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
         "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412J9",
@@ -1078,25 +1358,52 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucBayBan": "M1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MRKEMSHOP26TL",
+        "muc": "2",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412JA",
@@ -1114,25 +1421,38 @@
     "programs": {
       "vnmShop": {
         "dangKy": true,
-        "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucBayBan": "M1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412JC",
@@ -1157,18 +1477,26 @@
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412JP",
@@ -1187,11 +1515,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "2",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -1199,13 +1527,45 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M4"
+        "muc": "4",
+        "mucTrungBay": "TH-M4",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VSHOP26_TB",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VSHOP26_TL",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "2",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M4",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "4",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412KD",
@@ -1258,11 +1618,11 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M4",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
+        "dangKy": false,
         "mucBayBan": "TB1",
         "mucTichLuy": "TL1",
         "ngayDangKy": 0,
@@ -1270,13 +1630,35 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M4",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412KQ",
@@ -1501,9 +1883,9 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
@@ -1513,13 +1895,26 @@
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
+        "dangKy": true,
+        "muc": "8",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:03:50.375Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "8",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412MT",
@@ -1605,27 +2000,59 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MRKEMSHOP26TB",
+        "muc": "VNM",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MRKEMSHOP26TL",
+        "muc": "3",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412NQ",
@@ -1780,26 +2207,34 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": true,
-        "mucBayBan": "M5",
-        "mucTichLuy": "",
+        "dangKy": false,
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412S6",
@@ -1853,25 +2288,52 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "6",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "KH<600L"
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412SS",
@@ -1890,24 +2352,37 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M6",
-        "mucTichLuy": "",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": true,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "dangKy": false,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0,
         "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200412TA",
@@ -2099,9 +2574,9 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "dangKy": true,
+        "mucBayBan": "9",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
@@ -2112,13 +2587,40 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VSHOP26_TB",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VSHOP26_TL",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL2004133C",
@@ -2342,25 +2844,43 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0
       },
       "sbpsShop": {
-        "dangKy": false,
-        "muc": "",
+        "dangKy": true,
+        "muc": "8",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:07:03.668Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "8",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200413FN",
@@ -2549,26 +3069,48 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL4",
         "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "8",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL4",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "8",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200413KQ",
@@ -2619,9 +3161,9 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
+        "dangKy": true,
         "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
@@ -2633,11 +3175,19 @@
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-05T12:07:42.199Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200413N7",
@@ -2723,9 +3273,9 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "M1",
-        "mucTichLuy": "1",
+        "dangKy": true,
+        "mucBayBan": "9",
+        "mucTichLuy": "9",
         "ngayDangKy": 0
       },
       "vipShop": {
@@ -2736,13 +3286,35 @@
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VSHOP26_TB",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VSHOP26_TL",
+        "muc": "9",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200413OZ",
@@ -2794,24 +3366,33 @@
     "ghiChu": "",
     "programs": {
       "vnmShop": {
-        "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "dangKy": true,
+        "mucBayBan": "M1",
+        "mucTichLuy": "7",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": false,
-        "mucBayBan": "",
-        "mucTichLuy": "",
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
         "ngayDangKy": 0
       },
       "sbpsShop": {
         "dangKy": false,
         "muc": "",
+        "mucTrungBay": "",
         "ngayDangKy": 0
       }
     },
-    "monthly": {}
+    "monthly": {},
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ],
+    "_updatedAt": "2026-04-12T08:03:43.000Z"
   },
   {
     "ma": "DL200413PT",
@@ -3173,25 +3754,52 @@
       "vnmShop": {
         "dangKy": true,
         "mucBayBan": "M5",
-        "mucTichLuy": "1",
+        "mucTichLuy": "5",
         "ngayDangKy": 0
       },
       "vipShop": {
         "dangKy": true,
         "mucBayBan": "TB1",
-        "mucTichLuy": "TL1",
+        "mucTichLuy": "TL5",
         "ngayDangKy": 0,
         "loaiTu": "VNM>=210L"
       },
       "sbpsShop": {
         "dangKy": true,
-        "muc": "",
-        "ngayDangKy": 0,
-        "mucTrungBay": "TH-M5"
+        "muc": "7",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
       }
     },
     "monthly": {},
-    "_updatedAt": "2026-04-06T14:34:16.000Z"
+    "_updatedAt": "2026-04-12T08:03:43.000Z",
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ]
   },
   {
     "ma": "DL200413TR",
@@ -3432,5 +4040,235 @@
     },
     "monthly": {},
     "_updatedAt": "2026-04-05T12:09:47.165Z"
+  },
+  {
+    "ma": "DL200412E7",
+    "ten": "Nguyễn Thanh Quý (Tạp Hóa)",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": true,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL5",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "mucTrungBay": "",
+        "ngayDangKy": 0
+      }
+    },
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      }
+    ],
+    "monthly": {},
+    "_updatedAt": "2026-04-12T08:03:43.000Z"
+  },
+  {
+    "ma": "DL200412EM",
+    "ten": "Lê Thị Huệ",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": true,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL5",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "mucTrungBay": "",
+        "ngayDangKy": 0
+      }
+    },
+    "appCodes": [
+      {
+        "maCT": "MR_VIPSHOP26_TL",
+        "muc": "TL5",
+        "ngayDk": 0
+      }
+    ],
+    "monthly": {},
+    "_updatedAt": "2026-04-12T08:03:43.000Z"
+  },
+  {
+    "ma": "DL200412UF",
+    "ten": "Nguyễn Thị Mai Hồng",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": false,
+        "mucBayBan": "M1",
+        "mucTichLuy": "1",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": true,
+        "muc": "8",
+        "mucTrungBay": "TH-M5",
+        "ngayDangKy": 0
+      }
+    },
+    "appCodes": [
+      {
+        "maCT": "MR_SBPS26_TB",
+        "muc": "TH-M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_SBPS26_TL",
+        "muc": "8",
+        "ngayDk": 0
+      }
+    ],
+    "monthly": {},
+    "_updatedAt": "2026-04-12T08:03:43.000Z"
+  },
+  {
+    "ma": "DL200413BN",
+    "ten": "Hồ Thị Minh Nguyệt",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": true,
+        "mucBayBan": "M6",
+        "mucTichLuy": "7",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "mucTrungBay": "",
+        "ngayDangKy": 0
+      }
+    },
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M6",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "7",
+        "ngayDk": 0
+      }
+    ],
+    "monthly": {},
+    "_updatedAt": "2026-04-12T08:03:43.000Z"
+  },
+  {
+    "ma": "DL200412FK",
+    "ten": "Trần Đạt (Hoa Khánh)",
+    "tuyen": "",
+    "diachi": "",
+    "sdt": "",
+    "loaiCH": "tapHoa",
+    "coTuVNM": false,
+    "loaiTu": "",
+    "dungTichTu": 0,
+    "coKe": false,
+    "loaiKe": "",
+    "ghiChu": "",
+    "programs": {
+      "vnmShop": {
+        "dangKy": true,
+        "mucBayBan": "M5",
+        "mucTichLuy": "4",
+        "ngayDangKy": 0
+      },
+      "vipShop": {
+        "dangKy": false,
+        "mucBayBan": "TB1",
+        "mucTichLuy": "TL1",
+        "ngayDangKy": 0
+      },
+      "sbpsShop": {
+        "dangKy": false,
+        "muc": "",
+        "mucTrungBay": "",
+        "ngayDangKy": 0
+      }
+    },
+    "appCodes": [
+      {
+        "maCT": "MR_VNMS26_TB",
+        "muc": "M5",
+        "ngayDk": 0
+      },
+      {
+        "maCT": "MR_VNMS26_TL",
+        "muc": "4",
+        "ngayDk": 0
+      }
+    ],
+    "monthly": {},
+    "_updatedAt": "2026-04-12T08:03:43.000Z"
   }
 ]

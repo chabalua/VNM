@@ -106,7 +106,9 @@ var VNM_APP_CODES = {
   'MR_VSHOP26_TL':   { prog: 'vnmShop',  loai: 'TL', ten: 'V Shop Tích Lũy'     },
   'MR_SBPS26_TB':    { prog: 'sbpsShop', loai: 'TB', ten: 'SBPS Trưng Bày'      },
   'MR_SBPS26_TL':    { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS Tích Lũy'       },
-  'MR_SBPS_TE26_TL': { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS TE Tích Lũy'    }
+  'MR_SBPS_TE26_TL': { prog: 'sbpsShop', loai: 'TL', ten: 'SBPS TE Tích Lũy'    },
+  'MRKEMSHOP26TB':   { prog: 'kemShop',  loai: 'TB', ten: 'KEM Shop Trưng Bày'   },
+  'MRKEMSHOP26TL':   { prog: 'kemShop',  loai: 'TL', ten: 'KEM Shop Tích Lũy'    }
 };
 
 function cusResolveProductForOrderItem(item) {
@@ -392,6 +394,15 @@ function cusAppCodeMucOptions(maCT, selectedMuc) {
     SBPS_TICHLUY.forEach(function(t) {
       html += '<option value="'+t.muc+'"'+(selectedMuc===t.muc?' selected':'')+'>Mức '+t.muc+' — DS≥'+fmt(t.dsMin)+'đ</option>';
     });
+  } else if (maCT === 'MRKEMSHOP26TB') {
+    ['VNM'].forEach(function(m) {
+      html += '<option value="'+m+'"'+(selectedMuc===m?' selected':'')+'>'+m+'</option>';
+    });
+  } else if (maCT === 'MRKEMSHOP26TL') {
+    for (var i = 1; i <= 5; i++) {
+      var s = String(i);
+      html += '<option value="'+s+'"'+(selectedMuc===s?' selected':'')+'>Mức '+s+'</option>';
+    }
   }
   return html;
 }
