@@ -1826,11 +1826,23 @@
     "nhoms": "C",
     "active": true,
     "stackable": true,
+    "bonusMa": "04EI33",
+    "bonusName": "",
     "cascade": true,
-    "bonusMa": "",
-    "bonusName": "STTT 100% 110ml",
     "repeat": true,
     "maxSets": 0,
+    "tiers": [
+      {
+        "value": "5000",
+        "maxValue": "",
+        "bonusQty": "8"
+      },
+      {
+        "value": "2000",
+        "maxValue": "",
+        "bonusQty": "2"
+      }
+    ],
     "spMas": [
       "04ED04",
       "04EI04",
@@ -1886,35 +1898,8 @@
       "05FV44",
       "05AD11",
       "05AD31",
-      "06UA40",
-      "06UC40",
-      "06UN40",
-      "06UQ40",
-      "06UK10",
-      "06SA73",
-      "06SC73",
-      "06UA32",
-      "06UC32",
-      "06UN32",
-      "06UQ32",
-      "06VA23",
-      "06VC23",
-      "06VQ23",
-      "08HA11",
-      "08HA31"
+      "06SA73"
     ],
-    "minSKU": 0,
-    "tiers": [
-      {
-        "value": 5000,
-        "maxValue": "",
-        "bonusQty": 8
-      },
-      {
-        "value": 2000,
-        "maxValue": "",
-        "bonusQty": 2
-      }
-    ]
+    "_updatedAt": "2026-04-21T15:20:56.897Z"
   }
 ]
