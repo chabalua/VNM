@@ -410,6 +410,9 @@ function onQty(ma) {
   var draftItems = (typeof getItemsFromCartState === 'function') ? getItemsFromCartState(draftCart) : [];
   var orderKM = (typeof calcOrderKM === 'function') ? calcOrderKM(draftItems) : { disc: 0, desc: '', bonusItems: [] };
 
+  // Tính draftKm sớm để dùng hopKM đã phản ánh đầy đủ order-level KM
+  var draftKm = buildOrderAwareKmDisplay(p, km, draftItems, orderKM);
+
   var totalLon = qT * p.slThung + qL;
   var bonusLon = km.bonus || 0;
   var orderBonusSameQty = 0;
@@ -422,8 +425,10 @@ function onQty(ma) {
   var VAT_RATE = typeof VAT !== 'undefined' ? VAT : 0.015;
   var gocTotal = p.giaNYLon * totalLon;
   var afterKM = gocTotal - km.disc;
-  var vatTotal = Math.round(afterKM * (1 + VAT_RATE));
-  var saved = gocTotal - afterKM;
+  // Giá hiệu lực = hopKM (đã tính cả order-level) × qty mua thực tế
+  var effectiveTotal = draftKm.hopKM < p.giaNYLon ? draftKm.hopKM * totalLon : afterKM;
+  var vatTotal = Math.round(effectiveTotal * (1 + VAT_RATE));
+  var saved = gocTotal - effectiveTotal;
 
   // Build preview HTML
   var html = '';
@@ -453,27 +458,27 @@ function onQty(ma) {
   if (saved > 0) {
     html += '<div class="pv-row"><span class="pv-l">Giá gốc</span><span style="font-size:11px;color:var(--n4);text-decoration:line-through">' + fmt(gocTotal) + 'đ</span></div>';
   }
-  html += '<div class="pv-row"><span class="pv-l">Sau KM</span><span class="pv-v">' + fmt(afterKM) + 'đ</span></div>';
+  html += '<div class="pv-row"><span class="pv-l">Sau KM</span><span class="pv-v">' + fmt(effectiveTotal) + 'đ</span></div>';
   html += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(vatTotal) + 'đ</span></div>';
   if (saved > 0) {
     var savePct = Math.round(saved / gocTotal * 100);
     html += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span class="pv-save">-' + fmt(saved) + 'đ (' + savePct + '%)</span></div>';
   }
-  if (orderKM.disc > 0) {
+  if (orderKM.disc > 0 && draftKm.hopKM >= p.giaNYLon) {
+    // Chỉ hiện block CK đơn riêng khi chưa gộp vào hopKM (trường hợp hiếm)
     var draftTotal = draftItems.reduce(function(s, x) { return s + x.afterKM; }, 0) - orderKM.disc;
     html += '<div class="pv-divider" style="margin:4px 0;border-top:0.5px solid var(--orangeMid)"></div>';
     html += '<div class="pv-row"><span class="pv-l" style="color:var(--vm)">CK đơn hàng</span><span class="pv-save">-' + fmt(orderKM.disc) + 'đ</span></div>';
     if (orderKM.desc) html += '<div style="font-size:10px;color:var(--n3);margin:-2px 0 2px;line-height:1.3">' + escapeHtml(orderKM.desc) + '</div>';
     html += '<div class="pv-row"><span class="pv-l" style="font-weight:700">Tạm tính đơn</span><span class="pv-v">' + fmt(draftTotal) + 'đ</span></div>';
-    html += '<div class="pv-row"><span class="pv-l">+VAT 1.5%</span><span class="pv-vat">' + fmt(Math.round(draftTotal * (1 + (typeof VAT !== 'undefined' ? VAT : 0.015)))) + 'đ</span></div>';
+    html += '<div class="pv-row"><span class="pv-l">+VAT 1.5%</span><span class="pv-vat">' + fmt(Math.round(draftTotal * (1 + VAT_RATE))) + 'đ</span></div>';
   }
   html += '<button class="btn-ok" onclick="addCart(\'' + escapeHtmlAttr(ma) + '\')">✓ Thêm vào đơn</button>';
 
   pv.innerHTML = html;
   pv.classList.add('show');
 
-  // Cập nhật bảng giá với KM + order context
-  var draftKm = buildOrderAwareKmDisplay(p, km, draftItems, orderKM);
+  // Cập nhật bảng giá với KM + order context (draftKm đã tính ở trên)
   var ptEl = document.getElementById('pt_' + ma);
   if (ptEl) ptEl.innerHTML = buildPriceTable(p, draftKm);
 
@@ -515,15 +520,33 @@ function buildOrderAwareKmDisplay(p, km, draftItems, orderKM) {
   if (!p || !Array.isArray(draftItems) || !draftItems.length) return displayKm;
   var targetItem = draftItems.find(function(it) { return it.ma === p.ma; });
   if (!targetItem) return displayKm;
+
+  var totalAfter = draftItems.reduce(function(sum, item) { return sum + (item.afterKM || 0); }, 0);
+  var proportion = totalAfter > 0 ? ((targetItem.afterKM || 0) / totalAfter) : 0;
+
+  // Quà cùng SP: cộng vào số lượng nhận
   (orderKM && orderKM.bonusItems || []).forEach(function(bi) {
     if (bi && bi.ma === p.ma) displayKm.orderBonusQty += Math.max(0, parseInt(bi.qty, 10) || 0);
   });
-  if (orderKM && orderKM.disc > 0) {
-    var totalAfter = draftItems.reduce(function(sum, item) { return sum + (item.afterKM || 0); }, 0);
-    if (totalAfter > 0) displayKm.orderDiscAllocated = Math.round(orderKM.disc * ((targetItem.afterKM || 0) / totalAfter));
+
+  // CK % tổng đơn: phân bổ theo tỷ lệ giá trị SP
+  if (orderKM && orderKM.disc > 0 && totalAfter > 0) {
+    displayKm.orderDiscAllocated = Math.round(orderKM.disc * proportion);
   }
-  if (displayKm.orderBonusQty > 0 || displayKm.orderDiscAllocated > 0) {
-    var effectivePaid = Math.max(0, (targetItem.afterKM || 0) - displayKm.orderDiscAllocated);
+
+  // Quà SP khác: quy giá trị quà thành discount ảo, phân bổ theo tỷ lệ
+  var orderGiftValueAllocated = 0;
+  (orderKM && orderKM.bonusItems || []).forEach(function(bi) {
+    if (!bi || bi.ma === p.ma) return; // cùng SP đã tính ở trên
+    var giftP = bi.ma ? (typeof spFind === 'function' ? spFind(bi.ma) : null) : null;
+    var giftUnitPrice = giftP ? (+giftP.giaNYLon || 0) : 0;
+    if (giftUnitPrice <= 0) return;
+    orderGiftValueAllocated += Math.round((parseInt(bi.qty, 10) || 0) * giftUnitPrice * proportion);
+  });
+
+  var totalVirtualDisc = displayKm.orderDiscAllocated + orderGiftValueAllocated;
+  if (displayKm.orderBonusQty > 0 || totalVirtualDisc > 0) {
+    var effectivePaid = Math.max(0, (targetItem.afterKM || 0) - totalVirtualDisc);
     var effectiveQty = Math.max(targetItem.totalLon || 0, displayKm.nhan || 0) + displayKm.orderBonusQty;
     if (effectiveQty > 0) { displayKm.hopKM = Math.round(effectivePaid / effectiveQty); displayKm.thungKM = displayKm.hopKM * p.slThung; }
   }
