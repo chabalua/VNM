@@ -188,17 +188,25 @@ function kmTypeFields(prog) {
   }
 
   if (t === 'order_bonus') {
+    var isCascade = !!prog.cascade;
     var spOpts = _kmBuildSpOptgroups(prog.bonusMa, '-- Chọn SP tặng --');
     var rows = (prog.tiers || [{ value: 250, maxValue: '', bonusQty: 4 }]).map(function(ti, i) {
       var upperValue = ti.maxValue != null ? ti.maxValue : (ti.mx != null ? ti.mx : (ti.max != null ? ti.max : ''));
+      if (isCascade) {
+        return '<div class="km-tier-row" style="flex-wrap:wrap" id="ktr-' + i + '"><label>Đơn ≥</label><input type="number" class="t-val" value="' + (ti.value || 0) + '" placeholder="K" style="width:80px" oninput="kmPreview()"><label>K → Tặng</label><input type="number" class="t-bqty" value="' + (ti.bonusQty || 0) + '" style="width:50px" oninput="kmPreview()"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>';
+      }
       return '<div class="km-tier-row" style="flex-wrap:wrap" id="ktr-' + i + '"><label>Từ</label><input type="number" class="t-val" value="' + (ti.value || 0) + '" placeholder="K" style="width:68px" oninput="kmPreview()"><label>Đến &lt;</label><input type="number" class="t-max" value="' + upperValue + '" placeholder="∞" style="width:78px" oninput="kmPreview()"><label>Tặng</label><input type="number" class="t-bqty" value="' + (ti.bonusQty || 0) + '" style="width:50px" oninput="kmPreview()"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button></div>';
     }).join('');
+    var cascadeToggle = '<div style="margin-bottom:8px;padding:8px;background:var(--bg2,#f5f5f5);border-radius:var(--Rs);"><label style="display:flex;align-items:center;gap:8px;cursor:pointer;font-size:13px"><input type="checkbox" id="kf-bonus-cascade"' + (isCascade ? ' checked' : '') + ' onchange="kmRenderTypeFields(kmReadForm());kmPreview()"><b>Cascade</b>: áp tier lớn trước, dùng phần dư cho tier nhỏ hơn</label><div style="font-size:10px;color:var(--t3);margin-top:3px">VD: đơn 9M → 1×5M (8 hộp) + 2×2M (4 hộp) = 12 hộp</div></div>';
+    var repeatMaxHtml = isCascade ? '' : ('<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px"><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Lặp lại</div><select id="kf-bonus-repeat" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"><option value="1"' + (prog.repeat !== false ? ' selected' : '') + '>Mỗi X đồng tặng Y</option><option value="0"' + (prog.repeat === false ? ' selected' : '') + '>Chỉ 1 suất</option></select></div><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tối đa suất</div><input type="number" id="kf-bonus-max" value="' + (prog.maxSets || '') + '" placeholder="0=ko giới hạn" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"></div></div>');
+    var tierNote = isCascade ? '<div style="font-size:10px;color:var(--t3);margin-top:5px">Giá trị K (1K = 1.000 VND). Nhập nhiều mức — tier lớn nhất áp trước, phần dư áp tier nhỏ hơn.</div>' : '<div style="font-size:10px;color:var(--t3);margin-top:5px">Giá trị K (1K = 1.000 VND). Có thể nhập khoảng từ tiền đến dưới tiền; để trống ô trên nếu không giới hạn trên.</div>';
     return '<div class="kf"><div class="kfl">Tặng SP khi đạt mức đơn hàng</div>' +
+      cascadeToggle +
       '<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--t3);margin-bottom:3px">SP được tặng</div><select id="kf-bonus-ma" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;" onchange="kmPreview()">' + spOpts + '</select></div>' +
       '<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tên SP tặng (nếu không chọn mã)</div><input type="text" id="kf-bonus-name" value="' + (prog.bonusName || '') + '" placeholder="VD: lốc DGP 110ml" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"></div>' +
-      '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px"><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Lặp lại</div><select id="kf-bonus-repeat" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"><option value="1"' + (prog.repeat !== false ? ' selected' : '') + '>Mỗi X đồng tặng Y</option><option value="0"' + (prog.repeat === false ? ' selected' : '') + '>Chỉ 1 suất</option></select></div><div><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tối đa suất</div><input type="number" id="kf-bonus-max" value="' + (prog.maxSets || '') + '" placeholder="0=ko giới hạn" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"></div></div>' +
+      repeatMaxHtml +
       '<div id="km-tiers">' + rows + '</div><button class="btn-atr" onclick="kmAddTier(\'order_bonus\')">+ Thêm mức</button>' +
-      '<div style="font-size:10px;color:var(--t3);margin-top:5px">Giá trị K (1K = 1.000 VND). Có thể nhập khoảng từ tiền đến dưới tiền; để trống ô trên nếu không giới hạn trên.</div></div>';
+      tierNote + '</div>';
   }
 
   return '';
@@ -212,7 +220,12 @@ function kmAddTier(kind) {
   if (kind === 'money') {
     div.innerHTML = '<select class="t-type"><option value="below" selected>Dưới</option><option value="above">Trên</option></select><input type="number" class="t-val" value="0" placeholder="K"><label>K→CK</label><input type="number" class="t-ck" value="0"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
   } else if (kind === 'order_bonus') {
-    div.innerHTML = '<label>Từ</label><input type="number" class="t-val" value="0" placeholder="K" style="width:68px"><label>Đến &lt;</label><input type="number" class="t-max" value="" placeholder="∞" style="width:78px"><label>Tặng</label><input type="number" class="t-bqty" value="0" style="width:50px"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
+    var isCasc = !!(document.getElementById('kf-bonus-cascade') || {}).checked;
+    if (isCasc) {
+      div.innerHTML = '<label>Đơn ≥</label><input type="number" class="t-val" value="0" placeholder="K" style="width:80px"><label>K → Tặng</label><input type="number" class="t-bqty" value="0" style="width:50px"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
+    } else {
+      div.innerHTML = '<label>Từ</label><input type="number" class="t-val" value="0" placeholder="K" style="width:68px"><label>Đến &lt;</label><input type="number" class="t-max" value="" placeholder="∞" style="width:78px"><label>Tặng</label><input type="number" class="t-bqty" value="0" style="width:50px"><label>SP</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
+    }
     div.style.flexWrap = 'wrap';
   } else {
     div.innerHTML = '<label>Từ</label><input type="number" class="t-mn" value="2"><label>CK</label><input type="number" class="t-ck" value="0"><label>%</label><button class="btn-dtr" onclick="kmDelTier(this)">✕</button>';
@@ -371,14 +384,20 @@ function kmReadForm() {
   } else if (t === 'order_bonus') {
     prog.bonusMa = (document.getElementById('kf-bonus-ma') || {}).value || '';
     prog.bonusName = (document.getElementById('kf-bonus-name') || {}).value || '';
-    prog.repeat = (document.getElementById('kf-bonus-repeat') || {}).value !== '0';
-    prog.maxSets = parseInt((document.getElementById('kf-bonus-max') || {}).value) || 0;
+    prog.cascade = !!(document.getElementById('kf-bonus-cascade') || {}).checked;
+    if (prog.cascade) {
+      prog.repeat = true;
+      prog.maxSets = 0;
+    } else {
+      prog.repeat = (document.getElementById('kf-bonus-repeat') || {}).value !== '0';
+      prog.maxSets = parseInt((document.getElementById('kf-bonus-max') || {}).value) || 0;
+    }
     prog.tiers = [];
     document.querySelectorAll('#km-tiers .km-tier-row').forEach(function(r) {
       var val = (r.querySelector('.t-val') || {}).value;
-      var maxVal = (r.querySelector('.t-max') || {}).value;
+      var maxVal = (r.querySelector('.t-max') || {});
       var bqty = (r.querySelector('.t-bqty') || {}).value;
-      if (bqty && (val || maxVal)) prog.tiers.push({ value: val || 0, maxValue: maxVal || '', bonusQty: bqty });
+      if (bqty && val) prog.tiers.push({ value: val || 0, maxValue: (maxVal.value || ''), bonusQty: bqty });
     });
   }
   return prog;
@@ -516,6 +535,9 @@ function kmBuildText(prog) {
   if (t === 'tier_money' || t === 'order_money') return (prog.tiers || []).map(function(ti) { return (ti.type === 'below' ? '<' : '≥') + (ti.value || 0) + 'K CK' + ti.ck + '%'; }).join(' | ');
   if (t === 'order_bonus') {
     var name = prog.bonusName || (prog.bonusMa ? prog.bonusMa : 'SP');
+    if (prog.cascade) {
+      return '[Cascade] ' + (prog.tiers || []).slice().sort(function(a, b) { return (+b.value || 0) - (+a.value || 0); }).map(function(ti) { return (ti.value || 0) + 'K→' + (ti.bonusQty || 0); }).join('+') + ' ' + name;
+    }
     return (prog.tiers || []).map(function(ti) { return kmOrderBonusTierText(ti) + ' → ' + (ti.bonusQty || 0) + ' ' + name; }).join(' | ');
   }
   return '';

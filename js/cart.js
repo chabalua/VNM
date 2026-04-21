@@ -326,6 +326,36 @@ function buildOrderBonusResult(items, allMas, baseTotal, prog) {
   var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
   var progMas = prog.spMas || [];
   if (!hasOrderPromoMinSKU(allMas, progMas, prog.minSKU)) return null;
+
+  // Cascade mode: tier cao nhất trước, phần dư tiếp tục áp tier thấp hơn
+  if (prog.cascade) {
+    var cascTiers = (prog.tiers || []).map(function(t) {
+      var val = t.value != null ? t.value : (t.mn != null ? t.mn : 0);
+      return { minAmount: parsePromoMoneyValue(val), bonusQty: +t.bonusQty || 0 };
+    }).filter(function(t) { return t.minAmount > 0 && t.bonusQty > 0; })
+      .sort(function(a, b) { return b.minAmount - a.minAmount; });
+    if (!cascTiers.length) return null;
+    var remaining = total;
+    var totalBonus = 0;
+    for (var ci = 0; ci < cascTiers.length; ci++) {
+      var ct = cascTiers[ci];
+      var sets = Math.floor(remaining / ct.minAmount);
+      totalBonus += sets * ct.bonusQty;
+      remaining -= sets * ct.minAmount;
+    }
+    if (totalBonus <= 0) return null;
+    var cascProduct = prog.bonusMa ? spFind(prog.bonusMa) : null;
+    var cascName = prog.bonusName || (cascProduct ? cascProduct.ten : '') || prog.bonusMa || 'SP tặng';
+    var cascUnitValue = cascProduct ? (+cascProduct.giaNYLon || 0) : 0;
+    return {
+      ma: prog.bonusMa,
+      name: cascName,
+      qty: totalBonus,
+      progName: prog.name || 'CT Ontop',
+      value: cascUnitValue > 0 ? cascUnitValue * totalBonus : totalBonus
+    };
+  }
+
   var tiers = (prog.tiers || []).map(function(t) {
     return normalizeOrderBonusTier(t, prog);
   }).filter(function(t) {
