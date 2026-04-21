@@ -437,6 +437,11 @@ function onQty(ma) {
       html += '<div class="pv-row"><span class="pv-l">Tặng SP</span><span class="pv-bonus-tag">+' + bi.qty + ' ' + escapeHtml(bi.name || bi.ma) + '</span></div>';
     }
   });
+  (orderKM.bonusItems || []).forEach(function(bi) {
+    if (!bi) return;
+    if (bi.ma && bi.ma === p.ma) return; // same-product order bonus đã tính vào orderBonusSameQty
+    html += '<div class="pv-row"><span class="pv-l">Quà đơn</span><span class="pv-bonus-tag" style="background:var(--vmL);color:var(--vm);border-color:var(--vm)">+' + bi.qty + ' ' + escapeHtml(bi.name || bi.ma || 'SP tặng') + '</span></div>';
+  });
   if (orderBonusSameQty > 0) {
     html += '<div class="pv-row"><span class="pv-l">Quà ĐH</span><span class="pv-bonus-tag">+' + (typeof formatQtyByCarton === 'function' ? formatQtyByCarton(p, orderBonusSameQty) : orderBonusSameQty) + '</span></div>';
   }
@@ -475,8 +480,17 @@ function onQty(ma) {
   // Cập nhật km-line: chỉ hiện CT đang áp dụng
   var kmLine = document.getElementById('km-line_' + ma);
   if (kmLine) {
-    if (km.appliedPromos && km.appliedPromos.length) {
-      kmLine.innerHTML = renderPromoJumpChips(getAppliedPromoRefsByNames(km.appliedPromos), 4);
+    var chips = (km.appliedPromos && km.appliedPromos.length) ? getAppliedPromoRefsByNames(km.appliedPromos) : [];
+    // Thêm order-level bonus CT đang áp (cascade, order_bonus)
+    if (orderKM.bonusItems && orderKM.bonusItems.length) {
+      var orderProgNames = orderKM.bonusItems.map(function(bi) { return bi.progName; }).filter(Boolean);
+      var usedNames = chips.map(function(c) { return c.name; });
+      getAppliedPromoRefsByNames(orderProgNames).forEach(function(r) {
+        if (usedNames.indexOf(r.name) < 0) { chips.push(r); usedNames.push(r.name); }
+      });
+    }
+    if (chips.length) {
+      kmLine.innerHTML = renderPromoJumpChips(chips, 4);
     } else {
       var allRefs = getProductPromoRefs(ma);
       kmLine.innerHTML = allRefs.length ? renderPromoJumpChips(allRefs.map(function(r) { return { idx: r.idx, name: r.prog.name || 'CT KM' }; }), 4) : '';
