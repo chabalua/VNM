@@ -926,7 +926,7 @@
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 22+2",
     "type": "bonus",
-    "nhoms": "D",
+    "nhoms": "C",
     "active": true,
     "stackable": false,
     "bX": "22",
@@ -946,7 +946,8 @@
       "06UC32",
       "06UN32",
       "06UQ32"
-    ]
+    ],
+    "_updatedAt": "2026-04-21T16:11:44.309Z"
   },
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
