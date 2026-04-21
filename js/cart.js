@@ -231,7 +231,7 @@ function calcKM(p, qT, qL, orderContext) {
     return true;
   });
   var baseKM = _calcKM_orig(p, qT, qL);
-  if (!applicable.length) return { disc: baseKM.disc, bonus: baseKM.bonus, nhan: baseKM.nhan, hopKM: baseKM.hopKM, thungKM: baseKM.thungKM, desc: baseKM.desc, appliedPromos: [] };
+  if (!applicable.length) return { disc: baseKM.disc, bonus: baseKM.bonus, nhan: baseKM.nhan, hopKM: baseKM.hopKM, thungKM: baseKM.thungKM, desc: baseKM.desc, appliedPromos: [], bonusItems: [] };
 
   var stackable = applicable.filter(function(prog) { return prog.stackable; });
   var nonStackable = applicable.filter(function(prog) { return !prog.stackable; });
@@ -378,11 +378,13 @@ function calcOrderKM(items) {
   var disc = 0; var descParts = []; var bonusItems = [];
   var moneyPromos = orderPromos.filter(function(p) { return p.type === 'order_money'; });
   moneyPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
+    if (!hasOrderPromoMinSKU(allMas, prog.spMas || [], prog.minSKU)) return;
     var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
     var d = orderPromoDiscount(total, prog); if (d > 0) { disc += d; descParts.push(prog.name || 'CK đơn'); }
   });
   var bestDisc = 0, bestProg = null;
   moneyPromos.filter(function(p) { return !p.stackable; }).forEach(function(prog) {
+    if (!hasOrderPromoMinSKU(allMas, prog.spMas || [], prog.minSKU)) return;
     var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
     var d = orderPromoDiscount(total, prog); if (d > bestDisc) { bestDisc = d; bestProg = prog; }
   });
@@ -428,23 +430,35 @@ function _calcDiscountRules(rules, base, qT, totalLon) {
 }
 
 function _calcBestBonus(rules, p, qT, totalLon, base, ckDisc) {
-  var bestBonus = null;
+  // Gộp TẤT CẢ bonus rules (stackable đã được chọn trước ở calcKM)
+  // — cùng SP: cộng vào mẫu số (nhận thêm lons)
+  // — SP khác: trừ giá trị SP tặng khỏi tử số
+  var sameBl = 0;
+  var diffBonusValue = 0;
+  var descParts = [];
+  var anyHit = false;
   for (var bi = 0; bi < rules.length; bi++) {
     var rb = rules[bi];
-    if (rb.type === 'bonus') {
-      var cqb = rb.unit === 'thung' ? qT : totalLon;
-      var sets = rb.maxSets ? Math.min(Math.floor(cqb / rb.X), rb.maxSets) : Math.floor(cqb / rb.X);
-      if (sets > 0) {
-        var bu = sets * rb.Y; var bl = rb.unit === 'thung' ? bu * p.slThung : bu;
-        var hopTry, nhanTry;
-        if (rb.giaBonus != null) { hopTry = rb.giaBonus === 0 ? Math.round((base - ckDisc) / totalLon) : Math.round((base - ckDisc - Math.round(bl * rb.giaBonus)) / totalLon); nhanTry = totalLon; }
-        else { nhanTry = totalLon + bl; hopTry = Math.round((base - ckDisc) / nhanTry); }
-        var bd = (rb.giaBonus != null && rb.giaBonus > 0) ? Math.round(bl * rb.giaBonus) : 0;
-        if (!bestBonus || hopTry < bestBonus.hopKM) bestBonus = { hopKM: hopTry, bl: (rb.giaBonus != null) ? 0 : bl, bu: bu, unit: rb.unit === 'thung' ? 'thùng' : p.donvi, nhan: nhanTry, bonusDisc: bd };
-      }
+    if (rb.type !== 'bonus') continue;
+    var cqb = rb.unit === 'thung' ? qT : totalLon;
+    var sets = rb.maxSets ? Math.min(Math.floor(cqb / rb.X), rb.maxSets) : Math.floor(cqb / rb.X);
+    if (sets <= 0) continue;
+    anyHit = true;
+    var bu = sets * rb.Y;
+    var bl = rb.unit === 'thung' ? bu * p.slThung : bu;
+    var unitLabel = rb.unit === 'thung' ? 'thùng' : p.donvi;
+    if (rb.giaBonus != null) {
+      if (rb.giaBonus > 0) diffBonusValue += Math.round(bl * rb.giaBonus);
+      descParts.push(bu + ' ' + unitLabel + ' SP khác');
+    } else {
+      sameBl += bl;
+      descParts.push(bu + ' ' + unitLabel);
     }
   }
-  return bestBonus;
+  if (!anyHit) return null;
+  var nhanTry = totalLon + sameBl;
+  var hopTry = nhanTry > 0 ? Math.round((base - ckDisc - diffBonusValue) / nhanTry) : p.giaNYLon;
+  return { hopKM: hopTry, bl: sameBl, bu: descParts.join(' + '), unit: '', nhan: nhanTry, bonusDisc: diffBonusValue };
 }
 
 function _calcKM_orig(p, qT, qL) {
@@ -454,7 +468,7 @@ function _calcKM_orig(p, qT, qL) {
   var ckDisc = result.ckDisc, lines = result.lines;
   var bestBonus = _calcBestBonus(p.kmRules, p, qT, totalLon, base, ckDisc);
   var hopKM, bonusLon = 0, bonusDisc = 0;
-  if (bestBonus) { hopKM = bestBonus.hopKM; bonusLon = bestBonus.bl; bonusDisc = bestBonus.bonusDisc || 0; lines.unshift('Tặng ' + bestBonus.bu + ' ' + bestBonus.unit); }
+  if (bestBonus) { hopKM = bestBonus.hopKM; bonusLon = bestBonus.bl; bonusDisc = bestBonus.bonusDisc || 0; lines.unshift('Tặng ' + bestBonus.bu + (bestBonus.unit ? ' ' + bestBonus.unit : '')); }
   else { hopKM = totalLon ? Math.round((base - ckDisc) / totalLon) : p.giaNYLon; }
   return { disc: ckDisc + bonusDisc, bonus: bonusLon, nhan: totalLon + bonusLon, hopKM: hopKM, thungKM: hopKM * p.slThung, desc: lines.join(' + ') };
 }
@@ -471,7 +485,7 @@ function getItemsFromCartState(cartState) {
     var p = spFind(ma); if (!p) return null;
     var totalLon = q.qT * p.slThung + q.qL; var gocTotal = p.giaNYLon * totalLon;
     var km = calcKM(p, q.qT, q.qL, orderContext);
-    return { ma: p.ma, ten: p.ten, nhom: p.nhom, donvi: p.donvi, slThung: p.slThung, giaNYLon: p.giaNYLon, giaNYThung: p.giaNYThung, qT: q.qT, qL: q.qL, totalLon: totalLon, gocTotal: gocTotal, disc: km.disc, desc: km.desc, bonus: km.bonus, afterKM: gocTotal - km.disc, appliedPromos: km.appliedPromos };
+    return { ma: p.ma, ten: p.ten, nhom: p.nhom, donvi: p.donvi, slThung: p.slThung, giaNYLon: p.giaNYLon, giaNYThung: p.giaNYThung, qT: q.qT, qL: q.qL, totalLon: totalLon, gocTotal: gocTotal, disc: km.disc, desc: km.desc, bonus: km.bonus, bonusItems: km.bonusItems || [], afterKM: gocTotal - km.disc, appliedPromos: km.appliedPromos };
   }).filter(Boolean);
 }
 
@@ -547,6 +561,7 @@ function renderDon() {
       html += '<div class="oi"><div class="oi-top"><div class="oi-name">' + escapeHtml(it.ten) + '</div><button class="oi-del" onclick="removeCart(\'' + escapeHtmlAttr(it.ma) + '\')">✕</button></div>';
       html += '<div class="oi-sub">' + escapeHtml(it.ma) + ' · ' + escapeHtml(it.donvi) + '</div>';
       html += '<div class="oi-qty">' + (it.qT > 0 ? it.qT + ' thùng' : '') + (it.qT > 0 && it.qL > 0 ? ' + ' : '') + (it.qL > 0 ? it.qL + ' lẻ' : '') + ' = ' + it.totalLon + ' ' + it.donvi + (it.bonus > 0 ? ' + tặng ' + it.bonus : '') + '</div>';
+      if (it.bonusItems && it.bonusItems.length) { it.bonusItems.forEach(function(bi) { html += '<div class="oi-km">🎁 Tặng kèm: ' + bi.qty + ' ' + escapeHtml(bi.name || 'SP tặng') + '</div>'; }); }
       if (it.desc) html += '<div class="oi-km">' + escapeHtml(it.desc) + '</div>';
       html += '<div class="oi-pr"><span class="oi-pl">Thành tiền</span><span class="oi-pv">' + fmt(it.afterKM) + 'đ</span></div></div>';
     });

@@ -404,6 +404,23 @@ function kmPreview() {
   var rules = kmBuildRules(prog);
   var pTest = Object.assign({}, p, { kmRules: rules });
   var X = prog.type === 'bonus' ? (+prog.bX || 12) : 2;
+
+  // Khi tặng SP khác loại: hiển thị đúng — giá mua không đổi, tặng kèm hiện rõ tên SP được tặng
+  if (prog.type === 'bonus' && prog.bMa && prog.bMa !== 'same') {
+    var bonsP = (typeof SP !== 'undefined') ? SP.find(function(x) { return x.ma === prog.bMa; }) : null;
+    var bonsName = bonsP ? bonsP.ten.slice(0, 35) : (prog.bMa || 'SP tặng');
+    var bonsPrice = bonsP ? bonsP.giaNYLon : 0;
+    var bonsQty = +prog.bY || 1;
+    var totalPay = p.giaNYLon * X;
+    var bonusSavings = bonsQty * bonsPrice;
+    area.innerHTML = '<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview — ' + p.ten.slice(0, 25) + '</div>' +
+      '<div class="km-pv-row"><span>Giá/' + p.donvi + '</span><span>' + fmt(p.giaNYLon) + 'đ</span></div>' +
+      '<div class="km-pv-row"><span>Tặng kèm (mỗi ' + X + ')</span><b style="color:var(--g)">' + bonsQty + ' ' + p.donvi + ' ' + bonsName + (bonusSavings > 0 ? ' (~' + fmt(bonusSavings) + 'đ)' : '') + '</b></div>' +
+      (prog.minSKU ? '<div class="km-pv-row"><span>ĐK SKU tối thiểu</span><span>≥' + prog.minSKU + ' mã SP</span></div>' : '') +
+      '<div class="km-pv-row" style="border-top:1px solid #a3e6c0;padding-top:5px;margin-top:3px"><span>Thành tiền (' + X + ' ' + p.donvi + ')</span><b style="color:var(--g)">' + fmt(totalPay) + 'đ</b></div></div>';
+    return;
+  }
+
   var km = _calcKM_orig(pTest, 0, X);
   var total = km.hopKM * X;
   area.innerHTML = '<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview — ' + p.ten.slice(0, 25) + '</div><div class="km-pv-row"><span>Giá gốc/' + p.donvi + '</span><span>' + fmt(p.giaNYLon) + 'đ</span></div><div class="km-pv-row"><span>Giá KM/' + p.donvi + '</span><b style="color:var(--g)">' + fmt(km.hopKM) + 'đ</b></div>' + (km.bonus > 0 ? '<div class="km-pv-row"><span>Tặng thêm</span><span>' + km.bonus + ' ' + p.donvi + '</span></div>' : '') + (km.disc > 0 ? '<div class="km-pv-row"><span>Tiết kiệm (' + X + ' ' + p.donvi + ')</span><b style="color:var(--r)">- ' + fmt(km.disc) + 'đ</b></div>' : '') + (prog.minSKU ? '<div class="km-pv-row"><span>ĐK SKU tối thiểu</span><span>≥' + prog.minSKU + ' mã SP</span></div>' : '') + '<div class="km-pv-row" style="border-top:1px solid #a3e6c0;padding-top:5px;margin-top:3px"><span>Thành tiền (' + X + ' ' + p.donvi + ')</span><b style="color:var(--g)">' + fmt(total) + 'đ</b></div></div>';

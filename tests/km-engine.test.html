@@ -2,472 +2,108 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<title>KM Engine Unit Tests</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>KM Engine Tests</title>
 <style>
-body { font-family: system-ui, sans-serif; padding: 20px; max-width: 900px; margin: 0 auto; }
-.pass { color: #16a34a; } .fail { color: #dc2626; font-weight: bold; }
-.test-group { margin: 16px 0; padding: 12px; border: 1px solid #e5e7eb; border-radius: 8px; }
-.test-group h3 { margin: 0 0 8px; }
-.result { padding: 4px 0; font-size: 14px; }
-#summary { font-size: 18px; font-weight: 700; margin-top: 20px; padding: 12px; border-radius: 8px; }
+body {
+  font-family: "Segoe UI", sans-serif;
+  padding: 24px;
+  margin: 0 auto;
+  max-width: 1080px;
+  background: #f8fafc;
+  color: #0f172a;
+}
+h1 {
+  margin: 0 0 8px;
+}
+.meta {
+  margin-bottom: 18px;
+  color: #475569;
+}
+.summary {
+  padding: 14px 16px;
+  border-radius: 12px;
+  font-weight: 700;
+  margin-bottom: 18px;
+}
+.summary.pass {
+  background: #dcfce7;
+  color: #166534;
+}
+.summary.fail {
+  background: #fee2e2;
+  color: #991b1b;
+}
+.group {
+  background: #ffffff;
+  border: 1px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+.group h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+}
+.result {
+  padding: 6px 0;
+  border-top: 1px solid #f1f5f9;
+}
+.result:first-of-type {
+  border-top: 0;
+}
+.pass {
+  color: #166534;
+}
+.fail {
+  color: #b91c1c;
+  font-weight: 700;
+}
+.hint {
+  margin-top: 18px;
+  color: #475569;
+  font-size: 14px;
+}
+code {
+  font-family: Consolas, monospace;
+}
 </style>
 </head>
 <body>
-<h1>KM Engine — Unit Tests</h1>
+<h1>KM Engine Tests</h1>
+<div class="meta">Suite nay chay truc tiep tren <code>js/config.js</code> va <code>js/cart.js</code>, khong dung ban sao logic.</div>
+<div id="summary" class="summary"></div>
 <div id="results"></div>
-<div id="summary"></div>
+<div class="hint">Mo file nay trong browser de xem nhanh. De chay tu terminal, dung <code>node tests/km-engine.test.js</code>.</div>
 
+<script src="../js/config.js"></script>
+<script src="../js/cart.js"></script>
+<script src="./km-engine.test.shared.js"></script>
 <script>
-// ===== MOCK GLOBALS =====
-var SP = [];
-var kmProgs = [];
-var localStorage = window.localStorage;
+var result = runKmEngineTests(window);
+var summary = document.getElementById('summary');
+summary.className = 'summary ' + (result.failed ? 'fail' : 'pass');
+summary.textContent = result.passed + '/' + result.total + ' tests passed' + (result.failed ? ' - ' + result.failed + ' failed' : ' - all green');
 
-function showToast() {}
-function fmt(n) { return n != null ? Math.round(n).toLocaleString('vi-VN') : '0'; }
-function escapeHtml(v) { return String(v == null ? '' : v).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#39;'); }
-function escapeHtmlAttr(v) { return escapeHtml(v); }
-function spFind(ma) { return SP.find(function(p) { return p.ma === ma; }); }
-
-var LS_KEYS = { SP: 'vnm_sp', KM: 'vnm_km3', CART: 'vnm_cart', FAVORITES: 'vnm_favorites' };
-</script>
-
-<!-- Load cart.js functions inline (just the KM engine parts) -->
-<script>
-// _calcDiscountRules
-function _calcDiscountRules(rules, base, qT, totalLon) {
-  var ckDisc = 0, lines = [];
-  for (var ri = 0; ri < rules.length; ri++) {
-    var r = rules[ri];
-    if (r.type === 'tier_money') {
-      var applicableTier = null;
-      var belowTiers = r.tiers.filter(function(t) { return t.type === 'below' && base < t.value; });
-      if (belowTiers.length) applicableTier = belowTiers.reduce(function(prev, curr) { return !prev || curr.value < prev.value ? curr : prev; });
-      var aboveTiers = r.tiers.filter(function(t) { return t.type === 'above' && base >= t.value; });
-      if (aboveTiers.length) applicableTier = aboveTiers.reduce(function(prev, curr) { return !prev || curr.value > prev.value ? curr : prev; });
-      if (applicableTier && applicableTier.ckPct > 0) { ckDisc += Math.round(base * applicableTier.ckPct / 100); lines.push('CK ' + applicableTier.ckPct + '%'); }
-    } else if (r.type === 'tier_qty') {
-      var cq = r.unit === 'thung' ? qT : totalLon;
-      var t2 = r.tiers.slice().sort(function(a, b) { return b.minT - a.minT; }).find(function(x) { return cq >= x.minT; });
-      if (t2) { ckDisc += Math.round(base * t2.ck); lines.push('CK ' + Math.round(t2.ck * 100) + '%'); }
-    } else if (r.type === 'fixed') { ckDisc += Math.round(base * r.ck); lines.push('CK ' + Math.round(r.ck * 100) + '%'); }
-  }
-  return { ckDisc: ckDisc, lines: lines };
-}
-
-// _calcBestBonus
-function _calcBestBonus(rules, p, qT, totalLon, base, ckDisc) {
-  var bestBonus = null;
-  for (var bi = 0; bi < rules.length; bi++) {
-    var rb = rules[bi];
-    if (rb.type === 'bonus') {
-      var cqb = rb.unit === 'thung' ? qT : totalLon;
-      var sets = rb.maxSets ? Math.min(Math.floor(cqb / rb.X), rb.maxSets) : Math.floor(cqb / rb.X);
-      if (sets > 0) {
-        var bu = sets * rb.Y; var bl = rb.unit === 'thung' ? bu * p.slThung : bu;
-        var hopTry, nhanTry;
-        if (rb.giaBonus != null) { hopTry = rb.giaBonus === 0 ? Math.round((base - ckDisc) / totalLon) : Math.round((base - ckDisc - Math.round(bl * rb.giaBonus)) / totalLon); nhanTry = totalLon; }
-        else { nhanTry = totalLon + bl; hopTry = Math.round((base - ckDisc) / nhanTry); }
-        var bd = (rb.giaBonus != null && rb.giaBonus > 0) ? Math.round(bl * rb.giaBonus) : 0;
-        if (!bestBonus || hopTry < bestBonus.hopKM) bestBonus = { hopKM: hopTry, bl: (rb.giaBonus != null) ? 0 : bl, bu: bu, unit: rb.unit === 'thung' ? 'thùng' : p.donvi, nhan: nhanTry, bonusDisc: bd };
-      }
-    }
-  }
-  return bestBonus;
-}
-
-// _calcKM_orig
-function _calcKM_orig(p, qT, qL) {
-  var totalLon = qT * p.slThung + qL; var base = p.giaNYLon * totalLon;
-  if (!totalLon) return { disc: 0, bonus: 0, nhan: 0, hopKM: p.giaNYLon, thungKM: p.giaNYThung, desc: '' };
-  var result = _calcDiscountRules(p.kmRules, base, qT, totalLon);
-  var ckDisc = result.ckDisc, lines = result.lines;
-  var bestBonus = _calcBestBonus(p.kmRules, p, qT, totalLon, base, ckDisc);
-  var hopKM, bonusLon = 0, bonusDisc = 0;
-  if (bestBonus) { hopKM = bestBonus.hopKM; bonusLon = bestBonus.bl; bonusDisc = bestBonus.bonusDisc || 0; lines.unshift('Tặng ' + bestBonus.bu + ' ' + bestBonus.unit); }
-  else { hopKM = totalLon ? Math.round((base - ckDisc) / totalLon) : p.giaNYLon; }
-  return { disc: ckDisc + bonusDisc, bonus: bonusLon, nhan: totalLon + bonusLon, hopKM: hopKM, thungKM: hopKM * p.slThung, desc: lines.join(' + ') };
-}
-
-// kmBuildRules
-function kmBuildRules(prog) {
-  if (!prog || !prog.active) return [];
-  var t = prog.type;
-  if (t === 'order_money' || t === 'order_bonus') return [];
-  if (t === 'bonus') return [{ type: 'bonus', X: +prog.bX || 1, Y: +prog.bY || 1, unit: prog.bUnit || 'lon', giaBonus: (prog.bMa && prog.bMa !== 'same') ? (function() { var sp2 = spFind(prog.bMa); return sp2 ? sp2.giaNYLon : null; })() : null, maxSets: prog.bMax ? 1 : 0 }];
-  if (t === 'fixed') return [{ type: 'fixed', ck: (+prog.ck || 0) / 100 }];
-  if (t === 'tier_qty') return [{ type: 'tier_qty', unit: prog.tUnit || 'lon', tiers: (prog.tiers || []).map(function(ti) { return { minT: +ti.mn || 0, ck: (+ti.ck || 0) / 100 }; }) }];
-  if (t === 'tier_money') return [{ type: 'tier_money', tiers: (prog.tiers || []).map(function(ti) { return { type: ti.type || 'above', value: (+ti.value || 0) * 1000, ckPct: +ti.ck || 0 }; }) }];
-  return [];
-}
-</script>
-
-<script>
-// ===== TEST FRAMEWORK =====
-var _tests = [];
-var _passed = 0;
-var _failed = 0;
-var _currentGroup = '';
-
-function group(name) { _currentGroup = name; }
-
-function test(name, fn) {
-  try {
-    fn();
-    _tests.push({ group: _currentGroup, name: name, pass: true });
-    _passed++;
-  } catch (e) {
-    _tests.push({ group: _currentGroup, name: name, pass: false, error: e.message });
-    _failed++;
-  }
-}
-
-function assert(condition, msg) { if (!condition) throw new Error(msg || 'Assertion failed'); }
-function assertEqual(actual, expected, msg) {
-  if (actual !== expected) throw new Error((msg || '') + ' Expected ' + JSON.stringify(expected) + ', got ' + JSON.stringify(actual));
-}
-function assertClose(actual, expected, tolerance, msg) {
-  if (Math.abs(actual - expected) > (tolerance || 1)) throw new Error((msg || '') + ' Expected ~' + expected + ', got ' + actual);
-}
-
-// ===== TEST DATA =====
-var PRODUCT_NSPN = {
-  ma: '01SB10', ten: 'Creamer đặc NSPN xanh biển 1284g', nhom: 'B',
-  giaNYLon: 55404, donvi: 'hộp', slThung: 24, giaNYThung: 1329696, kmRules: []
-};
-
-var PRODUCT_STT = {
-  ma: '03SN01', ten: 'Sữa tươi STT có đường 180ml', nhom: 'C',
-  giaNYLon: 6800, donvi: 'hộp', slThung: 48, giaNYThung: 326400, kmRules: []
-};
-
-// =============================================
-// TEST 1: _calcKM_orig — No rules
-// =============================================
-group('_calcKM_orig — Không có KM');
-
-test('Zero quantity returns base prices', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, { kmRules: [] });
-  var r = _calcKM_orig(p, 0, 0);
-  assertEqual(r.disc, 0);
-  assertEqual(r.bonus, 0);
-  assertEqual(r.nhan, 0);
-  assertEqual(r.hopKM, p.giaNYLon);
-  assertEqual(r.thungKM, p.giaNYThung);
-  assertEqual(r.desc, '');
-});
-
-test('No rules — hopKM equals giaNYLon', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, { kmRules: [] });
-  var r = _calcKM_orig(p, 2, 0);
-  assertEqual(r.hopKM, p.giaNYLon);
-  assertEqual(r.nhan, 48);
-  assertEqual(r.disc, 0);
-  assertEqual(r.bonus, 0);
-});
-
-test('Lẻ only — correct total', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, { kmRules: [] });
-  var r = _calcKM_orig(p, 0, 10);
-  assertEqual(r.nhan, 10);
-  assertEqual(r.hopKM, p.giaNYLon);
-});
-
-// =============================================
-// TEST 2: Fixed discount
-// =============================================
-group('_calcKM_orig — CK cố định (fixed)');
-
-test('Fixed 5% discount on 2 thùng', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, { kmRules: [{ type: 'fixed', ck: 0.05 }] });
-  var r = _calcKM_orig(p, 2, 0);
-  var base = 55404 * 48;
-  var expectedDisc = Math.round(base * 0.05);
-  assertEqual(r.disc, expectedDisc);
-  var expectedHop = Math.round((base - expectedDisc) / 48);
-  assertEqual(r.hopKM, expectedHop);
-  assert(r.desc.indexOf('CK 5%') >= 0, 'desc should contain CK 5%');
-});
-
-test('Fixed 10% on lẻ', function() {
-  var p = Object.assign({}, PRODUCT_STT, { kmRules: [{ type: 'fixed', ck: 0.10 }] });
-  var r = _calcKM_orig(p, 0, 20);
-  var base = 6800 * 20;
-  assertEqual(r.disc, Math.round(base * 0.10));
-  assertEqual(r.nhan, 20);
-});
-
-// =============================================
-// TEST 3: Tier qty discount
-// =============================================
-group('_calcKM_orig — CK theo số lượng (tier_qty)');
-
-test('Tier qty — thùng: 2+ → 3%, 5+ → 5%', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'tier_qty', unit: 'thung', tiers: [
-      { minT: 2, ck: 0.03 }, { minT: 5, ck: 0.05 }
-    ]}]
-  });
-  var r2 = _calcKM_orig(p, 2, 0);
-  assert(r2.desc.indexOf('CK 3%') >= 0, '2 thùng should get 3%');
-
-  var r5 = _calcKM_orig(p, 5, 0);
-  assert(r5.desc.indexOf('CK 5%') >= 0, '5 thùng should get 5%');
-  assert(r5.disc > r2.disc, '5 thùng discount > 2 thùng discount');
-});
-
-test('Tier qty — lon: below min tier returns 0', function() {
-  var p = Object.assign({}, PRODUCT_STT, {
-    kmRules: [{ type: 'tier_qty', unit: 'lon', tiers: [{ minT: 100, ck: 0.05 }] }]
-  });
-  var r = _calcKM_orig(p, 0, 10);
-  assertEqual(r.disc, 0, '10 lon < 100 min');
-});
-
-// =============================================
-// TEST 4: Tier money discount
-// =============================================
-group('_calcKM_orig — CK theo tổng tiền (tier_money)');
-
-test('Tier money — above threshold', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'tier_money', tiers: [
-      { type: 'above', value: 1000000, ckPct: 8 }
-    ]}]
-  });
-  var r = _calcKM_orig(p, 2, 0); // base = 55404 * 48 = 2,659,392
-  var base = 55404 * 48;
-  assert(base > 1000000, 'base should be > 1M');
-  assertEqual(r.disc, Math.round(base * 8 / 100));
-  assert(r.desc.indexOf('CK 8%') >= 0);
-});
-
-test('Tier money — below threshold', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'tier_money', tiers: [
-      { type: 'below', value: 3000000, ckPct: 12 }
-    ]}]
-  });
-  var r = _calcKM_orig(p, 2, 0); // base = ~2.66M < 3M
-  assertEqual(r.disc, Math.round(55404 * 48 * 12 / 100));
-});
-
-test('Tier money — not matching', function() {
-  var p = Object.assign({}, PRODUCT_STT, {
-    kmRules: [{ type: 'tier_money', tiers: [
-      { type: 'above', value: 999999999, ckPct: 50 }
-    ]}]
-  });
-  var r = _calcKM_orig(p, 1, 0);
-  assertEqual(r.disc, 0, 'Base too low for threshold');
-});
-
-// =============================================
-// TEST 5: Bonus — Mua X tặng Y
-// =============================================
-group('_calcKM_orig — Bonus (mua X tặng Y)');
-
-test('Bonus 48+8 lon cùng loại', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'bonus', X: 48, Y: 8, unit: 'lon', giaBonus: null, maxSets: 0 }]
-  });
-  var r = _calcKM_orig(p, 2, 0); // 48 lon → 1 set → +8 lon
-  assertEqual(r.bonus, 8, 'Should get 8 bonus lon');
-  assertEqual(r.nhan, 56, '48 + 8 = 56');
-  assert(r.desc.indexOf('Tặng 8') >= 0);
-});
-
-test('Bonus thùng level: mua 2 tặng 1 thùng', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'bonus', X: 2, Y: 1, unit: 'thung', giaBonus: null, maxSets: 0 }]
-  });
-  var r = _calcKM_orig(p, 4, 0); // 4 thùng → 2 sets → +2 thùng = +48 lon
-  assertEqual(r.bonus, 48, '2 thùng bonus = 48 lon');
-  assertEqual(r.nhan, 96 + 48);
-  assert(r.desc.indexOf('Tặng 2 thùng') >= 0);
-});
-
-test('Bonus with maxSets=1', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'bonus', X: 24, Y: 4, unit: 'lon', giaBonus: null, maxSets: 1 }]
-  });
-  var r = _calcKM_orig(p, 2, 0); // 48 lon → 2 sets but maxSets=1 → only +4
-  assertEqual(r.bonus, 4, 'maxSets=1 limits to 4 bonus');
-  assertEqual(r.nhan, 52);
-});
-
-test('Bonus not enough quantity', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'bonus', X: 48, Y: 8, unit: 'lon', giaBonus: null, maxSets: 0 }]
-  });
-  var r = _calcKM_orig(p, 1, 0); // 24 lon < 48 → no bonus
-  assertEqual(r.bonus, 0);
-  assertEqual(r.nhan, 24);
-});
-
-test('Bonus with giaBonus=0 (free gift SP khác)', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [{ type: 'bonus', X: 48, Y: 4, unit: 'lon', giaBonus: 0, maxSets: 0 }]
-  });
-  var r = _calcKM_orig(p, 2, 0); // 48 lon = 1 set
-  assertEqual(r.bonus, 0, 'giaBonus defined → bonus lon is 0 (not same product)');
-  assertEqual(r.nhan, 48, 'nhan = totalLon when giaBonus defined');
-});
-
-// =============================================
-// TEST 6: Combined rules (discount + bonus)
-// =============================================
-group('_calcKM_orig — Kết hợp CK + Bonus');
-
-test('Fixed discount + bonus combined', function() {
-  var p = Object.assign({}, PRODUCT_NSPN, {
-    kmRules: [
-      { type: 'fixed', ck: 0.05 },
-      { type: 'bonus', X: 48, Y: 8, unit: 'lon', giaBonus: null, maxSets: 0 }
-    ]
-  });
-  var r = _calcKM_orig(p, 2, 0);
-  var base = 55404 * 48;
-  var expectedCkDisc = Math.round(base * 0.05);
-  assert(r.disc >= expectedCkDisc, 'disc should include CK');
-  assertEqual(r.bonus, 8);
-  assertEqual(r.nhan, 56);
-  assert(r.desc.indexOf('CK 5%') >= 0);
-  assert(r.desc.indexOf('Tặng 8') >= 0);
-});
-
-// =============================================
-// TEST 7: _calcDiscountRules
-// =============================================
-group('_calcDiscountRules — isolated');
-
-test('Empty rules returns 0', function() {
-  var r = _calcDiscountRules([], 1000000, 2, 48);
-  assertEqual(r.ckDisc, 0);
-  assertEqual(r.lines.length, 0);
-});
-
-test('Multiple rules accumulate', function() {
-  var rules = [
-    { type: 'fixed', ck: 0.03 },
-    { type: 'fixed', ck: 0.02 }
-  ];
-  var base = 1000000;
-  var r = _calcDiscountRules(rules, base, 2, 48);
-  assertEqual(r.ckDisc, Math.round(base * 0.03) + Math.round(base * 0.02));
-  assertEqual(r.lines.length, 2);
-});
-
-// =============================================
-// TEST 8: _calcBestBonus — isolated
-// =============================================
-group('_calcBestBonus — isolated');
-
-test('No bonus rules returns null', function() {
-  var r = _calcBestBonus([{ type: 'fixed', ck: 0.05 }], PRODUCT_NSPN, 2, 48, 55404 * 48, 0);
-  assertEqual(r, null);
-});
-
-test('Picks best bonus (lowest hopKM)', function() {
-  var rules = [
-    { type: 'bonus', X: 48, Y: 4, unit: 'lon', giaBonus: null, maxSets: 0 },
-    { type: 'bonus', X: 48, Y: 8, unit: 'lon', giaBonus: null, maxSets: 0 }
-  ];
-  var r = _calcBestBonus(rules, PRODUCT_NSPN, 2, 48, 55404 * 48, 0);
-  assert(r !== null);
-  assertEqual(r.bu, 8, 'Should pick 8-bonus as it gives lower hopKM');
-});
-
-// =============================================
-// TEST 9: kmBuildRules
-// =============================================
-group('kmBuildRules');
-
-test('Inactive prog returns empty', function() {
-  var r = kmBuildRules({ active: false, type: 'fixed', ck: 5 });
-  assertEqual(r.length, 0);
-});
-
-test('order_money returns empty (order-level)', function() {
-  var r = kmBuildRules({ active: true, type: 'order_money', tiers: [] });
-  assertEqual(r.length, 0);
-});
-
-test('order_bonus returns empty (order-level)', function() {
-  var r = kmBuildRules({ active: true, type: 'order_bonus', tiers: [] });
-  assertEqual(r.length, 0);
-});
-
-test('Fixed prog builds correct rule', function() {
-  var r = kmBuildRules({ active: true, type: 'fixed', ck: 5 });
-  assertEqual(r.length, 1);
-  assertEqual(r[0].type, 'fixed');
-  assertClose(r[0].ck, 0.05, 0.001);
-});
-
-test('Bonus prog builds correct rule', function() {
-  var r = kmBuildRules({ active: true, type: 'bonus', bX: 48, bY: 8, bUnit: 'lon', bMax: 0 });
-  assertEqual(r.length, 1);
-  assertEqual(r[0].type, 'bonus');
-  assertEqual(r[0].X, 48);
-  assertEqual(r[0].Y, 8);
-  assertEqual(r[0].maxSets, 0);
-});
-
-test('Tier qty prog builds tiers', function() {
-  var r = kmBuildRules({ active: true, type: 'tier_qty', tUnit: 'thung', tiers: [{ mn: 2, ck: 3 }, { mn: 5, ck: 5 }] });
-  assertEqual(r.length, 1);
-  assertEqual(r[0].tiers.length, 2);
-  assertEqual(r[0].tiers[0].minT, 2);
-  assertClose(r[0].tiers[0].ck, 0.03, 0.001);
-});
-
-test('Tier money prog builds tiers with value * 1000', function() {
-  var r = kmBuildRules({ active: true, type: 'tier_money', tiers: [{ type: 'above', value: 600, ck: 12 }] });
-  assertEqual(r.length, 1);
-  assertEqual(r[0].tiers[0].value, 600000);
-  assertEqual(r[0].tiers[0].ckPct, 12);
-});
-
-// =============================================
-// TEST 10: escapeHtml
-// =============================================
-group('escapeHtml');
-
-test('Escapes HTML special chars', function() {
-  assertEqual(escapeHtml('<script>alert("xss")</script>'), '&lt;script&gt;alert(&quot;xss&quot;)&lt;/script&gt;');
-});
-
-test('Handles null/undefined', function() {
-  assertEqual(escapeHtml(null), '');
-  assertEqual(escapeHtml(undefined), '');
-});
-
-test('Preserves normal text', function() {
-  assertEqual(escapeHtml('Sữa tươi STT 180ml'), 'Sữa tươi STT 180ml');
-});
-
-// ===== RENDER RESULTS =====
-var el = document.getElementById('results');
 var groups = {};
-_tests.forEach(function(t) {
-  if (!groups[t.group]) groups[t.group] = [];
-  groups[t.group].push(t);
+result.tests.forEach(function(test) {
+  if (!groups[test.group]) groups[test.group] = [];
+  groups[test.group].push(test);
 });
-var html = '';
-Object.keys(groups).forEach(function(g) {
-  html += '<div class="test-group"><h3>' + g + '</h3>';
-  groups[g].forEach(function(t) {
-    if (t.pass) html += '<div class="result pass">✓ ' + t.name + '</div>';
-    else html += '<div class="result fail">✗ ' + t.name + ' — ' + t.error + '</div>';
-  });
-  html += '</div>';
-});
-el.innerHTML = html;
 
-var sum = document.getElementById('summary');
-sum.style.background = _failed ? '#FEE2E2' : '#DCFCE7';
-sum.innerHTML = '<span class="' + (_failed ? 'fail' : 'pass') + '">' + _passed + '/' + (_passed + _failed) + ' passed</span>' + (_failed ? ' — ' + _failed + ' FAILED' : ' — All tests passed!');
+var html = '';
+Object.keys(groups).forEach(function(groupName) {
+  html += '<section class="group"><h2>' + groupName + '</h2>';
+  groups[groupName].forEach(function(test) {
+    html += '<div class="result ' + (test.pass ? 'pass' : 'fail') + '">' +
+      (test.pass ? 'PASS' : 'FAIL') + ' - ' + test.name +
+      (test.pass ? '' : ' :: ' + test.error) +
+      '</div>';
+  });
+  html += '</section>';
+});
+
+document.getElementById('results').innerHTML = html;
 </script>
 </body>
 </html>
