@@ -312,7 +312,11 @@ async function syncPullOrdersOnly() {
 async function syncAutoPushFile(filename) {
   var cfg = syncGetConfig();
   if (!cfg.autoPushMasterData || !syncHasToken()) return { ok: false, skipped: true, reason: 'disabled' };
-  return await syncPushSelected([filename], { silent: true });
+  var result = await syncPushSelected([filename], { silent: true });
+  if (!result.ok && !result.skipped) {
+    showToast('⚠️ Lưu lên GitHub thất bại (' + filename + '). Dữ liệu đã lưu cục bộ — hãy push thủ công để không mất dữ liệu khi reload.');
+  }
+  return result;
 }
 
 async function syncAutoPushOrder(order) {

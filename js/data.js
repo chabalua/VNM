@@ -118,8 +118,13 @@ async function initData() {
 
   if (hasCachedSP) {
     // Có cache: ẩn overlay ngay, boot tức thì, refresh ẩn ở nền
+    // Chỉ background-refresh SP (giá mới) — kmProgs là dữ liệu user, KHÔNG tự ghi đè
+    // vì sẽ xoá mất CT KM mới tạo chưa kịp push lên GitHub
     if (overlay) overlay.classList.remove('show');
-    Promise.all([loadProducts(), loadPromotions()])
+    var bgPromises = [loadProducts()];
+    // Chỉ load KM từ server nếu chưa có cache KM (lần đầu có SP nhưng chưa có KM)
+    if (!cachedKM) bgPromises.push(loadPromotions());
+    Promise.all(bgPromises)
       .then(function() {
         rerenderAfterBackgroundRefresh();
       })
