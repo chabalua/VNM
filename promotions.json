@@ -1901,5 +1901,26 @@
       "06SA73"
     ],
     "_updatedAt": "2026-04-21T15:38:33.562Z"
+  },
+  {
+    "name": "KD Fino ID/KD A2 48B + 2B Fino A2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FH20",
+    "spMas": [
+      "04FT32",
+      "04FC32",
+      "04FD2H",
+      "04FT2H",
+      "04FD32",
+      "04FI32"
+    ],
+    "_updatedAt": "2026-04-21T15:55:32.657Z"
   }
 ]
