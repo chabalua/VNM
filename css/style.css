@@ -168,7 +168,7 @@ html[data-theme='dark']{
 .ptbl-hdr td:not(:first-child){text-align:right}
 .ptbl tr.ptbl-row td{font-size:12px;padding:6px 10px;border-top:0.5px solid var(--n6)}
 .ptbl tr.ptbl-row td:first-child{color:var(--n2);font-size:11px}
-.ptbl tr.ptbl-row td:nth-child(2){color:var(--n5);text-align:right;text-decoration:line-through;font-size:11px}
+.ptbl tr.ptbl-row td:nth-child(2){color:var(--n3);text-align:right;font-size:11px}
 .ptbl tr.ptbl-row td:nth-child(3){color:var(--orange);font-weight:500;text-align:right}
 .ptbl tr.ptbl-row td:nth-child(4){color:var(--blue);text-align:right;font-size:11px}
 .ptbl tr.ptbl-row.ptbl-main td{background:var(--n7)}

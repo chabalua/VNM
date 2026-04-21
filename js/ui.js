@@ -456,7 +456,7 @@ function onQty(ma) {
 
   html += '<div class="pv-divider"></div>';
   if (saved > 0) {
-    html += '<div class="pv-row"><span class="pv-l">Giá gốc</span><span style="font-size:11px;color:var(--n4);text-decoration:line-through">' + fmt(gocTotal) + 'đ</span></div>';
+    html += '<div class="pv-row"><span class="pv-l">Giá gốc</span><span style="font-size:11px;color:var(--n3)">' + fmt(gocTotal) + 'đ</span></div>';
   }
   html += '<div class="pv-row"><span class="pv-l">Sau KM</span><span class="pv-v">' + fmt(effectiveTotal) + 'đ</span></div>';
   html += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(vatTotal) + 'đ</span></div>';
