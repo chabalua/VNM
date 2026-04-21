@@ -1802,5 +1802,22 @@
       "03HA38"
     ],
     "_updatedAt": "2026-04-07T15:40:18.556Z"
+  },
+  {
+    "name": "KD FINO ID/KD/ A2 : 48 + 2B Fino A2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FH20",
+    "spMas": [
+      "04FI32",
+      "04FT32"
+    ],
+    "_updatedAt": "2026-04-21T13:14:58.741Z"
   }
 ]
