@@ -1939,7 +1939,7 @@
     "stackable": true,
     "bonusMa": "02HL37",
     "bonusName": "",
-    "cascade": true,
+    "cascade": false,
     "repeat": true,
     "maxSets": 0,
     "tiers": [
@@ -1963,6 +1963,6 @@
       "02HY39",
       "02HY19"
     ],
-    "_updatedAt": "2026-04-22T00:32:30.561Z"
+    "_updatedAt": "2026-04-22T00:42:33.734Z"
   }
 ]
