@@ -1937,7 +1937,7 @@
     "nhoms": "A",
     "active": true,
     "stackable": true,
-    "bonusMa": "02HD39",
+    "bonusMa": "02HL37",
     "bonusName": "",
     "cascade": true,
     "repeat": true,
@@ -1963,6 +1963,6 @@
       "02HY39",
       "02HY19"
     ],
-    "_updatedAt": "2026-04-22T00:31:15.368Z"
+    "_updatedAt": "2026-04-22T00:32:30.561Z"
   }
 ]
