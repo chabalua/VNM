@@ -1930,5 +1930,39 @@
       "02HY19"
     ],
     "_updatedAt": "2026-04-22T00:25:24.262Z"
+  },
+  {
+    "name": "MR04263011",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "02HD39",
+    "bonusName": "",
+    "cascade": true,
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "250",
+        "maxValue": "",
+        "bonusQty": "4"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "03HA38",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:31:15.368Z"
   }
 ]
