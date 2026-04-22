@@ -1786,7 +1786,7 @@
     "name": "MR04263012 - SBPS TE DƯỚI 5 TRIỆU",
     "type": "order_bonus",
     "nhoms": "A",
-    "active": true,
+    "active": false,
     "stackable": true,
     "bonusMa": "02HL37",
     "bonusName": "Dielac Grow Plus 110ml",
@@ -1803,7 +1803,7 @@
       "02HL37",
       "03HA38"
     ],
-    "_updatedAt": "2026-04-07T15:40:18.556Z"
+    "_updatedAt": "2026-04-22T00:33:13.919Z"
   },
   {
     "name": "Ontop SN: 2M+2h/5M+8h Cascade",
