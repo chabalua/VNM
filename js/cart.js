@@ -400,17 +400,17 @@ function formatOrderBonusItemText(bi) {
 }
 
 function calcOrderKM(items) {
-  if (!items || !items.length) return { disc: 0, desc: '', bonusItems: [] };
+  if (!items || !items.length) return { disc: 0, desc: '', bonusItems: [], discProgNames: [] };
   var baseTotal = items.reduce(function(sum, item) { return sum + item.gocTotal; }, 0);
   var allMas = items.map(function(it) { return it.ma; });
   var orderPromos = kmProgs.filter(function(prog) { return prog.active && (prog.type === 'order_money' || prog.type === 'order_bonus'); });
-  if (!orderPromos.length) return { disc: 0, desc: '', bonusItems: [] };
-  var disc = 0; var descParts = []; var bonusItems = [];
+  if (!orderPromos.length) return { disc: 0, desc: '', bonusItems: [], discProgNames: [] };
+  var disc = 0; var descParts = []; var bonusItems = []; var discProgNames = [];
   var moneyPromos = orderPromos.filter(function(p) { return p.type === 'order_money'; });
   moneyPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
     if (!hasOrderPromoMinSKU(allMas, prog.spMas || [], prog.minSKU)) return;
     var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
-    var d = orderPromoDiscount(total, prog); if (d > 0) { disc += d; descParts.push(prog.name || 'CK đơn'); }
+    var d = orderPromoDiscount(total, prog); if (d > 0) { disc += d; descParts.push(prog.name || 'CK đơn'); discProgNames.push(prog.name || 'CK đơn'); }
   });
   var bestDisc = 0, bestProg = null;
   moneyPromos.filter(function(p) { return !p.stackable; }).forEach(function(prog) {
@@ -418,7 +418,7 @@ function calcOrderKM(items) {
     var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
     var d = orderPromoDiscount(total, prog); if (d > bestDisc) { bestDisc = d; bestProg = prog; }
   });
-  if (bestDisc > 0 && bestProg) { disc += bestDisc; descParts.push(bestProg.name || 'CK đơn'); }
+  if (bestDisc > 0 && bestProg) { disc += bestDisc; descParts.push(bestProg.name || 'CK đơn'); discProgNames.push(bestProg.name || 'CK đơn'); }
   var bonusPromos = orderPromos.filter(function(p) { return p.type === 'order_bonus'; });
   bonusPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
     var result = buildOrderBonusResult(items, allMas, baseTotal, prog);
@@ -436,7 +436,7 @@ function calcOrderKM(items) {
     bonusItems.push({ ma: bestBonus.ma, name: bestBonus.name, qty: bestBonus.qty, progName: bestBonus.progName });
     descParts.push(bestBonus.progName + ': +' + bestBonus.qty + ' ' + bestBonus.name);
   }
-  return { disc: disc, desc: descParts.join(' | '), bonusItems: bonusItems };
+  return { disc: disc, desc: descParts.join(' | '), bonusItems: bonusItems, discProgNames: discProgNames };
 }
 
 function _calcDiscountRules(rules, base, qT, totalLon) {

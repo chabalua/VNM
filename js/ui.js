@@ -460,19 +460,22 @@ function onQty(ma) {
     html += '<div class="pv-row"><span class="pv-l">Giá gốc</span><span style="font-size:11px;color:var(--n3)">' + fmt(gocTotal) + 'đ</span></div>';
   }
   html += '<div class="pv-row"><span class="pv-l">Sau KM</span><span class="pv-v">' + fmt(effectiveTotal) + 'đ</span></div>';
-  html += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(vatTotal) + 'đ</span></div>';
-  if (saved > 0) {
-    var savePct = Math.round(saved / gocTotal * 100);
-    html += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span class="pv-save">-' + fmt(saved) + 'đ (' + savePct + '%)</span></div>';
-  }
-  if (orderKM.disc > 0 && draftKm.hopKM >= p.giaNYLon) {
-    // Chỉ hiện block CK đơn riêng khi chưa gộp vào hopKM (trường hợp hiếm)
+  if (orderKM.disc > 0 && (draftKm.orderDiscAllocated || 0) > 0) {
+    // CK đơn hàng đã gộp vào hopKM — hiện ghi chú nhỏ để rõ ràng
+    html += '<div style="font-size:10px;color:var(--vm);margin:-4px 0 4px;padding:0 2px;line-height:1.4">↳ Bao gồm CK đơn <b>-' + fmt(draftKm.orderDiscAllocated) + 'đ</b>' + (orderKM.desc ? ' (' + escapeHtml(orderKM.desc) + ')' : '') + '</div>';
+  } else if (orderKM.disc > 0 && draftKm.hopKM >= p.giaNYLon) {
+    // CK đơn chưa gộp vào hopKM (không có item-level KM) — hiện block riêng
     var draftTotal = draftItems.reduce(function(s, x) { return s + x.afterKM; }, 0) - orderKM.disc;
     html += '<div class="pv-divider" style="margin:4px 0;border-top:0.5px solid var(--orangeMid)"></div>';
     html += '<div class="pv-row"><span class="pv-l" style="color:var(--vm)">CK đơn hàng</span><span class="pv-save">-' + fmt(orderKM.disc) + 'đ</span></div>';
     if (orderKM.desc) html += '<div style="font-size:10px;color:var(--n3);margin:-2px 0 2px;line-height:1.3">' + escapeHtml(orderKM.desc) + '</div>';
     html += '<div class="pv-row"><span class="pv-l" style="font-weight:700">Tạm tính đơn</span><span class="pv-v">' + fmt(draftTotal) + 'đ</span></div>';
     html += '<div class="pv-row"><span class="pv-l">+VAT 1.5%</span><span class="pv-vat">' + fmt(Math.round(draftTotal * (1 + VAT_RATE))) + 'đ</span></div>';
+  }
+  html += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(vatTotal) + 'đ</span></div>';
+  if (saved > 0) {
+    var savePct = Math.round(saved / gocTotal * 100);
+    html += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span class="pv-save">-' + fmt(saved) + 'đ (' + savePct + '%)</span></div>';
   }
   html += '<button class="btn-ok" onclick="addCart(\'' + escapeHtmlAttr(ma) + '\')">✓ Thêm vào đơn</button>';
 
@@ -487,11 +490,17 @@ function onQty(ma) {
   var kmLine = document.getElementById('km-line_' + ma);
   if (kmLine) {
     var chips = (km.appliedPromos && km.appliedPromos.length) ? getAppliedPromoRefsByNames(km.appliedPromos) : [];
+    var usedNames = chips.map(function(c) { return c.name; });
     // Thêm order-level bonus CT đang áp (cascade, order_bonus)
     if (orderKM.bonusItems && orderKM.bonusItems.length) {
       var orderProgNames = orderKM.bonusItems.map(function(bi) { return bi.progName; }).filter(Boolean);
-      var usedNames = chips.map(function(c) { return c.name; });
       getAppliedPromoRefsByNames(orderProgNames).forEach(function(r) {
+        if (usedNames.indexOf(r.name) < 0) { chips.push(r); usedNames.push(r.name); }
+      });
+    }
+    // Thêm order-level discount CT (order_money) đang áp
+    if (orderKM.discProgNames && orderKM.discProgNames.length) {
+      getAppliedPromoRefsByNames(orderKM.discProgNames).forEach(function(r) {
         if (usedNames.indexOf(r.name) < 0) { chips.push(r); usedNames.push(r.name); }
       });
     }
