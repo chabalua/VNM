@@ -432,17 +432,17 @@ function kmPreview() {
     var bonsQty = +prog.bY || 1;
     var totalPay = p.giaNYLon * X;
     var bonusSavings = bonsQty * bonsPrice;
-    area.innerHTML = '<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview — ' + p.ten.slice(0, 25) + '</div>' +
-      '<div class="km-pv-row"><span>Giá/' + p.donvi + '</span><span>' + fmt(p.giaNYLon) + 'đ</span></div>' +
-      '<div class="km-pv-row"><span>Tặng kèm (mỗi ' + X + ')</span><b style="color:var(--g)">' + bonsQty + ' ' + p.donvi + ' ' + bonsName + (bonusSavings > 0 ? ' (~' + fmt(bonusSavings) + 'đ)' : '') + '</b></div>' +
+    area.innerHTML = '<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview — ' + escapeHtml(p.ten.slice(0, 25)) + '</div>' +
+      '<div class="km-pv-row"><span>Giá/' + escapeHtml(p.donvi) + '</span><span>' + fmt(p.giaNYLon) + 'đ</span></div>' +
+      '<div class="km-pv-row"><span>Tặng kèm (mỗi ' + X + ')</span><b style="color:var(--g)">' + bonsQty + ' ' + escapeHtml(p.donvi) + ' ' + escapeHtml(bonsName) + (bonusSavings > 0 ? ' (~' + fmt(bonusSavings) + 'đ)' : '') + '</b></div>' +
       (prog.minSKU ? '<div class="km-pv-row"><span>ĐK SKU tối thiểu</span><span>≥' + prog.minSKU + ' mã SP</span></div>' : '') +
-      '<div class="km-pv-row" style="border-top:1px solid #a3e6c0;padding-top:5px;margin-top:3px"><span>Thành tiền (' + X + ' ' + p.donvi + ')</span><b style="color:var(--g)">' + fmt(totalPay) + 'đ</b></div></div>';
+      '<div class="km-pv-row" style="border-top:1px solid #a3e6c0;padding-top:5px;margin-top:3px"><span>Thành tiền (' + X + ' ' + escapeHtml(p.donvi) + ')</span><b style="color:var(--g)">' + fmt(totalPay) + 'đ</b></div></div>';
     return;
   }
 
   var km = _calcKM_orig(pTest, 0, X);
   var total = km.hopKM * X;
-  area.innerHTML = '<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview — ' + p.ten.slice(0, 25) + '</div><div class="km-pv-row"><span>Giá gốc/' + p.donvi + '</span><span>' + fmt(p.giaNYLon) + 'đ</span></div><div class="km-pv-row"><span>Giá KM/' + p.donvi + '</span><b style="color:var(--g)">' + fmt(km.hopKM) + 'đ</b></div>' + (km.bonus > 0 ? '<div class="km-pv-row"><span>Tặng thêm</span><span>' + km.bonus + ' ' + p.donvi + '</span></div>' : '') + (km.disc > 0 ? '<div class="km-pv-row"><span>Tiết kiệm (' + X + ' ' + p.donvi + ')</span><b style="color:var(--r)">- ' + fmt(km.disc) + 'đ</b></div>' : '') + (prog.minSKU ? '<div class="km-pv-row"><span>ĐK SKU tối thiểu</span><span>≥' + prog.minSKU + ' mã SP</span></div>' : '') + '<div class="km-pv-row" style="border-top:1px solid #a3e6c0;padding-top:5px;margin-top:3px"><span>Thành tiền (' + X + ' ' + p.donvi + ')</span><b style="color:var(--g)">' + fmt(total) + 'đ</b></div></div>';
+  area.innerHTML = '<div class="km-preview-box"><div style="font-size:11px;font-weight:700;color:var(--g);margin-bottom:6px">🔍 Preview — ' + escapeHtml(p.ten.slice(0, 25)) + '</div><div class="km-pv-row"><span>Giá gốc/' + escapeHtml(p.donvi) + '</span><span>' + fmt(p.giaNYLon) + 'đ</span></div><div class="km-pv-row"><span>Giá KM/' + escapeHtml(p.donvi) + '</span><b style="color:var(--g)">' + fmt(km.hopKM) + 'đ</b></div>' + (km.bonus > 0 ? '<div class="km-pv-row"><span>Tặng thêm</span><span>' + km.bonus + ' ' + escapeHtml(p.donvi) + '</span></div>' : '') + (km.disc > 0 ? '<div class="km-pv-row"><span>Tiết kiệm (' + X + ' ' + escapeHtml(p.donvi) + ')</span><b style="color:var(--r)">- ' + fmt(km.disc) + 'đ</b></div>' : '') + (prog.minSKU ? '<div class="km-pv-row"><span>ĐK SKU tối thiểu</span><span>≥' + prog.minSKU + ' mã SP</span></div>' : '') + '<div class="km-pv-row" style="border-top:1px solid #a3e6c0;padding-top:5px;margin-top:3px"><span>Thành tiền (' + X + ' ' + escapeHtml(p.donvi) + ')</span><b style="color:var(--g)">' + fmt(total) + 'đ</b></div></div>';
 }
 
 function kmSaveForm() {

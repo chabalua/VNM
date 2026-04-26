@@ -621,7 +621,7 @@ function renderRoutePills() {
   var html = '<div class="pill ' + (!curFilter ? 'on-all' : '') + '" onclick="cusFilterRoute(\'\');renderRoutePills()">Tất cả</div>';
   routes.forEach(function(r) {
     var active = curFilter === r.id;
-    html += '<div class="pill ' + (active ? 'on-C' : '') + '" onclick="cusFilterRoute(\'' + r.id + '\');renderRoutePills()">' + r.ten + '</div>';
+    html += '<div class="pill ' + (active ? 'on-C' : '') + '" data-route-id="' + escapeHtmlAttr(r.id) + '" onclick="cusFilterRoute(this.dataset.routeId);renderRoutePills()">' + escapeHtml(r.ten) + '</div>';
   });
   el.innerHTML = html;
 }

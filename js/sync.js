@@ -164,6 +164,7 @@ function getOrders() {
 
 function saveOrders(orders) {
   localStorage.setItem(ORDERS_KEY, JSON.stringify(mergeOrders(orders || [], [])));
+  if (window.lsCheckQuota) lsCheckQuota();
 }
 
 function getOrdersForSync() {
@@ -309,14 +310,32 @@ async function syncPullOrdersOnly() {
   return await syncPullSelected(['orders.json'], {});
 }
 
+var _pushQueue = {};          // filename → true, files pending push
+var _pushDebounceTimer = null; // debounce timer id
+
+async function _flushPushQueue() {
+  _pushDebounceTimer = null;
+  var filesToPush = Object.keys(_pushQueue);
+  _pushQueue = {};
+  if (!filesToPush.length) return;
+  var cfg = syncGetConfig();
+  if (!cfg.autoPushMasterData || !syncHasToken()) return;
+  for (var _i = 0; _i < filesToPush.length; _i++) {
+    var _result = await syncPushSelected([filesToPush[_i]], { silent: true });
+    if (!_result.ok && !_result.skipped) {
+      showToast('⚠️ Lưu lên GitHub thất bại (' + filesToPush[_i] + '). Dữ liệu đã lưu cục bộ — hãy push thủ công.');
+    }
+  }
+}
+
 async function syncAutoPushFile(filename) {
   var cfg = syncGetConfig();
   if (!cfg.autoPushMasterData || !syncHasToken()) return { ok: false, skipped: true, reason: 'disabled' };
-  var result = await syncPushSelected([filename], { silent: true });
-  if (!result.ok && !result.skipped) {
-    showToast('⚠️ Lưu lên GitHub thất bại (' + filename + '). Dữ liệu đã lưu cục bộ — hãy push thủ công để không mất dữ liệu khi reload.');
-  }
-  return result;
+  // Queue filename and debounce — prevents race conditions when multiple saves happen in quick succession
+  _pushQueue[filename] = true;
+  clearTimeout(_pushDebounceTimer);
+  _pushDebounceTimer = setTimeout(function() { _flushPushQueue(); }, 1500);
+  return { ok: true, queued: true };
 }
 
 async function syncAutoPushOrder(order) {

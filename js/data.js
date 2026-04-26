@@ -77,7 +77,7 @@ async function loadPromotions() {
   kmSave();
 }
 
-function saveSP() { localStorage.setItem(LS_KEYS.SP, JSON.stringify(SP)); }
+function saveSP() { localStorage.setItem(LS_KEYS.SP, JSON.stringify(SP)); if (window.lsCheckQuota) lsCheckQuota(); }
 function kmSave() { localStorage.setItem(LS_KEYS.KM, JSON.stringify(kmProgs)); }
 function spFind(ma) { return SP.find(function(x) { return x.ma === ma; }); }
 
@@ -169,6 +169,7 @@ async function syncFromGitHub() {
     } else {
       throw new Error('Products data không hợp lệ');
     }
+    if (!Array.isArray(newPromos)) throw new Error('Promotions data không hợp lệ');
     kmProgs = normalizePromotionList(newPromos);
     kmSave();
     if (window.renderOrder) window.renderOrder();

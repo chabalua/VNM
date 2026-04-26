@@ -255,7 +255,7 @@ function ctTableHTML(g, tp) {
     Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) {
       var t = VNM_SHOP_TRUNGBAY[m];
       html += '<tr data-key="'+m+'"><td style="font-weight:800;color:var(--vm)">'+m+'</td>';
-      html += '<td><input class="ct-inp ct-ten" value="'+t.ten+'" style="width:150px"></td>';
+      html += '<td><input class="ct-inp ct-ten" value="'+escapeHtmlAttr(t.ten)+'" style="width:150px"></td>';
       html += '<td><input class="ct-inp ct-dsmin" type="number" value="'+t.dsMin+'"></td>';
       html += '<td><input class="ct-inp ct-thuong" type="number" value="'+t.thuong+'"></td></tr>';
     });
@@ -514,7 +514,7 @@ function cusProgamsToAppCodes(kh) {
 // ============================================================
 // LOAD / SAVE
 // ============================================================
-function cusSave() { localStorage.setItem(CUS_STORAGE_KEY, JSON.stringify(CUS)); }
+function cusSave() { localStorage.setItem(CUS_STORAGE_KEY, JSON.stringify(CUS)); if (window.lsCheckQuota) lsCheckQuota(); }
 function routesSave() { localStorage.setItem(ROUTES_STORAGE_KEY, JSON.stringify(ROUTES)); }
 
 async function cusLoad() {
@@ -849,7 +849,7 @@ function cusGetMonthData(kh, monthKey) {
 }
 
 function cusProgressValueText(value, unit) {
-  return fmt(value) + (unit ? ' ' + unit : '');
+  return fmt(value) + (unit ? ' ' + escapeHtml(unit) : '');
 }
 
 function cusProgressRowsHTML(entries) {
@@ -867,10 +867,10 @@ function cusProgressRowsHTML(entries) {
 function cusCustomProgressRowHTML(entry) {
   var item = entry || {};
   return '<div class="custom-progress-row">' +
-    '<input type="text" class="custom-progress-input cp-label" placeholder="Tên mục tiêu, VD: Green Farm phân phối" value="' + (item.label || '') + '">' +
+    '<input type="text" class="custom-progress-input cp-label" placeholder="Tên mục tiêu, VD: Green Farm phân phối" value="' + escapeHtmlAttr(item.label || '') + '">' +
     '<input type="number" class="custom-progress-input cp-actual" placeholder="Thực hiện" value="' + (item.actual || '') + '" inputmode="numeric">' +
     '<input type="number" class="custom-progress-input cp-target" placeholder="Mục tiêu" value="' + (item.target || '') + '" inputmode="numeric">' +
-    '<input type="text" class="custom-progress-input cp-unit" placeholder="Đơn vị" value="' + (item.unit || '') + '">' +
+    '<input type="text" class="custom-progress-input cp-unit" placeholder="Đơn vị" value="' + escapeHtmlAttr(item.unit || '') + '">' +
     '<button type="button" class="custom-progress-remove" onclick="cusRemoveProgressRow(this)">✕</button>' +
   '</div>';
 }
@@ -1125,7 +1125,7 @@ function cusProgressBarHTML(label, pct, current, target, color, unit) {
   var barColor = pct >= 100 ? '#16a34a' : (pct >= 70 ? '#ca8a04' : color);
   var html = '<div style="margin-bottom:6px">';
   html += '<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:3px">';
-  html += '<span style="font-size:10.5px;font-weight:700;color:var(--n2)">' + label + '</span>';
+  html += '<span style="font-size:10.5px;font-weight:700;color:var(--n2)">' + escapeHtml(label) + '</span>';
   html += '<span style="font-size:10.5px;font-weight:700;color:' + barColor + '">' + cusProgressValueText(current, unit) + '/' + cusProgressValueText(target, unit) + ' (' + pctDisplay + '%)</span>';
   html += '</div>';
   html += '<div style="height:6px;background:var(--n6);border-radius:3px;overflow:hidden">';
@@ -1232,6 +1232,7 @@ function cusReadDS() {
     dsVipN2: gn('cds-vn2'),
     skuNhomD: gn('cds-skud'),
     vipShopTrungBay: c('cds-trungbay-vip'),
+    sbpsTrungBay: c('cds-trungbay-sbps'),
     manualDsSBPS: gn('cds-sbps'),
     sbpsN1: gn('cds-sbps-n1'),
     sbpsN2: gn('cds-sbps-n2'),
@@ -1292,7 +1293,7 @@ function cusEdit(idx) {
   html += cusFormField('ckh-diachi', 'Địa chỉ', kh.diachi || '');
   html += cusFormField('ckh-sdt', 'SĐT', kh.sdt || '');
   html += '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">Tuyến bán hàng</div><select id="ckh-tuyen" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:14px"><option value="">— Chưa phân tuyến —</option>';
-  ROUTES.forEach(function(r) { html += '<option value="' + r.id + '"' + (kh.tuyen === r.id ? ' selected' : '') + '>' + r.ten + '</option>'; });
+  ROUTES.forEach(function(r) { html += '<option value="' + escapeHtmlAttr(r.id) + '"' + (kh.tuyen === r.id ? ' selected' : '') + '>' + escapeHtml(r.ten) + '</option>'; });
   html += '</select></div>';
   html += '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">Loại cửa hàng</div><select id="ckh-loai" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:14px">';
   ['tapHoa', 'shopSua', 'sieuThiMini', 'daiLy'].forEach(function(v) { var labels = { tapHoa: 'Tạp hóa', shopSua: 'Shop sữa', sieuThiMini: 'Siêu thị mini', daiLy: 'Đại lý' }; html += '<option value="' + v + '"' + (kh.loaiCH === v ? ' selected' : '') + '>' + labels[v] + '</option>'; });
@@ -1303,7 +1304,7 @@ function cusEdit(idx) {
   html += '<div><div style="font-size:10px;color:var(--n3)">Dung tích (L)</div><input type="number" id="ckh-dungtich" value="' + (kh.dungTichTu || '') + '" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"></div></div>';
   html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:10px;margin-bottom:8px"><input type="checkbox" id="ckh-ke" ' + (kh.coKe ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:var(--vm)"> Có kệ VNM</label>';
   html += '<select id="ckh-loaike" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option>';
-  Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + m + '"' + (kh.loaiKe === m ? ' selected' : '') + '>' + m + ' — ' + VNM_SHOP_TRUNGBAY[m].ten + '</option>'; });
+  Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + escapeHtmlAttr(m) + '"' + (kh.loaiKe === m ? ' selected' : '') + '>' + escapeHtml(m) + ' — ' + escapeHtml(VNM_SHOP_TRUNGBAY[m].ten) + '</option>'; });
   html += '</select></div>';
   html += '<div class="kf"><div class="kfl" style="color:var(--vm)">📋 CHƯƠNG TRÌNH THAM GIA</div>';
   html += '<div style="font-size:11px;color:var(--n3);margin-bottom:10px">Nhìn vào app Vinamilk → nhập đúng Mã CT và Mức như trên app. Hệ thống tự tính thưởng.</div>';
@@ -1370,7 +1371,7 @@ function cusManageRoutes() {
   modal.style.display = 'block';
   var body = document.getElementById('km-modal-body');
   var html = '<div id="routes-list">';
-  ROUTES.forEach(function(r, i) { html += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;padding:10px;background:var(--n6);border-radius:var(--Rs)"><div style="flex:1"><div style="font-size:13px;font-weight:700">' + r.ten + '</div><div style="font-size:10.5px;color:var(--n3)">' + r.id + (r.mota ? ' · ' + r.mota : '') + '</div></div><button onclick="cusDelRoute(' + i + ')" style="border:none;background:none;color:var(--r);font-size:14px;cursor:pointer;padding:4px">✕</button></div>'; });
+  ROUTES.forEach(function(r, i) { html += '<div style="display:flex;gap:8px;align-items:center;margin-bottom:8px;padding:10px;background:var(--n6);border-radius:var(--Rs)"><div style="flex:1"><div style="font-size:13px;font-weight:700">' + escapeHtml(r.ten) + '</div><div style="font-size:10.5px;color:var(--n3)">' + escapeHtml(r.id) + (r.mota ? ' · ' + escapeHtml(r.mota) : '') + '</div></div><button onclick="cusDelRoute(' + i + ')" style="border:none;background:none;color:var(--r);font-size:14px;cursor:pointer;padding:4px">✕</button></div>'; });
   html += '</div>';
   html += '<div style="display:flex;gap:8px;margin-top:12px"><input type="text" id="new-route-id" placeholder="Mã tuyến" style="width:80px;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:14px"><input type="text" id="new-route-ten" placeholder="Tên tuyến" style="flex:1;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 10px;font-size:14px"><button onclick="cusAddRoute()" style="height:40px;padding:0 14px;background:var(--vm);color:#fff;border:none;border-radius:var(--Rs);font-size:14px;font-weight:700;cursor:pointer">+</button></div>';
   body.innerHTML = html;

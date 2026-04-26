@@ -590,7 +590,7 @@ function renderDon() {
     items.forEach(function(it) {
       html += '<div class="oi"><div class="oi-top"><div class="oi-name">' + escapeHtml(it.ten) + '</div><button class="oi-del" onclick="removeCart(\'' + escapeHtmlAttr(it.ma) + '\')">✕</button></div>';
       html += '<div class="oi-sub">' + escapeHtml(it.ma) + ' · ' + escapeHtml(it.donvi) + '</div>';
-      html += '<div class="oi-qty">' + (it.qT > 0 ? it.qT + ' thùng' : '') + (it.qT > 0 && it.qL > 0 ? ' + ' : '') + (it.qL > 0 ? it.qL + ' lẻ' : '') + ' = ' + it.totalLon + ' ' + it.donvi + (it.bonus > 0 ? ' + tặng ' + it.bonus : '') + '</div>';
+      html += '<div class="oi-qty">' + (it.qT > 0 ? it.qT + ' thùng' : '') + (it.qT > 0 && it.qL > 0 ? ' + ' : '') + (it.qL > 0 ? it.qL + ' lẻ' : '') + ' = ' + it.totalLon + ' ' + escapeHtml(it.donvi) + (it.bonus > 0 ? ' + tặng ' + it.bonus : '') + '</div>';
       if (it.bonusItems && it.bonusItems.length) { it.bonusItems.forEach(function(bi) { html += '<div class="oi-km">🎁 Tặng kèm: ' + bi.qty + ' ' + escapeHtml(bi.name || 'SP tặng') + '</div>'; }); }
       if (it.desc) html += '<div class="oi-km">' + escapeHtml(it.desc) + '</div>';
       html += '<div class="oi-pr"><span class="oi-pl">Thành tiền</span><span class="oi-pv">' + fmt(it.afterKM) + 'đ</span></div></div>';
@@ -901,22 +901,22 @@ function viewOrderDetail(orderRef) {
   html += '<div style="background:var(--vmL);border-radius:var(--Rs);padding:12px 14px;margin-bottom:12px;border:1px solid #C9D7FF">';
   html += '<div style="display:flex;justify-content:space-between;align-items:center">';
   html += '<div><div style="font-size:11px;color:var(--n3)">' + (o.ngay || '') + '</div>';
-  html += '<div style="font-size:14px;font-weight:800;color:var(--vm)">' + (o.khTen || o.khMa || 'Không rõ KH') + '</div></div>';
+  html += '<div style="font-size:14px;font-weight:800;color:var(--vm)">' + escapeHtml(o.khTen || o.khMa || 'Không rõ KH') + '</div></div>';
   html += '<div style="font-size:20px;font-weight:900;color:var(--vm)">' + fmt(o.tong) + 'đ</div>';
   html += '</div></div>';
 
   (o.items || []).forEach(function(it, i) {
     html += '<div style="padding:8px 0;border-bottom:1px solid var(--n5)">';
-    html += '<div style="display:flex;justify-content:space-between"><div style="font-size:13px;font-weight:700">' + (i+1) + '. ' + it.ten + '</div><div style="font-size:13px;font-weight:800;color:var(--vm)">' + fmt(it.afterKM) + 'đ</div></div>';
-    html += '<div style="font-size:11px;color:var(--n3)">' + it.ma + ' · ' + it.totalLon + ' ' + it.donvi + (it.bonus > 0 ? ' + tặng ' + it.bonus : '') + '</div>';
-    if (it.desc) html += '<div style="font-size:11px;color:var(--vm);font-weight:600">' + it.desc + '</div>';
+    html += '<div style="display:flex;justify-content:space-between"><div style="font-size:13px;font-weight:700">' + (i+1) + '. ' + escapeHtml(it.ten) + '</div><div style="font-size:13px;font-weight:800;color:var(--vm)">' + fmt(it.afterKM) + 'đ</div></div>';
+    html += '<div style="font-size:11px;color:var(--n3)">' + escapeHtml(it.ma) + ' · ' + it.totalLon + ' ' + escapeHtml(it.donvi) + (it.bonus > 0 ? ' + tặng ' + it.bonus : '') + '</div>';
+    if (it.desc) html += '<div style="font-size:11px;color:var(--vm);font-weight:600">' + escapeHtml(it.desc) + '</div>';
     html += '</div>';
   });
 
   if (o.bonusItems && o.bonusItems.length) {
     html += '<div style="margin-top:10px;padding:10px 0;border-top:1px solid var(--n5)">';
     o.bonusItems.forEach(function(bi) {
-      html += '<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0"><div style="font-size:12px;font-weight:700;color:var(--vm)">🎁 ' + bi.progName + '</div><div style="font-size:12px;color:var(--vm);text-align:right">+' + formatOrderBonusItemText(bi) + '</div></div>';
+      html += '<div style="display:flex;justify-content:space-between;gap:8px;padding:6px 0"><div style="font-size:12px;font-weight:700;color:var(--vm)">🎁 ' + escapeHtml(bi.progName) + '</div><div style="font-size:12px;color:var(--vm);text-align:right">+' + escapeHtml(formatOrderBonusItemText(bi)) + '</div></div>';
     });
     html += '</div>';
   }

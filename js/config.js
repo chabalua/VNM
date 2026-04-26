@@ -78,3 +78,24 @@ function showToast(msg, duration) {
   _toastTimer = setTimeout(function() { el.classList.remove('show'); }, duration || 2500);
 }
 window.showToast = showToast;
+
+// ============================================================
+// LOCALSTORAGE QUOTA GUARD
+// ============================================================
+var _lsQuotaWarnedAt = 0;
+function lsCheckQuota() {
+  try {
+    var total = 0;
+    for (var i = 0; i < localStorage.length; i++) {
+      var k = localStorage.key(i);
+      total += (k || '').length + (localStorage.getItem(k) || '').length;
+    }
+    // Each char = 2 bytes UTF-16; warn when estimated usage > ~4MB (2M chars)
+    if (total > 2000000 && Date.now() - _lsQuotaWarnedAt > 60000) {
+      _lsQuotaWarnedAt = Date.now();
+      var kb = Math.round(total * 2 / 1024);
+      showToast('⚠️ Bộ nhớ thiết bị gần đầy (' + kb + 'KB / ~5120KB). Hãy sync GitHub để giải phóng.', 5000);
+    }
+  } catch(e) {}
+}
+window.lsCheckQuota = lsCheckQuota;
