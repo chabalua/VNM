@@ -444,12 +444,12 @@ function _calcDiscountRules(rules, base, qT, totalLon) {
   for (var ri = 0; ri < rules.length; ri++) {
     var r = rules[ri];
     if (r.type === 'tier_money') {
-      var applicableTier = null;
       var belowTiers = r.tiers.filter(function(t) { return t.type === 'below' && base < t.value; });
-      if (belowTiers.length) applicableTier = belowTiers.reduce(function(prev, curr) { return !prev || curr.value < prev.value ? curr : prev; });
+      var bestBelow = belowTiers.length ? belowTiers.reduce(function(prev, curr) { return !prev || curr.value < prev.value ? curr : prev; }) : null;
       var aboveTiers = r.tiers.filter(function(t) { return t.type === 'above' && base >= t.value; });
-      if (aboveTiers.length) applicableTier = aboveTiers.reduce(function(prev, curr) { return !prev || curr.value > prev.value ? curr : prev; });
-      if (applicableTier && applicableTier.ckPct > 0) { ckDisc += Math.round(base * applicableTier.ckPct / 100); lines.push('CK ' + applicableTier.ckPct + '%'); }
+      var bestAbove = aboveTiers.length ? aboveTiers.reduce(function(prev, curr) { return !prev || curr.value > prev.value ? curr : prev; }) : null;
+      var bestTier = (bestBelow && bestAbove) ? (bestBelow.ckPct >= bestAbove.ckPct ? bestBelow : bestAbove) : (bestBelow || bestAbove);
+      if (bestTier && bestTier.ckPct > 0) { ckDisc += Math.round(base * bestTier.ckPct / 100); lines.push('CK ' + bestTier.ckPct + '%'); }
     } else if (r.type === 'tier_qty') {
       var cq = r.unit === 'thung' ? qT : totalLon;
       var t2 = r.tiers.slice().sort(function(a, b) { return b.minT - a.minT; }).find(function(x) { return cq >= x.minT; });

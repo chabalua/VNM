@@ -231,8 +231,6 @@ function importProductsJSON() {
   input.click();
 }
 
-window.SP = function() { return SP; };
-window.kmProgs = function() { return kmProgs; };
 window.saveSP = saveSP;
 window.kmSave = kmSave;
 window.spFind = spFind;

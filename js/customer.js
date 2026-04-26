@@ -355,7 +355,6 @@ function ctSaveSettings() {
 }
 
 function ctResetSettings() {
-  if (!confirm('Khôi phục tất cả CT về mặc định theo PDF? Thay đổi đã lưu sẽ bị xóa.')) return;
   localStorage.removeItem(CT_CONFIG_STORAGE_KEY);
   showToast('↺ Đã xóa cấu hình tùy chỉnh — tải lại trang để áp dụng');
 }

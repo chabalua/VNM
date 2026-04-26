@@ -41,7 +41,7 @@ var KPI_GROUP_META = [
     title: 'Thực thi KPIs',
     rows: [
       { key: 'avgSku', dataKey: 'avgSku', label: 'Bình quân SKUs/ASO', kind: 'number_2' },
-      { key: 'validOrderRate', dataKey: 'validOrderRate', label: 'Đơn hàng thành công hợp lệ trong tuyến', kind: 'percent' },
+      { key: 'validOrderRate', dataKey: 'validOrderRate', label: 'Tỷ lệ khách hàng phát sinh doanh số', kind: 'percent' },
       { key: 'asoWithSales400k', dataKey: 'asoWithSales400k', label: 'ASO phát sinh doanh số >= 400.000đ', kind: 'count' },
       { key: 'displaySales', dataKey: 'displaySales', label: 'Tỷ lệ đạt DS tích lũy tham gia trưng bày nguyên năm', kind: 'money_k', note: '(x1000đ)' },
       { key: 'displayImageStores', dataKey: 'displayImageStores', label: 'Tỷ lệ đạt hình ảnh trưng bày nguyên năm', kind: 'count' }

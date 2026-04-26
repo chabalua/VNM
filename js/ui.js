@@ -425,8 +425,9 @@ function onQty(ma) {
   var VAT_RATE = typeof VAT !== 'undefined' ? VAT : 0.015;
   var gocTotal = p.giaNYLon * totalLon;
   var afterKM = gocTotal - km.disc;
-  // Giá hiệu lực = hopKM (đã tính cả order-level) × qty mua thực tế
-  var effectiveTotal = draftKm.hopKM < p.giaNYLon ? draftKm.hopKM * totalLon : afterKM;
+  // Giá hiệu lực = hopKM × qty mua thực tế; chỉ dùng hopKM khi có discount tiền thực sự
+  var hasMonetaryDisc = km.disc > 0 || (draftKm.orderDiscAllocated || 0) > 0 || (draftKm.orderGiftValueAllocated || 0) > 0;
+  var effectiveTotal = (hasMonetaryDisc && draftKm.hopKM < p.giaNYLon) ? draftKm.hopKM * totalLon : afterKM;
   var vatTotal = Math.round(effectiveTotal * (1 + VAT_RATE));
   var saved = gocTotal - effectiveTotal;
 
@@ -543,6 +544,7 @@ function buildOrderAwareKmDisplay(p, km, draftItems, orderKM) {
     if (giftUnitPrice <= 0) return;
     orderGiftValueAllocated += Math.round((parseInt(bi.qty, 10) || 0) * giftUnitPrice * proportion);
   });
+  displayKm.orderGiftValueAllocated = orderGiftValueAllocated;
 
   var totalVirtualDisc = displayKm.orderDiscAllocated + orderGiftValueAllocated;
   if (displayKm.orderBonusQty > 0 || totalVirtualDisc > 0) {
@@ -659,7 +661,7 @@ function renderOrder() {
     groups[nhom].forEach(function(p) {
       var inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
       var isFav = favorites.includes(p.ma);
-      var kmInfo = calcKM(p, 0, 0);
+      var kmInfo = calcKM(p, 0, 1);
       var brand = detectBrand(p);
       var appliedCTs = getProductPromoRefs(p.ma);
 
