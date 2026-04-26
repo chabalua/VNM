@@ -926,7 +926,7 @@
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 22+2",
     "type": "bonus",
-    "nhoms": "D",
+    "nhoms": "C",
     "active": true,
     "stackable": false,
     "bX": "22",
@@ -946,7 +946,8 @@
       "06UC32",
       "06UN32",
       "06UQ32"
-    ]
+    ],
+    "_updatedAt": "2026-04-21T16:11:44.309Z"
   },
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
@@ -1744,7 +1745,8 @@
       "06VA23",
       "06VC23",
       "06VQ23"
-    ]
+    ],
+    "_updatedAt": "2026-04-21T16:11:28.513Z"
   },
   {
     "name": "STV: đơn 250k tặng 2h / 400k tặng 4h 9 hạt 180ml",
@@ -1784,7 +1786,7 @@
     "name": "MR04263012 - SBPS TE DƯỚI 5 TRIỆU",
     "type": "order_bonus",
     "nhoms": "A",
-    "active": true,
+    "active": false,
     "stackable": true,
     "bonusMa": "02HL37",
     "bonusName": "Dielac Grow Plus 110ml",
@@ -1801,24 +1803,7 @@
       "02HL37",
       "03HA38"
     ],
-    "_updatedAt": "2026-04-07T15:40:18.556Z"
-  },
-  {
-    "name": "KD FINO ID/KD/ A2 : 48 + 2B Fino A2",
-    "type": "bonus",
-    "nhoms": "C",
-    "active": true,
-    "stackable": true,
-    "bX": "48",
-    "bY": "2",
-    "bUnit": "lon",
-    "bMax": 0,
-    "bMa": "04FH20",
-    "spMas": [
-      "04FI32",
-      "04FT32"
-    ],
-    "_updatedAt": "2026-04-21T15:39:59.340Z"
+    "_updatedAt": "2026-04-22T00:33:13.919Z"
   },
   {
     "name": "Ontop SN: 2M+2h/5M+8h Cascade",
@@ -1901,5 +1886,83 @@
       "06SA73"
     ],
     "_updatedAt": "2026-04-21T15:38:33.562Z"
+  },
+  {
+    "name": "KD Fino ID/KD A2 48B + 2B Fino A2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FH20",
+    "spMas": [
+      "04FT32",
+      "04FI32"
+    ],
+    "_updatedAt": "2026-04-21T15:58:49.248Z"
+  },
+  {
+    "name": "KD SBPS 48+2 dâu/ chuối",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "03HA38",
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HS37",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:25:24.262Z"
+  },
+  {
+    "name": "MR04263011",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "02HL37",
+    "bonusName": "",
+    "cascade": false,
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "250",
+        "maxValue": "",
+        "bonusQty": "4"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "03HA38",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:42:33.734Z"
   }
 ]
