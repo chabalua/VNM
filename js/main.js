@@ -233,7 +233,7 @@ function openKpiSettings(monthKey) {
     html += '<div class="kpi-config-group">';
     html += '<div class="kpi-config-title">' + rule.label + '</div>';
     html += '<div style="font-size:10px;color:var(--n3);margin-bottom:6px">' + rule.help + '</div>';
-    html += '<textarea id="kpi-rule-' + rule.key + '" placeholder="Nếu để trống sẽ dùng danh sách mặc định" style="width:100%;min-height:88px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:10px 12px;font-size:13px;color:var(--n1);resize:vertical">' + ((rawCustom && rawCustom.length) ? codes.join('\n') : '') + '</textarea>';
+    html += '<textarea id="kpi-rule-' + rule.key + '" placeholder="Nếu để trống sẽ dùng danh sách mặc định" style="width:100%;min-height:88px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:10px 12px;font-size:13px;color:var(--n1);resize:vertical">' + escapeHtml((rawCustom && rawCustom.length) ? codes.join('\n') : '') + '</textarea>';
     html += '<div style="font-size:10px;color:var(--n3);margin-top:6px">Mặc định hiện có ' + codes.length + ' mã.</div>';
     html += '</div>';
   });

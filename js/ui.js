@@ -963,6 +963,7 @@ function spSaveForm() {
 
 function spDelete(ma) {
   var p = SP.find(function(x) { return x.ma === ma; }); if (!p) return;
+  if (window.syncTrackEntityDeletion) syncTrackEntityDeletion('products.json', p);
   SP.splice(SP.indexOf(p), 1);
   if (cart[ma]) { delete cart[ma]; saveCart(); updateBadge(); }
   saveSP(); if (window.syncAutoPushFile) syncAutoPushFile('products.json');

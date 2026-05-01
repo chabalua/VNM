@@ -221,6 +221,7 @@ function importProductsJSON() {
         SP = data;
         SP.forEach(normalizeProduct);
         saveSP();
+        if (window.syncAutoPushFile) syncAutoPushFile('products.json');
         if (window.renderOrder) window.renderOrder();
         if (window.renderAdm) window.renderAdm();
         if (window.renderDon) window.renderDon();

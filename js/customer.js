@@ -1211,7 +1211,7 @@ function cusInputDS(idx, monthKey) {
 
 function cusInputField(id, label, value, autoValue) {
   var placeholder = (autoValue || autoValue === 0) ? ('Tự lấy từ đơn: ' + fmt(autoValue)) : '0';
-  return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="number" id="' + id + '" value="' + (value || '') + '" placeholder="' + placeholder + '" inputmode="numeric" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:16px;font-weight:700;color:var(--n1)"></div>';
+  return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="number" id="' + id + '" value="' + escapeHtmlAttr(value || '') + '" placeholder="' + escapeHtmlAttr(placeholder) + '" inputmode="numeric" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:16px;font-weight:700;color:var(--n1)"></div>';
 }
 function cusReadDS() {
   var gn = function(id) {
@@ -1301,7 +1301,7 @@ function cusEdit(idx) {
   html += '<div class="kf"><div class="kfl">THIẾT BỊ BÁN HÀNG</div>';
   html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-bottom:8px"><input type="checkbox" id="ckh-tu" ' + (kh.coTuVNM ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:var(--vm)"> Có tủ mát VNM</label>';
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px"><div><div style="font-size:10px;color:var(--n3)">Loại tủ</div><select id="ckh-loaitu" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option><option value="1canh"' + (kh.loaiTu === '1canh' ? ' selected' : '') + '>1 cánh</option><option value="2canh"' + (kh.loaiTu === '2canh' ? ' selected' : '') + '>2 cánh</option><option value="honhop"' + (kh.loaiTu === 'honhop' ? ' selected' : '') + '>Hỗn hợp</option></select></div>';
-  html += '<div><div style="font-size:10px;color:var(--n3)">Dung tích (L)</div><input type="number" id="ckh-dungtich" value="' + (kh.dungTichTu || '') + '" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"></div></div>';
+  html += '<div><div style="font-size:10px;color:var(--n3)">Dung tích (L)</div><input type="number" id="ckh-dungtich" value="' + escapeHtmlAttr(kh.dungTichTu || '') + '" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"></div></div>';
   html += '<label style="font-size:12px;display:flex;align-items:center;gap:6px;margin-top:10px;margin-bottom:8px"><input type="checkbox" id="ckh-ke" ' + (kh.coKe ? 'checked' : '') + ' style="width:20px;height:20px;accent-color:var(--vm)"> Có kệ VNM</label>';
   html += '<select id="ckh-loaike" style="width:100%;height:38px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 8px;font-size:13px"><option value="">Không</option>';
   Object.keys(VNM_SHOP_TRUNGBAY).forEach(function(m) { html += '<option value="' + escapeHtmlAttr(m) + '"' + (kh.loaiKe === m ? ' selected' : '') + '>' + escapeHtml(m) + ' — ' + escapeHtml(VNM_SHOP_TRUNGBAY[m].ten) + '</option>'; });
@@ -1312,7 +1312,7 @@ function cusEdit(idx) {
   html += '<span>Mã CT (app)</span><span>Mức</span><span style="text-align:center">Ngày ĐK</span><span></span></div>';
   html += '<div id="appc-list"></div>';
   html += '<button type="button" onclick="cusAddAppCodeRow()" style="width:100%;height:38px;background:var(--n6);border:1.5px dashed var(--n4);border-radius:var(--Rs);font-size:13px;font-weight:600;color:var(--vm);cursor:pointer;margin-top:4px">+ Thêm mã CT từ app</button></div>';
-  html += '<div class="kf"><div class="kfl">GHI CHÚ</div><textarea id="ckh-ghichu" placeholder="Ghi chú về KH..." style="width:100%;height:60px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:10px 12px;font-size:13px;color:var(--n1);resize:vertical">' + (kh.ghiChu || '') + '</textarea></div>';
+  html += '<div class="kf"><div class="kfl">GHI CHÚ</div><textarea id="ckh-ghichu" placeholder="Ghi chú về KH..." style="width:100%;height:60px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:10px 12px;font-size:13px;color:var(--n1);resize:vertical">' + escapeHtml(kh.ghiChu || '') + '</textarea></div>';
   html += '<button class="btn-km-save" onclick="cusSaveForm()">' + (idx >= 0 && CUS[idx] ? '💾 Cập nhật KH' : '✓ Thêm KH') + '</button>';
   if (idx >= 0 && CUS[idx]) html += '<button onclick="cusDel(' + idx + ')" style="width:100%;height:42px;background:none;color:var(--r);border:1.5px solid var(--r);border-radius:var(--R);font-size:13px;font-weight:600;cursor:pointer;margin-top:8px">✕ Xóa khách hàng</button>';
   body.innerHTML = html;
@@ -1321,7 +1321,7 @@ function cusEdit(idx) {
   existingCodes.forEach(function(ac) { cusAddAppCodeRow(ac); });
 }
 function cusFormField(id, label, value, readonly) {
-  return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="text" id="' + id + '" value="' + (value || '') + '"' + (readonly ? ' readonly' : '') + ' style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1);' + (readonly ? 'background:var(--n6);color:var(--n3);' : '') + '"></div>';
+  return '<div style="margin-bottom:8px"><div style="font-size:10.5px;color:var(--n3);margin-bottom:3px">' + label + '</div><input type="text" id="' + id + '" value="' + escapeHtmlAttr(value || '') + '"' + (readonly ? ' readonly' : '') + ' style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:15px;color:var(--n1);' + (readonly ? 'background:var(--n6);color:var(--n3);' : '') + '"></div>';
 }
 function cusSaveForm() {
   var g = function(id) { return (document.getElementById(id) || {}).value || ''; };
@@ -1340,6 +1340,7 @@ function cusSaveForm() {
 }
 function cusDel(idx) {
   var kh = CUS[idx]; if (!kh) return;
+  if (window.syncTrackEntityDeletion) syncTrackEntityDeletion('customers.json', kh);
   CUS.splice(idx, 1); cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); document.getElementById('km-modal').style.display = 'none'; renderCusTab();
 }
 function cusExport() {
@@ -1357,9 +1358,21 @@ function cusImport() {
     reader.onload = function(ev) {
       try {
         var data = JSON.parse(ev.target.result);
+        if (!data || typeof data !== 'object') throw new Error('File khách hàng không hợp lệ');
         var replace = true; // auto thay thế
-        if (data.customers) { var newCus = data.customers.filter(function(k) { return k && k.ma; }); if (replace) CUS = newCus; else { newCus.forEach(function(k) { var ex = CUS.find(function(c) { return c.ma === k.ma; }); if (ex) Object.assign(ex, k); else CUS.push(k); }); } cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json'); }
-        if (data.routes) { ROUTES = data.routes; routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); }
+        if (data.customers) {
+          if (!Array.isArray(data.customers)) throw new Error('Danh sách khách hàng không hợp lệ');
+          var newCus = data.customers.filter(function(k) { return k && typeof k === 'object' && k.ma; });
+          if (newCus.length !== data.customers.length) throw new Error('Có khách hàng thiếu mã KH');
+          if (replace) CUS = newCus;
+          else { newCus.forEach(function(k) { var ex = CUS.find(function(c) { return c.ma === k.ma; }); if (ex) Object.assign(ex, k); else CUS.push(k); }); }
+          cusSave(); if (window.syncAutoPushFile) syncAutoPushFile('customers.json');
+        }
+        if (data.routes) {
+          if (!Array.isArray(data.routes)) throw new Error('Danh sách tuyến không hợp lệ');
+          if (!data.routes.every(function(route) { return route && typeof route === 'object' && route.id && route.ten; })) throw new Error('Có tuyến thiếu mã hoặc tên');
+          ROUTES = data.routes; routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json');
+        }
         renderCusTab(); showToast('✅ Đã nhập ' + (data.customers ? data.customers.length : 0) + ' KH');
       } catch(e) { showToast('Lỗi: ' + e.message); }
     }; reader.readAsText(file);
@@ -1385,7 +1398,7 @@ function cusAddRoute() {
   if (window.markEntityUpdated) markEntityUpdated(route);
   ROUTES.push(route); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab();
 }
-function cusDelRoute(i) { ROUTES.splice(i, 1); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab(); }
+function cusDelRoute(i) { var route = ROUTES[i]; if (route && window.syncTrackEntityDeletion) syncTrackEntityDeletion('routes.json', route); ROUTES.splice(i, 1); routesSave(); if (window.syncAutoPushFile) syncAutoPushFile('routes.json'); cusManageRoutes(); renderCusTab(); }
 function cusFilterRoute(routeId) { _cusFilterRoute = routeId; renderCusTab(); }
 function cusFilterSearch(q) { _cusFilterQuery = (q || '').trim(); renderCusTab(); }
 

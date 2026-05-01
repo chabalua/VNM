@@ -9,6 +9,7 @@ var GH_REPO = 'VNM';
 var GH_BRANCH = 'main';
 var GH_API = 'https://api.github.com';
 var ORDERS_KEY = LS_KEYS.ORDERS;
+var SYNC_SHADOW_KEY = LS_KEYS.SYNC_SHADOW;
 var SYNC_DEFAULTS = {
   autoPushOrders: true,
   autoPushMasterData: true,
@@ -16,12 +17,117 @@ var SYNC_DEFAULTS = {
 };
 
 var SYNC_FILES = [
-  { name: 'products.json', getLocal: function() { return SP; }, setLocal: function(d) { SP = Array.isArray(d) ? d : []; SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } }); saveSP(); } },
-  { name: 'promotions.json', getLocal: function() { return kmProgs; }, setLocal: function(d) { kmProgs = normalizePromotionList(d); kmSave(); } },
-  { name: 'customers.json', getLocal: function() { return CUS; }, setLocal: function(d) { CUS = Array.isArray(d) ? d.filter(function(k){ return k && k.ma; }) : []; cusSave(); } },
-  { name: 'routes.json', getLocal: function() { return ROUTES; }, setLocal: function(d) { ROUTES = Array.isArray(d) ? d : []; routesSave(); } },
+  { name: 'products.json', getLocal: function() { return SP; }, setLocal: function(d) { SP = Array.isArray(d) ? d.filter(function(p) { return p && p.ma && !p._deleted; }) : []; SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } }); saveSP(); } },
+  { name: 'promotions.json', getLocal: function() { return kmProgs; }, setLocal: function(d) { kmProgs = normalizePromotionList(d).filter(function(prog) { return prog && !prog._deleted; }); kmSave(); } },
+  { name: 'customers.json', getLocal: function() { return CUS; }, setLocal: function(d) { CUS = Array.isArray(d) ? d.filter(function(k){ return k && k.ma && !k._deleted; }) : []; cusSave(); } },
+  { name: 'routes.json', getLocal: function() { return ROUTES; }, setLocal: function(d) { ROUTES = Array.isArray(d) ? d.filter(function(route) { return route && route.id && !route._deleted; }) : []; routesSave(); } },
   { name: 'orders.json', getLocal: function() { return getOrdersForSync(); }, setLocal: function(d) { setOrdersFromSync(d); } }
 ];
+
+function syncIsMasterDataFile(name) {
+  return name === 'products.json' || name === 'promotions.json' || name === 'customers.json' || name === 'routes.json';
+}
+
+function syncGetShadowStore() {
+  try {
+    var raw = JSON.parse(localStorage.getItem(SYNC_SHADOW_KEY) || '{}');
+    return raw && typeof raw === 'object' ? raw : {};
+  } catch (e) {
+    return {};
+  }
+}
+
+function syncSaveShadowStore(store) {
+  localStorage.setItem(SYNC_SHADOW_KEY, JSON.stringify(store || {}));
+}
+
+function syncGetShadowRecords(name) {
+  var store = syncGetShadowStore();
+  return Array.isArray(store[name]) ? store[name] : [];
+}
+
+function syncSetShadowRecords(name, records) {
+  var store = syncGetShadowStore();
+  store[name] = Array.isArray(records) ? records : [];
+  syncSaveShadowStore(store);
+}
+
+function syncCreateEntityId(prefix) {
+  return prefix + '_' + Date.now().toString(36) + '_' + Math.random().toString(36).slice(2, 8);
+}
+
+function syncGetEntityKey(name, entity) {
+  if (!entity || typeof entity !== 'object') return '';
+  if (name === 'products.json' || name === 'customers.json') return String(entity.ma || '');
+  if (name === 'routes.json') return String(entity.id || '');
+  if (name === 'promotions.json') return String(entity._syncId || '');
+  return '';
+}
+
+function syncEnsureEntityIdentity(name, entity) {
+  if (!entity || typeof entity !== 'object') return entity;
+  if (name === 'promotions.json' && !entity._syncId) entity._syncId = syncCreateEntityId('km');
+  return entity;
+}
+
+function syncGetUpdatedAtValue(entity) {
+  if (!entity || !entity._updatedAt) return 0;
+  var value = new Date(entity._updatedAt).getTime();
+  return isNaN(value) ? 0 : value;
+}
+
+function syncNormalizeMasterRecord(name, entity) {
+  if (!entity || typeof entity !== 'object') return null;
+  var clone = JSON.parse(JSON.stringify(entity));
+  syncEnsureEntityIdentity(name, clone);
+  if (!syncGetEntityKey(name, clone)) return null;
+  if (!clone._updatedAt) clone._updatedAt = new Date().toISOString();
+  clone._deleted = !!clone._deleted;
+  return clone;
+}
+
+function syncMergeMasterRecords(name, localRecords, remoteRecords) {
+  var map = {};
+  var order = [];
+  [remoteRecords || [], localRecords || []].forEach(function(list) {
+    list.forEach(function(entity) {
+      var normalized = syncNormalizeMasterRecord(name, entity);
+      var key;
+      if (!normalized) return;
+      key = syncGetEntityKey(name, normalized);
+      if (!key) return;
+      if (!map[key]) order.push(key);
+      if (!map[key] || syncGetUpdatedAtValue(normalized) >= syncGetUpdatedAtValue(map[key])) {
+        map[key] = normalized;
+      }
+    });
+  });
+  return order.map(function(key) { return map[key]; });
+}
+
+function syncPrepareMasterRecords(name, activeRecords) {
+  var merged = syncMergeMasterRecords(name, activeRecords, syncGetShadowRecords(name));
+  syncSetShadowRecords(name, merged);
+  return merged;
+}
+
+function syncFilterActiveMasterRecords(name, records) {
+  return (records || []).filter(function(entity) {
+    var normalized = syncNormalizeMasterRecord(name, entity);
+    return normalized && !normalized._deleted;
+  });
+}
+
+function syncTrackEntityDeletion(name, entity) {
+  var deleted = syncNormalizeMasterRecord(name, entity);
+  var shadow;
+  if (!syncIsMasterDataFile(name) || !deleted) return;
+  deleted._deleted = true;
+  deleted._updatedAt = new Date().toISOString();
+  shadow = syncPrepareMasterRecords(name, []);
+  shadow = syncMergeMasterRecords(name, [deleted], shadow);
+  syncSetShadowRecords(name, shadow);
+}
 
 function syncGetConfig() {
   try {
@@ -234,6 +340,11 @@ async function syncPushSelected(fileNames, options) {
       if (name === 'orders.json') {
         localData = mergeOrders(localData, remote.content || []);
         saveOrders(localData);
+      } else if (syncIsMasterDataFile(name)) {
+        localData = syncPrepareMasterRecords(name, localData);
+        localData = syncMergeMasterRecords(name, localData, remote.content || []);
+        syncSetShadowRecords(name, localData);
+        file.setLocal(syncFilterActiveMasterRecords(name, localData));
       }
       await ghPutFile(name, localData, remote.sha);
       results.push('✅ ' + name);
@@ -273,7 +384,11 @@ async function syncPullSelected(fileNames, options) {
       var remote = await ghGetFile(name);
       if (remote.exists && remote.content != null) {
         if (name === 'orders.json') file.setLocal(mergeOrders(getOrdersForSync(), remote.content));
-        else file.setLocal(remote.content);
+        else if (syncIsMasterDataFile(name)) {
+          var mergedMaster = syncMergeMasterRecords(name, syncPrepareMasterRecords(name, file.getLocal()), remote.content);
+          syncSetShadowRecords(name, mergedMaster);
+          file.setLocal(syncFilterActiveMasterRecords(name, mergedMaster));
+        } else file.setLocal(remote.content);
         results.push('✅ ' + name);
       } else {
         results.push('⏭ ' + name + ' (không có trên GitHub)');
@@ -528,6 +643,7 @@ window.syncTestConnection = syncTestConnection;
 window.syncSetFlag = syncSetFlag;
 window.syncGetConfig = syncGetConfig;
 window.syncHasToken = syncHasToken;
+window.syncTrackEntityDeletion = syncTrackEntityDeletion;
 window.backupAll = backupAll;
 window.restoreAll = restoreAll;
 window.getOrders = getOrders;

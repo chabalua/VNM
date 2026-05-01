@@ -81,7 +81,7 @@ function kmRenderForm(prog) {
   var t = prog.type || 'bonus';
   var typeLabels = { bonus: '🎁 Tặng hàng', fixed: '% CK cố định', tier_qty: '📦 CK theo SL', tier_money: '💰 CK theo tiền', order_money: '🧾 CK đơn hàng', order_bonus: '🎯 Tặng SP theo ĐH' };
 
-  var html = '<div class="kf"><div class="kfl">Tên chương trình</div><input type="text" id="kf-name" value="' + (prog.name || '') + '" placeholder="VD: Sữa đặc NSPN xuất nhỏ xanh lá" inputmode="text"></div>';
+  var html = '<div class="kf"><div class="kfl">Tên chương trình</div><input type="text" id="kf-name" value="' + escapeHtmlAttr(prog.name || '') + '" placeholder="VD: Sữa đặc NSPN xuất nhỏ xanh lá" inputmode="text"></div>';
 
   html += '<div class="kf"><div class="kfl">Loại khuyến mãi</div><div class="km-types">';
   ['bonus', 'fixed', 'tier_qty', 'tier_money', 'order_money', 'order_bonus'].forEach(function(tp) {
@@ -203,7 +203,7 @@ function kmTypeFields(prog) {
     return '<div class="kf"><div class="kfl">Tặng SP khi đạt mức đơn hàng</div>' +
       cascadeToggle +
       '<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--t3);margin-bottom:3px">SP được tặng</div><select id="kf-bonus-ma" style="width:100%;height:38px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;" onchange="kmPreview()">' + spOpts + '</select></div>' +
-      '<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tên SP tặng (nếu không chọn mã)</div><input type="text" id="kf-bonus-name" value="' + (prog.bonusName || '') + '" placeholder="VD: lốc DGP 110ml" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"></div>' +
+      '<div style="margin-bottom:8px"><div style="font-size:10px;color:var(--t3);margin-bottom:3px">Tên SP tặng (nếu không chọn mã)</div><input type="text" id="kf-bonus-name" value="' + escapeHtmlAttr(prog.bonusName || '') + '" placeholder="VD: lốc DGP 110ml" style="width:100%;height:36px;border:1.5px solid var(--l2);border-radius:var(--Rs);padding:0 9px;font-size:13px;"></div>' +
       repeatMaxHtml +
       '<div id="km-tiers">' + rows + '</div><button class="btn-atr" onclick="kmAddTier(\'order_bonus\')">+ Thêm mức</button>' +
       tierNote + '</div>';
@@ -447,6 +447,7 @@ function kmPreview() {
 
 function kmSaveForm() {
   var prog = kmReadForm();
+  if (_kmEditIdx >= 0 && kmProgs[_kmEditIdx] && kmProgs[_kmEditIdx]._syncId) prog._syncId = kmProgs[_kmEditIdx]._syncId;
   prog.spMas = kmGetChecked();
   prog.stackable = _kmStackable;
   if (window.markEntityUpdated) markEntityUpdated(prog);
@@ -519,7 +520,7 @@ function renderKMTab() {
 }
 
 function kmToggle(i) { kmProgs[i].active = !kmProgs[i].active; if (window.markEntityUpdated) markEntityUpdated(kmProgs[i]); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
-function kmDel(i) { kmProgs.splice(i, 1); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
+function kmDel(i) { var prog = kmProgs[i]; if (prog && window.syncTrackEntityDeletion) syncTrackEntityDeletion('promotions.json', prog); kmProgs.splice(i, 1); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
 function kmEdit(i) { kmOpenModal(kmProgs[i], i); }
 
 function kmBuildText(prog) {
@@ -569,7 +570,7 @@ function importKM() {
     reader.onload = function(ev) {
       try {
         var data = JSON.parse(ev.target.result);
-        if (!Array.isArray(data)) throw new Error('File không đúng định dạng');
+        if (!validatePromotionList(data)) throw new Error('File CT KM không hợp lệ');
         data = normalizePromotionList(data);
         var action = true; // auto thay thế
         if (action) kmProgs = data;
@@ -587,10 +588,10 @@ async function loadKMFromURL() {
   var url = prompt('Nhập URL raw GitHub (vd: https://raw.githubusercontent.com/.../promotions.json)');
   if (!url) return;
   try {
-    var res = await fetch(url);
+    var res = await fetch(url + (url.indexOf('?') >= 0 ? '&' : '?') + '_t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
-    if (!Array.isArray(data)) throw new Error('Dữ liệu không phải mảng');
+    if (!validatePromotionList(data)) throw new Error('Dữ liệu CT KM không hợp lệ');
     data = normalizePromotionList(data);
     var action = true; // auto thay thế
     if (action) kmProgs = data;

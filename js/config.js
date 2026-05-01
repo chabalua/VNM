@@ -33,6 +33,7 @@ var LS_KEYS = {
   ORDERS:        'vnm_orders_v2',
   LEGACY_KH:     'vnm_kh',
   GITHUB_SYNC:   'vnm_github_sync',
+  SYNC_SHADOW:   'vnm_sync_master_shadow_v1',
   THEME:         'vnm_theme_mode',
   KPI_CONFIG:    'vnm_kpi_config_v1',
   CT_CONFIG:     'vnm_ct_config',
@@ -60,6 +61,16 @@ function escapeHtml(value) {
     .replace(/'/g, '&#39;');
 }
 window.escapeHtml = escapeHtml;
+
+function escapeHtmlAttr(value) {
+  return String(value == null ? '' : value)
+    .replace(/&/g, '&amp;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;');
+}
+window.escapeHtmlAttr = escapeHtmlAttr;
 
 // ============================================================
 // TOAST
