@@ -326,7 +326,7 @@ function addCart(ma) {
   var oldL = cart[ma] ? cart[ma].qL : 0;
 
   cart[ma] = { qT: qT, qL: qL };
-  LS.set(LS_KEYS.CART, cart);
+  saveCart();
 
   var card = document.getElementById('card_' + ma);
   if(card) {
@@ -425,22 +425,13 @@ window.toggleCard = function(ma) {
     var p = null;
     for(var i=0; i<SP.length; i++){ if(SP[i].ma===ma){ p=SP[i]; break; } }
     if(p) {
-      if(!p.kmRules) {
-        var base = _getBaseProg();
-        var spKM = __calcSPKM(p, base, true);
-        p.kmRules = spKM.rules;
-      }
-      var kmTop = _calcKM_orig(p, 1, 0, p.kmRules);
+      var kmTop = calcKM(p, 1, 0);
       var ckMax = (kmTop && kmTop.disc > 0) ? Math.round((kmTop.disc / (p.giaNYLon * p.slThung))*100) : 0;
       var tbl = buildPriceTable(p, kmTop);
       var info = '<div style="margin-bottom:12px">';
       if(ckMax>0) info += '<span style="display:inline-block;padding:2px 6px;background:var(--danger-soft);color:var(--danger-text);border-radius:4px;font-size:11px;font-weight:600;margin-right:6px">KM: ' + ckMax + '%</span>';
-      
-      var rulesAsc = p.kmRules ? p.kmRules.slice().sort(function(a,b){ return (a.ck||0) - (b.ck||0); }) : [];
-      if(rulesAsc.length > 0) {
-        var tr = rulesAsc[0];
-        if(tr && tr.name) info += '<span style="font-size:11.5px;color:var(--text-tertiary)">CT: ' + escapeHtml(tr.name) + '</span>';
-      }
+      var ctName = kmTop.appliedPromos && kmTop.appliedPromos.length ? kmTop.appliedPromos[0] : '';
+      if(ctName) info += '<span style="font-size:11.5px;color:var(--text-tertiary)">CT: ' + escapeHtml(ctName) + '</span>';
       info += '</div>';
 
       expandEl.innerHTML = info + tbl;
@@ -508,7 +499,7 @@ function onQty(ma) {
     if(kmInfo.desc) ht += '<div class="km-alert-title">' + escapeHtml(kmInfo.desc) + '</div>';
     if(kmInfo.bonusItems.length > 0) {
       kmInfo.bonusItems.forEach(function(bi) {
-        ht += '<div class="km-desc">🎁 +' + bi.q + ' ' + escapeHtml(bi.u) + ' ' + escapeHtml(bi.ten) + '</div>';
+        ht += '<div class="km-desc">🎁 +' + bi.qty + ' ' + escapeHtml(bi.name || '') + '</div>';
       });
     }
     ht += '</div>';

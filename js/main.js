@@ -471,6 +471,14 @@ function getDashboardData(monthKey) {
   };
 }
 
+function fmtShort(n) {
+  n = Math.round(n || 0);
+  if (n >= 1e9) return (n / 1e9).toFixed(1).replace(/\.0$/, '') + 'T';
+  if (n >= 1e6) return (n / 1e6).toFixed(0) + 'M';
+  if (n >= 1e3) return (n / 1e3).toFixed(0) + 'K';
+  return String(n);
+}
+
 function renderHomeDashboard() {
   var data = getDashboardData(_homeMonthKey);
   var targets = data.targets || getKpiTargets(data.monthKey);
@@ -480,15 +488,15 @@ function renderHomeDashboard() {
 
   var pctSales = calcProgress(data.totalSales, targets.totalSales || 1);
 
-  hero.innerHTML = 
+  hero.innerHTML =
     '<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px">' +
       '<div style="display:flex;justify-content:space-between;align-items:baseline">' +
         '<div style="font-size:11.5px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.06em">Doanh số tháng</div>' +
         '<div style="font-size:11px;color:var(--text-tertiary);font-variant-numeric:tabular-nums">' + pctSales + '% / mục tiêu</div>' +
       '</div>' +
-      '<div style="font-size:32px;font-weight:600;color:var(--text);letter-spacing:-0.025em;margin-top:6px;font-variant-numeric:tabular-nums">' +
-        fmt(data.totalSales).replace(/,000$/, 'k') +
-        '<span style="color:var(--text-tertiary);font-weight:500;font-size:18px"> / ' + fmt(targets.totalSales || 0).replace(/,000$/, 'k') + ' đ</span>' +
+      '<div style="font-size:32px;font-weight:600;color:var(--text);letter-spacing:-0.025em;margin-top:6px;line-height:1.1">' +
+        fmtShort(data.totalSales) +
+        '<span style="color:var(--text-tertiary);font-weight:500;font-size:16px"> / ' + fmtShort(targets.totalSales || 0) + ' đ</span>' +
       '</div>' +
       '<div style="margin-top:12px">' +
         '<div class="progress-track" style="height:6px;background:var(--border-subtle);border-radius:99px;overflow:hidden">' +
