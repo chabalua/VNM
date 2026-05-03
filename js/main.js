@@ -1,6 +1,6 @@
 // Khởi tạo, sự kiện chính, tab switching
 
-var NAV_TABS = ['home', 'order', 'don', 'ai', 'kh', 'adm'];
+var NAV_TABS = ['home', 'order', 'kh', 'ai', 'adm'];
 var ALL_PAGES = ['home', 'order', 'don', 'adm', 'km', 'ai', 'kh'];
 var _homeMonthKey = getCurrentMonthKey();
 var _kpiEditorMonthKey = '';
@@ -54,8 +54,25 @@ var KPI_RULE_META = [
   { key: 'catD', label: 'cat D', help: 'Mặc định lấy toàn bộ nhóm D, có thể giới hạn bằng mã SP.' }
 ];
 var _brandRuleDraft = [];
+var _layoutResizeTimer = null;
+
+function uiIcon(name) {
+  var icons = {
+    cart: '<svg viewBox="0 0 24 24"><path d="M3 4h2l2.4 11.5a2 2 0 0 0 2 1.5h7.5a2 2 0 0 0 2-1.5L21 7H6"></path><circle cx="9" cy="20" r="1.2"></circle><circle cx="18" cy="20" r="1.2"></circle></svg>',
+    users: '<svg viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"></path></svg>',
+    list: '<svg viewBox="0 0 24 24"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>',
+    target: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><circle cx="12" cy="12" r="6"></circle><circle cx="12" cy="12" r="2"></circle></svg>',
+    cloud: '<svg viewBox="0 0 24 24"><path d="M18 10h-1.26A8 8 0 1 0 9 20h9a5 5 0 0 0 0-10Z"></path></svg>',
+    edit: '<svg viewBox="0 0 24 24"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path></svg>',
+    chart: '<svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"></line><line x1="18" y1="20" x2="18" y2="4"></line><line x1="6" y1="20" x2="6" y2="16"></line></svg>'
+  };
+  return '<span class="ui-icon" aria-hidden="true">' + (icons[name] || '') + '</span>';
+}
 
 function gotoTab(t) {
+  window._currTab = t === 'km' ? 'adm' : t;
+  if (window.renderDesktopSidebar) window.renderDesktopSidebar();
+  if (window.renderMobileTabBar) window.renderMobileTabBar();
   var activeNav = (t === 'km') ? 'adm' : t;
   ALL_PAGES.forEach(function(x) {
     var page = document.getElementById('page-' + x);
@@ -117,6 +134,43 @@ function getThemeMode() {
   } catch (e) {
     return 'light';
   }
+}
+
+function isDesktopLayout() {
+  return window.innerWidth >= 1100;
+}
+
+function getLayoutMode() {
+  if (window.innerWidth >= 1100) return 'desktop';
+  if (window.innerWidth >= 768) return 'tablet';
+  return 'mobile';
+}
+
+function updateResponsiveLayout() {
+  document.documentElement.setAttribute('data-layout', getLayoutMode());
+}
+
+function rerenderActiveTab() {
+  var active = 'home';
+  ALL_PAGES.forEach(function(pageId) {
+    var page = document.getElementById('page-' + pageId);
+    if (page && page.classList.contains('on')) active = pageId;
+  });
+  if (active === 'home') renderHomeDashboard();
+  if (active === 'order' && window.renderOrder) renderOrder();
+  if (active === 'don' && window.renderDon) renderDon();
+  if (active === 'kh' && window.renderCusTab) { renderRoutePills(); renderCusTab(); }
+  if (active === 'adm' && window.renderAdm) { renderSettingsOverview(); renderAdm(); }
+  if (active === 'km' && window.renderKMTab) renderKMTab();
+  if (active === 'ai' && window.renderAITab) renderAITab();
+}
+
+function handleResponsiveResize() {
+  updateResponsiveLayout();
+  clearTimeout(_layoutResizeTimer);
+  _layoutResizeTimer = setTimeout(function() {
+    rerenderActiveTab();
+  }, 120);
 }
 
 function applyTheme(mode, skipPersist) {
@@ -424,10 +478,35 @@ function renderHomeDashboard() {
   var content = document.getElementById('home-content');
   if (!hero || !content) return;
 
-  hero.innerHTML = '' +
-    '<div class="hero-metric-card"><div class="hero-metric-label">Doanh số tháng</div><div class="hero-metric-value">' + fmt(data.totalSales) + 'đ</div></div>' +
-    '<div class="hero-metric-card"><div class="hero-metric-label">Đơn trong tháng</div><div class="hero-metric-value">' + data.monthOrders + '</div></div>' +
-    '<div class="hero-metric-card"><div class="hero-metric-label">KH active</div><div class="hero-metric-value">' + data.activeCustomers + '</div></div>';
+  var pctSales = calcProgress(data.totalSales, targets.totalSales || 1);
+
+  hero.innerHTML = 
+    '<div style="background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px">' +
+      '<div style="display:flex;justify-content:space-between;align-items:baseline">' +
+        '<div style="font-size:11.5px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.06em">Doanh số tháng</div>' +
+        '<div style="font-size:11px;color:var(--text-tertiary);font-variant-numeric:tabular-nums">' + pctSales + '% / mục tiêu</div>' +
+      '</div>' +
+      '<div style="font-size:32px;font-weight:600;color:var(--text);letter-spacing:-0.025em;margin-top:6px;font-variant-numeric:tabular-nums">' +
+        fmt(data.totalSales).replace(/,000$/, 'k') +
+        '<span style="color:var(--text-tertiary);font-weight:500;font-size:18px"> / ' + fmt(targets.totalSales || 0).replace(/,000$/, 'k') + ' đ</span>' +
+      '</div>' +
+      '<div style="margin-top:12px">' +
+        '<div class="progress-track" style="height:6px;background:var(--border-subtle);border-radius:99px;overflow:hidden">' +
+          '<div class="progress-fill" style="height:100%;background:var(--accent);width:' + Math.min(100, pctSales) + '%"></div>' +
+        '</div>' +
+      '</div>' +
+      '<div style="display:flex;gap:16px;margin-top:14px;padding-top:14px;border-top:1px solid var(--border-subtle)">' +
+        '<div>' +
+          '<div style="font-size:11px;color:var(--text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.04em">Đơn</div>' +
+          '<div style="font-size:18px;font-weight:600;color:var(--text);letter-spacing:-0.02em;margin-top:2px">' + data.monthOrders + '</div>' +
+        '</div>' +
+        '<div style="width:1px;background:var(--border-subtle)"></div>' +
+        '<div>' +
+          '<div style="font-size:11px;color:var(--text-tertiary);font-weight:500;text-transform:uppercase;letter-spacing:.04em">KH active</div>' +
+          '<div style="font-size:18px;font-weight:600;color:var(--text);letter-spacing:-0.02em;margin-top:2px">' + data.activeCustomers + '</div>' +
+        '</div>' +
+      '</div>' +
+    '</div>';
 
   var groups = KPI_GROUP_META.map(function(group) {
     return {
@@ -448,29 +527,49 @@ function renderHomeDashboard() {
   var syncMeta = data.syncState.lastPull ? ('Pull gần nhất: ' + new Date(data.syncState.lastPull).toLocaleString('vi-VN')) : 'Chưa pull dữ liệu cloud';
 
   var html = '<div class="dashboard-grid">';
-  html += '<div class="dashboard-card dashboard-card-wide">';
-  html += '<div class="dashboard-card-head"><div><div class="dashboard-kicker">Thống kê KPI</div><div class="dashboard-title">' + data.monthLabel + '</div></div><div class="dashboard-status">ASO ' + data.avgSku.toFixed(1) + '</div></div>';
-  html += '<div class="dashboard-toolbar"><label class="dashboard-month-filter"><span>Tháng</span><input type="month" value="' + data.monthKey + '" onchange="setHomeMonth(this.value)"></label></div>';
+  
+  html += '<div class="dashboard-toolbar" style="margin-bottom:12px"><label class="dashboard-month-filter" style="display:flex;align-items:center;gap:8px;font-size:13px;font-weight:500"><span style="color:var(--text-tertiary)">Tháng</span><input type="month" value="' + data.monthKey + '" onchange="setHomeMonth(this.value)" style="border:1px solid var(--border);border-radius:6px;padding:4px;background:var(--surface);color:var(--text)"></label></div>';
+
   groups.forEach(function(group) {
-    html += '<div class="kpi-group">';
-    html += '<div class="kpi-group-title">' + group.title + '</div>';
-    html += '<div class="kpi-table">';
-    group.rows.forEach(function(row) {
+    if (group.title === 'Chỉ tiêu tháng') return;
+
+    html += '<div style="margin-bottom:24px">';
+    html += '<div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;padding:0 4px">';
+    html += '<div style="font-size:13px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em">' + group.title + '</div>';
+    html += '</div>';
+
+    html += '<div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">';
+    group.rows.forEach(function(row, idx) {
       var pct = calcProgress(row.actual, row.target);
-      html += '<div class="kpi-row"><div class="kpi-main"><div class="kpi-name">' + row.label + (row.note ? ' <span class="kpi-unit-note">' + row.note + '</span>' : '') + '</div><div class="kpi-values"><span>Mục tiêu ' + dashboardFormatValue(row.target, row.kind) + '</span><span>Thực hiện ' + dashboardFormatValue(row.actual, row.kind) + '</span></div></div><div class="kpi-progress"><div class="kpi-progress-bar"><span style="width:' + pct + '%"></span></div><div class="kpi-progress-label">' + pct + '%</div></div></div>';
+      var progressColor = pct >= 80 ? 'var(--success)' : (pct >= 50 ? 'var(--accent)' : 'var(--text-tertiary)');
+      var progressTextClass = pct >= 80 ? 'color:var(--success-text)' : (pct >= 50 ? 'color:var(--text)' : 'color:var(--text-tertiary)');
+      
+      html += '<div style="padding:14px 16px;border-top:' + (idx === 0 ? 'none' : '1px solid var(--border-subtle)') + '">';
+      html += '<div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:8px">';
+      html += '<div style="font-size:13.5px;font-weight:500;color:var(--text);letter-spacing:-0.01em">' + row.label + '</div>';
+      html += '<div style="font-size:12px;font-weight:600;font-variant-numeric:tabular-nums;' + progressTextClass + '">' + pct + '%</div>';
+      html += '</div>';
+      html += '<div class="progress-track" style="height:4px;background:var(--border-subtle);border-radius:99px;overflow:hidden">';
+      html += '<div class="progress-fill" style="height:100%;width:' + Math.min(100, pct) + '%;background:' + progressColor + '"></div>';
+      html += '</div>';
+      html += '<div style="display:flex;justify-content:space-between;font-size:11px;color:var(--text-tertiary);margin-top:6px">';
+      html += '<span>Thực: ' + dashboardFormatValue(row.actual, row.kind) + '</span>';
+      html += '<span>Mục tiêu: ' + dashboardFormatValue(row.target, row.kind) + '</span>';
+      html += '</div>';
+      html += '</div>';
     });
     html += '</div></div>';
   });
   html += '</div></div>';
 
-  html += '<div class="dashboard-card">';
-  html += '<div class="dashboard-card-head"><div><div class="dashboard-kicker">Hành động nhanh</div><div class="dashboard-title">Điều hướng</div></div></div>';
-  html += '<div class="action-grid">';
-  html += '<button class="action-card" onclick="gotoTab(\'order\')"><span class="action-icon">◫</span><span>Đặt hàng</span></button>';
-  html += '<button class="action-card" onclick="gotoTab(\'kh\')"><span class="action-icon">◎</span><span>Khách hàng</span></button>';
-  html += '<button class="action-card" onclick="gotoTab(\'don\')"><span class="action-icon">☰</span><span>Đơn hàng</span></button>';
-  html += '<button class="action-card" onclick="openKpiSettings(\'' + data.monthKey + '\')"><span class="action-icon">◔</span><span>Mục tiêu KPI</span></button>';
-  html += '<button class="action-card" onclick="syncOpenSettings()"><span class="action-icon">☁</span><span>Cloud</span></button>';
+  html += '<div style="margin-bottom:24px">';
+  html += '<div style="font-size:13px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:12px;padding:0 4px">Điều hướng nhanh</div>';
+  html += '<div class="action-grid" style="display:grid;grid-template-columns:1fr 1fr;gap:12px">';
+  html += '<button class="action-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:500;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" onclick="gotoTab(\'order\')">' + uiIcon('cart') + '<span>Đặt hàng</span></button>';
+  html += '<button class="action-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:500;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" onclick="gotoTab(\'kh\')">' + uiIcon('users') + '<span>Khách hàng</span></button>';
+  html += '<button class="action-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:500;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" onclick="gotoTab(\'don\')">' + uiIcon('list') + '<span>Đơn hàng</span></button>';
+  html += '<button class="action-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:500;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" onclick="openKpiSettings(\'' + data.monthKey + '\')">' + uiIcon('target') + '<span>Mục tiêu KPI</span></button>';
+  html += '<button class="action-card" style="background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:14px;text-align:center;font-size:13px;font-weight:500;color:var(--text);display:flex;flex-direction:column;align-items:center;gap:8px;cursor:pointer" onclick="syncOpenSettings()">' + uiIcon('cloud') + '<span>Cloud</span></button>';
   html += '</div></div>';
 
   html += '<div class="dashboard-card">';
@@ -628,6 +727,7 @@ function renderRoutePills() {
 }
 
 window.onload = async function() {
+  updateResponsiveLayout();
   applyTheme(getThemeMode(), true);
   await initData();
   if (window.ctConfigLoad) ctConfigLoad();
@@ -642,6 +742,7 @@ window.onload = async function() {
   if (document.getElementById('page-adm').classList.contains('on')) renderAdm();
   if (document.getElementById('page-km').classList.contains('on')) renderKMTab();
   if (document.getElementById('page-kh').classList.contains('on')) { renderRoutePills(); renderCusTab(); }
+  window.addEventListener('resize', handleResponsiveResize);
 };
 
 window.gotoTab = gotoTab;
@@ -661,3 +762,12 @@ window.brandRulesDelete = brandRulesDelete;
 window.brandRulesMove = brandRulesMove;
 window.brandRulesReset = brandRulesReset;
 window.brandRulesSave = brandRulesSave;
+window.uiIcon = uiIcon;
+window.isDesktopLayout = isDesktopLayout;
+window.getLayoutMode = getLayoutMode;
+
+
+
+
+
+

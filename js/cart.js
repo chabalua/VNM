@@ -771,6 +771,56 @@ function renderDon() {
   el.innerHTML = html;
 }
 
+function buildDesktopOrderSidebarHTML() {
+  var items = getItems();
+  var orders = getOrders();
+  var html = '';
+
+  html += '<div class="desktop-panel-card desktop-cart-panel">';
+  html += '<div class="desktop-panel-head"><div><div class="desktop-panel-kicker">Giỏ hàng</div><div class="desktop-panel-title">Tóm tắt đơn</div></div></div>';
+
+  if (items.length) {
+    var totGoc = items.reduce(function(sum, item) { return sum + item.gocTotal; }, 0);
+    var totAfter = items.reduce(function(sum, item) { return sum + item.afterKM; }, 0);
+    var orderKM = calcOrderKM(items);
+    var total = totAfter - orderKM.disc;
+    html += '<div class="desktop-cart-total">' + fmt(total) + 'đ</div>';
+    html += '<div class="desktop-cart-meta">' + items.length + ' SP · VAT ' + fmt(Math.round(total * 1.015)) + 'đ</div>';
+    html += '<div class="desktop-cart-items">';
+    items.slice(0, 6).forEach(function(item) {
+      html += '<div class="desktop-cart-row">';
+      html += '<div class="desktop-cart-name">' + escapeHtml(item.ten) + '</div>';
+      html += '<div class="desktop-cart-sub">' + item.totalLon + ' ' + escapeHtml(item.donvi) + '</div>';
+      html += '<div class="desktop-cart-value">' + fmt(item.afterKM) + 'đ</div>';
+      html += '</div>';
+    });
+    html += '</div>';
+    html += '<div class="desktop-cart-actions">';
+    html += '<button class="desktop-primary-btn" onclick="gotoTab(\'don\')">Xem giỏ đầy đủ</button>';
+    html += '<button class="desktop-secondary-btn" onclick="submitOrder()">Xác nhận đơn</button>';
+    html += '</div>';
+  } else {
+    html += '<div class="desktop-empty">Chưa có sản phẩm trong giỏ. Chọn số lượng ở danh sách bên trái để tạo đơn.</div>';
+  }
+  html += '</div>';
+
+  html += '<div class="desktop-panel-card">';
+  html += '<div class="desktop-panel-head"><div><div class="desktop-panel-kicker">Lịch sử</div><div class="desktop-panel-title">Đơn gần đây</div></div></div>';
+  if (orders.length) {
+    orders.slice(0, 5).forEach(function(order) {
+      html += '<div class="desktop-order-history-row">';
+      html += '<div><div class="desktop-order-history-code">' + escapeHtml(order.khTen || order.khMa || 'Không rõ KH') + '</div><div class="desktop-order-history-meta">' + escapeHtml((order.ngay || '').toString()) + '</div></div>';
+      html += '<div class="desktop-order-history-value">' + fmt(order.tong || 0) + 'đ</div>';
+      html += '</div>';
+    });
+  } else {
+    html += '<div class="desktop-empty">Chưa có đơn hàng nào được lưu.</div>';
+  }
+  html += '</div>';
+
+  return html;
+}
+
 function filterOrders(period) {
   _ordersHistoryFilter = period || 'all';
   var el = document.getElementById('orders-history'); if (!el) return;
@@ -1073,3 +1123,4 @@ window.deleteOrder = deleteOrder;
 window.handleOrderActionClick = handleOrderActionClick;
 window.filterOrders = filterOrders;
 window.onOrderDateChange = onOrderDateChange;
+window.buildDesktopOrderSidebarHTML = buildDesktopOrderSidebarHTML;

@@ -1,6 +1,6 @@
 // ============================================================
-// UI v7 — Đặt hàng (brand filter + KH selector) + Quản lý SP
-// Redesign: card dropdown, price table 3 cột, CT strip inline
+// UI v8 — Đặt hàng (brand filter + KH selector) + Quản lý SP
+// Redesign: Phase 3.3 MobileOrder & DesktopOrder setup
 // ============================================================
 
 var nhomF = { order: '', adm: '' };
@@ -162,8 +162,11 @@ function debounceRender(tab) {
 function setNhom(el, tab, nhom) {
   nhomF[tab] = nhom;
   brandF = '';
-  el.closest('.pills').querySelectorAll('.pill').forEach(function(p) { p.className = 'pill'; });
-  el.className = 'pill on-' + (nhom || 'all');
+  // Toggle tag styles
+  el.closest('.pills').querySelectorAll('.pill').forEach(function(p) {
+    p.className = p.className.replace('tag-soft', 'tag-outline').replace('on-all', '');
+  });
+  el.className = el.className.replace('tag-outline', 'tag-soft on-all');
   if (tab === 'order') { renderBrandPills(); renderOrder(); }
   else renderAdm();
 }
@@ -181,7 +184,7 @@ function renderBrandPills() {
   el.style.display = 'flex';
   el.innerHTML = brands.map(function(b) {
     var active = brandF === b;
-    return '<div class="pill ' + (active ? 'on-C' : '') + '" onclick="setBrand(\'' + escapeHtmlAttr(b) + '\')">' + escapeHtml(b) + '</div>';
+    return '<div class="tag pill ' + (active ? 'tag-soft' : 'tag-outline') + '" onclick="setBrand(\'' + escapeHtmlAttr(b) + '\')" style="cursor:pointer;height:26px;padding:0 12px;border-radius:14px">' + escapeHtml(b) + '</div>';
   }).join('');
 }
 
@@ -192,31 +195,36 @@ function renderCustomerSelector() {
   var el = document.getElementById('cus-selector'); if (!el) return;
   var cusList = getCUS();
   if (!cusList.length) {
-    el.innerHTML = '<div style="font-size:11px;color:var(--n4);padding:4px 0 2px">Chưa có KH. Vào tab Khách hàng để thêm.</div>';
+    el.innerHTML = '<div style="font-size:11px;color:var(--text-tertiary);padding:4px 0 2px">Chưa có KH. Vào tab Khách hàng để thêm.</div>';
     return;
   }
   var selected = cusList.find(function(k) { return k.ma === _selectedCustomerMa; });
   var routes = (typeof ROUTES !== 'undefined' && Array.isArray(ROUTES)) ? ROUTES : [];
 
-  // Build selector box
-  var html = '<div class="cus-selector-wrap">';
-  html += '<div class="cus-selector-box' + (selected ? ' has-kh' : '') + '" onclick="document.getElementById(\'order-kh-select\').focus()">';
-  html += '<div class="cus-dot' + (selected ? ' active' : '') + '"></div>';
+  // Build selector box matches Phase 3.3 mockups
+  var html = '<div class="cus-selector-wrap" style="position:relative">';
+  html += '<div class="cus-selector-box' + (selected ? ' has-kh' : '') + '" onclick="document.getElementById(\'order-kh-select\').focus()" style="display:flex;align-items:center;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);height:44px;padding:0 12px;gap:8px;">';
+  
   if (selected) {
-    html += '<div class="cus-sel-name">' + escapeHtml(selected.ten || selected.ma) + '</div>';
+    html += '<div class="avatar avatar-sm rounded" style="background:var(--cat1);color:#fff">' + escapeHtml(selected.ten ? selected.ten.charAt(0).toUpperCase() : 'K') + '</div>';
+    html += '<div style="flex:1;min-width:0;display:flex;flex-direction:column;justify-content:center">';
+    html += '<div style="font-size:13px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;line-height:1.2">' + escapeHtml(selected.ten || selected.ma) + '</div>';
     var tags = [];
-    if (selected.programs && selected.programs.vnmShop && selected.programs.vnmShop.dangKy) tags.push('VNM ' + (selected.programs.vnmShop.mucBayBan || ''));
-    if (selected.programs && selected.programs.vipShop && selected.programs.vipShop.dangKy) tags.push('VIP ' + (selected.programs.vipShop.mucBayBan || ''));
+    if (selected.programs && selected.programs.vnmShop && selected.programs.vnmShop.dangKy) tags.push('VNM Shop');
+    if (selected.programs && selected.programs.vipShop && selected.programs.vipShop.dangKy) tags.push('VIP Shop');
     if (selected.programs && selected.programs.sbpsShop && selected.programs.sbpsShop.dangKy) tags.push('SBPS');
-    if (tags.length) html += '<div class="cus-sel-tags">' + tags.map(function(t) { return '<span class="cus-sel-tag">' + escapeHtml(t) + '</span>'; }).join('') + '</div>';
-    html += '<button class="cus-clear-btn" onclick="event.stopPropagation();onSelectCustomer(\'\')">✕</button>';
+    var tagStr = tags.length ? tags.join(' · ') : 'Khách hàng thường';
+    html += '<div style="font-size:11px;color:var(--text-tertiary);line-height:1.2;margin-top:2px;">' + escapeHtml(tagStr) + '</div>';
+    html += '</div>';
+    html += '<button style="background:none;border:none;color:var(--text-tertiary);padding:4px;cursor:pointer" onclick="event.stopPropagation();onSelectCustomer(\'\')">' + (window.renderIcon ? window.renderIcon('x', 14) : '✕') + '</button>';
   } else {
-    html += '<div class="cus-sel-empty">Chọn khách hàng...</div>';
+    html += '<div style="flex:1;font-size:13px;color:var(--text-tertiary);display:flex;align-items:center;gap:8px">' + (window.renderIcon ? window.renderIcon('users', 16) : '') + ' Chọn khách hàng...</div>';
+    html += '<div style="color:var(--text-tertiary)">' + (window.renderIcon ? window.renderIcon('chevronD', 14) : '▼') + '</div>';
   }
   html += '</div>';
 
   // Dropdown select (hidden visual, real select)
-  html += '<select id="order-kh-select" onchange="onSelectCustomer(this.value)">';
+  html += '<select id="order-kh-select" style="opacity:0;position:absolute;top:0;left:0;width:100%;height:100%;pointer-events:none;" onchange="onSelectCustomer(this.value)">';
   html += '<option value="">— Chọn khách hàng —</option>';
   var grouped = {};
   cusList.forEach(function(k) { var r = k.tuyen || '_'; if (!grouped[r]) grouped[r] = []; grouped[r].push(k); });
@@ -265,47 +273,79 @@ function buildPriceTable(p, km) {
 
   var rows = '';
   // Thùng row (highlight)
-  rows += '<tr class="ptbl-row ptbl-main">';
-  rows += '<td>Thùng ' + p.slThung + '</td>';
-  rows += '<td>' + fmt(thungGoc) + 'đ</td>';
-  rows += '<td>' + (hasDiscount ? fmt(thungKM) + 'đ' : '—') + '</td>';
-  rows += '<td>' + fmt(thungVat) + 'đ</td>';
-  rows += '</tr>';
+  rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;border-bottom:1px solid var(--border-subtle);background:var(--accent-soft);align-items:center;gap:4px">';
+  rows += '<div style="font-weight:600;font-size:12.5px;color:var(--accent-text)">Thùng ' + p.slThung + '</div>';
+  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:-line-through">' + fmt(thungGoc) + '</div>';
+  rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + (hasDiscount ? fmt(thungKM) + 'đ' : '—') + '</div>';
+  rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + fmt(thungVat) + 'đ</div>';
+  rows += '</div>';
 
   // Lốc row (nếu có)
   if (p.locSize) {
     var locGoc = hopGoc * p.locSize;
     var locKM = hopKM * p.locSize;
     var locVat = Math.round(locKM * (1 + VAT_RATE));
-    rows += '<tr class="ptbl-row">';
-    rows += '<td>' + (p.locLabel || 'Lốc') + ' ' + p.locSize + '</td>';
-    rows += '<td>' + fmt(locGoc) + 'đ</td>';
-    rows += '<td>' + (hasDiscount ? fmt(locKM) + 'đ' : '—') + '</td>';
-    rows += '<td>' + fmt(locVat) + 'đ</td>';
-    rows += '</tr>';
+    rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;border-bottom:1px solid var(--border-subtle);align-items:center;gap:4px">';
+    rows += '<div style="font-size:12.5px;color:var(--text)">' + (p.locLabel || 'Lốc') + ' ' + p.locSize + '</div>';
+    rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:-line-through">' + fmt(locGoc) + '</div>';
+    rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (hasDiscount ? fmt(locKM) : '—') + '</div>';
+    rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + fmt(locVat) + '</div>';
+    rows += '</div>';
   }
 
-  // Đơn vị lẻ
-  rows += '<tr class="ptbl-row">';
-  rows += '<td>' + escapeHtml(p.donvi) + '</td>';
-  rows += '<td>' + fmt(hopGoc) + 'đ</td>';
-  rows += '<td>' + (hasDiscount ? fmt(hopKM) + 'đ' : '—') + '</td>';
-  rows += '<td>' + fmt(hopVat) + 'đ</td>';
-  rows += '</tr>';
+  // Hộp row
+  rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;align-items:center;gap:4px">';
+  rows += '<div style="font-size:12.5px;color:var(--text)">Hộp/Lon</div>';
+  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:-line-through">' + fmt(hopGoc) + '</div>';
+  rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (hasDiscount ? fmt(hopKM) : '—') + '</div>';
+  rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + fmt(hopVat) + '</div>';
+  rows += '</div>';
 
-  var saveRow = '';
-  if (km.desc) {
-    var saveText = km.desc;
-    if (savePerThung > 0) saveText += ' · Tiết kiệm ' + fmt(savePerThung) + 'đ/thùng';
-    saveRow = '<tr><td colspan="4" class="ptbl-save">' + escapeHtml(saveText) + '</td></tr>';
-  } else if (savePerThung > 0) {
-    saveRow = '<tr><td colspan="4" class="ptbl-save">Tiết kiệm ' + fmt(savePerThung) + 'đ/thùng</td></tr>';
+  var header = '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border-subtle);border-radius:8px 8px 0 0;font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;gap:4px"><div>Quy cách</div><div>Gốc</div><div>+KM</div><div>+VAT</div></div>';
+
+  var body = '<div style="background:var(--bg);border:1px solid var(--border-subtle);border-radius:8px;margin-bottom:12px">' + header + rows + '</div>';
+
+  if(savePerThung > 0) {
+    body += '<div style="margin-top:-8px;margin-bottom:12px;font-size:11px;color:var(--success-text);display:flex;align-items:center;gap:4px;"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path></svg> Tiết kiệm <b>' + fmt(savePerThung) + 'đ</b> mỗi thùng</div>';
+  }
+  return body;
+}
+
+// ============================================================
+// ADD CART (Button Thêm)
+// ============================================================
+function addCart(ma) {
+  var b = document.getElementById('b_' + ma);
+  var eT = document.getElementById('qT_' + ma);
+  var eL = document.getElementById('qL_' + ma);
+  var qT = parseInt((eT && eT.value) || 0, 10);
+  var qL = parseInt((eL && eL.value) || 0, 10);
+  if(qT===0 && qL===0) return;
+
+  var oldT = cart[ma] ? cart[ma].qT : 0;
+  var oldL = cart[ma] ? cart[ma].qL : 0;
+
+  cart[ma] = { qT: qT, qL: qL };
+  LS.set(LS_KEYS.CART, cart);
+
+  var card = document.getElementById('card_' + ma);
+  if(card) {
+    card.classList.add('inCart');
+    // green flash
+    card.style.transition = 'background-color 0.2s ease, border-color 0.2s ease';
+    var originalBg = card.style.backgroundColor;
+    var originalBorder = card.style.borderColor;
+    card.style.backgroundColor = 'var(--success-soft)';
+    card.style.borderColor = 'var(--success)';
+    
+    setTimeout(function() {
+      card.style.backgroundColor = originalBg;
+      card.style.borderColor = originalBorder;
+    }, 400);
   }
 
-  return '<table class="ptbl">' +
-    '<tr class="ptbl-hdr"><td></td><td>Gốc</td><td>Sau KM</td><td>+Thuế</td></tr>' +
-    rows + saveRow +
-    '</table>';
+  showToast('Đã cập nhật ' + ma + ' vào giỏ');
+  onQty(ma);
 }
 
 // ============================================================
@@ -369,148 +409,118 @@ function buildTLStrip(p) {
 // ============================================================
 // TOGGLE CARD
 // ============================================================
-function toggleCard(ma) {
+window.toggleCard = function(ma) {
   _cardExpanded[ma] = !_cardExpanded[ma];
   var expandEl = document.getElementById('expand_' + ma);
-  var toggleBtn = document.getElementById('toggle_' + ma);
+  var cardBtn = document.getElementById('b_' + ma);
+  
   if (!expandEl) return;
   if (_cardExpanded[ma]) {
-    expandEl.classList.add('open');
-    if (toggleBtn) toggleBtn.classList.add('open');
+    expandEl.style.display = 'block';
+    if (cardBtn) cardBtn.classList.add('expanded');
+    
+    var icon = cardBtn.querySelector('.expand-icon');
+    if (icon) icon.style.transform = 'rotate(180deg)';
+    
+    var p = null;
+    for(var i=0; i<SP.length; i++){ if(SP[i].ma===ma){ p=SP[i]; break; } }
+    if(p) {
+      if(!p.kmRules) {
+        var base = _getBaseProg();
+        var spKM = __calcSPKM(p, base, true);
+        p.kmRules = spKM.rules;
+      }
+      var kmTop = _calcKM_orig(p, 1, 0, p.kmRules);
+      var ckMax = (kmTop && kmTop.disc > 0) ? Math.round((kmTop.disc / (p.giaNYLon * p.slThung))*100) : 0;
+      var tbl = buildPriceTable(p, kmTop);
+      var info = '<div style="margin-bottom:12px">';
+      if(ckMax>0) info += '<span style="display:inline-block;padding:2px 6px;background:var(--danger-soft);color:var(--danger-text);border-radius:4px;font-size:11px;font-weight:600;margin-right:6px">KM: ' + ckMax + '%</span>';
+      
+      var rulesAsc = p.kmRules ? p.kmRules.slice().sort(function(a,b){ return (a.ck||0) - (b.ck||0); }) : [];
+      if(rulesAsc.length > 0) {
+        var tr = rulesAsc[0];
+        if(tr && tr.name) info += '<span style="font-size:11.5px;color:var(--text-tertiary)">CT: ' + escapeHtml(tr.name) + '</span>';
+      }
+      info += '</div>';
+
+      expandEl.innerHTML = info + tbl;
+    }
   } else {
-    expandEl.classList.remove('open');
-    if (toggleBtn) toggleBtn.classList.remove('open');
+    expandEl.style.display = 'none';
+    if (cardBtn) cardBtn.classList.remove('expanded');
+    var icon = cardBtn.querySelector('.expand-icon');
+    if (icon) icon.style.transform = 'rotate(0deg)';
   }
 }
 
+
+
 // ============================================================
-// onQty — tính giá preview khi nhập SL
+// PREVIEW TÍNH TIỀN
 // ============================================================
 function onQty(ma) {
-  var p = spFind(ma); if (!p) return;
-  var qT = parseInt(document.getElementById('qT_' + ma) && document.getElementById('qT_' + ma).value) || 0;
-  var qL = parseInt(document.getElementById('qL_' + ma) && document.getElementById('qL_' + ma).value) || 0;
-  if (qT < 0) { var eTQ = document.getElementById('qT_' + ma); if (eTQ) eTQ.value = 0; qT = 0; }
-  if (qL < 0) { var eLQ = document.getElementById('qL_' + ma); if (eLQ) eLQ.value = 0; qL = 0; }
+  var eT = document.getElementById('qT_' + ma);
+  var eL = document.getElementById('qL_' + ma);
+  var qT = parseInt((eT && eT.value) || 0, 10);
+  var qL = parseInt((eL && eL.value) || 0, 10);
 
-  var pv = document.getElementById('pv_' + ma); if (!pv) return;
-  if (!qT && !qL) {
-    pv.classList.remove('show');
-    // Khôi phục km-line về tất cả CT khi xóa số lượng
-    var kmLineReset = document.getElementById('km-line_' + ma);
-    if (kmLineReset) {
-      var allRefsReset = getProductPromoRefs(ma);
-      kmLineReset.innerHTML = allRefsReset.length ? renderPromoJumpChips(allRefsReset.map(function(r) { return { idx: r.idx, name: r.prog.name || 'CT KM' }; }), 4) : '';
+  var pv = document.getElementById('pv_' + ma);
+  var card = document.getElementById('card_' + ma); // For class toggle
+  var p = null;
+  for(var i=0; i<SP.length; i++) { if(SP[i].ma===ma) { p=SP[i]; break; } }
+  if(!p || !pv) return;
+
+  var totalLon = qT * p.slThung + qL;
+  if(totalLon <= 0) {
+    pv.style.display = 'none';
+    if (card) {
+      if (!cart[ma] || (cart[ma].qT === 0 && cart[ma].qL === 0)) {
+        card.classList.remove('inCart');
+      }
     }
     return;
   }
 
-  var km = calcKM(p, qT, qL);
-  var draftCart = buildDraftCartState(ma, qT, qL);
-  var draftItems = (typeof getItemsFromCartState === 'function') ? getItemsFromCartState(draftCart) : [];
-  var orderKM = (typeof calcOrderKM === 'function') ? calcOrderKM(draftItems) : { disc: 0, desc: '', bonusItems: [] };
+  if (card) card.classList.add('inCart');
 
-  // Tính draftKm sớm để dùng hopKM đã phản ánh đầy đủ order-level KM
-  var draftKm = buildOrderAwareKmDisplay(p, km, draftItems, orderKM);
-
-  var totalLon = qT * p.slThung + qL;
-  var bonusLon = km.bonus || 0;
-  var orderBonusSameQty = 0;
-  var lineBonusItems = Array.isArray(km.bonusItems) ? km.bonusItems : [];
-  (orderKM.bonusItems || []).forEach(function(bi) {
-    if (bi && bi.ma === p.ma) orderBonusSameQty += Math.max(0, parseInt(bi.qty, 10) || 0);
-  });
-  var totalNhan = totalLon + bonusLon + orderBonusSameQty;
-
+  var kmInfo = calcKM(p, qT, qL);
+  var hasDis = kmInfo.disc > 0 || kmInfo.bonus > 0 || kmInfo.bonusItems.length > 0;
+  
+  var goc = p.giaNYLon * totalLon;
+  var tgt = goc - kmInfo.disc;
   var VAT_RATE = typeof VAT !== 'undefined' ? VAT : 0.015;
-  var gocTotal = p.giaNYLon * totalLon;
-  var afterKM = gocTotal - km.disc;
-  // Giá hiệu lực = hopKM × qty mua thực tế; chỉ dùng hopKM khi có discount tiền thực sự
-  var hasMonetaryDisc = km.disc > 0 || (draftKm.orderDiscAllocated || 0) > 0 || (draftKm.orderGiftValueAllocated || 0) > 0;
-  var effectiveTotal = (hasMonetaryDisc && draftKm.hopKM < p.giaNYLon) ? draftKm.hopKM * totalLon : afterKM;
-  var vatTotal = Math.round(effectiveTotal * (1 + VAT_RATE));
-  var saved = gocTotal - effectiveTotal;
+  var vatAmt = Math.round(tgt * VAT_RATE);
+  var total = tgt + vatAmt;
+  
+  var ht = '<div class="pv-row" style="margin-bottom:8px"><span class="pv-l" style="font-weight:600">Tạm tính:</span><span class="pv-total">' + fmt(total) + 'đ</span></div>';
 
-  // Build preview HTML
-  var html = '';
-  html += '<div class="pv-row"><span class="pv-l">Mua</span><span style="font-size:11px;color:var(--n2)">' + (typeof formatQtyByCarton === 'function' ? formatQtyByCarton(p, totalLon) : totalLon + ' ' + p.donvi) + '</span></div>';
+  if (hasDis) {
+    ht += '<div class="pv-row"><span class="pv-l">Mua gốc:</span><span class="pv-v">' + fmt(goc) + 'đ</span></div>';
+    ht += '<div class="pv-row"><span class="pv-l">Trừ KM:</span><span class="pv-v" style="color:var(--danger-text)">-' + fmt(kmInfo.disc) + 'đ</span></div>';
+    ht += '<div class="pv-row"><span class="pv-l">Chưa VAT:</span><span class="pv-v">' + fmt(tgt) + 'đ</span></div>';
+  } else {
+    ht += '<div class="pv-row"><span class="pv-l">Tiền SP:</span><span class="pv-v">' + fmt(tgt) + 'đ</span></div>';
+  }
+  ht += '<div class="pv-row"><span class="pv-l">VAT (1.5%):</span><span class="pv-v">' + fmt(vatAmt) + 'đ</span></div>';
 
-  if (bonusLon > 0) {
-    html += '<div class="pv-row"><span class="pv-l">Tặng KM</span><div><span class="pv-bonus-tag">+' + (typeof formatQtyByCarton === 'function' ? formatQtyByCarton(p, bonusLon) : bonusLon + ' ' + p.donvi) + '</span></div></div>';
-  }
-  lineBonusItems.forEach(function(bi) {
-    if (bi.ma !== p.ma) {
-      html += '<div class="pv-row"><span class="pv-l">Tặng SP</span><span class="pv-bonus-tag">+' + bi.qty + ' ' + escapeHtml(bi.name || bi.ma) + '</span></div>';
-    }
-  });
-  (orderKM.bonusItems || []).forEach(function(bi) {
-    if (!bi) return;
-    if (bi.ma && bi.ma === p.ma) return; // same-product order bonus đã tính vào orderBonusSameQty
-    html += '<div class="pv-row"><span class="pv-l">Quà đơn</span><span class="pv-bonus-tag" style="background:var(--vmL);color:var(--vm);border-color:var(--vm)">+' + bi.qty + ' ' + escapeHtml(bi.name || bi.ma || 'SP tặng') + '</span></div>';
-  });
-  if (orderBonusSameQty > 0) {
-    html += '<div class="pv-row"><span class="pv-l">Quà ĐH</span><span class="pv-bonus-tag">+' + (typeof formatQtyByCarton === 'function' ? formatQtyByCarton(p, orderBonusSameQty) : orderBonusSameQty) + '</span></div>';
-  }
-  if (totalNhan !== totalLon) {
-    html += '<div class="pv-row"><span class="pv-l">Tổng nhận</span><span style="font-size:11px;font-weight:500;color:var(--n1)">' + (typeof formatQtyByCarton === 'function' ? formatQtyByCarton(p, totalNhan) : totalNhan + ' ' + p.donvi) + '</span></div>';
-  }
-
-  html += '<div class="pv-divider"></div>';
-  if (saved > 0) {
-    html += '<div class="pv-row"><span class="pv-l">Giá gốc</span><span style="font-size:11px;color:var(--n3)">' + fmt(gocTotal) + 'đ</span></div>';
-  }
-  html += '<div class="pv-row"><span class="pv-l">Sau KM</span><span class="pv-v">' + fmt(effectiveTotal) + 'đ</span></div>';
-  if (orderKM.disc > 0 && (draftKm.orderDiscAllocated || 0) > 0) {
-    // CK đơn hàng đã gộp vào hopKM — hiện ghi chú nhỏ để rõ ràng
-    html += '<div style="font-size:10px;color:var(--vm);margin:-4px 0 4px;padding:0 2px;line-height:1.4">↳ Bao gồm CK đơn <b>-' + fmt(draftKm.orderDiscAllocated) + 'đ</b>' + (orderKM.desc ? ' (' + escapeHtml(orderKM.desc) + ')' : '') + '</div>';
-  } else if (orderKM.disc > 0 && draftKm.hopKM >= p.giaNYLon) {
-    // CK đơn chưa gộp vào hopKM (không có item-level KM) — hiện block riêng
-    var draftTotal = draftItems.reduce(function(s, x) { return s + x.afterKM; }, 0) - orderKM.disc;
-    html += '<div class="pv-divider" style="margin:4px 0;border-top:0.5px solid var(--orangeMid)"></div>';
-    html += '<div class="pv-row"><span class="pv-l" style="color:var(--vm)">CK đơn hàng</span><span class="pv-save">-' + fmt(orderKM.disc) + 'đ</span></div>';
-    if (orderKM.desc) html += '<div style="font-size:10px;color:var(--n3);margin:-2px 0 2px;line-height:1.3">' + escapeHtml(orderKM.desc) + '</div>';
-    html += '<div class="pv-row"><span class="pv-l" style="font-weight:700">Tạm tính đơn</span><span class="pv-v">' + fmt(draftTotal) + 'đ</span></div>';
-    html += '<div class="pv-row"><span class="pv-l">+VAT 1.5%</span><span class="pv-vat">' + fmt(Math.round(draftTotal * (1 + VAT_RATE))) + 'đ</span></div>';
-  }
-  html += '<div class="pv-row"><span class="pv-l">+Thuế 1.5%</span><span class="pv-vat">' + fmt(vatTotal) + 'đ</span></div>';
-  if (saved > 0) {
-    var savePct = Math.round(saved / gocTotal * 100);
-    html += '<div class="pv-row"><span class="pv-l">Tiết kiệm</span><span class="pv-save">-' + fmt(saved) + 'đ (' + savePct + '%)</span></div>';
-  }
-  html += '<button class="btn-ok" onclick="addCart(\'' + escapeHtmlAttr(ma) + '\')">✓ Thêm vào đơn</button>';
-
-  pv.innerHTML = html;
-  pv.classList.add('show');
-
-  // Cập nhật bảng giá với KM + order context (draftKm đã tính ở trên)
-  var ptEl = document.getElementById('pt_' + ma);
-  if (ptEl) ptEl.innerHTML = buildPriceTable(p, draftKm);
-
-  // Cập nhật km-line: chỉ hiện CT đang áp dụng
-  var kmLine = document.getElementById('km-line_' + ma);
-  if (kmLine) {
-    var chips = (km.appliedPromos && km.appliedPromos.length) ? getAppliedPromoRefsByNames(km.appliedPromos) : [];
-    var usedNames = chips.map(function(c) { return c.name; });
-    // Thêm order-level bonus CT đang áp (cascade, order_bonus)
-    if (orderKM.bonusItems && orderKM.bonusItems.length) {
-      var orderProgNames = orderKM.bonusItems.map(function(bi) { return bi.progName; }).filter(Boolean);
-      getAppliedPromoRefsByNames(orderProgNames).forEach(function(r) {
-        if (usedNames.indexOf(r.name) < 0) { chips.push(r); usedNames.push(r.name); }
+  if(kmInfo.desc || kmInfo.bonusItems.length > 0) {
+    ht += '<div class="km-alert">';
+    if(kmInfo.desc) ht += '<div class="km-alert-title">' + escapeHtml(kmInfo.desc) + '</div>';
+    if(kmInfo.bonusItems.length > 0) {
+      kmInfo.bonusItems.forEach(function(bi) {
+        ht += '<div class="km-desc">🎁 +' + bi.q + ' ' + escapeHtml(bi.u) + ' ' + escapeHtml(bi.ten) + '</div>';
       });
     }
-    // Thêm order-level discount CT (order_money) đang áp
-    if (orderKM.discProgNames && orderKM.discProgNames.length) {
-      getAppliedPromoRefsByNames(orderKM.discProgNames).forEach(function(r) {
-        if (usedNames.indexOf(r.name) < 0) { chips.push(r); usedNames.push(r.name); }
-      });
-    }
-    if (chips.length) {
-      kmLine.innerHTML = renderPromoJumpChips(chips, 4);
-    } else {
-      var allRefs = getProductPromoRefs(ma);
-      kmLine.innerHTML = allRefs.length ? renderPromoJumpChips(allRefs.map(function(r) { return { idx: r.idx, name: r.prog.name || 'CT KM' }; }), 4) : '';
-    }
+    ht += '</div>';
   }
+  
+  if (!cart[ma] || (cart[ma].qT !== qT || cart[ma].qL !== qL)) {
+     ht += '<div style="font-size:11px;color:var(--warning-text);margin-top:6px;font-style:italic">Chưa "Thêm" vào giỏ</div>';
+  }
+
+  pv.innerHTML = ht;
+  pv.style.display = 'block';
+
 }
 
 function buildDraftCartState(ma, qT, qL) {
@@ -660,12 +670,13 @@ function renderOrder() {
   var sectionOrder = ['A', 'B', 'C', 'D', 'X'];
   var NCOLOR_LOCAL = { A: '#2563EB', B: '#C97B0A', C: '#F26322', D: '#D63030', X: '#888' };
   var html = '';
+  var mainHtml = '';
 
   sectionOrder.forEach(function(nhom) {
     if (!groups[nhom] || !groups[nhom].length) return;
     var label = nhom === 'X' ? 'Khác' : ({ A: 'Sữa bột', B: 'Sữa đặc', C: 'Sữa nước', D: 'Sữa chua' }[nhom] || nhom);
-    html += '<div class="order-section">';
-    html += '<div class="order-sec-hd"><span style="display:inline-block;width:3.5px;height:14px;border-radius:2px;background:' + NCOLOR_LOCAL[nhom] + ';margin-right:4px"></span>' + label + ' (' + groups[nhom].length + ')</div>';
+    mainHtml += '<div class="order-section">';
+    mainHtml += '<div class="order-sec-hd"><span style="display:inline-block;width:3.5px;height:14px;border-radius:2px;background:' + NCOLOR_LOCAL[nhom] + ';margin-right:4px"></span>' + label + ' (' + groups[nhom].length + ')</div>';
 
     groups[nhom].forEach(function(p) {
       var inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
@@ -678,39 +689,39 @@ function renderOrder() {
       var isExpanded = _cardExpanded[p.ma] !== undefined ? _cardExpanded[p.ma] : false;
       var eMa = escapeHtmlAttr(p.ma);
 
-      html += '<div class="sp-card ' + (inCart ? 'inCart' : '') + '" id="card_' + eMa + '">';
+      mainHtml += '<div class="sp-card ' + (inCart ? 'inCart' : '') + '" id="card_' + eMa + '">';
 
       // Header — always visible
-      html += '<div class="sp-head" onclick="toggleCard(\'' + eMa + '\')">';
-      html += '<div class="sp-bar" style="background:' + NCOLOR_LOCAL[nhom] + '"></div>';
-      html += '<div class="sp-body">';
-      html += '<div class="sp-name-row">';
-      html += '<div class="sp-name">' + escapeHtml(p.ten);
-      html += '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + eMa + '\')">★</span>';
-      html += '</div>';
-      html += '<button id="toggle_' + eMa + '" class="sp-toggle' + (isExpanded ? ' open' : '') + '" onclick="event.stopPropagation();toggleCard(\'' + eMa + '\')">';
-      html += '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 4L6 7.5L9.5 4"/></svg>';
-      html += '</button>';
-      html += '</div>';
+      mainHtml += '<div class="sp-head" onclick="toggleCard(\'' + eMa + '\')">';
+      mainHtml += '<div class="sp-bar" style="background:' + NCOLOR_LOCAL[nhom] + '"></div>';
+      mainHtml += '<div class="sp-body">';
+      mainHtml += '<div class="sp-name-row">';
+      mainHtml += '<div class="sp-name">' + escapeHtml(p.ten);
+      mainHtml += '<span class="fav-star' + (isFav ? ' active' : '') + '" onclick="toggleFavorite(event, \'' + eMa + '\')">★</span>';
+      mainHtml += '</div>';
+      mainHtml += '<button id="toggle_' + eMa + '" class="sp-toggle' + (isExpanded ? ' open' : '') + '" onclick="event.stopPropagation();toggleCard(\'' + eMa + '\')">';
+      mainHtml += '<svg width="12" height="12" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M2.5 4L6 7.5L9.5 4"/></svg>';
+      mainHtml += '</button>';
+      mainHtml += '</div>';
 
       // Meta chips
-      html += '<div class="sp-meta">';
-      html += '<span class="sp-chip">' + escapeHtml(p.ma) + '</span>';
-      html += '<span class="sp-chip">' + p.slThung + '/' + escapeHtml(p.donvi) + '</span>';
-      if (brand) html += '<span class="sp-chip">' + escapeHtml(brand) + '</span>';
+      mainHtml += '<div class="sp-meta">';
+      mainHtml += '<span class="sp-chip">' + escapeHtml(p.ma) + '</span>';
+      mainHtml += '<span class="sp-chip">' + p.slThung + '/' + escapeHtml(p.donvi) + '</span>';
+      if (brand) mainHtml += '<span class="sp-chip">' + escapeHtml(brand) + '</span>';
       // KM badges
       appliedCTs.slice(0, 3).forEach(function(item) {
-        html += '<span class="sp-kmbadge">' + escapeHtml(item.prog.name || 'KM') + '</span>';
+        mainHtml += '<span class="sp-kmbadge">' + escapeHtml(item.prog.name || 'KM') + '</span>';
       });
-      if (appliedCTs.length > 3) html += '<span class="sp-kmbadge">+' + (appliedCTs.length - 3) + '</span>';
+      if (appliedCTs.length > 3) mainHtml += '<span class="sp-kmbadge">+' + (appliedCTs.length - 3) + '</span>';
       // Cart badge
       if (inCart) {
         var cq = cart[p.ma];
         var cartLon = (cq.qT || 0) * p.slThung + (cq.qL || 0);
-        html += '<span class="sp-cartbadge">✓ ' + cartLon + ' ' + escapeHtml(p.donvi) + '</span>';
+        mainHtml += '<span class="sp-cartbadge">✓ ' + cartLon + ' ' + escapeHtml(p.donvi) + '</span>';
       }
-      html += '</div>';
-      html += '</div></div>'; // sp-body, sp-head
+      mainHtml += '</div>';
+      mainHtml += '</div></div>'; // sp-body, sp-head
 
       // Quick price strip khi trong giỏ và đang thu gọn
       if (inCart && !isExpanded) {
@@ -722,58 +733,72 @@ function renderOrder() {
         var goc2 = p.giaNYLon * totalL2;
         var VAT_RATE2 = typeof VAT !== 'undefined' ? VAT : 0.015;
         var vatAmt2 = Math.round(afterKM2 * (1 + VAT_RATE2));
-        html += '<div class="sp-quick-price">';
-        html += '<div><div style="font-size:10px;color:var(--n4);margin-bottom:1px">' + (qT2 > 0 ? qT2 + ' thùng' : '') + (qT2 > 0 && qL2 > 0 ? ' + ' : '') + (qL2 > 0 ? qL2 + ' lẻ' : '') + ' = ' + totalL2 + ' ' + escapeHtml(p.donvi) + '</div>';
-        html += '<div class="sp-qp-main">' + fmt(afterKM2) + 'đ</div></div>';
-        html += '<div style="text-align:right">';
-        if (goc2 > afterKM2) html += '<div class="sp-qp-sub">' + fmt(goc2) + 'đ</div>';
-        html += '<div class="sp-qp-vat">+Thuế: ' + fmt(vatAmt2) + 'đ</div>';
-        html += '</div></div>';
+        mainHtml += '<div class="sp-quick-price">';
+        mainHtml += '<div><div class="qp-meta">' + (qT2 > 0 ? qT2 + ' thùng' : '') + (qT2 > 0 && qL2 > 0 ? ' + ' : '') + (qL2 > 0 ? qL2 + ' lẻ' : '') + ' = ' + totalL2 + ' ' + escapeHtml(p.donvi) + '</div>';
+        mainHtml += '<div class="sp-qp-main">' + fmt(afterKM2) + 'đ</div></div>';
+        mainHtml += '<div class="qp-right">';
+        if (goc2 > afterKM2) mainHtml += '<div class="sp-qp-sub">' + fmt(goc2) + 'đ</div>';
+        mainHtml += '<div class="sp-qp-vat">+Thuế: ' + fmt(vatAmt2) + 'đ</div>';
+        mainHtml += '</div></div>';
       }
 
       // Expandable section
-      html += '<div class="sp-expand' + (isExpanded ? ' open' : '') + '" id="expand_' + eMa + '">';
+      mainHtml += '<div class="sp-expand' + (isExpanded ? ' open' : '') + '" id="expand_' + eMa + '">';
 
       // Bảng giá
-      html += '<div id="pt_' + eMa + '">' + buildPriceTable(p, kmInfo) + '</div>';
+      mainHtml += '<div id="pt_' + eMa + '">' + buildPriceTable(p, kmInfo) + '</div>';
 
       // KM jump chips
       if (appliedCTs.length) {
-        html += '<div id="km-line_' + eMa + '">';
-        html += renderPromoJumpChips(appliedCTs.map(function(item) {
+        mainHtml += '<div id="km-line_' + eMa + '">';
+        mainHtml += renderPromoJumpChips(appliedCTs.map(function(item) {
           return { idx: item.idx, name: item.prog.name || 'CT KM' };
         }), 4);
-        html += '</div>';
+        mainHtml += '</div>';
       }
 
       // Tích lũy CT (chỉ khi có KH)
       var tlStrip = buildTLStrip(p);
       if (tlStrip) {
-        html += tlStrip;
+        mainHtml += tlStrip;
       } else if (_selectedCustomerMa) {
         // KH được chọn nhưng SP không thuộc CT nào
       } else {
-        html += '<div class="sp-no-kh">Chọn khách hàng để xem thưởng tích lũy tháng</div>';
+        mainHtml += '<div class="sp-no-kh">Chọn khách hàng để xem thưởng tích lũy tháng</div>';
       }
 
       // Qty input
-      html += '<div class="qty-area">';
-      html += '<div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" max="999" inputmode="numeric" placeholder="0" id="qT_' + eMa + '" oninput="onQty(\'' + eMa + '\')"></div>';
-      html += '<div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" max="9999" inputmode="numeric" placeholder="0" id="qL_' + eMa + '" oninput="onQty(\'' + eMa + '\')"></div>';
-      html += '<button class="btn-add" onclick="addCart(\'' + eMa + '\')">＋</button>';
-      html += '</div>';
+      mainHtml += '<div class="qty-area">';
+      mainHtml += '<div class="qbox"><span class="qlbl">Thùng</span><input class="qinp" type="number" min="0" max="999" inputmode="numeric" placeholder="0" id="qT_' + eMa + '" oninput="onQty(\'' + eMa + '\')"></div>';
+      mainHtml += '<div class="qbox"><span class="qlbl">Lẻ</span><input class="qinp" type="number" min="0" max="9999" inputmode="numeric" placeholder="0" id="qL_' + eMa + '" oninput="onQty(\'' + eMa + '\')"></div>';
+      mainHtml += '<button class="btn-add" onclick="addCart(\'' + eMa + '\')">＋</button>';
+      mainHtml += '</div>';
 
       // Preview box
-      html += '<div class="pv-box" id="pv_' + eMa + '"></div>';
+      mainHtml += '<div class="pv-box" id="pv_' + eMa + '"></div>';
 
-      html += '</div>'; // sp-expand
-      html += '</div>'; // sp-card
+      mainHtml += '</div>'; // sp-expand
+      mainHtml += '</div>'; // sp-card
     });
 
-    html += '</div>'; // order-section
+    mainHtml += '</div>'; // order-section
   });
 
+  if (typeof isDesktopLayout === 'function' && isDesktopLayout()) {
+    html += '<div class="order-desktop-shell">';
+    html += '<div class="order-desktop-main">' + mainHtml + '</div>';
+    html += '<aside class="order-desktop-side" id="order-desktop-side"></aside>';
+    html += '</div>';
+  } else {
+    html = mainHtml;
+  }
+
   el.innerHTML = html;
+
+  if (typeof isDesktopLayout === 'function' && isDesktopLayout() && window.buildDesktopOrderSidebarHTML) {
+    var side = document.getElementById('order-desktop-side');
+    if (side) side.innerHTML = buildDesktopOrderSidebarHTML();
+  }
 
   // Khôi phục giá trị trong giỏ
   for (var ma in cart) {
@@ -1010,3 +1035,17 @@ window.hasManualBrand = hasManualBrand;
 window.getCustomBrandRules = getCustomBrandRules;
 window.saveCustomBrandRules = saveCustomBrandRules;
 window.clearDetectedBrandCache = clearDetectedBrandCache;
+
+
+
+
+
+
+
+
+
+
+
+
+
+

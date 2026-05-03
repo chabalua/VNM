@@ -921,7 +921,7 @@ function cusToggleExpand(idx) {
 // ============================================================
 // UI — Tab Khách Hàng
 // ============================================================
-function renderCusTab() {
+function renderCusTabMobile() {
   var el = document.getElementById('kh-list'); if (!el) return;
   var viewMonthKey = _cusViewMonthKey || cusCurrentMonthKey();
   var filtered = CUS.filter(function(kh) {
@@ -1440,3 +1440,202 @@ window.calcVNMShopReward = calcVNMShopReward;
 window.calcVIPShopReward = calcVIPShopReward;
 window.calcSBPSReward = calcSBPSReward;
 window.calcTotalReward = calcTotalReward;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function renderCusTab() {
+  if (typeof getLayoutMode === 'function' && getLayoutMode() === 'desktop') return renderCusTabDesktop();
+  return renderCusTabMobile();
+}
+
+function renderCusTabDesktop() {
+  var el = document.getElementById('kh-list'); if (!el) return;
+  var viewMonthKey = _cusViewMonthKey || cusCurrentMonthKey();
+  
+  var totalKH = CUS.length;
+  var totalVNM = CUS.filter(function(k) { return k.programs && k.programs.vnmShop && k.programs.vnmShop.dangKy; }).length;
+  var totalVIP = CUS.filter(function(k) { return k.programs && k.programs.vipShop && k.programs.vipShop.dangKy; }).length;
+  var totalSBPS = CUS.filter(function(k) { return k.programs && k.programs.sbpsShop && k.programs.sbpsShop.dangKy; }).length;
+  var totalNormal = totalKH - totalVNM - totalVIP - totalSBPS;
+
+  var filtered = CUS.filter(function(kh) {
+    if (_cusFilterRoute && kh.tuyen !== _cusFilterRoute) return false;
+    if (_cusFilterQuery) {
+      var q = _cusFilterQuery.toLowerCase();
+      return (kh.ma || '').toLowerCase().indexOf(q) >= 0 || (kh.ten || '').toLowerCase().indexOf(q) >= 0;
+    }
+    // TODO: Add type filter based on _cusFilterType
+    return true;
+  });
+
+  var html = '';
+  // DesktopPageHeader
+  html += '<div style="padding:20px 32px 18px;border-bottom:1px solid var(--border);background:var(--bg)">';
+  html += '  <div style="display:flex;align-items:flex-start;justify-content:space-between;gap:16px">';
+  html += '    <div>';
+  html += '      <div style="font-size:11.5px;color:var(--text-tertiary);font-weight:500;letter-spacing:.04em;text-transform:uppercase;margin-bottom:4px">Tuyến và độ phủ</div>';
+  html += '      <h1 style="margin:0;font-size:22px;font-weight:600;color:var(--text);letter-spacing:-0.02em;line-height:1.2">Khách hàng</h1>';
+  html += '      <div style="font-size:13px;color:var(--text-secondary);margin-top:6px">' + totalKH + ' khách · ' + totalVNM + ' VNM Shop · ' + totalVIP + ' VIP Shop · ' + totalSBPS + ' SBPS</div>';
+  html += '    </div>';
+  html += '    <div style="display:flex;align-items:center;gap:8px">';
+  html += '      <button onclick="cusExport()" style="height:32px;padding:0 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer">📤 Xuất KH</button>';
+  html += '      <button onclick="cusImport()" style="height:32px;padding:0 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer">📥 Nhập KH</button>';
+  html += '      <button onclick="cusManageRoutes()" style="height:32px;padding:0 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer">📍 Tuyến</button>';
+  html += '    </div>';
+  html += '  </div>';
+  html += '</div>';
+
+  // Main columns
+  html += '<div style="flex:1;display:flex;min-height:0">';
+  
+  // Left Sidebar
+  html += '  <div style="width:220px;flex-shrink:0;border-right:1px solid var(--border);background:var(--surface);padding:16px;overflow-y:auto">';
+  
+  html += '    <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin-bottom:8px">Tuyến</div>';
+  var allRoutes = ROUTES.map(r => r);
+  allRoutes.unshift({id: '', ten: 'Tất cả'});
+  allRoutes.push({id: '_noRoute', ten: 'Chưa phân tuyến'});
+  allRoutes.forEach(function(r) {
+    var c = r.id === '' ? CUS.length : (r.id === '_noRoute' ? CUS.filter(k => !k.tuyen).length : CUS.filter(k => k.tuyen === r.id).length);
+    var active = (_cusFilterRoute || '') === r.id;
+    if (active) {
+       html += '    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:1px;background:var(--orangeL);color:var(--orange);font-size:12.5px;font-weight:600;cursor:pointer" onclick="cusFilterRoute(\'\')">';
+    } else {
+       html += '    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:1px;color:var(--text-secondary);font-size:12.5px;font-weight:500;cursor:pointer" onclick="cusFilterRoute(' + "'" + r.id + "'" + ')">';
+    }
+    html += '      <span>' + escapeHtml(r.ten) + '</span>';
+    html += '      <span style="font-size:11px;opacity:.7;font-variant-numeric:tabular-nums">' + c + '</span>';
+    html += '    </div>';
+  });
+
+  html += '    <div style="font-size:11px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.05em;margin:18px 0 8px">Loại KH</div>';
+  html += '    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:1px;font-size:12.5px;font-weight:500;color:var(--text-secondary);cursor:pointer"><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#10b981"></span>VNM Shop</span><span style="font-size:11px;opacity:.7">' + totalVNM + '</span></div>';
+  html += '    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:1px;font-size:12.5px;font-weight:500;color:var(--text-secondary);cursor:pointer"><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#3b82f6"></span>VIP Shop</span><span style="font-size:11px;opacity:.7">' + totalVIP + '</span></div>';
+  html += '    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:1px;font-size:12.5px;font-weight:500;color:var(--text-secondary);cursor:pointer"><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#f59e0b"></span>SBPS</span><span style="font-size:11px;opacity:.7">' + totalSBPS + '</span></div>';
+  html += '    <div style="display:flex;justify-content:space-between;align-items:center;padding:7px 9px;border-radius:6px;margin-bottom:1px;font-size:12.5px;font-weight:500;color:var(--text-secondary);cursor:pointer"><span style="display:inline-flex;align-items:center;gap:6px"><span style="width:8px;height:8px;border-radius:2px;background:#8b5cf6"></span>KH Thường</span><span style="font-size:11px;opacity:.7">' + totalNormal + '</span></div>';
+  
+  html += '  </div>'; // End Sidebar
+
+  // Center Table
+  html += '  <div style="flex:1;overflow:auto;padding:24px;min-width:0">';
+  html += '    <div style="display:flex;gap:10px;margin-bottom:16px">';
+  html += '      <div style="flex:1;position:relative">';
+  html += '        <span style="position:absolute;left:10px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--text-tertiary)">🔍</span>';
+  html += '        <input type="text" placeholder="Tìm KH theo tên, mã..." value="' + (_cusFilterQuery||'') + '" oninput="cusFilterSearch(this.value)" style="width:100%;height:34px;border:1px solid var(--border);border-radius:8px;background:var(--surface);padding:0 12px 0 34px;font-size:13px;color:var(--text);outline:none">';
+  html += '      </div>';
+  html += '      <label style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:500;color:var(--text-secondary)">Tháng: <input type="month" value="' + viewMonthKey + '" onchange="cusSetViewMonth(this.value)" style="height:34px;border:1px solid var(--border);border-radius:8px;padding:0 10px;font-size:12px"></label>';
+  html += '    </div>';
+
+  html += '    <div style="background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden">';
+  html += '      <div style="display:grid;grid-template-columns:1fr 110px 110px 130px 100px 100px;gap:14px;padding:10px 16px;border-bottom:1px solid var(--border-subtle);font-size:11px;font-weight:600;color:var(--text-tertiary);text-transform:uppercase;letter-spacing:.05em;background:var(--surface-muted)">';
+  html += '        <div>Khách hàng</div><div>Mã KH</div><div>Khu vực</div><div>Loại</div><div>K/H hoạch</div><div style="text-align:right">Thao tác</div>';
+  html += '      </div>';
+
+  if (!filtered.length) {
+     html += '      <div style="padding:40px;text-align:center;color:var(--text-secondary);font-size:14px">Không tìm thấy khách hàng nào.</div>';
+  }
+
+  filtered.forEach(function(kh, displayIdx) {
+    var md = cusGetMonthData(kh, viewMonthKey);
+    var route = ROUTES.find(r => r.id === kh.tuyen);
+    var area = route ? route.ten : 'Chưa phân';
+    
+    var tags = [];
+    if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) tags.push({n:'VNM', c:'var(--green-soft)', f:'var(--green)'});
+    if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) tags.push({n:'VIP', c:'var(--blue-soft)', f:'var(--blue)'});
+    if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) tags.push({n:'SBPS', c:'var(--orange-soft)', f:'var(--orange)'});
+    var tagHtml = tags.map(t => '<span style="display:inline-flex;align-items:center;height:20px;padding:0 7px;background:'+t.c+';color:'+t.f+';border-radius:5px;font-size:10.5px;font-weight:600;margin-right:4px">'+t.n+'</span>').join('');
+
+    var bgStyle = displayIdx % 2 === 0 ? 'background:transparent' : 'background:var(--surface-muted)';
+    
+    var idx = CUS.indexOf(kh);
+
+    html += '      <div style="display:grid;grid-template-columns:1fr 110px 110px 130px 100px 100px;gap:14px;padding:12px 16px;align-items:center;border-top:' + (displayIdx===0?'none':'1px solid var(--border-subtle)') + ';' + bgStyle + '">';
+    
+    // Avatar + Name
+    var initials = (kh.ten||'').split(' ').slice(-2).map(w=>w[0]).join('').toUpperCase().slice(0,2) || 'KH';
+    html += '        <div style="display:flex;align-items:center;gap:10px;min-width:0">';
+    html += '          <div style="width:30px;height:30px;border-radius:8px;background:var(--orangeL);color:var(--orange);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:600;flex-shrink:0">' + escapeHtml(initials) + '</div>';
+    html += '          <div style="min-width:0">';
+    html += '            <div style="font-size:13px;font-weight:600;color:var(--text);letter-spacing:-0.005em;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;cursor:pointer" onclick="cusToggleExpand('+idx+')">' + escapeHtml(kh.ten) + '</div>';
+    html += '            <div style="font-size:11px;color:var(--text-tertiary);overflow:hidden;text-overflow:ellipsis;white-space:nowrap">' + escapeHtml(kh.diachi||'') + '</div>';
+    html += '          </div>';
+    html += '        </div>';
+
+    // Mã KH
+    html += '        <div style="font-size:11px;font-family:monospace;color:var(--text-secondary);cursor:pointer" onclick="cusEdit('+idx+')">' + escapeHtml(kh.ma) + '</div>';
+    
+    // Tuyến
+    html += '        <div style="font-size:12.5px;color:var(--text-secondary);white-space:nowrap;overflow:hidden;text-overflow:ellipsis">' + escapeHtml(area) + '</div>';
+    
+    // Loại KH
+    html += '        <div>' + tagHtml + '</div>';
+
+    // Kế hoạch/Tiến độ
+    var progHtml = (md.dsNhomC||0) > 0 ? ('<span style="font-size:12px;color:var(--green)">Đã nhập</span>') : '<span style="font-size:12px;color:var(--text-tertiary)">-</span>';
+    html += '        <div>' + progHtml + '</div>';
+
+    // Thao tác
+    html += '        <div style="text-align:right;white-space:nowrap">';
+    html += '          <button onclick="cusInputDS(' + idx + ', \'' + viewMonthKey + '\')" style="font-size:12px;padding:4px 8px;border-radius:4px;background:var(--orangeL);color:var(--orange);border:1px solid var(--orangeMid);font-weight:600;cursor:pointer;margin-right:2px">📊 DS</button>';
+    html += '          <button onclick="cusEdit(' + idx + ')" style="font-size:12px;padding:4px 8px;border-radius:4px;background:var(--surface);color:var(--text-secondary);border:1px solid var(--border);cursor:pointer">✏️</button>';
+    html += '        </div>';
+
+    html += '      </div>';
+    
+    if (_cusExpanded[kh.ma]) {
+        // Detail panel inline for now
+        var reward = calcTotalReward(kh, md);
+        html += '<div style="padding:16px;background:var(--bg);border-top:1px dashed var(--border-subtle);border-bottom:1px solid var(--border);font-size:13px">';
+        html += '<b>Thưởng dự kiến tháng:</b> ' + fmt(reward.totalReward) + 'đ<br/>';
+        if (kh.programs && kh.programs.vnmShop && kh.programs.vnmShop.dangKy) {
+            html += '- Nhóm C: ' + fmt(md.dsNhomC||0) + '<br/>';
+        }
+        if (kh.programs && kh.programs.vipShop && kh.programs.vipShop.dangKy) {
+            html += '- Nhóm DE: ' + fmt(md.dsNhomDE||0) + '<br/>';
+        }
+        if (kh.programs && kh.programs.sbpsShop && kh.programs.sbpsShop.dangKy) {
+            html += '- Nhóm SBPS: ' + fmt(md.dsSBPS||0) + '<br/>';
+        }
+        html += '</div>';
+    }
+  });
+
+  html += '    </div>';
+  html += '  </div>'; // End Center Table
+
+  html += '</div>'; // End Main columns
+  
+  el.innerHTML = html;
+}
+

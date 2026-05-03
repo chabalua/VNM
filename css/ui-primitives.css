@@ -1,0 +1,327 @@
+/* =========================================================================
+   VNM Sales App — UI Primitives (Phase 2)
+   ========================================================================= */
+
+/* ─── 1. Buttons ─── */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-family: inherit;
+  font-weight: 500;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  letter-spacing: -0.005em;
+  transition: all 0.12s ease;
+  user-select: none;
+  outline: none;
+  border: 1px solid transparent;
+  gap: 6px;
+}
+
+.btn:active,
+.btn:focus:active {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px var(--accent-soft);
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* Button Sizes */
+.btn-sm {
+  height: 28px;
+  padding: 0 10px;
+  font-size: 12.5px;
+}
+.btn-sm svg { width: 14px; height: 14px; }
+
+.btn-md {
+  height: 34px;
+  padding: 0 12px;
+  font-size: 13px;
+}
+.btn-md svg { width: 15px; height: 15px; }
+
+.btn-lg {
+  height: 40px;
+  padding: 0 16px;
+  font-size: 14px;
+  gap: 8px;
+}
+.btn-lg svg { width: 16px; height: 16px; }
+
+/* Button Variants */
+.btn-primary {
+  background-color: var(--accent);
+  color: var(--text-inverse);
+  border-color: var(--accent);
+}
+.btn-primary:hover {
+  background-color: var(--accent-hover);
+  border-color: var(--accent-hover);
+}
+
+.btn-secondary {
+  background-color: var(--surface);
+  color: var(--text);
+  border-color: var(--border);
+}
+.btn-secondary:hover {
+  background-color: var(--surface-hover);
+}
+
+.btn-ghost {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border-color: transparent;
+}
+.btn-ghost:hover {
+  background-color: var(--surface-muted);
+  color: var(--text);
+}
+
+.btn-danger {
+  background-color: transparent;
+  color: var(--danger);
+  border-color: var(--border);
+}
+.btn-danger:hover {
+  background-color: var(--danger-soft);
+  border-color: var(--danger);
+}
+
+.btn-soft {
+  background-color: var(--accent-soft);
+  color: var(--accent-text);
+  border-color: transparent;
+}
+.btn-soft:hover {
+  background-color: var(--accent-soft-hover);
+}
+
+
+/* ─── 2. Tags / Chips ─── */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  height: 20px;
+  padding: 0 7px;
+  border-radius: 5px;
+  font-size: 10.5px;
+  font-weight: 600;
+  letter-spacing: -0.005em;
+  white-space: nowrap;
+}
+
+.tag-soft {
+  background-color: rgba(var(--accent-rgb, 37, 99, 235), 0.1);
+  color: var(--text-secondary);
+  border: none;
+}
+
+.tag-outline {
+  background-color: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border);
+}
+
+/* Color specific variants */
+.tag-success { background-color: var(--success-soft); color: var(--success-text); }
+.tag-warning { background-color: var(--warning-soft); color: var(--warning-text); }
+.tag-danger  { background-color: var(--danger-soft); color: var(--danger-text); }
+.tag-accent  { background-color: var(--accent-soft); color: var(--accent-text); }
+
+/* ─── 3. Cards ─── */
+.card {
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: var(--card-pad, 16px);
+  box-shadow: var(--shadow-sm); /* Light shadow to add depth */
+}
+
+/* ─── 4. KPI Cards ─── */
+.kpi-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  min-width: 0;
+  box-shadow: var(--shadow-sm);
+}
+
+.kpi-card-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+}
+
+.kpi-icon-box {
+  width: 28px;
+  height: 28px;
+  border-radius: 7px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--accent-soft);
+  color: var(--accent);
+}
+
+.kpi-label {
+  font-size: 11px;
+  color: var(--text-tertiary);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.kpi-value {
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--text);
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+
+.kpi-change {
+  font-size: 12px;
+  margin-top: 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-weight: 500;
+}
+
+.kpi-change.positive { color: var(--success-text); }
+.kpi-change.negative { color: var(--danger-text); }
+
+/* ─── 5. Progress Bar ─── */
+.progress-container {
+  width: 100%;
+  height: 6px;
+  background-color: var(--surface-muted);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background-color: var(--accent);
+  border-radius: var(--radius-full);
+  transition: width 0.25s ease;
+}
+
+/* ─── 6. Search Field ─── */
+.search-field {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background-color: var(--surface-muted);
+  border-radius: var(--radius-md);
+  padding: 0 10px;
+  border: 1px solid var(--border-subtle);
+  transition: all 0.2s ease;
+}
+
+.search-field:focus-within {
+  background-color: var(--surface);
+  border-color: var(--accent);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.search-field input {
+  flex: 1;
+  border: none;
+  background: transparent;
+  outline: none;
+  font-size: 13px;
+  color: var(--text);
+  line-height: inherit;
+  letter-spacing: -0.005em;
+}
+
+.search-field input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.search-field.sm { height: 30px; }
+.search-field.md { height: 34px; }
+.search-field.lg { height: 38px; }
+
+/* ─── 7. Avatar ─── */
+.avatar {
+  background-color: var(--accent-soft);
+  color: var(--accent-text);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-md); /* App default, could be full */
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  user-select: none;
+}
+
+.avatar.rounded {
+  border-radius: var(--radius-full);
+}
+
+.avatar-sm { width: 24px; height: 24px; font-size: 11px; }
+.avatar-md { width: 32px; height: 32px; font-size: 13px; }
+.avatar-lg { width: 40px; height: 40px; font-size: 15px; }
+
+/* ─── 8. Typography / Hierarchy System overrides ─── */
+.page-title {
+  font-size: 22px;
+  font-weight: 600;
+  letter-spacing: -0.025em;
+}
+
+.section-title {
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.body-text {
+  font-size: 13px;
+  font-weight: 500;
+}
+
+.secondary-text {
+  font-size: 12.5px;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.caption-text {
+  font-size: 11.5px;
+  color: var(--text-tertiary);
+}
+
+.mono-text {
+  font-size: 11px;
+  font-family: var(--font-mono);
+}
+
+.section-label {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}

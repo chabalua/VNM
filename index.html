@@ -2,7 +2,7 @@
 <html lang="vi">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=390,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,minimum-scale=1,user-scalable=no,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="VNM Order">
@@ -14,7 +14,7 @@ try {
   document.documentElement.setAttribute('data-theme', savedThemeMode === 'dark' ? 'dark' : 'light');
 } catch (e) {}
 </script>
-<link rel="stylesheet" href="css/style.css">
+<link rel="stylesheet" href="css/style.css?v=1.1">
 </head>
 <body>
 
@@ -25,6 +25,9 @@ try {
 </div>
 
 <div id="main">
+
+<!-- TAB BAR & SIDEBAR -->
+<div id="desktop-sidebar"></div>
 
 <!-- TRANG CHỦ KPI -->
 <div id="page-home" class="page on" role="tabpanel" aria-labelledby="tab-home">
@@ -46,29 +49,26 @@ try {
 
 <!-- ĐẶT HÀNG -->
 <div id="page-order" class="page" role="tabpanel" aria-labelledby="tab-order">
-  <div class="sbar" style="padding-bottom:6px">
-    <div class="page-head-inline">
-      <div>
-        <div class="page-kicker">Bán hàng</div>
-        <div class="page-title">Đặt hàng</div>
-      </div>
-      <button class="head-mini-btn" onclick="gotoTab('don')">Xem đơn</button>
-    </div>
-    <div id="cus-selector" style="margin-bottom:6px"></div>
-    <div class="sinp-wrap">
-      <span class="sico">🔍</span>
+  <div class="mobile-header">
+    <div class="mobile-eyebrow">Khách hàng đặt hàng</div>
+    <div id="cus-selector" style="margin-bottom:12px"></div>
+    <div class="search-field md" style="margin-bottom:12px">
+      <script>document.write(window.renderIcon ? window.renderIcon('search', 16, 2) : '🔍')</script>
       <input type="text" id="order-q" placeholder="Tìm sản phẩm, mã SP..." oninput="debounceRender('order')" aria-label="Tìm sản phẩm">
     </div>
-    <div class="pills">
-      <div class="pill on-all" onclick="setNhom(this,'order','')">Tất cả</div>
-      <div class="pill" onclick="setNhom(this,'order','A')">A·Bột</div>
-      <div class="pill" onclick="setNhom(this,'order','B')">B·Đặc</div>
-      <div class="pill" onclick="setNhom(this,'order','C')">C·Nước</div>
-      <div class="pill" onclick="setNhom(this,'order','D')">D·Chua</div>
+    <div class="pills-scroll-wrapper" style="overflow-x:auto; margin:0 -20px; padding:0 20px; -webkit-overflow-scrolling:touch">
+      <div class="pills" style="display:flex;white-space:nowrap;gap:8px;padding-bottom:2px">
+        <div class="tag tag-soft pill on-all" onclick="setNhom(this,'order','')" style="cursor:pointer;height:26px;padding:0 12px;border-radius:14px">Tất cả</div>
+        <div class="tag tag-outline pill" onclick="setNhom(this,'order','A')" style="cursor:pointer;height:26px;padding:0 12px;border-radius:14px">Sữa bột</div>
+        <div class="tag tag-outline pill" onclick="setNhom(this,'order','B')" style="cursor:pointer;height:26px;padding:0 12px;border-radius:14px">Sữa đặc</div>
+        <div class="tag tag-outline pill" onclick="setNhom(this,'order','C')" style="cursor:pointer;height:26px;padding:0 12px;border-radius:14px">Sữa nước</div>
+        <div class="tag tag-outline pill" onclick="setNhom(this,'order','D')" style="cursor:pointer;height:26px;padding:0 12px;border-radius:14px">Sữa chua</div>
+      </div>
+      <div class="pills" id="brand-pills" style="display:none;white-space:nowrap;gap:8px;margin-top:8px;padding-bottom:2px"></div>
     </div>
-    <div class="pills" id="brand-pills" style="margin-top:5px;display:none"></div>
   </div>
-  <div id="order-list"></div>
+  <div id="order-list" style="padding: 12px 20px"></div>
+  <div id="floating-cart"></div>
 </div>
 
 <!-- ĐƠN HÀNG -->
@@ -245,17 +245,20 @@ try {
   </div>
 </div>
 
-<script src="js/config.js"></script>
-<script src="js/data.js"></script>
-<script src="js/cart.js"></script>
-<script src="js/ui.js"></script>
-<script src="js/km.js"></script>
-<script src="js/customer.js"></script>
-<script src="js/sync.js"></script>
-<script src="js/ai-service.js"></script>
-<script src="js/ai-context.js"></script>
-<script src="js/ai-chat.js"></script>
-<script src="js/ai-ui.js"></script>
-<script src="js/main.js"></script>
+<script src="js/config.js?v=1.1"></script>
+<script src="js/data.js?v=1.1"></script>
+<script src="js/cart.js?v=1.1"></script>
+<script src="js/ui.js?v=1.1"></script>
+<script src="js/km.js?v=1.1"></script>
+<script src="js/customer.js?v=1.1"></script>
+<script src="js/sync.js?v=1.1"></script>
+<script src="js/ai-service.js?v=1.1"></script>
+<script src="js/ai-context.js?v=1.1"></script>
+<script src="js/ai-chat.js?v=1.1"></script>
+<script src="js/ai-ui.js?v=1.1"></script>
+<script src="js/mobile-ui.js?v=1.1"></script>
+<script src="js/main.js?v=1.1"></script>
 </body>
 </html>
+
+

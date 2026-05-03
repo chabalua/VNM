@@ -1,33 +1,37 @@
 /* ============================================================
-   VNM ORDER v7 — Warm Minimal · Vinamilk Orange
-   Primary: #F26322  Background: #F5F2EE  Card: #FFFFFF
+   VNM ORDER v8 — Redesigned Interface
    ============================================================ */
+
+/* Import design tokens */
+@import url('./tokens.css');
+/* Import UI Primitives */
+@import url('./ui-primitives.css');
+/* Import Mobile UI */
+@import url('./mobile-ui.css');
 
 *{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
 html,body{width:100%;overflow-x:hidden}
 body{
-  font-family:'SF Pro Display',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
-  background:var(--bg);color:var(--n1);font-size:14px;
-  -webkit-text-size-adjust:100%;line-height:1.5;
-  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
-  transition:background .25s,color .25s
+  font-family: var(--font-sans);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 14px;
+  -webkit-text-size-adjust: 100%;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  transition: background .25s, color .25s;
 }
-input,button,select,textarea{font-family:inherit;font-size:16px}
 
-/* ── TOKENS ─────────────────────────────────────────────── */
-:root{
-  --orange:#F26322;--orangeD:#D04F10;--orangeL:#FEF0E8;--orangeMid:#F5C4A0;
-  --bg:#F5F2EE;--card:#FFFFFF;
-  --n1:#1A1A1A;--n2:#444;--n3:#777;--n4:#B0ABA5;--n5:#DDD9D4;--n6:#F0EDE8;--n7:#F8F6F3;
-  --blue:#2563EB;--blueL:#EFF6FF;
-  --red:#D63030;--redL:#FFF0F0;
-  --green:#2A7A45;--greenL:#EBF7EF;
-  --gold:#C97B0A;--goldL:#FFF8E6;
-  --shadow-sm:0 1px 3px rgba(26,26,26,.06),0 1px 2px rgba(26,26,26,.04);
-  --shadow:0 4px 14px rgba(26,26,26,.08);
-  --shadow-lg:0 8px 28px rgba(26,26,26,.11);
-  --shadow-orange:0 4px 16px rgba(242,99,34,.22);
-  --R:16px;--Rs:10px;--Rr:100px;
+h1, h2, h3, h4, h5, h6 {
+  letter-spacing: -0.01em;
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+input,button,select,textarea{font-family:inherit;font-size:16px}
   --tabbar-bg:rgba(255,255,255,.96);
   --overlay:rgba(26,26,26,.55)
 }
@@ -851,3 +855,17 @@ html[data-theme='dark'] .sync-pill.ready{background:var(--greenL);color:#4ade80}
   .btn-kmt{flex:1 1 calc(100% - 46px)}
   .btn-kmd{flex:0 0 40px;padding:0}
 }
+
+/* DESKTOP CUSTOMER UI */
+html[data-layout='desktop'] #page-kh .sbar { display: none; }
+html[data-layout='desktop'] #kh-list { padding-bottom: 0; display: flex; flex-direction: column; height: 100%; }
+
+
+/* DESKTOP GLOBAL LAYOUT */
+html[data-layout='desktop'] body { overflow: hidden; }
+html[data-layout='desktop'] #main { display: flex; height: 100vh; box-sizing: border-box; padding: 0; }
+html[data-layout='desktop'] .page { flex: 1; min-height: 0; height: 100%; border-radius: 0; }
+html[data-layout='desktop'] #tabbar { display: none !important; }
+#desktop-sidebar { display: none; }
+html[data-layout='desktop'] #desktop-sidebar { display: flex; width: 232px; flex-shrink: 0; border-right: 1px solid var(--border); background: var(--surface); flex-direction: column; }
+
