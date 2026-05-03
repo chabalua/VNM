@@ -1,5 +1,47 @@
 [
   {
+    "id": 1777789424835,
+    "date": "2026-04-07T05:00:00.000Z",
+    "ngay": "7/4/2026",
+    "_updatedAt": "2026-05-03T06:23:44.836Z",
+    "khMa": "DL200412FK",
+    "khTen": "Trần Đạt (Hoa Khánh)",
+    "items": [
+      {
+        "ma": "04FD32",
+        "ten": "SDD có đường Vinamilk F220ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 8,
+        "qL": 0,
+        "totalLon": 384,
+        "gocTotal": 2944512,
+        "afterKM": 2944512,
+        "disc": 0,
+        "desc": "Tặng 24 Hộp + 24 Hộp + 24 Hộp",
+        "bonus": 72
+      }
+    ],
+    "tong": 2944512,
+    "tongGoc": 2944512,
+    "orderDisc": 0,
+    "bonusItems": [
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 2,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      },
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 2,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      }
+    ],
+    "_deleted": false
+  },
+  {
     "id": 1775395704472,
     "date": "2026-04-01T05:00:00.000Z",
     "ngay": "1/4/2026",
