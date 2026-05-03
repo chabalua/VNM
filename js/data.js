@@ -1,6 +1,6 @@
 // Quản lý dữ liệu SP và KM
-let SP = [];
-let kmProgs = [];
+var SP = [];
+var kmProgs = [];
 
 function normalizeProduct(product) {
   if (!product || typeof product !== 'object') return product;

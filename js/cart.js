@@ -8,15 +8,6 @@ var _editingOrderId = '';
 function saveCart() { localStorage.setItem(LS_KEYS.CART, JSON.stringify(cart)); }
 function fmt(n) { return Math.round(n).toLocaleString('vi-VN'); }
 
-function escapeHtmlAttr(value) {
-  return String(value == null ? '' : value)
-    .replace(/&/g, '&amp;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;');
-}
-
 function getTodayDateInputValue() {
   var now = new Date();
   var offset = now.getTimezoneOffset() * 60000;
@@ -739,11 +730,9 @@ function renderDon() {
   // ─── PHẦN 2: Lịch sử đơn hàng ───
   var orders = getOrders();
   if (orders.length || !items.length) {
-    html += '<div style="padding:16px 12px 8px"><div style="font-size:15px;font-weight:800;color:var(--n1)">📋 Lịch sử đơn hàng</div>';
+    html += '<div style="padding:16px 12px 8px"><div style="font-size:15px;font-weight:800;color:var(--n1);display:flex;align-items:center;gap:6px">' + (window.renderIcon ? window.renderIcon('list', 16, 2) : '') + 'Lịch sử đơn hàng</div>';
     html += '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">';
     if (cloudReady) {
-      html += '<button onclick="syncPullOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--b);border-radius:8px;background:var(--card);color:var(--b);font-size:11px;font-weight:700;cursor:pointer">⬇️ Tải đơn cloud</button>';
-      html += '<button onclick="syncPushOrdersOnly()" style="height:34px;padding:0 12px;border:1.5px solid var(--vm);border-radius:8px;background:var(--card);color:var(--vm);font-size:11px;font-weight:700;cursor:pointer">⬆️ Lưu đơn cloud</button>';
     } else {
       html += '<button onclick="syncOpenSettings()" style="height:34px;padding:0 12px;border:1.5px solid var(--o);border-radius:8px;background:var(--card);color:var(--o);font-size:11px;font-weight:700;cursor:pointer">☁️ Cài cloud GitHub</button>';
     }
@@ -898,10 +887,10 @@ function renderOrdersList(orders, period) {
     html += '</div>';
 
     html += '<div class="history-card-actions">';
-    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" class="history-card-btn copy">📋 Copy</button>';
-    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" class="history-card-btn edit">✏️ Sửa đơn</button>';
-    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="detail" onclick="handleOrderActionClick(this)" class="history-card-btn view">📄 Chi tiết</button>';
-    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" class="history-card-btn delete">🗑</button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" class="history-card-btn copy"><span style="display:inline-flex;align-items:center;gap:4px">' + (window.renderIcon ? window.renderIcon('copy', 12, 2) : '') + 'Copy</span></button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" class="history-card-btn edit"><span style="display:inline-flex;align-items:center;gap:4px">' + (window.renderIcon ? window.renderIcon('edit', 12, 2) : '') + 'Sửa đơn</span></button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="detail" onclick="handleOrderActionClick(this)" class="history-card-btn view"><span style="display:inline-flex;align-items:center;gap:4px">' + (window.renderIcon ? window.renderIcon('detail', 12, 2) : '') + 'Chi tiết</span></button>';
+    html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" class="history-card-btn delete">' + (window.renderIcon ? window.renderIcon('trash', 14, 2) : '🗑') + '</button>';
     html += '</div>';
 
     html += '</div>';
@@ -1077,10 +1066,10 @@ function viewOrderDetail(orderRef) {
   html += '</div>';
 
   html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:16px">';
-  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:var(--card);color:var(--o);font-size:14px;font-weight:800;cursor:pointer">✏️ Sửa đơn</button>';
-  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" style="height:46px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:14px;font-weight:800;cursor:pointer">📋 Copy gửi Zalo</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="edit" onclick="handleOrderActionClick(this)" style="height:46px;border:1.5px solid var(--o);border-radius:var(--R);background:var(--card);color:var(--o);font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">' + (window.renderIcon ? window.renderIcon('edit', 16, 2) : '') + 'Sửa đơn</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="copy" onclick="handleOrderActionClick(this)" style="height:46px;background:linear-gradient(135deg,var(--vm),var(--vm2));color:#fff;border:none;border-radius:var(--R);font-size:14px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">' + (window.renderIcon ? window.renderIcon('copy', 16, 2) : '') + 'Copy Zalo</button>';
   html += '</div>';
-  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:var(--card);color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px">🗑 Xóa đơn này</button>';
+  html += '<button type="button" data-order-id="' + orderIdAttr + '" data-order-action="delete" onclick="handleOrderActionClick(this)" style="width:100%;height:42px;border:1.5px solid var(--r);border-radius:var(--R);background:var(--card);color:var(--r);font-size:13px;font-weight:700;cursor:pointer;margin-top:8px;display:flex;align-items:center;justify-content:center;gap:6px">' + (window.renderIcon ? window.renderIcon('trash', 15, 2) : '') + 'Xóa đơn này</button>';
 
   body.innerHTML = html;
 }
