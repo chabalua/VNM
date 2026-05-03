@@ -426,16 +426,17 @@ window.toggleCard = function(ma) {
     var p = null;
     for(var i=0; i<SP.length; i++){ if(SP[i].ma===ma){ p=SP[i]; break; } }
     if(p) {
-      var kmTop = calcKM(p, 1, 0);
-      var ckMax = (kmTop && kmTop.disc > 0) ? Math.round((kmTop.disc / (p.giaNYLon * p.slThung))*100) : 0;
-      var tbl = buildPriceTable(p, kmTop);
-      var info = '<div style="margin-bottom:12px">';
-      if(ckMax>0) info += '<span style="display:inline-block;padding:2px 6px;background:var(--danger-soft);color:var(--danger-text);border-radius:4px;font-size:11px;font-weight:600;margin-right:6px">KM: ' + ckMax + '%</span>';
-      var ctName = kmTop.appliedPromos && kmTop.appliedPromos.length ? kmTop.appliedPromos[0] : '';
-      if(ctName) info += '<span style="font-size:11.5px;color:var(--text-tertiary)">CT: ' + escapeHtml(ctName) + '</span>';
-      info += '</div>';
-
-      expandEl.innerHTML = info + tbl;
+      // Lấy qty hiện tại (nếu user đã nhập), fallback 1 thùng để hiện giá KM đại diện
+      var eT2 = document.getElementById('qT_' + ma);
+      var eL2 = document.getElementById('qL_' + ma);
+      var qT2 = parseInt((eT2 && eT2.value) || 0, 10);
+      var qL2 = parseInt((eL2 && eL2.value) || 0, 10);
+      var useQT = (qT2 > 0 || qL2 > 0) ? qT2 : 1;
+      var useQL = (qT2 > 0 || qL2 > 0) ? qL2 : 0;
+      var kmTop = calcKM(p, useQT, useQL);
+      // Chỉ cập nhật pt_ div, KHÔNG overwrite toàn bộ expandEl (tránh xóa inputs)
+      var ptEl = document.getElementById('pt_' + ma);
+      if (ptEl) ptEl.innerHTML = buildPriceTable(p, kmTop);
     }
   } else {
     expandEl.style.display = 'none';
@@ -677,7 +678,7 @@ function renderOrder() {
     groups[nhom].forEach(function(p) {
       var inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
       var isFav = favorites.includes(p.ma);
-      var kmInfo = calcKM(p, 0, 1);
+      var kmInfo = calcKM(p, 1, 0);
       var brand = detectBrand(p);
       var appliedCTs = getProductPromoRefs(p.ma);
 
