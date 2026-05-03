@@ -1,5 +1,75 @@
 [
   {
+    "id": 1777789706882,
+    "date": "2026-05-03T05:00:00.000Z",
+    "ngay": "3/5/2026",
+    "_updatedAt": "2026-05-03T06:28:26.882Z",
+    "khMa": "DL200412FK",
+    "khTen": "Trần Đạt (Hoa Khánh)",
+    "items": [
+      {
+        "ma": "04CD35",
+        "ten": "SDD ADM có đường 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 16,
+        "qL": 0,
+        "totalLon": 768,
+        "gocTotal": 3608064,
+        "afterKM": 3608064,
+        "disc": 0,
+        "desc": "Tặng 96 Hộp",
+        "bonus": 96
+      },
+      {
+        "ma": "04EI33",
+        "ten": "STTT ít đường VNM 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 12,
+        "qL": 0,
+        "totalLon": 576,
+        "gocTotal": 3110400,
+        "afterKM": 3110400,
+        "disc": 0,
+        "desc": "Tặng 48 Hộp + 48 Hộp + 48 Hộp",
+        "bonus": 144
+      },
+      {
+        "ma": "04GI34",
+        "ten": "STTT rất ít đường Green Farm 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 1,
+        "qL": 0,
+        "totalLon": 48,
+        "gocTotal": 295488,
+        "afterKM": 295488,
+        "disc": 0,
+        "desc": "Tặng 4 Hộp + 4 Hộp + 4 Hộp",
+        "bonus": 12
+      }
+    ],
+    "tong": 7013952,
+    "tongGoc": 7013952,
+    "orderDisc": 0,
+    "bonusItems": [
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 10,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      },
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 10,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      }
+    ],
+    "_deleted": false
+  },
+  {
     "id": 1777789652916,
     "date": "2026-04-10T05:00:00.000Z",
     "ngay": "10/4/2026",
