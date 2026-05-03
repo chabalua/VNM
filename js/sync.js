@@ -512,15 +512,16 @@ function syncOpenSettings() {
     html += '</div>';
 
     html += '<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px">';
-    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPushOrdersOnly()" style="height:44px;border:1.5px solid var(--vm);border-radius:var(--Rs);background:var(--card);color:var(--vm);font-size:13px;font-weight:700;cursor:pointer">⬆️ Push đơn hàng</button>';
-    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPullOrdersOnly()" style="height:44px;border:1.5px solid var(--b);border-radius:var(--Rs);background:var(--card);color:var(--b);font-size:13px;font-weight:700;cursor:pointer">⬇️ Pull đơn hàng</button>';
+    var _ic = window.renderIcon || function() { return ''; };
+    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPushOrdersOnly()" style="height:44px;border:1.5px solid var(--vm);border-radius:var(--Rs);background:var(--card);color:var(--vm);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">' + _ic('upload', 15, 2) + 'Push đơn hàng</button>';
+    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPullOrdersOnly()" style="height:44px;border:1.5px solid var(--b);border-radius:var(--Rs);background:var(--card);color:var(--b);font-size:13px;font-weight:700;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px">' + _ic('download', 15, 2) + 'Pull đơn hàng</button>';
     html += '</div>';
 
     html += '<div style="display:flex;flex-direction:column;gap:10px;margin-top:16px">';
-    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPush()" style="width:100%;height:52px;background:linear-gradient(135deg,var(--vm),#245bff);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(26,77,255,.22)">⬆️ Push toàn bộ dữ liệu</button>';
-    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPull()" style="width:100%;height:52px;background:linear-gradient(135deg,#111827,#2f3e63);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(17,24,39,.18)">⬇️ Pull toàn bộ dữ liệu</button>';
+    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPush()" style="width:100%;height:52px;background:linear-gradient(135deg,var(--vm),#245bff);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(26,77,255,.22);display:flex;align-items:center;justify-content:center;gap:8px">' + _ic('upload', 18, 2) + 'Push toàn bộ dữ liệu</button>';
+    html += '<button onclick="document.getElementById(\'km-modal\').style.display=\'none\';syncPull()" style="width:100%;height:52px;background:linear-gradient(135deg,#111827,#2f3e63);color:#fff;border:none;border-radius:var(--R);font-size:15px;font-weight:800;cursor:pointer;box-shadow:0 4px 12px rgba(17,24,39,.18);display:flex;align-items:center;justify-content:center;gap:8px">' + _ic('download', 18, 2) + 'Pull toàn bộ dữ liệu</button>';
     html += '</div>';
-    html += '<button onclick="syncTestConnection()" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);background:var(--card);color:var(--n2);font-size:12px;font-weight:600;cursor:pointer;margin-top:12px">🔍 Kiểm tra kết nối</button>';
+    html += '<button onclick="syncTestConnection()" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);background:var(--card);color:var(--n2);font-size:12px;font-weight:600;cursor:pointer;margin-top:12px;display:flex;align-items:center;justify-content:center;gap:6px">' + _ic('search', 14, 2) + 'Kiểm tra kết nối</button>';
   }
 
   html += '<div style="border-top:1px solid var(--n5);margin-top:20px;padding-top:16px">';

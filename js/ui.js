@@ -463,6 +463,8 @@ function onQty(ma) {
   if(!p || !pv) return;
 
   var totalLon = qT * p.slThung + qL;
+  var pt = document.getElementById('pt_' + ma);
+
   if(totalLon <= 0) {
     pv.style.display = 'none';
     if (card) {
@@ -470,12 +472,14 @@ function onQty(ma) {
         card.classList.remove('inCart');
       }
     }
+    if (pt) pt.innerHTML = buildPriceTable(p, calcKM(p, 0, 1));
     return;
   }
 
   if (card) card.classList.add('inCart');
 
   var kmInfo = calcKM(p, qT, qL);
+  if (pt) pt.innerHTML = buildPriceTable(p, kmInfo);
   var hasDis = kmInfo.disc > 0 || kmInfo.bonus > 0 || kmInfo.bonusItems.length > 0;
   
   var goc = p.giaNYLon * totalLon;
