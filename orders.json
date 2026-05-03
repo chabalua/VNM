@@ -1,5 +1,89 @@
 [
   {
+    "id": 1777789652916,
+    "date": "2026-04-10T05:00:00.000Z",
+    "ngay": "10/4/2026",
+    "_updatedAt": "2026-05-03T06:27:32.916Z",
+    "khMa": "DL200412FK",
+    "khTen": "Trần Đạt (Hoa Khánh)",
+    "items": [
+      {
+        "ma": "04CD35",
+        "ten": "SDD ADM có đường 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 16,
+        "qL": 0,
+        "totalLon": 768,
+        "gocTotal": 3608064,
+        "afterKM": 3608064,
+        "disc": 0,
+        "desc": "Tặng 96 Hộp",
+        "bonus": 96
+      },
+      {
+        "ma": "01SB10",
+        "ten": "Creamer đặc NSPN xanh biển 1284g",
+        "donvi": "hộp",
+        "nhom": "B",
+        "qT": 1,
+        "qL": 11,
+        "totalLon": 23,
+        "gocTotal": 1274292,
+        "afterKM": 1274292,
+        "disc": 0,
+        "desc": "Tặng 1 hộp",
+        "bonus": 1
+      },
+      {
+        "ma": "04GI34",
+        "ten": "STTT rất ít đường Green Farm 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 2,
+        "qL": 0,
+        "totalLon": 96,
+        "gocTotal": 590976,
+        "afterKM": 590976,
+        "disc": 0,
+        "desc": "Tặng 8 Hộp + 8 Hộp + 8 Hộp",
+        "bonus": 24
+      },
+      {
+        "ma": "07ND15",
+        "ten": "Sữa Chua Nha đam 100g",
+        "donvi": "hộp",
+        "nhom": "D",
+        "qT": 0,
+        "qL": 24,
+        "totalLon": 24,
+        "gocTotal": 178848,
+        "afterKM": 178848,
+        "disc": 0,
+        "desc": "",
+        "bonus": 0
+      }
+    ],
+    "tong": 5652180,
+    "tongGoc": 5652180,
+    "orderDisc": 0,
+    "bonusItems": [
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 4,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      },
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 4,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      }
+    ],
+    "_deleted": false
+  },
+  {
     "id": 1777789424835,
     "date": "2026-04-07T05:00:00.000Z",
     "ngay": "7/4/2026",
