@@ -414,15 +414,15 @@ window.toggleCard = function(ma) {
   _cardExpanded[ma] = !_cardExpanded[ma];
   var expandEl = document.getElementById('expand_' + ma);
   var cardBtn = document.getElementById('b_' + ma);
-  
+  var icon = cardBtn ? cardBtn.querySelector('.expand-icon') : null;
+
   if (!expandEl) return;
   if (_cardExpanded[ma]) {
     expandEl.style.display = 'block';
     if (cardBtn) cardBtn.classList.add('expanded');
-    
-    var icon = cardBtn.querySelector('.expand-icon');
+
     if (icon) icon.style.transform = 'rotate(180deg)';
-    
+
     var p = null;
     for(var i=0; i<SP.length; i++){ if(SP[i].ma===ma){ p=SP[i]; break; } }
     if(p) {
@@ -441,7 +441,6 @@ window.toggleCard = function(ma) {
   } else {
     expandEl.style.display = 'none';
     if (cardBtn) cardBtn.classList.remove('expanded');
-    var icon = cardBtn.querySelector('.expand-icon');
     if (icon) icon.style.transform = 'rotate(0deg)';
   }
 }

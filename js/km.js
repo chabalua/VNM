@@ -1,11 +1,11 @@
 // Quản lý CT KM (modal, form)
 
-let _kmEditIdx = -1;
-let _kmPickerNhom = '';
-let _kmPickerSearch = '';
-let _kmStackable = true;
-let _kmFilterGroup = '';
-let _kmFilterQuery = '';
+var _kmEditIdx = -1;
+var _kmPickerNhom = '';
+var _kmPickerSearch = '';
+var _kmStackable = true;
+var _kmFilterGroup = '';
+var _kmFilterQuery = '';
 
 function kmBuildSearchHaystack(prog) {
   if (!prog) return '';

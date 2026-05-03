@@ -614,24 +614,6 @@ function getItems() {
   return getItemsFromCartState(cart);
 }
 
-function addCart(ma) {
-  var p = spFind(ma); if (!p) return;
-  var qT = parseInt(document.getElementById('qT_' + ma)?.value) || 0;
-  var qL = parseInt(document.getElementById('qL_' + ma)?.value) || 0;
-  if (qT < 0) qT = 0; if (qL < 0) qL = 0;
-  if (!qT && !qL) return;
-  cart[ma] = { qT: qT, qL: qL }; saveCart(); updateBadge();
-  var card = document.getElementById('card_' + ma);
-  if (card) card.className = 'sp-card inCart';
-  var pv = document.getElementById('pv_' + ma);
-  if (pv) {
-    var km = calcKM(p, qT, qL);
-    var after = p.giaNYLon * (qT * p.slThung + qL) - km.disc;
-    pv.innerHTML = '<div class="pv-row"><span class="pv-l">✓ Đã thêm</span><span class="pv-v">' + fmt(after) + 'đ</span></div>';
-    setTimeout(function() { if (pv) pv.style.display = 'none'; }, 1500);
-  }
-}
-
 function removeCart(ma) {
   delete cart[ma]; saveCart(); updateBadge();
   var card = document.getElementById('card_' + ma); if (card) card.className = 'sp-card';
@@ -1096,7 +1078,7 @@ function delKH() {}
 window.cart = cart; window.customers = customers;
 window.saveCart = saveCart; window.fmt = fmt;
 window.calcKM = calcKM; window.calcOrderKM = calcOrderKM;
-window.getItems = getItems; window.addCart = addCart;
+window.getItems = getItems;
 window.getItemsFromCartState = getItemsFromCartState;
 window.removeCart = removeCart; window.clearCart = clearCart;
 window.renderDon = renderDon; window.submitOrder = submitOrder;

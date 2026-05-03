@@ -6,6 +6,10 @@ function normalizeProduct(product) {
   if (!product || typeof product !== 'object') return product;
   if (!product.kmRules) product.kmRules = [];
   if (!product.kmText) product.kmText = '';
+  // Đảm bảo giaNYThung luôn khớp giaNYLon × slThung
+  if (product.giaNYLon && product.slThung) {
+    product.giaNYThung = product.giaNYLon * product.slThung;
+  }
   if (product.phanLoaiTuNhap !== true) {
     if (product._brand && product.phanLoai === product._brand) delete product.phanLoai;
     delete product.phanLoaiTuNhap;
@@ -169,7 +173,7 @@ async function syncFromGitHub() {
     } else {
       throw new Error('Products data không hợp lệ');
     }
-    if (!Array.isArray(newPromos)) throw new Error('Promotions data không hợp lệ');
+    if (!Array.isArray(newPromos) || !validatePromotionList(newPromos)) throw new Error('Promotions data không hợp lệ');
     kmProgs = normalizePromotionList(newPromos);
     kmSave();
     if (window.renderOrder) window.renderOrder();
