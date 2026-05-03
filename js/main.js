@@ -1,7 +1,7 @@
 // Khởi tạo, sự kiện chính, tab switching
 
-var NAV_TABS = ['home', 'order', 'don', 'kh', 'adm'];
-var ALL_PAGES = ['home', 'order', 'don', 'adm', 'km', 'kh'];
+var NAV_TABS = ['home', 'order', 'don', 'ai', 'kh', 'adm'];
+var ALL_PAGES = ['home', 'order', 'don', 'adm', 'km', 'ai', 'kh'];
 var _homeMonthKey = getCurrentMonthKey();
 var _kpiEditorMonthKey = '';
 var KPI_CONFIG_KEY = LS_KEYS.KPI_CONFIG;
@@ -71,6 +71,7 @@ function gotoTab(t) {
 
   if (t === 'home') renderHomeDashboard();
   if (t === 'don') renderDon();
+  if (t === 'ai' && window.renderAITab) renderAITab();
   if (t === 'adm') { renderSettingsOverview(); renderAdm(); }
   if (t === 'km') renderKMTab();
   if (t === 'kh') { renderRoutePills(); renderCusTab(); }
@@ -637,6 +638,7 @@ window.onload = async function() {
   renderOrder();
   updateBadge();
   if (document.getElementById('page-don').classList.contains('on')) renderDon();
+  if (document.getElementById('page-ai').classList.contains('on') && window.renderAITab) renderAITab();
   if (document.getElementById('page-adm').classList.contains('on')) renderAdm();
   if (document.getElementById('page-km').classList.contains('on')) renderKMTab();
   if (document.getElementById('page-kh').classList.contains('on')) { renderRoutePills(); renderCusTab(); }

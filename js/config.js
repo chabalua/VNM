@@ -37,7 +37,9 @@ var LS_KEYS = {
   THEME:         'vnm_theme_mode',
   KPI_CONFIG:    'vnm_kpi_config_v1',
   CT_CONFIG:     'vnm_ct_config',
-  BRAND_RULES:   'vnm_custom_brand_rules_v1'
+  BRAND_RULES:   'vnm_custom_brand_rules_v1',
+  AI_SETTINGS:   'vnm_ai_settings_v1',
+  AI_CHAT:       'vnm_ai_chat_v1'
 };
 
 window.REPO_RAW = REPO_RAW;
