@@ -857,18 +857,18 @@ html[data-layout='desktop'] .page { padding-bottom: 0 !important; }
 #desktop-sidebar { display: none; }
 html[data-layout='desktop'] #desktop-sidebar { display: flex; width: 232px; flex-shrink: 0; border-right: 1px solid var(--border); background: var(--surface); flex-direction: column; }
 
-/* DESKTOP ORDER — 2-column layout */
-html[data-layout='desktop'] #page-order { display: grid !important; grid-template-columns: 1fr 300px; grid-template-rows: auto 1fr; overflow: hidden; }
-html[data-layout='desktop'] #page-order .mobile-header { grid-column: 1; grid-row: 1; border-bottom: 1px solid var(--border); overflow-y: visible; }
-html[data-layout='desktop'] #page-order #order-list { grid-column: 1; grid-row: 2; overflow-y: auto; padding-bottom: 16px !important; }
-html[data-layout='desktop'] #page-order #floating-cart { display: none; }
-html[data-layout='desktop'] #order-desktop-side { grid-column: 2; grid-row: 1 / span 2; overflow-y: auto; border-left: 1px solid var(--border); background: var(--surface); padding: 16px 12px; display: flex; flex-direction: column; gap: 12px; }
+/* DESKTOP ORDER — 2-column layout (only when active) */
+html[data-layout='desktop'] #page-order.on { display: grid !important; grid-template-columns: 1fr 300px; grid-template-rows: auto 1fr; overflow: hidden; }
+html[data-layout='desktop'] #page-order.on .mobile-header { grid-column: 1; grid-row: 1; border-bottom: 1px solid var(--border); overflow-y: visible; }
+html[data-layout='desktop'] #page-order.on #order-list { grid-column: 1; grid-row: 2; overflow-y: auto; padding-bottom: 16px !important; }
+html[data-layout='desktop'] #page-order.on #floating-cart { display: none; }
+html[data-layout='desktop'] #page-order.on #order-desktop-side { grid-column: 2; grid-row: 1 / span 2; overflow-y: auto; border-left: 1px solid var(--border); background: var(--surface); padding: 16px 12px; display: flex; flex-direction: column; gap: 12px; }
 #order-desktop-side { display: none; }
 
-/* DESKTOP CUSTOMER — 2-column layout (filter + list) */
-html[data-layout='desktop'] #page-kh { display: flex !important; flex-direction: row; overflow: hidden; }
-html[data-layout='desktop'] #page-kh .sbar { display: flex !important; flex-direction: column; width: 240px; flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; padding: 16px 12px; gap: 8px; }
-html[data-layout='desktop'] #kh-list { flex: 1; overflow-y: auto; padding-bottom: 0; height: 100%; }
+/* DESKTOP CUSTOMER — 2-column layout (filter + list, only when active) */
+html[data-layout='desktop'] #page-kh.on { display: flex !important; flex-direction: row; overflow: hidden; }
+html[data-layout='desktop'] #page-kh.on .sbar { display: flex !important; flex-direction: column; width: 240px; flex-shrink: 0; border-right: 1px solid var(--border); overflow-y: auto; padding: 16px 12px; gap: 8px; }
+html[data-layout='desktop'] #page-kh.on #kh-list { flex: 1; overflow-y: auto; padding-bottom: 0; height: 100%; }
 
 /* DESKTOP CART PANEL components */
 .desktop-panel-card { background: var(--card); border-radius: var(--R); border: 1px solid var(--border); overflow: hidden; }
