@@ -219,7 +219,7 @@ function renderCustomerSelector() {
     html += '<button style="background:none;border:none;color:var(--text-tertiary);padding:4px;cursor:pointer" onclick="event.stopPropagation();onSelectCustomer(\'\')">' + (window.renderIcon ? window.renderIcon('x', 14) : '✕') + '</button>';
   } else {
     html += '<div style="flex:1;font-size:13px;color:var(--text-tertiary);display:flex;align-items:center;gap:8px">' + (window.renderIcon ? window.renderIcon('users', 16) : '') + ' Chọn khách hàng...</div>';
-    html += '<div style="color:var(--text-tertiary)">' + (window.renderIcon ? window.renderIcon('chevronD', 14) : '▼') + '</div>';
+    html += '<div style="color:var(--text-tertiary)">' + (window.renderIcon ? window.renderIcon('chevron-down', 14) : '▼') + '</div>';
   }
   html += '</div>';
 
@@ -275,7 +275,7 @@ function buildPriceTable(p, km) {
   // Thùng row (highlight)
   rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;border-bottom:1px solid var(--border-subtle);background:var(--accent-soft);align-items:center;gap:4px">';
   rows += '<div style="font-weight:600;font-size:12.5px;color:var(--accent-text)">Thùng ' + p.slThung + '</div>';
-  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:-line-through">' + fmt(thungGoc) + '</div>';
+  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:line-through">' + fmt(thungGoc) + '</div>';
   rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + (hasDiscount ? fmt(thungKM) + 'đ' : '—') + '</div>';
   rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + fmt(thungVat) + 'đ</div>';
   rows += '</div>';
@@ -287,7 +287,7 @@ function buildPriceTable(p, km) {
     var locVat = Math.round(locKM * (1 + VAT_RATE));
     rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;border-bottom:1px solid var(--border-subtle);align-items:center;gap:4px">';
     rows += '<div style="font-size:12.5px;color:var(--text)">' + (p.locLabel || 'Lốc') + ' ' + p.locSize + '</div>';
-    rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:-line-through">' + fmt(locGoc) + '</div>';
+    rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:line-through">' + fmt(locGoc) + '</div>';
     rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (hasDiscount ? fmt(locKM) : '—') + '</div>';
     rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + fmt(locVat) + '</div>';
     rows += '</div>';
@@ -296,7 +296,7 @@ function buildPriceTable(p, km) {
   // Hộp row
   rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;align-items:center;gap:4px">';
   rows += '<div style="font-size:12.5px;color:var(--text)">Hộp/Lon</div>';
-  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:-line-through">' + fmt(hopGoc) + '</div>';
+  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:line-through">' + fmt(hopGoc) + '</div>';
   rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (hasDiscount ? fmt(hopKM) : '—') + '</div>';
   rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + fmt(hopVat) + '</div>';
   rows += '</div>';
@@ -344,6 +344,7 @@ function addCart(ma) {
     }, 400);
   }
 
+  updateBadge();
   showToast('Đã cập nhật ' + ma + ' vào giỏ');
   onQty(ma);
 }
@@ -723,13 +724,13 @@ function renderOrder() {
         var afterKM2 = p.giaNYLon * totalL2 - kmInCart.disc;
         var goc2 = p.giaNYLon * totalL2;
         var VAT_RATE2 = typeof VAT !== 'undefined' ? VAT : 0.015;
-        var vatAmt2 = Math.round(afterKM2 * (1 + VAT_RATE2));
         mainHtml += '<div class="sp-quick-price">';
         mainHtml += '<div><div class="qp-meta">' + (qT2 > 0 ? qT2 + ' thùng' : '') + (qT2 > 0 && qL2 > 0 ? ' + ' : '') + (qL2 > 0 ? qL2 + ' lẻ' : '') + ' = ' + totalL2 + ' ' + escapeHtml(p.donvi) + '</div>';
         mainHtml += '<div class="sp-qp-main">' + fmt(afterKM2) + 'đ</div></div>';
         mainHtml += '<div class="qp-right">';
         if (goc2 > afterKM2) mainHtml += '<div class="sp-qp-sub">' + fmt(goc2) + 'đ</div>';
-        mainHtml += '<div class="sp-qp-vat">+Thuế: ' + fmt(vatAmt2) + 'đ</div>';
+        var vatOnly2 = Math.round(afterKM2 * VAT_RATE2);
+        mainHtml += '<div class="sp-qp-vat">+Thuế: ' + fmt(vatOnly2) + 'đ</div>';
         mainHtml += '</div></div>';
       }
 

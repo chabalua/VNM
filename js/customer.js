@@ -1002,7 +1002,7 @@ function cusCardHTML(kh, idx, monthKey) {
   html += '<div class="customer-row-head">';
   html += '<div class="customer-row-title-wrap">';
   html += '<button type="button" class="customer-toggle-btn" onclick="cusToggleExpand(' + idx + ')" aria-label="' + (expanded ? 'Thu gọn khách hàng' : 'Mở rộng khách hàng') + '">';
-  html += '<span class="customer-toggle-icon">' + (expanded ? '▾' : '▸') + '</span>';
+  html += '<span class="customer-toggle-icon">' + (window.renderIcon ? window.renderIcon(expanded ? 'chevron-down' : 'chevron-right', 13, 2.2) : (expanded ? '▾' : '▸')) + '</span>';
   html += '</button>';
   html += '<div class="customer-row-title">';
   html += '<div style="font-size:15px;font-weight:800;color:var(--n1);line-height:1.2">' + escapeHtml(kh.ten || kh.ma) + '</div>';
@@ -1011,8 +1011,8 @@ function cusCardHTML(kh, idx, monthKey) {
   html += '</div>';
   html += '</div>';
   html += '<div class="customer-actions">';
-  html += '<button onclick="cusInputDS(' + idx + ', \'' + monthKey + '\')" class="customer-action-btn">📊 Nhập DS</button>';
-  html += '<button onclick="cusEdit(' + idx + ')" class="customer-icon-btn">✏️</button>';
+  html += '<button onclick="cusInputDS(' + idx + ', \'' + monthKey + '\')" class="customer-action-btn"><span style="display:inline-flex;align-items:center;gap:4px">' + (window.renderIcon ? window.renderIcon('chart', 13, 2) : '') + 'Nhập DS</span></button>';
+  html += '<button onclick="cusEdit(' + idx + ')" class="customer-icon-btn">' + (window.renderIcon ? window.renderIcon('edit', 15, 2) : '✏️') + '</button>';
   html += '</div></div>';
 
   if (!expanded) {
@@ -1508,8 +1508,6 @@ function renderCusTabDesktop() {
   html += '      <div style="font-size:13px;color:var(--text-secondary);margin-top:6px">' + totalKH + ' khách · ' + totalVNM + ' VNM Shop · ' + totalVIP + ' VIP Shop · ' + totalSBPS + ' SBPS</div>';
   html += '    </div>';
   html += '    <div style="display:flex;align-items:center;gap:8px">';
-  html += '      <button onclick="cusExport()" style="height:32px;padding:0 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer">📤 Xuất KH</button>';
-  html += '      <button onclick="cusImport()" style="height:32px;padding:0 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer">📥 Nhập KH</button>';
   html += '      <button onclick="cusManageRoutes()" style="height:32px;padding:0 12px;border:1px solid var(--border);border-radius:6px;background:var(--surface);color:var(--text);font-size:12px;font-weight:500;cursor:pointer">📍 Tuyến</button>';
   html += '    </div>';
   html += '  </div>';
@@ -1607,8 +1605,8 @@ function renderCusTabDesktop() {
 
     // Thao tác
     html += '        <div style="text-align:right;white-space:nowrap">';
-    html += '          <button onclick="cusInputDS(' + idx + ', \'' + viewMonthKey + '\')" style="font-size:12px;padding:4px 8px;border-radius:4px;background:var(--orangeL);color:var(--orange);border:1px solid var(--orangeMid);font-weight:600;cursor:pointer;margin-right:2px">📊 DS</button>';
-    html += '          <button onclick="cusEdit(' + idx + ')" style="font-size:12px;padding:4px 8px;border-radius:4px;background:var(--surface);color:var(--text-secondary);border:1px solid var(--border);cursor:pointer">✏️</button>';
+    html += '          <button onclick="cusInputDS(' + idx + ', \'' + viewMonthKey + '\')" style="font-size:12px;padding:4px 8px;border-radius:4px;background:var(--orangeL);color:var(--orange);border:1px solid var(--orangeMid);font-weight:600;cursor:pointer;margin-right:2px;display:inline-flex;align-items:center;gap:3px">' + (window.renderIcon ? window.renderIcon('chart', 13, 2) : '📊') + ' DS</button>';
+    html += '          <button onclick="cusEdit(' + idx + ')" style="font-size:12px;padding:4px 8px;border-radius:4px;background:var(--surface);color:var(--text-secondary);border:1px solid var(--border);cursor:pointer;display:inline-flex;align-items:center">' + (window.renderIcon ? window.renderIcon('edit', 13, 2) : '✏️') + '</button>';
     html += '        </div>';
 
     html += '      </div>';
