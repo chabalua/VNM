@@ -11,7 +11,8 @@
     "kmText": "",
     "phanLoai": "SĐ Xanh Biển",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:53:32.464Z"
+    "_updatedAt": "2026-04-05T13:53:32.464Z",
+    "_deleted": false
   },
   {
     "ma": "01SB02",
@@ -25,7 +26,8 @@
     "kmText": "",
     "phanLoai": "SĐ Xanh Biển",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:53:37.440Z"
+    "_updatedAt": "2026-04-05T13:53:37.440Z",
+    "_deleted": false
   },
   {
     "ma": "01SX11",
@@ -39,7 +41,8 @@
     "kmText": "",
     "phanLoai": "SĐ Xanh Lá",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:53:46.019Z"
+    "_updatedAt": "2026-04-05T13:53:46.019Z",
+    "_deleted": false
   },
   {
     "ma": "01SX07",
@@ -53,7 +56,8 @@
     "kmText": "",
     "phanLoai": "SĐ Xanh Lá",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:00.518Z"
+    "_updatedAt": "2026-04-05T13:54:00.518Z",
+    "_deleted": false
   },
   {
     "ma": "01SX05",
@@ -67,7 +71,8 @@
     "kmText": "",
     "phanLoai": "SĐ Xanh Lá",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:05.274Z"
+    "_updatedAt": "2026-04-05T13:54:05.274Z",
+    "_deleted": false
   },
   {
     "ma": "01TL10",
@@ -81,7 +86,8 @@
     "kmText": "",
     "phanLoai": "Tài Lộc",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:09.603Z"
+    "_updatedAt": "2026-04-05T13:54:09.603Z",
+    "_deleted": false
   },
   {
     "ma": "01TL00",
@@ -95,7 +101,8 @@
     "kmText": "",
     "phanLoai": "Tài Lộc",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:55:39.455Z"
+    "_updatedAt": "2026-04-05T13:55:39.455Z",
+    "_deleted": false
   },
   {
     "ma": "01TH60",
@@ -107,7 +114,9 @@
     "giaNYThung": 480816,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "_brand": "Ông Thọ",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "01TD11",
@@ -121,7 +130,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:15.208Z"
+    "_updatedAt": "2026-04-05T13:54:15.208Z",
+    "_deleted": false
   },
   {
     "ma": "01TD12",
@@ -135,7 +145,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:19.463Z"
+    "_updatedAt": "2026-04-05T13:54:19.463Z",
+    "_deleted": false
   },
   {
     "ma": "01TD13",
@@ -149,7 +160,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:35.810Z"
+    "_updatedAt": "2026-04-05T13:54:35.810Z",
+    "_deleted": false
   },
   {
     "ma": "01TD03",
@@ -161,7 +173,9 @@
     "giaNYThung": 1218240,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "_brand": "Ông Thọ",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "01TD60",
@@ -173,7 +187,9 @@
     "giaNYThung": 440640,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Ông Thọ"
+    "_brand": "Ông Thọ",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "01TA60",
@@ -187,7 +203,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:42.860Z"
+    "_updatedAt": "2026-04-05T13:54:42.860Z",
+    "_deleted": false
   },
   {
     "ma": "01TC60",
@@ -201,7 +218,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:47.543Z"
+    "_updatedAt": "2026-04-05T13:54:47.543Z",
+    "_deleted": false
   },
   {
     "ma": "01VD41",
@@ -215,7 +233,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:54:51.720Z"
+    "_updatedAt": "2026-04-05T13:54:51.720Z",
+    "_deleted": false
   },
   {
     "ma": "01TX03",
@@ -229,7 +248,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:55:00.112Z"
+    "_updatedAt": "2026-04-05T13:55:00.112Z",
+    "_deleted": false
   },
   {
     "ma": "01TT02",
@@ -243,7 +263,8 @@
     "kmText": "",
     "phanLoai": "Ông Thọ",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T13:55:03.467Z"
+    "_updatedAt": "2026-04-05T13:55:03.467Z",
+    "_deleted": false
   },
   {
     "ma": "02EO18",
@@ -255,7 +276,9 @@
     "giaNYThung": 6171552,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EO28",
@@ -267,7 +290,9 @@
     "giaNYThung": 6027696,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EO38",
@@ -279,7 +304,9 @@
     "giaNYThung": 6206544,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EO48",
@@ -291,7 +318,9 @@
     "giaNYThung": 5759424,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DO3A",
@@ -303,7 +332,9 @@
     "giaNYThung": 5027832,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DO4A",
@@ -315,7 +346,9 @@
     "giaNYThung": 4666896,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EG17",
@@ -327,7 +360,9 @@
     "giaNYThung": 4457592,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EG27",
@@ -339,7 +374,9 @@
     "giaNYThung": 4281336,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EG37",
@@ -351,7 +388,9 @@
     "giaNYThung": 3876984,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EG47",
@@ -363,7 +402,9 @@
     "giaNYThung": 3790152,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DG4A",
@@ -375,7 +416,9 @@
     "giaNYThung": 2932524,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02ER68",
@@ -387,7 +430,9 @@
     "giaNYThung": 5115312,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Grow Plus"
+    "_brand": "Grow Plus",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02ER78",
@@ -399,7 +444,9 @@
     "giaNYThung": 5115312,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Grow Plus"
+    "_brand": "Grow Plus",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DR64",
@@ -411,7 +458,9 @@
     "giaNYThung": 3970296,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Grow Plus"
+    "_brand": "Grow Plus",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DR74",
@@ -423,7 +472,9 @@
     "giaNYThung": 3970296,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Grow Plus"
+    "_brand": "Grow Plus",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02ES18",
@@ -435,7 +486,9 @@
     "giaNYThung": 7506432,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02ES38",
@@ -447,7 +500,9 @@
     "giaNYThung": 6813072,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EA15",
@@ -459,7 +514,9 @@
     "giaNYThung": 3154464,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EA25",
@@ -471,7 +528,9 @@
     "giaNYThung": 3154464,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EA35",
@@ -483,7 +542,9 @@
     "giaNYThung": 2927664,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EA45",
@@ -495,7 +556,9 @@
     "giaNYThung": 2927664,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AM12",
@@ -507,7 +570,9 @@
     "giaNYThung": 4647456,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AM22",
@@ -519,7 +584,9 @@
     "giaNYThung": 4647456,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EM12",
@@ -531,7 +598,9 @@
     "giaNYThung": 3094200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EM22",
@@ -543,7 +612,9 @@
     "giaNYThung": 5299344,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EU15",
@@ -555,7 +626,9 @@
     "giaNYThung": 7901712,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02PU02",
@@ -567,7 +640,9 @@
     "giaNYThung": 707616,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02ED12",
@@ -579,7 +654,9 @@
     "giaNYThung": 7501896,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EC14",
@@ -591,7 +668,9 @@
     "giaNYThung": 5832000,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EN22",
@@ -603,7 +682,9 @@
     "giaNYThung": 2556360,
     "kmRules": [],
     "kmText": "",
-    "_brand": ""
+    "_brand": "",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HT30",
@@ -615,7 +696,9 @@
     "giaNYThung": 298080,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AY19",
@@ -627,7 +710,9 @@
     "giaNYThung": 5671296,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yoko"
+    "_brand": "Yoko",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA15",
@@ -639,7 +724,9 @@
     "giaNYThung": 1477440,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA24",
@@ -651,7 +738,9 @@
     "giaNYThung": 1477440,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA34",
@@ -663,7 +752,9 @@
     "giaNYThung": 1477440,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA44",
@@ -675,7 +766,9 @@
     "giaNYThung": 1477440,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA54",
@@ -687,7 +780,9 @@
     "giaNYThung": 1477440,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA75",
@@ -699,7 +794,9 @@
     "giaNYThung": 1207872,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA84",
@@ -711,7 +808,9 @@
     "giaNYThung": 1358208,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CA92",
@@ -723,7 +822,9 @@
     "giaNYThung": 1617408,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CM06",
@@ -735,7 +836,9 @@
     "giaNYThung": 1573344,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CM20",
@@ -747,7 +850,9 @@
     "giaNYThung": 1373760,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03CY73",
@@ -759,7 +864,9 @@
     "giaNYThung": 1477440,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AB11",
@@ -771,7 +878,9 @@
     "giaNYThung": 2299104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AA13",
@@ -783,7 +892,9 @@
     "giaNYThung": 2042496,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AA42",
@@ -795,7 +906,9 @@
     "giaNYThung": 2299104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AA54",
@@ -807,7 +920,9 @@
     "giaNYThung": 2299104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AA74",
@@ -819,7 +934,9 @@
     "giaNYThung": 1804032,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AA92",
@@ -831,7 +948,9 @@
     "giaNYThung": 2514240,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AO90",
@@ -843,7 +962,9 @@
     "giaNYThung": 2771040,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AY73",
@@ -855,7 +976,9 @@
     "giaNYThung": 2299104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ED04",
@@ -867,7 +990,9 @@
     "giaNYThung": 458136,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EI04",
@@ -879,7 +1004,9 @@
     "giaNYThung": 458136,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ET04",
@@ -891,7 +1018,9 @@
     "giaNYThung": 458136,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ET22",
@@ -903,7 +1032,9 @@
     "giaNYThung": 458136,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ED13",
@@ -915,7 +1046,9 @@
     "giaNYThung": 406944,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EI18",
@@ -927,7 +1060,9 @@
     "giaNYThung": 406944,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ET13",
@@ -939,7 +1074,9 @@
     "giaNYThung": 406944,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EA13",
@@ -951,7 +1088,9 @@
     "giaNYThung": 419904,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EC13",
@@ -963,7 +1102,9 @@
     "giaNYThung": 419904,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EU11",
@@ -975,7 +1116,9 @@
     "giaNYThung": 419904,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EM10",
@@ -987,7 +1130,9 @@
     "giaNYThung": 419904,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EN10",
@@ -999,7 +1144,9 @@
     "giaNYThung": 419904,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EB11",
@@ -1011,7 +1158,9 @@
     "giaNYThung": 419904,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EC60",
@@ -1023,7 +1172,9 @@
     "giaNYThung": 482112,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ED33",
@@ -1035,7 +1186,9 @@
     "giaNYThung": 259200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EI33",
@@ -1047,7 +1200,9 @@
     "giaNYThung": 259200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04ET33",
@@ -1059,7 +1214,9 @@
     "giaNYThung": 259200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EA33",
@@ -1071,7 +1228,9 @@
     "giaNYThung": 259200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04EC33",
@@ -1083,7 +1242,9 @@
     "giaNYThung": 259200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FD2H",
@@ -1095,7 +1256,9 @@
     "giaNYThung": 412128,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FT2H",
@@ -1107,7 +1270,9 @@
     "giaNYThung": 412128,
     "kmRules": [],
     "kmText": "",
-    "_brand": "STT 100%"
+    "_brand": "STT 100%",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FD32",
@@ -1119,7 +1284,9 @@
     "giaNYThung": 368064,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Fino"
+    "_brand": "Fino",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FI32",
@@ -1131,7 +1298,9 @@
     "giaNYThung": 368064,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Fino"
+    "_brand": "Fino",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FT32",
@@ -1143,7 +1312,9 @@
     "giaNYThung": 368064,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Fino"
+    "_brand": "Fino",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FA31",
@@ -1155,7 +1326,9 @@
     "giaNYThung": 368064,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Fino"
+    "_brand": "Fino",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FC32",
@@ -1167,7 +1340,9 @@
     "giaNYThung": 368064,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Fino"
+    "_brand": "Fino",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CD15",
@@ -1179,7 +1354,9 @@
     "giaNYThung": 360288,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CI11",
@@ -1191,7 +1368,9 @@
     "giaNYThung": 360288,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CD35",
@@ -1203,7 +1382,9 @@
     "giaNYThung": 225504,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CI31",
@@ -1215,7 +1396,9 @@
     "giaNYThung": 225504,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CC34",
@@ -1227,7 +1410,9 @@
     "giaNYThung": 225504,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CA33",
@@ -1239,7 +1424,9 @@
     "giaNYThung": 225504,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CH10",
@@ -1251,7 +1438,9 @@
     "giaNYThung": 438048,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04CH30",
@@ -1263,7 +1452,9 @@
     "giaNYThung": 287712,
     "kmRules": [],
     "kmText": "",
-    "_brand": "ADM"
+    "_brand": "ADM",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04FH20",
@@ -1276,7 +1467,8 @@
     "kmRules": [],
     "kmText": "",
     "_updatedAt": "2026-04-21T15:39:33.218Z",
-    "_brand": "Fino"
+    "_brand": "Fino",
+    "_deleted": false
   },
   {
     "ma": "04GI14",
@@ -1288,7 +1480,9 @@
     "giaNYThung": 461376,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04GI34",
@@ -1300,7 +1494,9 @@
     "giaNYThung": 295488,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04GB18",
@@ -1312,7 +1508,9 @@
     "giaNYThung": 327888,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04GO11",
@@ -1324,7 +1522,9 @@
     "giaNYThung": 572832,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04GT05",
@@ -1336,7 +1536,9 @@
     "giaNYThung": 509328,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04AE12",
@@ -1348,7 +1550,9 @@
     "giaNYThung": 598752,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04AE32",
@@ -1360,7 +1564,9 @@
     "giaNYThung": 401760,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "04LL13",
@@ -1372,7 +1578,9 @@
     "giaNYThung": 422496,
     "kmRules": [],
     "kmText": "",
-    "_brand": "CanPro/Mama"
+    "_brand": "CanPro/Mama",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05AN25",
@@ -1384,7 +1592,9 @@
     "giaNYThung": 278640,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05AN31",
@@ -1396,7 +1606,9 @@
     "giaNYThung": 278640,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05DY10",
@@ -1408,7 +1620,9 @@
     "giaNYThung": 222912,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05MD10",
@@ -1420,7 +1634,9 @@
     "giaNYThung": 329184,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05AV24",
@@ -1432,7 +1648,9 @@
     "giaNYThung": 329184,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05AV33",
@@ -1444,7 +1662,9 @@
     "giaNYThung": 207360,
     "kmRules": [],
     "kmText": "",
-    "_brand": "CanPro/Mama"
+    "_brand": "CanPro/Mama",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05DD14",
@@ -1456,7 +1676,9 @@
     "giaNYThung": 329184,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05DH14",
@@ -1468,7 +1690,9 @@
     "giaNYThung": 329184,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05FV44",
@@ -1480,7 +1704,9 @@
     "giaNYThung": 222912,
     "kmRules": [],
     "kmText": "",
-    "_brand": "CanPro/Mama"
+    "_brand": "CanPro/Mama",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05AD11",
@@ -1492,7 +1718,9 @@
     "giaNYThung": 344736,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "05AD31",
@@ -1504,7 +1732,9 @@
     "giaNYThung": 344736,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SĐN/Hạt"
+    "_brand": "SĐN/Hạt",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UA40",
@@ -1516,7 +1746,9 @@
     "giaNYThung": 191808,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UC40",
@@ -1528,7 +1760,9 @@
     "giaNYThung": 191808,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UN40",
@@ -1540,7 +1774,9 @@
     "giaNYThung": 191808,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UQ40",
@@ -1552,7 +1788,9 @@
     "giaNYThung": 191808,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UK10",
@@ -1564,7 +1802,9 @@
     "giaNYThung": 422496,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06SA73",
@@ -1576,7 +1816,9 @@
     "giaNYThung": 110160,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06SC73",
@@ -1588,7 +1830,9 @@
     "giaNYThung": 110160,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UA32",
@@ -1600,7 +1844,9 @@
     "giaNYThung": 207360,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UC32",
@@ -1612,7 +1858,9 @@
     "giaNYThung": 207360,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UN32",
@@ -1624,7 +1872,9 @@
     "giaNYThung": 207360,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06UQ32",
@@ -1636,7 +1886,9 @@
     "giaNYThung": 207360,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06VA23",
@@ -1648,7 +1900,9 @@
     "giaNYThung": 342144,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yomilk"
+    "_brand": "Yomilk",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06VC23",
@@ -1660,7 +1914,9 @@
     "giaNYThung": 342144,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yomilk"
+    "_brand": "Yomilk",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "06VQ23",
@@ -1672,7 +1928,9 @@
     "giaNYThung": 342144,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yomilk"
+    "_brand": "Yomilk",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UA11",
@@ -1684,7 +1942,9 @@
     "giaNYThung": 232200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UC11",
@@ -1696,7 +1956,9 @@
     "giaNYThung": 259200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UD11",
@@ -1708,7 +1970,9 @@
     "giaNYThung": 232200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UG11",
@@ -1720,7 +1984,9 @@
     "giaNYThung": 232200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UI11",
@@ -1732,7 +1998,9 @@
     "giaNYThung": 232200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UQ11",
@@ -1744,7 +2012,9 @@
     "giaNYThung": 232200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UR13",
@@ -1756,7 +2026,9 @@
     "giaNYThung": 232200,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UD30",
@@ -1768,7 +2040,9 @@
     "giaNYThung": 199584,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UI31",
@@ -1780,7 +2054,9 @@
     "giaNYThung": 199584,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UL31",
@@ -1792,7 +2068,9 @@
     "giaNYThung": 216432,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UM31",
@@ -1804,7 +2082,9 @@
     "giaNYThung": 215400,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UQ31",
@@ -1816,7 +2096,9 @@
     "giaNYThung": 199584,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UR31",
@@ -1828,7 +2110,9 @@
     "giaNYThung": 199584,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UT30",
@@ -1840,7 +2124,9 @@
     "giaNYThung": 199584,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UI40",
@@ -1852,7 +2138,9 @@
     "giaNYThung": 290952,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UR41",
@@ -1864,7 +2152,9 @@
     "giaNYThung": 290952,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UI70",
@@ -1876,7 +2166,9 @@
     "giaNYThung": 240084,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07UR71",
@@ -1888,7 +2180,9 @@
     "giaNYThung": 240084,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07TR33",
@@ -1900,7 +2194,9 @@
     "giaNYThung": 298080,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SCA Trắng"
+    "_brand": "SCA Trắng",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07TR61",
@@ -1912,7 +2208,9 @@
     "giaNYThung": 189216,
     "kmRules": [],
     "kmText": "",
-    "_brand": "SCA Trắng"
+    "_brand": "SCA Trắng",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07PR50",
@@ -1924,7 +2222,9 @@
     "giaNYThung": 334896,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Probi"
+    "_brand": "Probi",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07GR20",
@@ -1936,7 +2236,9 @@
     "giaNYThung": 284352,
     "kmRules": [],
     "kmText": "",
-    "_brand": ""
+    "_brand": "",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "07GR10",
@@ -1948,7 +2250,9 @@
     "giaNYThung": 311040,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Green Farm"
+    "_brand": "Green Farm",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HO38",
@@ -1960,7 +2264,9 @@
     "giaNYThung": 479520,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HO18",
@@ -1972,7 +2278,9 @@
     "giaNYThung": 767232,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HL37",
@@ -1984,7 +2292,9 @@
     "giaNYThung": 453600,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Grow Plus"
+    "_brand": "Grow Plus",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03HA38",
@@ -1999,7 +2309,8 @@
     "kmRules": [],
     "kmText": "",
     "_brand": "Grow Plus",
-    "_updatedAt": "2026-04-07T00:00:00.000Z"
+    "_updatedAt": "2026-04-07T00:00:00.000Z",
+    "_deleted": false
   },
   {
     "ma": "02HL17",
@@ -2011,7 +2322,9 @@
     "giaNYThung": 679104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Grow Plus"
+    "_brand": "Grow Plus",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HD39",
@@ -2023,7 +2336,9 @@
     "giaNYThung": 453600,
     "kmRules": [],
     "kmText": "",
-    "_brand": ""
+    "_brand": "",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HD19",
@@ -2035,7 +2350,9 @@
     "giaNYThung": 679104,
     "kmRules": [],
     "kmText": "",
-    "_brand": ""
+    "_brand": "",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HG18",
@@ -2047,7 +2364,9 @@
     "giaNYThung": 616896,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha Gold"
+    "_brand": "D.Alpha Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HG38",
@@ -2059,7 +2378,9 @@
     "giaNYThung": 412128,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha Gold"
+    "_brand": "D.Alpha Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HS37",
@@ -2071,7 +2392,9 @@
     "giaNYThung": 526176,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HY19",
@@ -2083,7 +2406,9 @@
     "giaNYThung": 756864,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yoko"
+    "_brand": "Yoko",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02HY39",
@@ -2095,7 +2420,9 @@
     "giaNYThung": 476928,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yoko"
+    "_brand": "Yoko",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02PD21",
@@ -2107,7 +2434,9 @@
     "giaNYThung": 931824,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02PU21",
@@ -2119,7 +2448,9 @@
     "giaNYThung": 857952,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AA15",
@@ -2131,7 +2462,9 @@
     "giaNYThung": 3827088,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AA25",
@@ -2143,7 +2476,9 @@
     "giaNYThung": 3827088,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DA35",
@@ -2155,7 +2490,9 @@
     "giaNYThung": 2321460,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DA45",
@@ -2167,7 +2504,9 @@
     "giaNYThung": 2321460,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha"
+    "_brand": "D.Alpha",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AG17",
@@ -2179,7 +2518,9 @@
     "giaNYThung": 4475088,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha Gold"
+    "_brand": "D.Alpha Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AG27",
@@ -2191,7 +2532,9 @@
     "giaNYThung": 4386960,
     "kmRules": [],
     "kmText": "",
-    "_brand": "D.Alpha Gold"
+    "_brand": "D.Alpha Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AO18",
@@ -2203,7 +2546,9 @@
     "giaNYThung": 7099488,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AO28",
@@ -2215,7 +2560,9 @@
     "giaNYThung": 7024320,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Optimum"
+    "_brand": "Optimum",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02DG3A",
@@ -2227,7 +2574,9 @@
     "giaNYThung": 2996352,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02AU15",
@@ -2239,7 +2588,9 @@
     "giaNYThung": 7591968,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Sure/Diecerna"
+    "_brand": "Sure/Diecerna",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EY19",
@@ -2251,7 +2602,9 @@
     "giaNYThung": 5631120,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yoko"
+    "_brand": "Yoko",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EY29",
@@ -2263,7 +2616,9 @@
     "giaNYThung": 5307120,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yoko"
+    "_brand": "Yoko",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "02EY39",
@@ -2275,7 +2630,9 @@
     "giaNYThung": 5112720,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Yoko"
+    "_brand": "Yoko",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AH10",
@@ -2287,7 +2644,9 @@
     "giaNYThung": 2299104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "03AA23",
@@ -2299,7 +2658,9 @@
     "giaNYThung": 2299104,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Dielac Gold"
+    "_brand": "Dielac Gold",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "08HA11",
@@ -2311,7 +2672,9 @@
     "giaNYThung": 316224,
     "kmRules": [],
     "kmText": "",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_updatedAt": "2026-05-03T06:26:31.566Z",
+    "_deleted": false
   },
   {
     "ma": "08HA31",
@@ -2324,7 +2687,8 @@
     "kmRules": [],
     "kmText": "",
     "_updatedAt": "2026-04-21T01:01:45.640Z",
-    "_brand": "Susu/Hero"
+    "_brand": "Susu/Hero",
+    "_deleted": false
   },
   {
     "ma": "07KD12",
@@ -2338,6 +2702,24 @@
     "kmText": "",
     "phanLoai": "Sữa Chua",
     "phanLoaiTuNhap": true,
-    "_updatedAt": "2026-04-05T12:15:18.399Z"
+    "_updatedAt": "2026-04-05T12:15:18.399Z",
+    "_deleted": false
+  },
+  {
+    "ma": "07ND15",
+    "ten": "Sữa Chua Nha đam 100g",
+    "nhom": "D",
+    "donvi": "hộp",
+    "slThung": 48,
+    "giaNYLon": 7452,
+    "giaNYThung": 357696,
+    "kmRules": [],
+    "kmText": "",
+    "phanLoai": "SCU",
+    "phanLoaiTuNhap": true,
+    "locSize": 4,
+    "locLabel": "Lốc",
+    "_updatedAt": "2026-05-03T06:26:28.909Z",
+    "_deleted": false
   }
 ]
