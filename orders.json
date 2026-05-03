@@ -1,5 +1,103 @@
 [
   {
+    "id": 1777789858368,
+    "date": "2026-04-17T05:00:00.000Z",
+    "ngay": "17/4/2026",
+    "_updatedAt": "2026-05-03T06:30:58.368Z",
+    "khMa": "DL200412FK",
+    "khTen": "Trần Đạt (Hoa Khánh)",
+    "items": [
+      {
+        "ma": "04EI33",
+        "ten": "STTT ít đường VNM 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 12,
+        "qL": 0,
+        "totalLon": 576,
+        "gocTotal": 3110400,
+        "afterKM": 3110400,
+        "disc": 0,
+        "desc": "Tặng 48 Hộp + 48 Hộp + 48 Hộp",
+        "bonus": 144
+      },
+      {
+        "ma": "04CD35",
+        "ten": "SDD ADM có đường 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 40,
+        "qL": 0,
+        "totalLon": 1920,
+        "gocTotal": 9020160,
+        "afterKM": 9020160,
+        "disc": 0,
+        "desc": "Tặng 240 Hộp",
+        "bonus": 240
+      },
+      {
+        "ma": "04FT32",
+        "ten": "SDD không đường Vinamilk F220ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 6,
+        "qL": 0,
+        "totalLon": 288,
+        "gocTotal": 2208384,
+        "afterKM": 1868184,
+        "disc": 340200,
+        "desc": "Tặng 18 Hộp + 12 Hộp SP khác + 18 Hộp + 12 Hộp SP khác + 18 Hộp + 12 Hộp SP khác",
+        "bonus": 54
+      },
+      {
+        "ma": "04FI32",
+        "ten": "SDD ít đường Vinamilk F220ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 2,
+        "qL": 0,
+        "totalLon": 96,
+        "gocTotal": 736128,
+        "afterKM": 622728,
+        "disc": 113400,
+        "desc": "Tặng 6 Hộp + 4 Hộp SP khác + 6 Hộp + 4 Hộp SP khác + 6 Hộp + 4 Hộp SP khác",
+        "bonus": 18
+      },
+      {
+        "ma": "04FD32",
+        "ten": "SDD có đường Vinamilk F220ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 7,
+        "qL": 0,
+        "totalLon": 336,
+        "gocTotal": 2576448,
+        "afterKM": 2576448,
+        "disc": 0,
+        "desc": "Tặng 21 Hộp + 21 Hộp + 21 Hộp",
+        "bonus": 63
+      }
+    ],
+    "tong": 17197920,
+    "tongGoc": 17651520,
+    "orderDisc": 0,
+    "bonusItems": [
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 26,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      },
+      {
+        "ma": "04EI33",
+        "name": "STTT ít đường VNM 110ml",
+        "qty": 26,
+        "progName": "Ontop SN: 2M+2h/5M+8h Cascade"
+      }
+    ],
+    "_deleted": false
+  },
+  {
     "id": 1777789706882,
     "date": "2026-04-14T05:00:00.000Z",
     "ngay": "14/4/2026",
