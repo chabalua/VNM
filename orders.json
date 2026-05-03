@@ -1,5 +1,48 @@
 [
   {
+    "id": 1777789927446,
+    "date": "2026-04-21T05:00:00.000Z",
+    "ngay": "21/4/2026",
+    "_updatedAt": "2026-05-03T06:32:07.446Z",
+    "khMa": "DL200412FK",
+    "khTen": "Trần Đạt (Hoa Khánh)",
+    "items": [
+      {
+        "ma": "04GI34",
+        "ten": "STTT rất ít đường Green Farm 110ml",
+        "donvi": "Hộp",
+        "nhom": "C",
+        "qT": 2,
+        "qL": 0,
+        "totalLon": 96,
+        "gocTotal": 590976,
+        "afterKM": 590976,
+        "disc": 0,
+        "desc": "Tặng 8 Hộp + 8 Hộp + 8 Hộp",
+        "bonus": 24
+      },
+      {
+        "ma": "01SB10",
+        "ten": "Creamer đặc NSPN xanh biển 1284g",
+        "donvi": "hộp",
+        "nhom": "B",
+        "qT": 1,
+        "qL": 11,
+        "totalLon": 23,
+        "gocTotal": 1274292,
+        "afterKM": 1274292,
+        "disc": 0,
+        "desc": "Tặng 1 hộp",
+        "bonus": 1
+      }
+    ],
+    "tong": 1865268,
+    "tongGoc": 1865268,
+    "orderDisc": 0,
+    "bonusItems": [],
+    "_deleted": false
+  },
+  {
     "id": 1777789858368,
     "date": "2026-04-17T05:00:00.000Z",
     "ngay": "17/4/2026",
