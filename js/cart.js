@@ -50,6 +50,29 @@ function clearOrderDraftState() {
   _orderDraftDate = getTodayDateInputValue();
 }
 
+function normalizeTierMoneyRule(tier) {
+  var ckPerc = +tier.ck;
+  if (!ckPerc || ckPerc <= 0) return null;
+
+  var type = tier.type || (tier.mx != null ? 'below' : 'above');
+  var value = 0;
+
+  // Unit guard: persisted promotion thresholds are in VND, but some legacy
+  // fields are authored in K. Preserve the existing conversion rules exactly
+  // so tier_money never reintroduces the old double-divide bug.
+  if (tier.value != null && tier.value !== '') {
+    value = +tier.value;
+    if (!isNaN(value) && value > 0 && value < 10000) value = value * 1000;
+  } else if (tier.mx != null && tier.mx !== '') {
+    value = +tier.mx;
+  } else if (tier.mn != null && tier.mn !== '') {
+    value = +tier.mn * 1000;
+  }
+
+  if (isNaN(value) || value < 0) value = 0;
+  return { type: type, value: value, ckPct: ckPerc };
+}
+
 function syncLegacyCustomerOrder(order, previousOrder) {
   if (!order || !order.id) return;
   var targetKhMa = order.khMa || '';
@@ -150,32 +173,42 @@ function cancelEditOrder() {
 // ============================================================
 // KM ENGINE v2 (giữ nguyên)
 // ============================================================
+function buildBonusRules(prog) {
+  var rule = { type: 'bonus', unit: prog.bUnit || 'lon', X: +prog.bX || 12, Y: +prog.bY || 1 };
+  if (prog.bMa && prog.bMa !== 'same') {
+    var bonusProduct = spFind(prog.bMa);
+    rule.giaBonus = bonusProduct ? bonusProduct.giaNYLon : null;
+  }
+  if (+prog.bMax === 1) rule.maxSets = 1;
+  return [rule];
+}
+
+function buildFixedRules(prog) {
+  return [{ type: 'fixed', ck: +prog.ck / 100 }];
+}
+
+function buildTierQtyRules(prog) {
+  var tiers = (prog.tiers || []).filter(function(t) { return +t.mn > 0 && +t.ck > 0; }).map(function(t) {
+    return { minT: +t.mn, ck: +t.ck / 100 };
+  });
+  return tiers.length ? [{ type: 'tier_qty', unit: prog.tUnit || 'lon', tiers: tiers }] : [];
+}
+
+function buildTierMoneyRules(prog) {
+  var tiers = (prog.tiers || []).map(normalizeTierMoneyRule).filter(function(t) { return t && t.ckPct > 0; });
+  return tiers.length ? [{ type: 'tier_money', tiers: tiers }] : [];
+}
+
+var KM_RULE_BUILDERS = {
+  bonus: buildBonusRules,
+  fixed: buildFixedRules,
+  tier_qty: buildTierQtyRules,
+  tier_money: buildTierMoneyRules
+};
+
 function kmBuildRules(prog) {
-  var rules = [];
-  if (prog.type === 'bonus') {
-    var r = { type: 'bonus', unit: prog.bUnit || 'lon', X: +prog.bX || 12, Y: +prog.bY || 1 };
-    if (prog.bMa && prog.bMa !== 'same') { var bp = spFind(prog.bMa); r.giaBonus = bp ? bp.giaNYLon : null; }
-    if (+prog.bMax === 1) r.maxSets = 1;
-    rules.push(r);
-  } else if (prog.type === 'fixed') {
-    rules.push({ type: 'fixed', ck: +prog.ck / 100 });
-  } else if (prog.type === 'tier_qty') {
-    var tiers = (prog.tiers || []).filter(function(t) { return +t.mn > 0 && +t.ck > 0; }).map(function(t) { return { minT: +t.mn, ck: +t.ck / 100 }; });
-    if (tiers.length) rules.push({ type: 'tier_qty', unit: prog.tUnit || 'lon', tiers: tiers });
-  } else if (prog.type === 'tier_money') {
-    var tiers2 = (prog.tiers || []).map(function(t) {
-      var ckPerc = +t.ck; if (!ckPerc || ckPerc <= 0) return null;
-      var type = t.type || (t.mx != null ? 'below' : 'above');
-      var value = 0;
-      if (t.value != null && t.value !== '') { value = +t.value; if (!isNaN(value) && value > 0 && value < 10000) value = value * 1000; }
-      else if (t.mx != null && t.mx !== '') { value = +t.mx; }
-      else if (t.mn != null && t.mn !== '') { value = +t.mn * 1000; }
-      if (isNaN(value) || value < 0) value = 0;
-      return { type: type, value: value, ckPct: ckPerc };
-    }).filter(function(t) { return t && t.ckPct > 0; });
-    if (tiers2.length) rules.push({ type: 'tier_money', tiers: tiers2 });
-  } else if (prog.type === 'order_money' || prog.type === 'order_bonus') { return []; }
-  return rules;
+  var builder = KM_RULE_BUILDERS[prog.type];
+  return builder ? builder(prog) : [];
 }
 
 function calcBonusGiftItemFromProgram(prog, p, qT, qL) {
@@ -267,7 +300,14 @@ function calcKM(p, qT, qL, orderContext) {
   return { disc: kmFinal.disc, bonus: kmFinal.bonus, nhan: kmFinal.nhan, hopKM: kmFinal.hopKM, thungKM: kmFinal.thungKM, desc: kmFinal.desc, appliedPromos: appliedProgs, bonusItems: bonusItems };
 }
 
-function parsePromoMoneyValue(value) { var num = +value; if (isNaN(num) || num <= 0) return 0; return num < 10000 ? num * 1000 : num; }
+function parsePromoMoneyValue(value) {
+  var num = +value;
+  if (isNaN(num) || num <= 0) return 0;
+
+  // Order-level thresholds are stored in VND after normalization. Values below
+  // 10000 are treated as K-based authoring input and converted once here.
+  return num < 10000 ? num * 1000 : num;
+}
 
 function orderPromoDiscount(baseTotal, prog) {
   var tiers = (prog.tiers || []).map(function(t) {
@@ -399,6 +439,29 @@ function formatOrderBonusItemText(bi) {
   return bi.qty + ' ' + (bi.name || 'SP tặng');
 }
 
+function applyOrderMoneyPromo(items, allMas, baseTotal, prog) {
+  if (!hasOrderPromoMinSKU(allMas, prog.spMas || [], prog.minSKU)) return null;
+  var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
+  var disc = orderPromoDiscount(total, prog);
+  if (disc <= 0) return null;
+  return { disc: disc, name: prog.name || 'CK đơn' };
+}
+
+function applyOrderBonusPromo(items, allMas, baseTotal, prog) {
+  var result = buildOrderBonusResult(items, allMas, baseTotal, prog);
+  if (!result) return null;
+  return {
+    item: { ma: result.ma, name: result.name, qty: result.qty, progName: result.progName },
+    desc: result.progName + ': +' + result.qty + ' ' + result.name,
+    value: result.value
+  };
+}
+
+var ORDER_PROMO_HANDLERS = {
+  order_money: applyOrderMoneyPromo,
+  order_bonus: applyOrderBonusPromo
+};
+
 function calcOrderKM(items) {
   if (!items || !items.length) return { disc: 0, desc: '', bonusItems: [], discProgNames: [] };
   var baseTotal = items.reduce(function(sum, item) { return sum + item.gocTotal; }, 0);
@@ -408,55 +471,100 @@ function calcOrderKM(items) {
   var disc = 0; var descParts = []; var bonusItems = []; var discProgNames = [];
   var moneyPromos = orderPromos.filter(function(p) { return p.type === 'order_money'; });
   moneyPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
-    if (!hasOrderPromoMinSKU(allMas, prog.spMas || [], prog.minSKU)) return;
-    var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
-    var d = orderPromoDiscount(total, prog); if (d > 0) { disc += d; descParts.push(prog.name || 'CK đơn'); discProgNames.push(prog.name || 'CK đơn'); }
+    var result = ORDER_PROMO_HANDLERS[prog.type](items, allMas, baseTotal, prog);
+    if (!result) return;
+    disc += result.disc;
+    descParts.push(result.name);
+    discProgNames.push(result.name);
   });
   var bestDisc = 0, bestProg = null;
   moneyPromos.filter(function(p) { return !p.stackable; }).forEach(function(prog) {
-    if (!hasOrderPromoMinSKU(allMas, prog.spMas || [], prog.minSKU)) return;
-    var total = getOrderPromoEligibleTotal(items, baseTotal, prog);
-    var d = orderPromoDiscount(total, prog); if (d > bestDisc) { bestDisc = d; bestProg = prog; }
+    var result = ORDER_PROMO_HANDLERS[prog.type](items, allMas, baseTotal, prog);
+    if (!result) return;
+    if (result.disc > bestDisc) { bestDisc = result.disc; bestProg = result.name; }
   });
-  if (bestDisc > 0 && bestProg) { disc += bestDisc; descParts.push(bestProg.name || 'CK đơn'); discProgNames.push(bestProg.name || 'CK đơn'); }
+  if (bestDisc > 0 && bestProg) { disc += bestDisc; descParts.push(bestProg); discProgNames.push(bestProg); }
   var bonusPromos = orderPromos.filter(function(p) { return p.type === 'order_bonus'; });
   bonusPromos.filter(function(p) { return p.stackable; }).forEach(function(prog) {
-    var result = buildOrderBonusResult(items, allMas, baseTotal, prog);
+    var result = ORDER_PROMO_HANDLERS[prog.type](items, allMas, baseTotal, prog);
     if (!result) return;
-    bonusItems.push({ ma: result.ma, name: result.name, qty: result.qty, progName: result.progName });
-    descParts.push(result.progName + ': +' + result.qty + ' ' + result.name);
+    bonusItems.push(result.item);
+    descParts.push(result.desc);
   });
   var bestBonus = null;
   bonusPromos.filter(function(p) { return !p.stackable; }).forEach(function(prog) {
-    var result = buildOrderBonusResult(items, allMas, baseTotal, prog);
+    var result = ORDER_PROMO_HANDLERS[prog.type](items, allMas, baseTotal, prog);
     if (!result) return;
     if (!bestBonus || result.value > bestBonus.value) bestBonus = result;
   });
   if (bestBonus) {
-    bonusItems.push({ ma: bestBonus.ma, name: bestBonus.name, qty: bestBonus.qty, progName: bestBonus.progName });
-    descParts.push(bestBonus.progName + ': +' + bestBonus.qty + ' ' + bestBonus.name);
+    bonusItems.push(bestBonus.item);
+    descParts.push(bestBonus.desc);
   }
   return { disc: disc, desc: descParts.join(' | '), bonusItems: bonusItems, discProgNames: discProgNames };
 }
+
+function applyTierMoneyDiscountRule(rule, base) {
+  var belowTiers = rule.tiers.filter(function(t) { return t.type === 'below' && base < t.value; });
+  var bestBelow = belowTiers.length ? belowTiers.reduce(function(prev, curr) { return !prev || curr.value < prev.value ? curr : prev; }) : null;
+  var aboveTiers = rule.tiers.filter(function(t) { return t.type === 'above' && base >= t.value; });
+  var bestAbove = aboveTiers.length ? aboveTiers.reduce(function(prev, curr) { return !prev || curr.value > prev.value ? curr : prev; }) : null;
+  var bestTier = (bestBelow && bestAbove) ? (bestBelow.ckPct >= bestAbove.ckPct ? bestBelow : bestAbove) : (bestBelow || bestAbove);
+  if (!bestTier || bestTier.ckPct <= 0) return null;
+  return { disc: Math.round(base * bestTier.ckPct / 100), line: 'CK ' + bestTier.ckPct + '%' };
+}
+
+function applyTierQtyDiscountRule(rule, base, qT, totalLon) {
+  var compareQty = rule.unit === 'thung' ? qT : totalLon;
+  var bestTier = rule.tiers.slice().sort(function(a, b) { return b.minT - a.minT; }).find(function(tier) { return compareQty >= tier.minT; });
+  if (!bestTier) return null;
+  return { disc: Math.round(base * bestTier.ck), line: 'CK ' + Math.round(bestTier.ck * 100) + '%' };
+}
+
+function applyFixedDiscountRule(rule, base) {
+  return { disc: Math.round(base * rule.ck), line: 'CK ' + Math.round(rule.ck * 100) + '%' };
+}
+
+var ITEM_DISCOUNT_RULE_HANDLERS = {
+  tier_money: applyTierMoneyDiscountRule,
+  tier_qty: applyTierQtyDiscountRule,
+  fixed: applyFixedDiscountRule
+};
 
 function _calcDiscountRules(rules, base, qT, totalLon) {
   var ckDisc = 0, lines = [];
   for (var ri = 0; ri < rules.length; ri++) {
     var r = rules[ri];
-    if (r.type === 'tier_money') {
-      var belowTiers = r.tiers.filter(function(t) { return t.type === 'below' && base < t.value; });
-      var bestBelow = belowTiers.length ? belowTiers.reduce(function(prev, curr) { return !prev || curr.value < prev.value ? curr : prev; }) : null;
-      var aboveTiers = r.tiers.filter(function(t) { return t.type === 'above' && base >= t.value; });
-      var bestAbove = aboveTiers.length ? aboveTiers.reduce(function(prev, curr) { return !prev || curr.value > prev.value ? curr : prev; }) : null;
-      var bestTier = (bestBelow && bestAbove) ? (bestBelow.ckPct >= bestAbove.ckPct ? bestBelow : bestAbove) : (bestBelow || bestAbove);
-      if (bestTier && bestTier.ckPct > 0) { ckDisc += Math.round(base * bestTier.ckPct / 100); lines.push('CK ' + bestTier.ckPct + '%'); }
-    } else if (r.type === 'tier_qty') {
-      var cq = r.unit === 'thung' ? qT : totalLon;
-      var t2 = r.tiers.slice().sort(function(a, b) { return b.minT - a.minT; }).find(function(x) { return cq >= x.minT; });
-      if (t2) { ckDisc += Math.round(base * t2.ck); lines.push('CK ' + Math.round(t2.ck * 100) + '%'); }
-    } else if (r.type === 'fixed') { ckDisc += Math.round(base * r.ck); lines.push('CK ' + Math.round(r.ck * 100) + '%'); }
+    var handler = ITEM_DISCOUNT_RULE_HANDLERS[r.type];
+    var partial = handler ? handler(r, base, qT, totalLon) : null;
+    if (!partial) continue;
+    ckDisc += partial.disc;
+    lines.push(partial.line);
   }
   return { ckDisc: ckDisc, lines: lines };
+}
+
+function applyBonusRule(rule, product, qT, totalLon) {
+  var compareQty = rule.unit === 'thung' ? qT : totalLon;
+  var sets = rule.maxSets ? Math.min(Math.floor(compareQty / rule.X), rule.maxSets) : Math.floor(compareQty / rule.X);
+  if (sets <= 0) return null;
+
+  var bonusUnits = sets * rule.Y;
+  var bonusLon = rule.unit === 'thung' ? bonusUnits * product.slThung : bonusUnits;
+  var unitLabel = rule.unit === 'thung' ? 'thùng' : product.donvi;
+  if (rule.giaBonus != null) {
+    return {
+      sameBl: 0,
+      diffBonusValue: rule.giaBonus > 0 ? Math.round(bonusLon * rule.giaBonus) : 0,
+      desc: bonusUnits + ' ' + unitLabel + ' SP khác'
+    };
+  }
+
+  return {
+    sameBl: bonusLon,
+    diffBonusValue: 0,
+    desc: bonusUnits + ' ' + unitLabel
+  };
 }
 
 function _calcBestBonus(rules, p, qT, totalLon, base, ckDisc) {
@@ -470,20 +578,12 @@ function _calcBestBonus(rules, p, qT, totalLon, base, ckDisc) {
   for (var bi = 0; bi < rules.length; bi++) {
     var rb = rules[bi];
     if (rb.type !== 'bonus') continue;
-    var cqb = rb.unit === 'thung' ? qT : totalLon;
-    var sets = rb.maxSets ? Math.min(Math.floor(cqb / rb.X), rb.maxSets) : Math.floor(cqb / rb.X);
-    if (sets <= 0) continue;
+    var partial = applyBonusRule(rb, p, qT, totalLon);
+    if (!partial) continue;
     anyHit = true;
-    var bu = sets * rb.Y;
-    var bl = rb.unit === 'thung' ? bu * p.slThung : bu;
-    var unitLabel = rb.unit === 'thung' ? 'thùng' : p.donvi;
-    if (rb.giaBonus != null) {
-      if (rb.giaBonus > 0) diffBonusValue += Math.round(bl * rb.giaBonus);
-      descParts.push(bu + ' ' + unitLabel + ' SP khác');
-    } else {
-      sameBl += bl;
-      descParts.push(bu + ' ' + unitLabel);
-    }
+    sameBl += partial.sameBl;
+    diffBonusValue += partial.diffBonusValue;
+    descParts.push(partial.desc);
   }
   if (!anyHit) return null;
   var nhanTry = totalLon + sameBl;
