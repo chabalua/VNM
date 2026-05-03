@@ -12,7 +12,10 @@
     "bMa": "04FT32",
     "spMas": [
       "01SX05"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_gezlds",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XL 380g HT: 28h+1h cùng loại",
@@ -27,7 +30,10 @@
     "bMa": "same",
     "spMas": [
       "01SX05"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_qks5m3",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XL 380g HG: 8h+1b Fino",
@@ -43,7 +49,9 @@
     "spMas": [
       "01SX07"
     ],
-    "_updatedAt": "2026-04-10T13:30:49.986Z"
+    "_updatedAt": "2026-04-10T13:30:49.986Z",
+    "_syncId": "km_mop2q3he_9oo11z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XL 380g HG: 18h+1h cùng loại",
@@ -58,7 +66,10 @@
     "bMa": "same",
     "spMas": [
       "01SX07"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_ukuqke",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Xanh 380g HT: 12h+1b Fino",
@@ -74,7 +85,10 @@
     "spMas": [
       "01TD03",
       "01TT02"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_ttn4tl",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Xanh 380g HT: 28h+1h cùng loại",
@@ -90,7 +104,10 @@
     "spMas": [
       "01TD03",
       "01TT02"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_g5wv2f",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XB 380g: 7h+1b Fino",
@@ -105,7 +122,10 @@
     "bMa": "04FT32",
     "spMas": [
       "01SB02"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_dqedne",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XB 380g: 15h+1h cùng loại",
@@ -120,7 +140,10 @@
     "bMa": "same",
     "spMas": [
       "01SB02"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_i2zo9d",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 12h+2b Fino",
@@ -135,7 +158,10 @@
     "bMa": "04FT32",
     "spMas": [
       "01TD13"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_vzut5b",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 18h+1h cùng loại",
@@ -150,7 +176,10 @@
     "bMa": "same",
     "spMas": [
       "01TD13"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_yogzgc",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT XL 380g: 12h+2b Fino",
@@ -165,7 +194,10 @@
     "bMa": "04FT32",
     "spMas": [
       "01TX03"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_ncdka8",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT XL 380g: 15h+1h cùng loại",
@@ -180,7 +212,10 @@
     "bMa": "same",
     "spMas": [
       "01TX03"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_ftr6oc",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Tuýp 165g: 8+1 (Dâu/Sô/Trắng/MCha)",
@@ -197,7 +232,10 @@
       "01TD60",
       "01TA60",
       "01TC60"
-    ]
+    ],
+    "_syncId": "km_mop2q3he_406z22",
+    "_updatedAt": "2026-05-03T01:10:17.378Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Tuýp Café/9Hạt: 6+1",
@@ -212,7 +250,10 @@
     "bMa": "same",
     "spMas": [
       "01TH60"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_esph4i",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ Ô/Thọ Vỉ 40g: 6 vỉ+1h ĐB 110ml",
@@ -227,7 +268,10 @@
     "bMa": "04ED33",
     "spMas": [
       "01VD41"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_i9xaoo",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ Tài Lộc 380g: 11h+1b Fino",
@@ -242,7 +286,10 @@
     "bMa": "04FT32",
     "spMas": [
       "01TL00"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_esnlj9",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ Tài Lộc 380g: 20h+1h cùng loại",
@@ -257,7 +304,10 @@
     "bMa": "same",
     "spMas": [
       "01TL00"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_dr7cct",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Đỏ 1284g: 8h+1h NSPN 380g",
@@ -272,7 +322,10 @@
     "bMa": "01SX05",
     "spMas": [
       "01TD11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_bkvz1x",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Đỏ 1284g: 23h+1h cùng loại",
@@ -287,7 +340,10 @@
     "bMa": "same",
     "spMas": [
       "01TD11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_1dhfz7",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XL 1284g: 8h+1h NSPN 380g",
@@ -303,7 +359,9 @@
     "spMas": [
       "01SX11"
     ],
-    "_updatedAt": "2026-04-12T05:09:53.449Z"
+    "_updatedAt": "2026-04-12T05:09:53.449Z",
+    "_syncId": "km_mop2q3hf_4ur3fc",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XL 1284g: 23h+1h cùng loại",
@@ -318,7 +376,10 @@
     "bMa": "same",
     "spMas": [
       "01SX11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_3h2qts",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Đỏ 1kg: 8h+1h NSPN 380g",
@@ -333,7 +394,10 @@
     "bMa": "01SX05",
     "spMas": [
       "01TD12"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_iji7ks",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ ÔT Đỏ 1kg: 23h+1h cùng loại",
@@ -348,7 +412,10 @@
     "bMa": "same",
     "spMas": [
       "01TD12"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_fumxb3",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XB 1284g: 10h+1h NSPN 380g",
@@ -364,7 +431,9 @@
     "spMas": [
       "01SB10"
     ],
-    "_updatedAt": "2026-04-12T06:11:14.692Z"
+    "_updatedAt": "2026-04-12T06:11:14.692Z",
+    "_syncId": "km_mop2q3hf_zi3n84",
+    "_deleted": false
   },
   {
     "name": "SĐ NSPN XB 1284g: 23h+1h cùng loại",
@@ -379,7 +448,10 @@
     "bMa": "same",
     "spMas": [
       "01SB10"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_cagnkb",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ Tài Lộc 1284g: 8h+1h NSPN 380g",
@@ -395,7 +467,9 @@
     "spMas": [
       "01TL10"
     ],
-    "_updatedAt": "2026-04-12T06:49:29.408Z"
+    "_updatedAt": "2026-04-12T06:49:29.408Z",
+    "_syncId": "km_mop2q3hf_c1ma7s",
+    "_deleted": false
   },
   {
     "name": "SĐ Tài Lộc 1284g: 18h+1h cùng loại",
@@ -410,7 +484,10 @@
     "bMa": "same",
     "spMas": [
       "01TL10"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_wi671k",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐ Tài Lộc 960g: 4h+CK 12%",
@@ -425,7 +502,10 @@
         "ck": 12
       }
     ],
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_fihqj4",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Fino 16+1",
@@ -445,7 +525,10 @@
       "04FT32",
       "04FI32",
       "04FH20"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_spu18d",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Fino Ontop: 96b+2b Fino bất kỳ",
@@ -462,7 +545,10 @@
       "04FA31",
       "04FC32",
       "04FH20"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_5duhph",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "STTT Fino 220ml: 12b+1b",
@@ -478,7 +564,10 @@
     "spMas": [
       "04FT2H",
       "04FD2H"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_x27rgk",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "STTT Fino 220ml: 3 thùng+15 bịch",
@@ -494,7 +583,10 @@
     "spMas": [
       "04FT2H",
       "04FD2H"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_0wyfxb",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 110ml: 12+1",
@@ -513,7 +605,10 @@
       "04ED33",
       "04EI33",
       "04ET33"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_im6k1v",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 180ml: 12+1",
@@ -537,7 +632,10 @@
       "04EC60",
       "04EU11",
       "04EI18"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_2siomb",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 180ml Ontop FM vị: 48+1 (kèm 2 SKU)",
@@ -555,7 +653,10 @@
       "04EM10",
       "04EN10",
       "04EC60"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_iws1ir",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 180ml Ontop FM vị: 96h+3h (kèm 3 SKU)",
@@ -573,7 +674,10 @@
       "04EM10",
       "04EN10",
       "04EC60"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_426feh",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 110ml Ontop: 5T+4H",
@@ -586,7 +690,10 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_tenwj3",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 110ml Ontop: 10T+12H",
@@ -599,7 +706,10 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_f9a724",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 180ml Ontop: 5T+4H",
@@ -612,7 +722,10 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_uazye9",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 180ml Ontop: 10T+12H",
@@ -625,7 +738,10 @@
     "bUnit": "thung",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_mua3lg",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 1L: 12+1",
@@ -643,7 +759,10 @@
       "04EI04",
       "04ET04",
       "04ET22"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_y4xxrf",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đàn Bò 1L: CK 2%",
@@ -657,7 +776,10 @@
       "04EI04",
       "04ET04",
       "04ET22"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_4q03ij",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ADM 110ml: 12+1, 48+5, 192+24",
@@ -676,7 +798,10 @@
       "04CC34",
       "04CH30",
       "04CI31"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_6q2tnl",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ADM 110ml: 48+5",
@@ -695,7 +820,10 @@
       "04CC34",
       "04CH30",
       "04CI31"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_8nh9c3",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ADM 110ml: 192+24",
@@ -714,7 +842,10 @@
       "04CC34",
       "04CH30",
       "04CI31"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_phs4oe",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ADM 180ml: 12+1, 48+5, 192+24",
@@ -731,7 +862,10 @@
       "04CD15",
       "04CH10",
       "04CI11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_b83sqy",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ADM 180ml: 48+5",
@@ -748,7 +882,10 @@
       "04CD15",
       "04CH10",
       "04CI11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_v1njye",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ADM 180ml: 192+24",
@@ -765,7 +902,10 @@
       "04CD15",
       "04CH10",
       "04CI11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_lo65sj",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Green Farm 110ml: 12+1",
@@ -780,7 +920,10 @@
     "bMa": "same",
     "spMas": [
       "04GI34"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_qvnc1p",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Green Farm 180ml: 12+1",
@@ -795,7 +938,10 @@
     "bMa": "same",
     "spMas": [
       "04GI14"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_ifp39r",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Green Farm CK theo tiền",
@@ -818,7 +964,10 @@
     "spMas": [
       "04GI34",
       "04GI14"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_wn5sjl",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "GF A2 110ml: 12+1 (tặng GF 110)",
@@ -833,7 +982,10 @@
     "bMa": "04GI34",
     "spMas": [
       "04AE32"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_26901o",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "GF A2 180ml: 12+1 (tặng GF 180)",
@@ -848,7 +1000,10 @@
     "bMa": "04GI14",
     "spMas": [
       "04AE12"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_tzm88v",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "GF Tổ Yến 180: 12+1 (tặng GF 180)",
@@ -863,7 +1018,10 @@
     "bMa": "04GI14",
     "spMas": [
       "04GB18"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_pbto90",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "GF 1L: 6h+4h GF 110ml",
@@ -878,7 +1036,10 @@
     "bMa": "04GI34",
     "spMas": [
       "04GT05"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_83lk5s",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "GF Cao đạm 250ml: 6h+2h GF 110ml",
@@ -891,7 +1052,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "04GI34",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_2o9ytd",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Organic 180ml: 12+1 (tặng GF 180)",
@@ -906,7 +1070,10 @@
     "bMa": "04GI14",
     "spMas": [
       "04GO11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_tez54l",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Fino A2 220: 16+1",
@@ -921,7 +1088,10 @@
     "bMa": "same",
     "spMas": [
       "04FH20"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_auatfa",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 22+2",
@@ -947,7 +1117,9 @@
       "06UN32",
       "06UQ32"
     ],
-    "_updatedAt": "2026-04-21T16:11:44.309Z"
+    "_updatedAt": "2026-04-21T16:11:44.309Z",
+    "_syncId": "km_mop2q3hf_n4phkp",
+    "_deleted": false
   },
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
@@ -972,7 +1144,10 @@
       "06UC32",
       "06UN32",
       "06UQ32"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_nc06lw",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCU Susu/Hero 170/180: 11+1",
@@ -991,7 +1166,10 @@
       "06VA23",
       "06VC23",
       "06VQ23"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_mk3zes",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCU Susu/Hero 170/180: 86+10",
@@ -1010,7 +1188,10 @@
       "06VA23",
       "06VC23",
       "06VQ23"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_l7oj0s",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Trắng (CĐ,KĐ)/Nha đam: 12+1",
@@ -1026,7 +1207,10 @@
     "spMas": [
       "07KD12",
       "07TR33"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_wkmp5l",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Trắng ID/NĐ ID: 16+1",
@@ -1039,7 +1223,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_wwvwwv",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA NĐ nhãn thân/TDLD/Táo đỏ/Nếp cẩm/Trân Châu: 12+1",
@@ -1052,7 +1239,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_rw636b",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Green Farm: 7+1",
@@ -1065,7 +1255,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_a5yxsf",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCU Green Farm Vải/Bưởi: 3c+2h SCA GF",
@@ -1078,7 +1271,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "07GR10",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_g4lt35",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Dâu/Lựu đỏ/Trái Cây CTKD: 4+1",
@@ -1091,7 +1287,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_v9kdjc",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Susu + Cream 60g: 7+1",
@@ -1104,7 +1303,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_rgd4wg",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Star: 22+2",
@@ -1117,7 +1319,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_4g9y4l",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SCA Hy Lạp: 3+1",
@@ -1130,7 +1335,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_oji4z8",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Probi 65ml: 23+2",
@@ -1150,7 +1358,10 @@
       "07UQ11",
       "07UA11",
       "07UC11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_axgjdm",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Probi 65ml: 50+5",
@@ -1170,7 +1381,10 @@
       "07UQ11",
       "07UA11",
       "07UC11"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_ik2fuh",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Probi 130ml CĐ/Đa vị: 11+1",
@@ -1189,7 +1403,10 @@
       "07UR31",
       "07UL31",
       "07UD30"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_f7pixv",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Probi 400ml/700ml: CK 15%",
@@ -1203,7 +1420,10 @@
       "07UR71",
       "07UI40",
       "07UI70"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_vvtfzr",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "STV 9 hạt 180ml: 24+2",
@@ -1219,7 +1439,10 @@
     "spMas": [
       "05AN25",
       "05AN31"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_63vwuo",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Cao đạm 180ml: 12+1 (gom chung tặng hàng 10%)",
@@ -1235,7 +1458,10 @@
     "spMas": [
       "05AD11",
       "05AD31"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_1o3s9t",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Cao đạm 240ml: 16+1 (gom chung tặng hàng 10%)",
@@ -1248,7 +1474,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_afe60b",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SĐN/STV gom chung tặng hàng 10% (Super Soy 200/220, ĐĐ/HN/OC, SĐN Tươi, Yến mạch)",
@@ -1265,7 +1494,10 @@
       "05DH14",
       "05DD14",
       "05DY10"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_l0xyat",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SDD Flex 180ml/1L: đơn từ 150k → CK 8%",
@@ -1282,7 +1514,10 @@
     ],
     "spMas": [
       "04LL13"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_7a95iv",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "STV 9 hạt 1L: đơn từ 150k → CK 8%",
@@ -1297,7 +1532,10 @@
         "ck": "8"
       }
     ],
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_tgo28i",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "BDD Ridielac - Mua 2 hộp CK 3%",
@@ -1327,7 +1565,10 @@
       "03CA84",
       "03CM20",
       "03CY73"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_oe8ncz",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "BDD Optimum Gold - Mua 2 hộp CK 3%",
@@ -1349,7 +1590,10 @@
       "03AA74",
       "03AA54",
       "03AA92"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_3yzl25",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB D.Alpha Step 3,4 - CK 3%",
@@ -1373,7 +1617,10 @@
       "02AA25",
       "02EA15",
       "02EA25"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_t03ggk",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB D.Alpha Gold Step 3,4 - CK 3% (Ontop +4%)",
@@ -1393,7 +1640,10 @@
       "02EG47",
       "02DG3A",
       "02DG4A"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_c84gvy",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB D.Alpha Gold Step 3,4 - Ontop CK 4%",
@@ -1413,7 +1663,10 @@
       "02EG47",
       "02DG3A",
       "02DG4A"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_igs5j5",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB Yoko Gold Step 3,4 - CK 3%",
@@ -1433,7 +1686,10 @@
       "02AY19",
       "02EY19",
       "02EY29"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_rpgkxo",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB Optimum Gold Step 3,4 - CK 7% (Ontop +3%)",
@@ -1457,7 +1713,10 @@
       "02AO28",
       "02EO18",
       "02EO28"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_s39vps",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB Optimum COLOS Step 3,4 - CK 7% (Ontop +3%)",
@@ -1475,7 +1734,10 @@
     "spMas": [
       "02ES38",
       "02ES18"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_q6iygn",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB Grow Plus Step 3,4 - CK 10%",
@@ -1495,7 +1757,10 @@
       "02ER78",
       "02DR64",
       "02DR74"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_703fcc",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB D.Grow All Step - CK 3%",
@@ -1510,7 +1775,10 @@
         "ck": "3"
       }
     ],
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_ciywkg",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SBNL CanPro/Mama/SBNK - CK 3%",
@@ -1532,7 +1800,10 @@
       "02EM22",
       "02AM22",
       "02EN22"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_29nxsy",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SBNL Sure Prevent/Diecerna (mẫu mới) - CK 7%",
@@ -1547,7 +1818,10 @@
         "ck": "7"
       }
     ],
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_nmx5gb",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SBNL Sure Prevent/Diecerna (mẫu cũ) - CK 10%",
@@ -1566,7 +1840,10 @@
       "02EU15",
       "02ED12",
       "02AU15"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_o4guvg",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "SB Nguyên Kem - CK 3%",
@@ -1583,7 +1860,10 @@
     ],
     "spMas": [
       "02EN22"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_extbtb",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Vfresh 1L: CK 12%",
@@ -1592,7 +1872,10 @@
     "active": false,
     "stackable": true,
     "ck": "12",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_bllmj0",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Nước Ép 275ml: 6+1",
@@ -1605,7 +1888,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_3dx8c8",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Nước dừa 330ml: 6+1",
@@ -1618,7 +1904,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_m2vkja",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ICY: 6+1",
@@ -1631,7 +1920,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_hblxqq",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "ICY: 20+4",
@@ -1644,7 +1936,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_pfkgxi",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Kombucha: 6+1",
@@ -1657,7 +1952,10 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_7ekp8w",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Đường: CK 5%",
@@ -1666,7 +1964,10 @@
     "active": false,
     "stackable": true,
     "ck": "5",
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_0izc1r",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "Que Susu TPM: 2 túi → CK 15%",
@@ -1681,7 +1982,10 @@
         "ck": 15
       }
     ],
-    "spMas": []
+    "spMas": [],
+    "_syncId": "km_mop2q3hf_bfjmgr",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "1T tặng 8H",
@@ -1697,7 +2001,9 @@
     "spMas": [
       "02HO38"
     ],
-    "_updatedAt": "2026-04-05T14:19:29.112Z"
+    "_updatedAt": "2026-04-05T14:19:29.112Z",
+    "_syncId": "km_mop2q3hf_iz0j7i",
+    "_deleted": false
   },
   {
     "name": "OP 48+2",
@@ -1713,7 +2019,9 @@
     "spMas": [
       "02HO38"
     ],
-    "_updatedAt": "2026-04-05T14:20:33.928Z"
+    "_updatedAt": "2026-04-05T14:20:33.928Z",
+    "_syncId": "km_mop2q3hf_b9299b",
+    "_deleted": false
   },
   {
     "name": "SCU/STC Susu/Hero Ontop: đơn từ 2tr → CK 2%",
@@ -1746,7 +2054,9 @@
       "06VC23",
       "06VQ23"
     ],
-    "_updatedAt": "2026-04-21T16:11:28.513Z"
+    "_updatedAt": "2026-04-21T16:11:28.513Z",
+    "_syncId": "km_mop2q3hf_s188f3",
+    "_deleted": false
   },
   {
     "name": "STV: đơn 250k tặng 2h / 400k tặng 4h 9 hạt 180ml",
@@ -1780,7 +2090,10 @@
       "05DH14",
       "05DD14",
       "05DY10"
-    ]
+    ],
+    "_syncId": "km_mop2q3hf_b29zqq",
+    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_deleted": false
   },
   {
     "name": "MR04263012 - SBPS TE DƯỚI 5 TRIỆU",
@@ -1803,7 +2116,9 @@
       "02HL37",
       "03HA38"
     ],
-    "_updatedAt": "2026-04-22T00:33:13.919Z"
+    "_updatedAt": "2026-04-22T00:33:13.919Z",
+    "_syncId": "km_mop2q3hf_ta46wg",
+    "_deleted": false
   },
   {
     "name": "Ontop SN: 2M+2h/5M+8h Cascade",
@@ -1885,7 +2200,9 @@
       "05AD31",
       "06SA73"
     ],
-    "_updatedAt": "2026-04-21T15:38:33.562Z"
+    "_updatedAt": "2026-04-21T15:38:33.562Z",
+    "_syncId": "km_mop2q3hf_kw4bt2",
+    "_deleted": false
   },
   {
     "name": "KD Fino ID/KD A2 48B + 2B Fino A2",
@@ -1902,7 +2219,9 @@
       "04FT32",
       "04FI32"
     ],
-    "_updatedAt": "2026-04-21T15:58:49.248Z"
+    "_updatedAt": "2026-04-21T15:58:49.248Z",
+    "_syncId": "km_mop2q3hf_0mz9c9",
+    "_deleted": false
   },
   {
     "name": "KD SBPS 48+2 dâu/ chuối",
@@ -1929,7 +2248,9 @@
       "02HY39",
       "02HY19"
     ],
-    "_updatedAt": "2026-04-22T00:25:24.262Z"
+    "_updatedAt": "2026-04-22T00:25:24.262Z",
+    "_syncId": "km_mop2q3hf_pnlxt9",
+    "_deleted": false
   },
   {
     "name": "MR04263011",
@@ -1963,6 +2284,4586 @@
       "02HY39",
       "02HY19"
     ],
-    "_updatedAt": "2026-04-22T00:42:33.734Z"
+    "_updatedAt": "2026-04-22T00:42:33.734Z",
+    "_syncId": "km_mop2q3hf_e8uit5",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HT: 14h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "14",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01SX05"
+    ],
+    "_syncId": "km_mop2pfj7_ce99qh",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HT: 28h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "28",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SX05"
+    ],
+    "_syncId": "km_mop2pfj7_yu7zqq",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HG: 8h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01SX07"
+    ],
+    "_updatedAt": "2026-04-10T13:30:49.986Z",
+    "_syncId": "km_mop2pfj7_4ilcrm",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HG: 18h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "18",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SX07"
+    ],
+    "_syncId": "km_mop2pfj7_ioczvy",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Xanh 380g HT: 12h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TD03",
+      "01TT02"
+    ],
+    "_syncId": "km_mop2pfj7_tebsax",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Xanh 380g HT: 28h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "28",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD03",
+      "01TT02"
+    ],
+    "_syncId": "km_mop2pfj7_qh6ckl",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 380g: 7h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "7",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01SB02"
+    ],
+    "_syncId": "km_mop2pfj7_kjurqh",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 380g: 15h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "15",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SB02"
+    ],
+    "_syncId": "km_mop2pfj7_595ugt",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 12h+2b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TD13"
+    ],
+    "_syncId": "km_mop2pfj7_medc4n",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 18h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "18",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD13"
+    ],
+    "_syncId": "km_mop2pfj7_wsnb3i",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT XL 380g: 12h+2b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TX03"
+    ],
+    "_syncId": "km_mop2pfj7_xgqna4",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT XL 380g: 15h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "15",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TX03"
+    ],
+    "_syncId": "km_mop2pfj7_u93tsd",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Tuýp 165g: 8+1 (Dâu/Sô/Trắng/MCha)",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": true,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD60",
+      "01TA60",
+      "01TC60"
+    ],
+    "_syncId": "km_mop2pfj7_mwwdc1",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Tuýp Café/9Hạt: 6+1",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TH60"
+    ],
+    "_syncId": "km_mop2pfj7_y7e0zl",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Ô/Thọ Vỉ 40g: 6 vỉ+1h ĐB 110ml",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04ED33",
+    "spMas": [
+      "01VD41"
+    ],
+    "_syncId": "km_mop2pfj7_s0qolj",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 380g: 11h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "11",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TL00"
+    ],
+    "_syncId": "km_mop2pfj7_px2hfe",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 380g: 20h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "20",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TL00"
+    ],
+    "_syncId": "km_mop2pfj7_izapxg",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1284g: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX05",
+    "spMas": [
+      "01TD11"
+    ],
+    "_syncId": "km_mop2pfj7_0met9o",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1284g: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD11"
+    ],
+    "_syncId": "km_mop2pfj7_eljj17",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 1284g: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX07",
+    "spMas": [
+      "01SX11"
+    ],
+    "_updatedAt": "2026-04-12T05:09:53.449Z",
+    "_syncId": "km_mop2pfj7_j3zha5",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 1284g: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SX11"
+    ],
+    "_syncId": "km_mop2pfj7_bug4x7",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1kg: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX05",
+    "spMas": [
+      "01TD12"
+    ],
+    "_syncId": "km_mop2pfj7_21w4d1",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1kg: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD12"
+    ],
+    "_syncId": "km_mop2pfj7_x0914v",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 1284g: 10h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "10",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX07",
+    "spMas": [
+      "01SB10"
+    ],
+    "_updatedAt": "2026-04-12T06:11:14.692Z",
+    "_syncId": "km_mop2pfj7_t6ntz1",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 1284g: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SB10"
+    ],
+    "_syncId": "km_mop2pfj8_hs3xzv",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 1284g: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX07",
+    "spMas": [
+      "01TL10"
+    ],
+    "_updatedAt": "2026-04-12T06:49:29.408Z",
+    "_syncId": "km_mop2pfj8_9x9b3w",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 1284g: 18h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "18",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TL10"
+    ],
+    "_syncId": "km_mop2pfj8_3linyj",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 960g: 4h+CK 12%",
+    "type": "tier_qty",
+    "nhoms": "B",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": 4,
+        "ck": 12
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_r6u0rn",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Fino 16+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FA31",
+      "04FC32",
+      "04FD32",
+      "04FT32",
+      "04FI32",
+      "04FH20"
+    ],
+    "_syncId": "km_mop2pfj8_l05alj",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Fino Ontop: 96b+2b Fino bất kỳ",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "96",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FA31",
+      "04FC32",
+      "04FH20"
+    ],
+    "_syncId": "km_mop2pfj8_tk8wfv",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "STTT Fino 220ml: 12b+1b",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FT2H",
+      "04FD2H"
+    ],
+    "_syncId": "km_mop2pfj8_svmecw",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "STTT Fino 220ml: 3 thùng+15 bịch",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "144",
+    "bY": "15",
+    "bUnit": "lon",
+    "bMax": 1,
+    "bMa": "same",
+    "spMas": [
+      "04FT2H",
+      "04FD2H"
+    ],
+    "_syncId": "km_mop2pfj8_gwail6",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 110ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04EA33",
+      "04EC33",
+      "04ED33",
+      "04EI33",
+      "04ET33"
+    ],
+    "_syncId": "km_mop2pfj8_lik9e0",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04ED13",
+      "04ET13",
+      "04EA13",
+      "04EB11",
+      "04EC13",
+      "04EM10",
+      "04EN10",
+      "04EC60",
+      "04EU11",
+      "04EI18"
+    ],
+    "_syncId": "km_mop2pfj8_4lroib",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop FM vị: 48+1 (kèm 2 SKU)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "48",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04EB11",
+      "04EM10",
+      "04EN10",
+      "04EC60"
+    ],
+    "_syncId": "km_mop2pfj8_7m8dyy",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop FM vị: 96h+3h (kèm 3 SKU)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "96",
+    "bY": "3",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04EB11",
+      "04EM10",
+      "04EN10",
+      "04EC60"
+    ],
+    "_syncId": "km_mop2pfj8_ftku3b",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 110ml Ontop: 5T+4H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "5",
+    "bY": "4",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_6xhkov",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 110ml Ontop: 10T+12H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "10",
+    "bY": "12",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_qiwz1s",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop: 5T+4H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "5",
+    "bY": "4",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_orzy4r",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop: 10T+12H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "10",
+    "bY": "12",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_yp8k9p",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 1L: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22"
+    ],
+    "_syncId": "km_mop2pfj8_hjgz7g",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 1L: CK 2%",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "2",
+    "spMas": [
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22"
+    ],
+    "_syncId": "km_mop2pfj8_u925uh",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 110ml: 12+1, 48+5, 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD35",
+      "04CA33",
+      "04CC34",
+      "04CH30",
+      "04CI31"
+    ],
+    "_syncId": "km_mop2pfj8_3v2ou9",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 110ml: 48+5",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "48",
+    "bY": "5",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD35",
+      "04CA33",
+      "04CC34",
+      "04CH30",
+      "04CI31"
+    ],
+    "_syncId": "km_mop2pfj8_9ea2ob",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 110ml: 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "192",
+    "bY": "24",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD35",
+      "04CA33",
+      "04CC34",
+      "04CH30",
+      "04CI31"
+    ],
+    "_syncId": "km_mop2pfj8_mot39g",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 180ml: 12+1, 48+5, 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD15",
+      "04CH10",
+      "04CI11"
+    ],
+    "_syncId": "km_mop2pfj8_11lhob",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 180ml: 48+5",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "48",
+    "bY": "5",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD15",
+      "04CH10",
+      "04CI11"
+    ],
+    "_syncId": "km_mop2pfj8_5e0kuk",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 180ml: 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "192",
+    "bY": "24",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD15",
+      "04CH10",
+      "04CI11"
+    ],
+    "_syncId": "km_mop2pfj8_cxfq3a",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Green Farm 110ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04GI34"
+    ],
+    "_syncId": "km_mop2pfj8_hzhui6",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Green Farm 180ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04GI14"
+    ],
+    "_syncId": "km_mop2pfj8_gcm5j7",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Green Farm CK theo tiền",
+    "type": "tier_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "1500",
+        "ck": "1"
+      },
+      {
+        "type": "above",
+        "value": "5000",
+        "ck": "2"
+      }
+    ],
+    "spMas": [
+      "04GI34",
+      "04GI14"
+    ],
+    "_syncId": "km_mop2pfj8_24lqqv",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF A2 110ml: 12+1 (tặng GF 110)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI34",
+    "spMas": [
+      "04AE32"
+    ],
+    "_syncId": "km_mop2pfj8_b7gt6z",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF A2 180ml: 12+1 (tặng GF 180)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI14",
+    "spMas": [
+      "04AE12"
+    ],
+    "_syncId": "km_mop2pfj8_pfnyje",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF Tổ Yến 180: 12+1 (tặng GF 180)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI14",
+    "spMas": [
+      "04GB18"
+    ],
+    "_syncId": "km_mop2pfj8_41w0s6",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF 1L: 6h+4h GF 110ml",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "6",
+    "bY": "4",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI34",
+    "spMas": [
+      "04GT05"
+    ],
+    "_syncId": "km_mop2pfj8_yuy33q",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF Cao đạm 250ml: 6h+2h GF 110ml",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI34",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_6vt3xp",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Organic 180ml: 12+1 (tặng GF 180)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI14",
+    "spMas": [
+      "04GO11"
+    ],
+    "_syncId": "km_mop2pfj8_4htejs",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Fino A2 220: 16+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FH20"
+    ],
+    "_syncId": "km_mop2pfj8_h15yrv",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero/Yomilk 80/110: 22+2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "22",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "08HA31",
+      "06SA73",
+      "06SC73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32"
+    ],
+    "_updatedAt": "2026-04-21T16:11:44.309Z",
+    "_syncId": "km_mop2pfj8_il345e",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "129",
+    "bY": "15",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "08HA31",
+      "06SA73",
+      "06SC73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32"
+    ],
+    "_syncId": "km_mop2pfj8_jia990",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero 170/180: 11+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "11",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UK10",
+      "08HA11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ],
+    "_syncId": "km_mop2pfj8_hake41",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero 170/180: 86+10",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "86",
+    "bY": "10",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UK10",
+      "08HA11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ],
+    "_syncId": "km_mop2pfj8_kej7yq",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Trắng (CĐ,KĐ)/Nha đam: 12+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07KD12",
+      "07TR33"
+    ],
+    "_syncId": "km_mop2pfj8_i44fx8",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Trắng ID/NĐ ID: 16+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_ossood",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA NĐ nhãn thân/TDLD/Táo đỏ/Nếp cẩm/Trân Châu: 12+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_axbzpz",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Green Farm: 7+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "7",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_uiog13",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Green Farm Vải/Bưởi: 3c+2h SCA GF",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "3",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "07GR10",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_osjaha",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Dâu/Lựu đỏ/Trái Cây CTKD: 4+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "4",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_2lcymc",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Susu + Cream 60g: 7+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "7",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_h56m4f",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Star: 22+2",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "22",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_p3gpju",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Hy Lạp: 3+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "3",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_zh1ruo",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 65ml: 23+2",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07UR13",
+      "07UD11",
+      "07UG11",
+      "07UQ11",
+      "07UA11",
+      "07UC11"
+    ],
+    "_syncId": "km_mop2pfj8_xwcr3g",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 65ml: 50+5",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "50",
+    "bY": "5",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07UR13",
+      "07UD11",
+      "07UG11",
+      "07UQ11",
+      "07UA11",
+      "07UC11"
+    ],
+    "_syncId": "km_mop2pfj8_9woep6",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 130ml CĐ/Đa vị: 11+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "bX": "11",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07UQ31",
+      "07UM31",
+      "07UR31",
+      "07UL31",
+      "07UD30"
+    ],
+    "_syncId": "km_mop2pfj8_ylmboi",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 400ml/700ml: CK 15%",
+    "type": "fixed",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "ck": "15",
+    "spMas": [
+      "07UR41",
+      "07UR71",
+      "07UI40",
+      "07UI70"
+    ],
+    "_syncId": "km_mop2pfj8_s8lc5d",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "STV 9 hạt 180ml: 24+2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "24",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "05AN25",
+      "05AN31"
+    ],
+    "_syncId": "km_mop2pfj8_0moq7g",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Cao đạm 180ml: 12+1 (gom chung tặng hàng 10%)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "05AD11",
+      "05AD31"
+    ],
+    "_syncId": "km_mop2pfj8_2tjog8",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Cao đạm 240ml: 16+1 (gom chung tặng hàng 10%)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_xp8tly",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐN/STV gom chung tặng hàng 10% (Super Soy 200/220, ĐĐ/HN/OC, SĐN Tươi, Yến mạch)",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "10",
+    "spMas": [
+      "05AV33",
+      "05FV44",
+      "05MD10",
+      "05AV24",
+      "05DH14",
+      "05DD14",
+      "05DY10"
+    ],
+    "_syncId": "km_mop2pfj8_lkjejg",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SDD Flex 180ml/1L: đơn từ 150k → CK 8%",
+    "type": "order_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "150",
+        "ck": "8"
+      }
+    ],
+    "spMas": [
+      "04LL13"
+    ],
+    "_syncId": "km_mop2pfj8_ht5v69",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "STV 9 hạt 1L: đơn từ 150k → CK 8%",
+    "type": "order_money",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "150",
+        "ck": "8"
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_0n9ihg",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "BDD Ridielac - Mua 2 hộp CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "03AA13",
+      "03CA54",
+      "03CM06",
+      "03CA92",
+      "03AB11",
+      "03AY73",
+      "03CA15",
+      "03CA24",
+      "03CA34",
+      "03CA44",
+      "03CA75",
+      "03CA84",
+      "03CM20",
+      "03CY73"
+    ],
+    "_syncId": "km_mop2pfj8_vwzdnu",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "BDD Optimum Gold - Mua 2 hộp CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "03AA23",
+      "03AH10",
+      "03AA42",
+      "03AA74",
+      "03AA54",
+      "03AA92"
+    ],
+    "_syncId": "km_mop2pfj8_zkyilk",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Alpha Step 3,4 - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EA35",
+      "02EA45",
+      "02DA35",
+      "02DA45",
+      "02AA15",
+      "02AA25",
+      "02EA15",
+      "02EA25"
+    ],
+    "_syncId": "km_mop2pfj8_p2jt3n",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Alpha Gold Step 3,4 - CK 3% (Ontop +4%)",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EG37",
+      "02EG47",
+      "02DG3A",
+      "02DG4A"
+    ],
+    "_syncId": "km_mop2pfj8_d8wm83",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Alpha Gold Step 3,4 - Ontop CK 4%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "4"
+      }
+    ],
+    "spMas": [
+      "02EG37",
+      "02EG47",
+      "02DG3A",
+      "02DG4A"
+    ],
+    "_syncId": "km_mop2pfj8_z93c0l",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Yoko Gold Step 3,4 - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EY39",
+      "02AY19",
+      "02EY19",
+      "02EY29"
+    ],
+    "_syncId": "km_mop2pfj8_y9sp72",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Optimum Gold Step 3,4 - CK 7% (Ontop +3%)",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02EO38",
+      "02EO48",
+      "02DO3A",
+      "02DO4A",
+      "02AO18",
+      "02AO28",
+      "02EO18",
+      "02EO28"
+    ],
+    "_syncId": "km_mop2pfj8_olo1mr",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Optimum COLOS Step 3,4 - CK 7% (Ontop +3%)",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02ES38",
+      "02ES18"
+    ],
+    "_syncId": "km_mop2pfj8_nidvi1",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Grow Plus Step 3,4 - CK 10%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "10"
+      }
+    ],
+    "spMas": [
+      "02ER68",
+      "02ER78",
+      "02DR64",
+      "02DR74"
+    ],
+    "_syncId": "km_mop2pfj8_2h4nef",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Grow All Step - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_s9auy0",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SBNL CanPro/Mama/SBNK - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EC14",
+      "02EM12",
+      "02AM12",
+      "02EM22",
+      "02AM22",
+      "02EN22"
+    ],
+    "_syncId": "km_mop2pfj8_v9t1ej",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SBNL Sure Prevent/Diecerna (mẫu mới) - CK 7%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_kag4tj",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SBNL Sure Prevent/Diecerna (mẫu cũ) - CK 10%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "10"
+      }
+    ],
+    "spMas": [
+      "02EU15",
+      "02ED12",
+      "02AU15"
+    ],
+    "_syncId": "km_mop2pfj8_js5k20",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Nguyên Kem - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EN22"
+    ],
+    "_syncId": "km_mop2pfj8_xxpce2",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Vfresh 1L: CK 12%",
+    "type": "fixed",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "ck": "12",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_d87q3r",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Nước Ép 275ml: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_p7qbng",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Nước dừa 330ml: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_861unh",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ICY: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": false,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_dddvvw",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "ICY: 20+4",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": false,
+    "bX": "20",
+    "bY": "4",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_sw5jhi",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Kombucha: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_y6vkpe",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đường: CK 5%",
+    "type": "fixed",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "ck": "5",
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_jqreto",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "Que Susu TPM: 2 túi → CK 15%",
+    "type": "tier_qty",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": 2,
+        "ck": 15
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj8_e1dd2q",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "1T tặng 8H",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "8",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "02HO38"
+    ],
+    "_updatedAt": "2026-04-05T14:19:29.112Z",
+    "_syncId": "km_mop2pfj8_gi5dcs",
+    "_deleted": false
+  },
+  {
+    "name": "OP 48+2",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "02HO38"
+    ],
+    "_updatedAt": "2026-04-05T14:20:33.928Z",
+    "_syncId": "km_mop2pfj8_ly19p5",
+    "_deleted": false
+  },
+  {
+    "name": "SCU/STC Susu/Hero Ontop: đơn từ 2tr → CK 2%",
+    "type": "order_money",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "2000",
+        "ck": "2"
+      }
+    ],
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "08HA31",
+      "06SA73",
+      "06SC73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32",
+      "06UK10",
+      "08HA11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ],
+    "_updatedAt": "2026-04-21T16:11:28.513Z",
+    "_syncId": "km_mop2pfj8_4a808j",
+    "_deleted": false
+  },
+  {
+    "name": "STV: đơn 250k tặng 2h / 400k tặng 4h 9 hạt 180ml",
+    "type": "order_bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "05AN25",
+    "bonusName": "Sữa 9 hạt 180ml",
+    "repeat": false,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "250",
+        "bonusQty": "2"
+      },
+      {
+        "value": "400",
+        "bonusQty": "4"
+      }
+    ],
+    "spMas": [
+      "05AN25",
+      "05AN31",
+      "05AD11",
+      "05AD31",
+      "05AV33",
+      "05FV44",
+      "05MD10",
+      "05AV24",
+      "05DH14",
+      "05DD14",
+      "05DY10"
+    ],
+    "_syncId": "km_mop2pfj8_5npeaa",
+    "_updatedAt": "2026-05-03T01:09:46.340Z",
+    "_deleted": false
+  },
+  {
+    "name": "MR04263012 - SBPS TE DƯỚI 5 TRIỆU",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": false,
+    "stackable": true,
+    "bonusMa": "02HL37",
+    "bonusName": "Dielac Grow Plus 110ml",
+    "repeat": false,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "310",
+        "maxValue": "5000",
+        "bonusQty": "8"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "03HA38"
+    ],
+    "_updatedAt": "2026-04-22T00:33:13.919Z",
+    "_syncId": "km_mop2pfj8_q06tai",
+    "_deleted": false
+  },
+  {
+    "name": "Ontop SN: 2M+2h/5M+8h Cascade",
+    "type": "order_bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "04EI33",
+    "bonusName": "",
+    "cascade": true,
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "5000",
+        "maxValue": "",
+        "bonusQty": "8"
+      },
+      {
+        "value": "2000",
+        "maxValue": "",
+        "bonusQty": "2"
+      }
+    ],
+    "spMas": [
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22",
+      "04ED13",
+      "04EI18",
+      "04ET13",
+      "04EA13",
+      "04EC13",
+      "04EU11",
+      "04EM10",
+      "04EN10",
+      "04EB11",
+      "04EC60",
+      "04ED33",
+      "04EI33",
+      "04ET33",
+      "04EA33",
+      "04EC33",
+      "04FD2H",
+      "04FT2H",
+      "04FD32",
+      "04FI32",
+      "04FT32",
+      "04FA31",
+      "04FC32",
+      "04CD15",
+      "04CI11",
+      "04CD35",
+      "04CI31",
+      "04CC34",
+      "04CA33",
+      "04CH10",
+      "04CH30",
+      "04FH20",
+      "04GI14",
+      "04GI34",
+      "04GB18",
+      "04GO11",
+      "04GT05",
+      "04AE12",
+      "04AE32",
+      "04LL13",
+      "05AN25",
+      "05AN31",
+      "05DY10",
+      "05MD10",
+      "05AV24",
+      "05AV33",
+      "05DD14",
+      "05DH14",
+      "05FV44",
+      "05AD11",
+      "05AD31",
+      "06SA73"
+    ],
+    "_updatedAt": "2026-04-21T15:38:33.562Z",
+    "_syncId": "km_mop2pfj8_93h4qr",
+    "_deleted": false
+  },
+  {
+    "name": "KD Fino ID/KD A2 48B + 2B Fino A2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FH20",
+    "spMas": [
+      "04FT32",
+      "04FI32"
+    ],
+    "_updatedAt": "2026-04-21T15:58:49.248Z",
+    "_syncId": "km_mop2pfj8_vczcw9",
+    "_deleted": false
+  },
+  {
+    "name": "KD SBPS 48+2 dâu/ chuối",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "03HA38",
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HS37",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:25:24.262Z",
+    "_syncId": "km_mop2pfj8_a0neje",
+    "_deleted": false
+  },
+  {
+    "name": "MR04263011",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "02HL37",
+    "bonusName": "",
+    "cascade": false,
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "250",
+        "maxValue": "",
+        "bonusQty": "4"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "03HA38",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:42:33.734Z",
+    "_syncId": "km_mop2pfj8_ecp22j",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HT: 14h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "14",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01SX05"
+    ],
+    "_syncId": "km_mop2pfj6_23vzwl",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HT: 28h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "28",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SX05"
+    ],
+    "_syncId": "km_mop2pfj6_ir9568",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HG: 8h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01SX07"
+    ],
+    "_updatedAt": "2026-04-10T13:30:49.986Z",
+    "_syncId": "km_mop2pfj6_ypihck",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 380g HG: 18h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "18",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SX07"
+    ],
+    "_syncId": "km_mop2pfj6_4ik12x",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Xanh 380g HT: 12h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TD03",
+      "01TT02"
+    ],
+    "_syncId": "km_mop2pfj6_2qpspp",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Xanh 380g HT: 28h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "28",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD03",
+      "01TT02"
+    ],
+    "_syncId": "km_mop2pfj6_yvxz91",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 380g: 7h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "7",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01SB02"
+    ],
+    "_syncId": "km_mop2pfj6_8cr3xs",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 380g: 15h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "15",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SB02"
+    ],
+    "_syncId": "km_mop2pfj6_f0funn",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 12h+2b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TD13"
+    ],
+    "_syncId": "km_mop2pfj6_ya5dmz",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Chữ xanh/Đỏ 380g: 18h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "18",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD13"
+    ],
+    "_syncId": "km_mop2pfj6_q0rh8b",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT XL 380g: 12h+2b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TX03"
+    ],
+    "_syncId": "km_mop2pfj6_nsd702",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT XL 380g: 15h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "15",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TX03"
+    ],
+    "_syncId": "km_mop2pfj6_ua9xbf",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Tuýp 165g: 8+1 (Dâu/Sô/Trắng/MCha)",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": true,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD60",
+      "01TA60",
+      "01TC60"
+    ],
+    "_syncId": "km_mop2pfj6_x6jly8",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Tuýp Café/9Hạt: 6+1",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TH60"
+    ],
+    "_syncId": "km_mop2pfj6_qr2qsy",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Ô/Thọ Vỉ 40g: 6 vỉ+1h ĐB 110ml",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04ED33",
+    "spMas": [
+      "01VD41"
+    ],
+    "_syncId": "km_mop2pfj6_2m9ln4",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 380g: 11h+1b Fino",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "11",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FT32",
+    "spMas": [
+      "01TL00"
+    ],
+    "_syncId": "km_mop2pfj6_rapkxx",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 380g: 20h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "20",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TL00"
+    ],
+    "_syncId": "km_mop2pfj6_a4xap9",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1284g: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX05",
+    "spMas": [
+      "01TD11"
+    ],
+    "_syncId": "km_mop2pfj6_o7kizc",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1284g: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD11"
+    ],
+    "_syncId": "km_mop2pfj6_44agf6",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 1284g: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX07",
+    "spMas": [
+      "01SX11"
+    ],
+    "_updatedAt": "2026-04-12T05:09:53.449Z",
+    "_syncId": "km_mop2pfj6_yntdgp",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XL 1284g: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SX11"
+    ],
+    "_syncId": "km_mop2pfj6_84nfi9",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1kg: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX05",
+    "spMas": [
+      "01TD12"
+    ],
+    "_syncId": "km_mop2pfj6_ezn9on",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ ÔT Đỏ 1kg: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TD12"
+    ],
+    "_syncId": "km_mop2pfj6_w6teq8",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 1284g: 10h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "10",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX07",
+    "spMas": [
+      "01SB10"
+    ],
+    "_updatedAt": "2026-04-12T06:11:14.692Z",
+    "_syncId": "km_mop2pfj6_1ogafg",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ NSPN XB 1284g: 23h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01SB10"
+    ],
+    "_syncId": "km_mop2pfj6_wb4o8b",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 1284g: 8h+1h NSPN 380g",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "8",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "01SX07",
+    "spMas": [
+      "01TL10"
+    ],
+    "_updatedAt": "2026-04-12T06:49:29.408Z",
+    "_syncId": "km_mop2pfj6_0pzu2b",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 1284g: 18h+1h cùng loại",
+    "type": "bonus",
+    "nhoms": "B",
+    "active": true,
+    "stackable": false,
+    "bX": "18",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "01TL10"
+    ],
+    "_syncId": "km_mop2pfj6_ncnci6",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐ Tài Lộc 960g: 4h+CK 12%",
+    "type": "tier_qty",
+    "nhoms": "B",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": 4,
+        "ck": 12
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj6_gbcyan",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Fino 16+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FA31",
+      "04FC32",
+      "04FD32",
+      "04FT32",
+      "04FI32",
+      "04FH20"
+    ],
+    "_syncId": "km_mop2pfj6_1io9gy",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Fino Ontop: 96b+2b Fino bất kỳ",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "96",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FA31",
+      "04FC32",
+      "04FH20"
+    ],
+    "_syncId": "km_mop2pfj6_1y8s0u",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "STTT Fino 220ml: 12b+1b",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FT2H",
+      "04FD2H"
+    ],
+    "_syncId": "km_mop2pfj6_j2azos",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "STTT Fino 220ml: 3 thùng+15 bịch",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "144",
+    "bY": "15",
+    "bUnit": "lon",
+    "bMax": 1,
+    "bMa": "same",
+    "spMas": [
+      "04FT2H",
+      "04FD2H"
+    ],
+    "_syncId": "km_mop2pfj6_zil3fw",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 110ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04EA33",
+      "04EC33",
+      "04ED33",
+      "04EI33",
+      "04ET33"
+    ],
+    "_syncId": "km_mop2pfj6_a9s6sd",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04ED13",
+      "04ET13",
+      "04EA13",
+      "04EB11",
+      "04EC13",
+      "04EM10",
+      "04EN10",
+      "04EC60",
+      "04EU11",
+      "04EI18"
+    ],
+    "_syncId": "km_mop2pfj6_f96zjp",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop FM vị: 48+1 (kèm 2 SKU)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "48",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04EB11",
+      "04EM10",
+      "04EN10",
+      "04EC60"
+    ],
+    "_syncId": "km_mop2pfj6_ooo8w9",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop FM vị: 96h+3h (kèm 3 SKU)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "96",
+    "bY": "3",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04EB11",
+      "04EM10",
+      "04EN10",
+      "04EC60"
+    ],
+    "_syncId": "km_mop2pfj6_f8yhfz",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 110ml Ontop: 5T+4H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "5",
+    "bY": "4",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj6_l4jpoi",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 110ml Ontop: 10T+12H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "10",
+    "bY": "12",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj6_ec408y",
+    "_updatedAt": "2026-05-03T01:09:46.338Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop: 5T+4H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "5",
+    "bY": "4",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj6_ata4c2",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 180ml Ontop: 10T+12H",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": false,
+    "bX": "10",
+    "bY": "12",
+    "bUnit": "thung",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_fbq7kx",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 1L: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22"
+    ],
+    "_syncId": "km_mop2pfj7_e4c1ll",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đàn Bò 1L: CK 2%",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "2",
+    "spMas": [
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22"
+    ],
+    "_syncId": "km_mop2pfj7_teulxi",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 110ml: 12+1, 48+5, 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD35",
+      "04CA33",
+      "04CC34",
+      "04CH30",
+      "04CI31"
+    ],
+    "_syncId": "km_mop2pfj7_ha4ukx",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 110ml: 48+5",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "48",
+    "bY": "5",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD35",
+      "04CA33",
+      "04CC34",
+      "04CH30",
+      "04CI31"
+    ],
+    "_syncId": "km_mop2pfj7_o9laqz",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 110ml: 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "192",
+    "bY": "24",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD35",
+      "04CA33",
+      "04CC34",
+      "04CH30",
+      "04CI31"
+    ],
+    "_syncId": "km_mop2pfj7_65am38",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 180ml: 12+1, 48+5, 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD15",
+      "04CH10",
+      "04CI11"
+    ],
+    "_syncId": "km_mop2pfj7_17tvyz",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 180ml: 48+5",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "48",
+    "bY": "5",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD15",
+      "04CH10",
+      "04CI11"
+    ],
+    "_syncId": "km_mop2pfj7_9pyxhq",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ADM 180ml: 192+24",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "192",
+    "bY": "24",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04CD15",
+      "04CH10",
+      "04CI11"
+    ],
+    "_syncId": "km_mop2pfj7_wne4zm",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Green Farm 110ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04GI34"
+    ],
+    "_syncId": "km_mop2pfj7_yc0c5a",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Green Farm 180ml: 12+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04GI14"
+    ],
+    "_syncId": "km_mop2pfj7_w2cwbb",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Green Farm CK theo tiền",
+    "type": "tier_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "1500",
+        "ck": "1"
+      },
+      {
+        "type": "above",
+        "value": "5000",
+        "ck": "2"
+      }
+    ],
+    "spMas": [
+      "04GI34",
+      "04GI14"
+    ],
+    "_syncId": "km_mop2pfj7_zl61pr",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF A2 110ml: 12+1 (tặng GF 110)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI34",
+    "spMas": [
+      "04AE32"
+    ],
+    "_syncId": "km_mop2pfj7_hydsd1",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF A2 180ml: 12+1 (tặng GF 180)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI14",
+    "spMas": [
+      "04AE12"
+    ],
+    "_syncId": "km_mop2pfj7_ul4f26",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF Tổ Yến 180: 12+1 (tặng GF 180)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI14",
+    "spMas": [
+      "04GB18"
+    ],
+    "_syncId": "km_mop2pfj7_3whxpy",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF 1L: 6h+4h GF 110ml",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "6",
+    "bY": "4",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI34",
+    "spMas": [
+      "04GT05"
+    ],
+    "_syncId": "km_mop2pfj7_i3frdw",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "GF Cao đạm 250ml: 6h+2h GF 110ml",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI34",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_zqfwwq",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Organic 180ml: 12+1 (tặng GF 180)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04GI14",
+    "spMas": [
+      "04GO11"
+    ],
+    "_syncId": "km_mop2pfj7_8aosnb",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Fino A2 220: 16+1",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "04FH20"
+    ],
+    "_syncId": "km_mop2pfj7_oow707",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero/Yomilk 80/110: 22+2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": false,
+    "bX": "22",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "08HA31",
+      "06SA73",
+      "06SC73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32"
+    ],
+    "_updatedAt": "2026-04-21T16:11:44.309Z",
+    "_syncId": "km_mop2pfj7_pvx2ux",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "129",
+    "bY": "15",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "08HA31",
+      "06SA73",
+      "06SC73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32"
+    ],
+    "_syncId": "km_mop2pfj7_pidfkl",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero 170/180: 11+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "11",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UK10",
+      "08HA11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ],
+    "_syncId": "km_mop2pfj7_i579wf",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Susu/Hero 170/180: 86+10",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "86",
+    "bY": "10",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "06UK10",
+      "08HA11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ],
+    "_syncId": "km_mop2pfj7_df6okj",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Trắng (CĐ,KĐ)/Nha đam: 12+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07KD12",
+      "07TR33"
+    ],
+    "_syncId": "km_mop2pfj7_cr2mxq",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Trắng ID/NĐ ID: 16+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_hpgavu",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA NĐ nhãn thân/TDLD/Táo đỏ/Nếp cẩm/Trân Châu: 12+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_qdccwx",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Green Farm: 7+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "7",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_z8q6hi",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCU Green Farm Vải/Bưởi: 3c+2h SCA GF",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "3",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "07GR10",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_94ibe4",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Dâu/Lựu đỏ/Trái Cây CTKD: 4+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "4",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_2c5nuv",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Susu + Cream 60g: 7+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "7",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_ch6har",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Star: 22+2",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "22",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_hr7338",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SCA Hy Lạp: 3+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": false,
+    "stackable": true,
+    "bX": "3",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_5u4pj5",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 65ml: 23+2",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "23",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07UR13",
+      "07UD11",
+      "07UG11",
+      "07UQ11",
+      "07UA11",
+      "07UC11"
+    ],
+    "_syncId": "km_mop2pfj7_jg9flz",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 65ml: 50+5",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": false,
+    "bX": "50",
+    "bY": "5",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07UR13",
+      "07UD11",
+      "07UG11",
+      "07UQ11",
+      "07UA11",
+      "07UC11"
+    ],
+    "_syncId": "km_mop2pfj7_rm0r9f",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 130ml CĐ/Đa vị: 11+1",
+    "type": "bonus",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "bX": "11",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "07UQ31",
+      "07UM31",
+      "07UR31",
+      "07UL31",
+      "07UD30"
+    ],
+    "_syncId": "km_mop2pfj7_zih7qi",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Probi 400ml/700ml: CK 15%",
+    "type": "fixed",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "ck": "15",
+    "spMas": [
+      "07UR41",
+      "07UR71",
+      "07UI40",
+      "07UI70"
+    ],
+    "_syncId": "km_mop2pfj7_rana2f",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "STV 9 hạt 180ml: 24+2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "24",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "05AN25",
+      "05AN31"
+    ],
+    "_syncId": "km_mop2pfj7_h4gqd2",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Cao đạm 180ml: 12+1 (gom chung tặng hàng 10%)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "12",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "05AD11",
+      "05AD31"
+    ],
+    "_syncId": "km_mop2pfj7_y0w98h",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Cao đạm 240ml: 16+1 (gom chung tặng hàng 10%)",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "bX": "16",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_p0c23q",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SĐN/STV gom chung tặng hàng 10% (Super Soy 200/220, ĐĐ/HN/OC, SĐN Tươi, Yến mạch)",
+    "type": "fixed",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "ck": "10",
+    "spMas": [
+      "05AV33",
+      "05FV44",
+      "05MD10",
+      "05AV24",
+      "05DH14",
+      "05DD14",
+      "05DY10"
+    ],
+    "_syncId": "km_mop2pfj7_g1eykb",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SDD Flex 180ml/1L: đơn từ 150k → CK 8%",
+    "type": "order_money",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "150",
+        "ck": "8"
+      }
+    ],
+    "spMas": [
+      "04LL13"
+    ],
+    "_syncId": "km_mop2pfj7_d6k6lx",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "STV 9 hạt 1L: đơn từ 150k → CK 8%",
+    "type": "order_money",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "150",
+        "ck": "8"
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_4g6pd4",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "BDD Ridielac - Mua 2 hộp CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "03AA13",
+      "03CA54",
+      "03CM06",
+      "03CA92",
+      "03AB11",
+      "03AY73",
+      "03CA15",
+      "03CA24",
+      "03CA34",
+      "03CA44",
+      "03CA75",
+      "03CA84",
+      "03CM20",
+      "03CY73"
+    ],
+    "_syncId": "km_mop2pfj7_bncm9h",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "BDD Optimum Gold - Mua 2 hộp CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "03AA23",
+      "03AH10",
+      "03AA42",
+      "03AA74",
+      "03AA54",
+      "03AA92"
+    ],
+    "_syncId": "km_mop2pfj7_78fhof",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Alpha Step 3,4 - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EA35",
+      "02EA45",
+      "02DA35",
+      "02DA45",
+      "02AA15",
+      "02AA25",
+      "02EA15",
+      "02EA25"
+    ],
+    "_syncId": "km_mop2pfj7_79qzvg",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Alpha Gold Step 3,4 - CK 3% (Ontop +4%)",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EG37",
+      "02EG47",
+      "02DG3A",
+      "02DG4A"
+    ],
+    "_syncId": "km_mop2pfj7_mutnv9",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Alpha Gold Step 3,4 - Ontop CK 4%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "4"
+      }
+    ],
+    "spMas": [
+      "02EG37",
+      "02EG47",
+      "02DG3A",
+      "02DG4A"
+    ],
+    "_syncId": "km_mop2pfj7_d51s8a",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Yoko Gold Step 3,4 - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EY39",
+      "02AY19",
+      "02EY19",
+      "02EY29"
+    ],
+    "_syncId": "km_mop2pfj7_4gqe82",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Optimum Gold Step 3,4 - CK 7% (Ontop +3%)",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02EO38",
+      "02EO48",
+      "02DO3A",
+      "02DO4A",
+      "02AO18",
+      "02AO28",
+      "02EO18",
+      "02EO28"
+    ],
+    "_syncId": "km_mop2pfj7_b6x2ap",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Optimum COLOS Step 3,4 - CK 7% (Ontop +3%)",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [
+      "02ES38",
+      "02ES18"
+    ],
+    "_syncId": "km_mop2pfj7_ozguau",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Grow Plus Step 3,4 - CK 10%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "10"
+      }
+    ],
+    "spMas": [
+      "02ER68",
+      "02ER78",
+      "02DR64",
+      "02DR74"
+    ],
+    "_syncId": "km_mop2pfj7_ocrwgt",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB D.Grow All Step - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_p7c7qn",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SBNL CanPro/Mama/SBNK - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EC14",
+      "02EM12",
+      "02AM12",
+      "02EM22",
+      "02AM22",
+      "02EN22"
+    ],
+    "_syncId": "km_mop2pfj7_wtceht",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SBNL Sure Prevent/Diecerna (mẫu mới) - CK 7%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "7"
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_dt8fnd",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SBNL Sure Prevent/Diecerna (mẫu cũ) - CK 10%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "10"
+      }
+    ],
+    "spMas": [
+      "02EU15",
+      "02ED12",
+      "02AU15"
+    ],
+    "_syncId": "km_mop2pfj7_uzrite",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "SB Nguyên Kem - CK 3%",
+    "type": "tier_qty",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": "2",
+        "ck": "3"
+      }
+    ],
+    "spMas": [
+      "02EN22"
+    ],
+    "_syncId": "km_mop2pfj7_byywxf",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Vfresh 1L: CK 12%",
+    "type": "fixed",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "ck": "12",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_msxz0i",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Nước Ép 275ml: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_hgg6dr",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Nước dừa 330ml: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_uhye4b",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ICY: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": false,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_l4rj8x",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "ICY: 20+4",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": false,
+    "bX": "20",
+    "bY": "4",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_qqhz41",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Kombucha: 6+1",
+    "type": "bonus",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "bX": "6",
+    "bY": "1",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_iuqi79",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Đường: CK 5%",
+    "type": "fixed",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "ck": "5",
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_11p5ge",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "Que Susu TPM: 2 túi → CK 15%",
+    "type": "tier_qty",
+    "nhoms": "",
+    "active": false,
+    "stackable": true,
+    "tUnit": "lon",
+    "tiers": [
+      {
+        "mn": 2,
+        "ck": 15
+      }
+    ],
+    "spMas": [],
+    "_syncId": "km_mop2pfj7_nwf2qa",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "1T tặng 8H",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "8",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "02HO38"
+    ],
+    "_updatedAt": "2026-04-05T14:19:29.112Z",
+    "_syncId": "km_mop2pfj7_z88qra",
+    "_deleted": false
+  },
+  {
+    "name": "OP 48+2",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "same",
+    "spMas": [
+      "02HO38"
+    ],
+    "_updatedAt": "2026-04-05T14:20:33.928Z",
+    "_syncId": "km_mop2pfj7_grs2j5",
+    "_deleted": false
+  },
+  {
+    "name": "SCU/STC Susu/Hero Ontop: đơn từ 2tr → CK 2%",
+    "type": "order_money",
+    "nhoms": "D",
+    "active": true,
+    "stackable": true,
+    "tiers": [
+      {
+        "type": "above",
+        "value": "2000",
+        "ck": "2"
+      }
+    ],
+    "spMas": [
+      "06UQ40",
+      "06UA40",
+      "06UC40",
+      "06UN40",
+      "08HA31",
+      "06SA73",
+      "06SC73",
+      "06UA32",
+      "06UC32",
+      "06UN32",
+      "06UQ32",
+      "06UK10",
+      "08HA11",
+      "06VA23",
+      "06VC23",
+      "06VQ23"
+    ],
+    "_updatedAt": "2026-04-21T16:11:28.513Z",
+    "_syncId": "km_mop2pfj7_rgoec4",
+    "_deleted": false
+  },
+  {
+    "name": "STV: đơn 250k tặng 2h / 400k tặng 4h 9 hạt 180ml",
+    "type": "order_bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "05AN25",
+    "bonusName": "Sữa 9 hạt 180ml",
+    "repeat": false,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "250",
+        "bonusQty": "2"
+      },
+      {
+        "value": "400",
+        "bonusQty": "4"
+      }
+    ],
+    "spMas": [
+      "05AN25",
+      "05AN31",
+      "05AD11",
+      "05AD31",
+      "05AV33",
+      "05FV44",
+      "05MD10",
+      "05AV24",
+      "05DH14",
+      "05DD14",
+      "05DY10"
+    ],
+    "_syncId": "km_mop2pfj7_ym8s8b",
+    "_updatedAt": "2026-05-03T01:09:46.339Z",
+    "_deleted": false
+  },
+  {
+    "name": "MR04263012 - SBPS TE DƯỚI 5 TRIỆU",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": false,
+    "stackable": true,
+    "bonusMa": "02HL37",
+    "bonusName": "Dielac Grow Plus 110ml",
+    "repeat": false,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "310",
+        "maxValue": "5000",
+        "bonusQty": "8"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "03HA38"
+    ],
+    "_updatedAt": "2026-04-22T00:33:13.919Z",
+    "_syncId": "km_mop2pfj7_8ox0ei",
+    "_deleted": false
+  },
+  {
+    "name": "Ontop SN: 2M+2h/5M+8h Cascade",
+    "type": "order_bonus",
+    "nhoms": "C",
+    "active": false,
+    "stackable": true,
+    "bonusMa": "04EI33",
+    "bonusName": "",
+    "cascade": true,
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "5000",
+        "maxValue": "",
+        "bonusQty": "8"
+      },
+      {
+        "value": "2000",
+        "maxValue": "",
+        "bonusQty": "2"
+      }
+    ],
+    "spMas": [
+      "04ED04",
+      "04EI04",
+      "04ET04",
+      "04ET22",
+      "04ED13",
+      "04EI18",
+      "04ET13",
+      "04EA13",
+      "04EC13",
+      "04EU11",
+      "04EM10",
+      "04EN10",
+      "04EB11",
+      "04EC60",
+      "04ED33",
+      "04EI33",
+      "04ET33",
+      "04EA33",
+      "04EC33",
+      "04FD2H",
+      "04FT2H",
+      "04FD32",
+      "04FI32",
+      "04FT32",
+      "04FA31",
+      "04FC32",
+      "04CD15",
+      "04CI11",
+      "04CD35",
+      "04CI31",
+      "04CC34",
+      "04CA33",
+      "04CH10",
+      "04CH30",
+      "04FH20",
+      "04GI14",
+      "04GI34",
+      "04GB18",
+      "04GO11",
+      "04GT05",
+      "04AE12",
+      "04AE32",
+      "04LL13",
+      "05AN25",
+      "05AN31",
+      "05DY10",
+      "05MD10",
+      "05AV24",
+      "05AV33",
+      "05DD14",
+      "05DH14",
+      "05FV44",
+      "05AD11",
+      "05AD31",
+      "06SA73"
+    ],
+    "_updatedAt": "2026-05-03T01:10:14.844Z",
+    "_syncId": "km_mop2pfj7_o7xk90",
+    "_deleted": false
+  },
+  {
+    "name": "KD Fino ID/KD A2 48B + 2B Fino A2",
+    "type": "bonus",
+    "nhoms": "C",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "04FH20",
+    "spMas": [
+      "04FT32",
+      "04FI32"
+    ],
+    "_updatedAt": "2026-04-21T15:58:49.248Z",
+    "_syncId": "km_mop2pfj7_7vihdp",
+    "_deleted": false
+  },
+  {
+    "name": "KD SBPS 48+2 dâu/ chuối",
+    "type": "bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bX": "48",
+    "bY": "2",
+    "bUnit": "lon",
+    "bMax": 0,
+    "bMa": "03HA38",
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HS37",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:25:24.262Z",
+    "_syncId": "km_mop2pfj7_20rvoa",
+    "_deleted": false
+  },
+  {
+    "name": "MR04263011",
+    "type": "order_bonus",
+    "nhoms": "A",
+    "active": true,
+    "stackable": true,
+    "bonusMa": "02HL37",
+    "bonusName": "",
+    "cascade": false,
+    "repeat": true,
+    "maxSets": 0,
+    "tiers": [
+      {
+        "value": "250",
+        "maxValue": "",
+        "bonusQty": "4"
+      }
+    ],
+    "spMas": [
+      "02HL37",
+      "02HG38",
+      "02HG18",
+      "02HL17",
+      "03HA38",
+      "02HD39",
+      "02HD19",
+      "02HT30",
+      "02HO38",
+      "02HO18",
+      "02HY39",
+      "02HY19"
+    ],
+    "_updatedAt": "2026-04-22T00:42:33.734Z",
+    "_syncId": "km_mop2pfj7_kl0stq",
+    "_deleted": false
   }
 ]
