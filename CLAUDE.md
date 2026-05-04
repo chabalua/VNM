@@ -20,19 +20,28 @@
 ```
 index.html                       — HTML shell + script loader
 css/style.css                    — Toàn bộ CSS, hỗ trợ data-theme=light/dark
-js/config.js     (~50 dòng)      — Hằng số, URLs, LS_KEYS, escapeHtml, showToast
-js/data.js       (~230 dòng)     — Fetch + cache, initData, loadProducts, loadPromotions
-js/cart.js       (~820 dòng)     — Giỏ hàng + KM Engine v2 + lịch sử đơn
-js/ui.js         (~680 dòng)     — Render tab Đặt hàng + brand classification
-js/km.js         (~560 dòng)     — Modal CT KM, form, picker SP
-js/customer.js   (~1290 dòng)    — KH + KPI + tính thưởng VNM/VIP/SBPS  ⚠️ NÊN TÁCH
-js/sync.js       (~520 dòng)     — Sync 2 chiều GitHub
-js/main.js       (~660 dòng)     — onload, gotoTab, KPI dashboard, theme
+css/tokens.css                   — CSS custom properties (màu, spacing, radius)
+css/ui-primitives.css            — Component primitives tái dùng
+css/mobile-ui.css                — Layout mobile, tabbar, padding safe-area
+js/config.js     (~120 dòng)     — Hằng số, URLs, LS_KEYS, escapeHtml, showToast, lsCheckQuota
+js/data.js       (~300 dòng)     — Fetch + cache, initData, loadProducts, loadPromotions
+js/cart.js       (~1550 dòng)    — Giỏ hàng + KM Engine v2 + lịch sử đơn + buildDesktopOrderSidebarHTML
+js/ui.js         (~1600 dòng)    — Render tab Đặt hàng, buildPriceTable, brand classification
+js/km.js         (~1200 dòng)    — Modal CT KM, form, picker SP
+js/customer.js   (~2900 dòng)    — KH + KPI + tính thưởng VNM/VIP/SBPS  ⚠️ NÊN TÁCH
+js/sync.js       (~900 dòng)     — Sync 2 chiều GitHub, debounce queue push
+js/ai-service.js (~270 dòng)     — AI API wrapper (OpenAI-compatible)
+js/ai-context.js (~240 dòng)     — Build context từ app state cho AI
+js/ai-chat.js    (~150 dòng)     — Chat logic, lịch sử hội thoại
+js/ai-ui.js      (~450 dòng)     — Render tab AI
+js/mobile-ui.js  (~360 dòng)     — Mobile tabbar SVG, renderDesktopSidebar
+js/main.js       (~1200 dòng)    — onload, gotoTab, KPI dashboard, theme, layout detection
 tests/km-engine.test.js          — Node test runner (chạy: node tests/km-engine.test.js)
 tests/km-engine.test.shared.js   — 13 test cases dùng chung
+tests/reward-engine.test.js      — 34 test cases cho calcVNMShopReward/calcVIPShopReward/calcSBPSReward
 ```
 
-**Thứ tự load script** (cố định, đừng đảo): `config → data → cart → ui → km → customer → sync → main`.
+**Thứ tự load script** (cố định, đừng đảo): `config → data → cart → ui → km → customer → sync → ai-service → ai-context → ai-chat → ai-ui → mobile-ui → main`.
 
 ---
 
@@ -68,8 +77,10 @@ tests/km-engine.test.shared.js   — 13 test cases dùng chung
 | `cusReadDS()` thiếu `sbpsTrungBay` | Checkbox trưng bày SBPS không ảnh hưởng preview thưởng | customer.js 2026-04-26 |
 | `syncFromGitHub()` không validate promotions | GitHub trả về object lỗi → `normalizePromotionList` → `[]` → xóa trắng CT KM | data.js 2026-04-26 |
 | Upload file vào sai path `js/js/` | Phải xác nhận lại canonical path: `index.html` ở repo root, JS ở `js/` |
-| `tier_money` chia % cho 100 hai lần | Số CK bị chia đôi |
-
+| `tier_money` chia % cho 100 hai lần | Số CK bị chia đôi || `buildPriceTable` hiện giá KM/VAT khi chưa nhập SL | Luôn tính `calcKM(p,1,0)` → hiển thị giá giả, gây nhầm lẫn | ui.js 2026-05-04 |
+| Quà tặng hiển thị số hộp thô, không quy đổi thùng | `🎁 +60 hộp` thay vì `Tặng 60 hộp (1 thùng + 12 hộp)` | ui.js 2026-05-04 |
+| `data-layout='desktop'` không bao giờ được set | `isDesktopLayout()` và `getLayoutMode()` undefined → desktop CSS grid không kích hoạt | main.js 2026-05-04 |
+| `renderOrder` tạo `#order-desktop-side` thứ hai bên trong `#order-list` | Conflict với CSS grid vốn trỏ vào element đã có sẵn trong HTML | ui.js 2026-05-04 |
 ---
 
 ## 5. KM Engine — kiến trúc 2 cấp
@@ -148,7 +159,7 @@ Bảng mức gốc: `VNM_SHOP_TRUNGBAY`, `VNM_SHOP_TICHLUY`, `VIP_SHOP_TRUNGBAY`
 
 Mapping mã CT app Vinamilk → program: `VNM_APP_CODES`.
 
-⚠️ **Logic này CHƯA có test** — sửa cẩn thận, đối chiếu bằng tay với 1-2 KH thật.
+✅ **Đã có 34 test cases** — chạy: `node tests/reward-engine.test.js`. Vẫn nên đối chiếu bằng tay khi sửa logic bảng mức.
 
 ---
 
@@ -177,10 +188,9 @@ Mapping mã CT app Vinamilk → program: `VNM_APP_CODES`.
 - Repo: `chabalua/VNM`, branch `main`. API: `https://api.github.com/repos/.../contents/<file>`.
 - Token PAT lưu localStorage, validate format `ghp_*` / `github_pat_*` / etc.
 - 5 file sync: `products.json`, `promotions.json`, `customers.json`, `routes.json`, `orders.json`.
-- **Auto-push**: sau mỗi save (gọi `syncAutoPushFile(filename)`).
+- **Auto-push**: sau mỗi save (gọi `syncAutoPushFile(filename)`). Có debounce 1500ms + queue per filename — tránh race condition.
 - **Auto-pull on start**: nếu flag `autoPullAllOnStart=true`.
 - Orders dùng soft delete (`_deleted: true`) để merge cross-device.
-- **Rủi ro**: chưa có queue/debounce — nếu user save nhanh nhiều thứ liên tiếp, có thể race condition.
 
 ---
 
@@ -204,6 +214,8 @@ Tab `km` ẩn trong tabbar nhưng accessible qua `gotoTab('km')` từ trong page
 - **VAT**: `VAT = 0.015` (1.5%)
 - **Render**: build string → `el.innerHTML = html` (không có template engine)
 - **Modal dùng chung**: `#km-modal` tái sử dụng cho CT KM / Sync settings / CT TB-TL / Brand rules / Order detail / KH edit
+- **Layout detection**: `isDesktopLayout()` → true nếu `window.innerWidth >= 1024`. `updateLayoutMode()` set `data-layout='desktop'` trên `<html>`. Gọi khi onload + resize (debounce 150ms). Định nghĩa trong `main.js`.
+- **Desktop sidebar order**: `buildDesktopOrderSidebarHTML()` từ `cart.js`, render vào `#order-desktop-side` (đã có sẵn trong HTML, là con trực tiếp của `#page-order`)
 
 ---
 
@@ -241,4 +253,6 @@ Mọi fetch: `fetch(url + '?_t=' + Date.now(), { cache: 'no-store' })`.
 - [ ] **Tách `customer.js`** thành 3 file: `customer-data.js`, `customer-reward.js`, `customer-ui.js`.
 - [x] **Test cho 3 hàm reward** (calcVNMShopReward, calcVIPShopReward, calcSBPSReward). (Done 2026-04-26: 34 test cases, chạy: node tests/reward-engine.test.js)
 - [x] **LocalStorage quota guard** — cảnh báo khi gần 5MB. (Done 2026-04-26: lsCheckQuota() trong config.js, gọi sau saveSP/cusSave/saveOrders)
+- [x] **Desktop layout activation** — `isDesktopLayout()`, `getLayoutMode()`, `updateLayoutMode()` vào main.js; set `data-layout='desktop'` khi width ≥ 1024px. (Done 2026-05-04)
+- [ ] **Tách `customer.js`** thành 3 file: `customer-data.js`, `customer-reward.js`, `customer-ui.js`.
 - [ ] **Centralize state** — gom global `_xxx` vars vào 1 `appState` object.

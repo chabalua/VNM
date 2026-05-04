@@ -258,7 +258,7 @@ function onSelectCustomer(ma) {
 // ============================================================
 // PRICE TABLE — 3 cột: Gốc / Sau KM / +Thuế
 // ============================================================
-function buildPriceTable(p, km) {
+function buildPriceTable(p, km, noQty) {
   var VAT_RATE = typeof VAT !== 'undefined' ? VAT : 0.015;
   var hopGoc = p.giaNYLon;
   var thungGoc = p.giaNYThung;
@@ -268,16 +268,16 @@ function buildPriceTable(p, km) {
   var hopVat = Math.round(hopKM * (1 + VAT_RATE));
   var thungVat = Math.round(thungKM * (1 + VAT_RATE));
 
-  var hasDiscount = hopKM < hopGoc || km.bonus > 0;
-  var savePerThung = (hopGoc - hopKM) * p.slThung;
+  var hasDiscount = !noQty && (hopKM < hopGoc || km.bonus > 0);
+  var savePerThung = !noQty ? (hopGoc - hopKM) * p.slThung : 0;
 
   var rows = '';
   // Thùng row (highlight)
   rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;border-bottom:1px solid var(--border-subtle);background:var(--accent-soft);align-items:center;gap:4px">';
   rows += '<div style="font-weight:600;font-size:12.5px;color:var(--accent-text)">Thùng ' + p.slThung + '</div>';
-  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:line-through">' + fmt(thungGoc) + '</div>';
-  rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + (hasDiscount ? fmt(thungKM) + 'đ' : '—') + '</div>';
-  rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + fmt(thungVat) + 'đ</div>';
+  rows += '<div style="font-size:12px;color:var(--text-tertiary)' + (hasDiscount ? ';text-decoration:line-through' : '') + '">' + fmt(thungGoc) + '</div>';
+  rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + (noQty ? '—' : (hasDiscount ? fmt(thungKM) + 'đ' : '—')) + '</div>';
+  rows += '<div style="font-size:13px;font-weight:600;color:var(--accent-text)">' + (noQty ? '—' : fmt(thungVat) + 'đ') + '</div>';
   rows += '</div>';
 
   // Lốc row (nếu có)
@@ -287,18 +287,18 @@ function buildPriceTable(p, km) {
     var locVat = Math.round(locKM * (1 + VAT_RATE));
     rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;border-bottom:1px solid var(--border-subtle);align-items:center;gap:4px">';
     rows += '<div style="font-size:12.5px;color:var(--text)">' + (p.locLabel || 'Lốc') + ' ' + p.locSize + '</div>';
-    rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:line-through">' + fmt(locGoc) + '</div>';
-    rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (hasDiscount ? fmt(locKM) : '—') + '</div>';
-    rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + fmt(locVat) + '</div>';
+    rows += '<div style="font-size:12px;color:var(--text-tertiary)' + (hasDiscount ? ';text-decoration:line-through' : '') + '">' + fmt(locGoc) + '</div>';
+    rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (noQty ? '—' : (hasDiscount ? fmt(locKM) : '—')) + '</div>';
+    rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (noQty ? '—' : fmt(locVat)) + '</div>';
     rows += '</div>';
   }
 
   // Hộp row
   rows += '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;align-items:center;gap:4px">';
   rows += '<div style="font-size:12.5px;color:var(--text)">Hộp/Lon</div>';
-  rows += '<div style="font-size:12px;color:var(--text-tertiary);text-decoration:line-through">' + fmt(hopGoc) + '</div>';
-  rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (hasDiscount ? fmt(hopKM) : '—') + '</div>';
-  rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + fmt(hopVat) + '</div>';
+  rows += '<div style="font-size:12px;color:var(--text-tertiary)' + (hasDiscount ? ';text-decoration:line-through' : '') + '">' + fmt(hopGoc) + '</div>';
+  rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (noQty ? '—' : (hasDiscount ? fmt(hopKM) : '—')) + '</div>';
+  rows += '<div style="font-size:13px;font-weight:500;color:var(--text)">' + (noQty ? '—' : fmt(hopVat)) + '</div>';
   rows += '</div>';
 
   var header = '<div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;padding:8px 12px;background:var(--surface);border-bottom:1px solid var(--border-subtle);border-radius:8px 8px 0 0;font-size:11px;font-weight:600;color:var(--text-secondary);text-transform:uppercase;letter-spacing:0.5px;gap:4px"><div>Quy cách</div><div>Gốc</div><div>+KM</div><div>+VAT</div></div>';
@@ -436,7 +436,7 @@ window.toggleCard = function(ma) {
       var kmTop = calcKM(p, useQT, useQL);
       // Chỉ cập nhật pt_ div, KHÔNG overwrite toàn bộ expandEl (tránh xóa inputs)
       var ptEl = document.getElementById('pt_' + ma);
-      if (ptEl) ptEl.innerHTML = buildPriceTable(p, kmTop);
+      if (ptEl) ptEl.innerHTML = buildPriceTable(p, kmTop, !(qT2 > 0 || qL2 > 0));
     }
   } else {
     expandEl.style.display = 'none';
@@ -472,7 +472,7 @@ function onQty(ma) {
         card.classList.remove('inCart');
       }
     }
-    if (pt) pt.innerHTML = buildPriceTable(p, calcKM(p, 0, 1));
+    if (pt) pt.innerHTML = buildPriceTable(p, calcKM(p, 0, 0), true);
     return;
   }
 
@@ -504,7 +504,10 @@ function onQty(ma) {
     if(kmInfo.desc) ht += '<div class="km-alert-title">' + escapeHtml(kmInfo.desc) + '</div>';
     if(kmInfo.bonusItems.length > 0) {
       kmInfo.bonusItems.forEach(function(bi) {
-        ht += '<div class="km-desc">🎁 +' + bi.qty + ' ' + escapeHtml(bi.name || '') + '</div>';
+        var bip = (bi.ma && typeof spFind === 'function') ? spFind(bi.ma) : null;
+        var biqStr = bip ? formatQtyByCarton(bip, bi.qty) : (bi.qty + ' hộp');
+        var nameStr = (bi.ma && bi.ma !== ma) ? ' ' + escapeHtml(bi.name || '') : '';
+        ht += '<div class="km-desc">🎁 Tặng ' + biqStr + nameStr + '</div>';
       });
     }
     ht += '</div>';
@@ -677,7 +680,7 @@ function renderOrder() {
     groups[nhom].forEach(function(p) {
       var inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
       var isFav = favorites.includes(p.ma);
-      var kmInfo = calcKM(p, 1, 0);
+      var kmInfo = inCart ? calcKM(p, cart[p.ma].qT || 0, cart[p.ma].qL || 0) : calcKM(p, 0, 0);
       var brand = detectBrand(p);
       var appliedCTs = getProductPromoRefs(p.ma);
 
@@ -742,7 +745,7 @@ function renderOrder() {
       mainHtml += '<div class="sp-expand' + (isExpanded ? ' open' : '') + '" id="expand_' + eMa + '">';
 
       // Bảng giá
-      mainHtml += '<div id="pt_' + eMa + '">' + buildPriceTable(p, kmInfo) + '</div>';
+      mainHtml += '<div id="pt_' + eMa + '">' + buildPriceTable(p, kmInfo, !inCart) + '</div>';
 
       // KM jump chips
       if (appliedCTs.length) {
@@ -780,16 +783,7 @@ function renderOrder() {
     mainHtml += '</div>'; // order-section
   });
 
-  if (typeof isDesktopLayout === 'function' && isDesktopLayout()) {
-    html += '<div class="order-desktop-shell">';
-    html += '<div class="order-desktop-main">' + mainHtml + '</div>';
-    html += '<aside class="order-desktop-side" id="order-desktop-side"></aside>';
-    html += '</div>';
-  } else {
-    html = mainHtml;
-  }
-
-  el.innerHTML = html;
+  el.innerHTML = mainHtml;
 
   if (typeof isDesktopLayout === 'function' && isDesktopLayout() && window.buildDesktopOrderSidebarHTML) {
     var side = document.getElementById('order-desktop-side');
