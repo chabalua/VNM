@@ -1,1 +1,6 @@
 *.md
+!CLAUDE.md
+!docs/**/*.md
+
+# Backup files được tạo bởi script dedupe — không commit
+promotions.json.backup-*.json

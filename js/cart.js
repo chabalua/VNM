@@ -614,6 +614,21 @@ function getItems() {
   return getItemsFromCartState(cart);
 }
 
+// Build orderContext từ cart hiện tại để truyền vào calcKM. extraMa để bao gồm
+// SP đang được preview (chưa add cart) — minSKU sẽ check như thể SP đã trong giỏ.
+function buildOrderContextFromCart(extraMa) {
+  var allMas = [];
+  var seen = {};
+  Object.keys(cart || {}).forEach(function(ma) {
+    var c = cart[ma];
+    if (!c || (c.qT <= 0 && c.qL <= 0)) return;
+    if (seen[ma]) return;
+    seen[ma] = true; allMas.push(ma);
+  });
+  if (extraMa && !seen[extraMa]) allMas.push(extraMa);
+  return { allMas: allMas, skuCount: allMas.length };
+}
+
 function removeCart(ma) {
   delete cart[ma]; saveCart(); updateBadge();
   var card = document.getElementById('card_' + ma); if (card) card.className = 'sp-card';
@@ -1075,11 +1090,86 @@ function renderKH() { if (window.renderCusTab) window.renderCusTab(); }
 function addKH() {}
 function delKH() {}
 
+// ============================================================
+// DEBUG TRACE GIÁ — paste vào Safari/Chrome console:
+//   debugCalcPrice('01SX05', 2, 0)   // SP, qT, qL
+// In ra: SP info, applicable promos, skipped (do minSKU), per-SP KM,
+// order-level KM cho cả giỏ. Dùng khi giá hiển thị sai để gửi cho AI verify.
+// ============================================================
+function debugCalcPrice(ma, qT, qL) {
+  qT = parseInt(qT, 10) || 0; qL = parseInt(qL, 10) || 0;
+  var p = (typeof spFind === 'function') ? spFind(ma) : null;
+  if (!p) { console.error('[debugCalcPrice] Không tìm thấy SP:', ma); return null; }
+
+  var ctx = buildOrderContextFromCart(ma);
+  var progs = (typeof kmProgs !== 'undefined') ? kmProgs : [];
+
+  console.group('🔍 debugCalcPrice: ' + p.ma + ' (qT=' + qT + ', qL=' + qL + ')');
+  console.log('SP:', p.ten, '| nhóm:', p.nhom, '| donvi:', p.donvi);
+  console.log('giaNYLon:', p.giaNYLon, '| giaNYThung:', p.giaNYThung, '| slThung:', p.slThung);
+  console.log('Context allMas (' + ctx.allMas.length + '):', ctx.allMas);
+
+  var applicable = [], skipped = [];
+  progs.forEach(function(prog) {
+    if (!prog.active) return;
+    if (!(prog.spMas || []).includes(p.ma)) return;
+    if (prog.minSKU) {
+      var matched = ctx.allMas.filter(function(m) { return prog.spMas.includes(m); });
+      if (matched.length < +prog.minSKU) {
+        skipped.push({ prog: prog, reason: 'minSKU=' + prog.minSKU + ' nhưng chỉ ' + matched.length + ' SKU khớp' });
+        return;
+      }
+    }
+    applicable.push(prog);
+  });
+  console.log('Applicable (' + applicable.length + '):');
+  applicable.forEach(function(prog, i) {
+    console.log('  ' + (i+1) + '. [' + prog.type + ']' + (prog.stackable ? ' STACK' : ' NON-stack') + ' — ' + (prog.name || 'CT KM'));
+  });
+  if (skipped.length) {
+    console.log('Skipped (' + skipped.length + '):');
+    skipped.forEach(function(s) { console.log('  - ' + (s.prog.name || 'CT KM') + ' [' + s.reason + ']'); });
+  }
+
+  var km = calcKM(p, qT, qL, ctx);
+  var totalLon = qT * p.slThung + qL;
+  var goc = p.giaNYLon * totalLon;
+  var afterKM = goc - km.disc;
+  var vat = Math.round(afterKM * 0.015);
+  console.log('--- Per-SP result ---');
+  console.log('Tổng lon:', totalLon, '| Gốc:', fmt(goc) + 'đ');
+  console.log('disc:', fmt(km.disc) + 'đ', '| bonus:', km.bonus, '| nhan:', km.nhan);
+  console.log('hopKM:', fmt(km.hopKM) + 'đ', '| thungKM:', fmt(km.thungKM) + 'đ');
+  console.log('Sau KM (chưa VAT):', fmt(afterKM) + 'đ');
+  console.log('VAT 1.5%:', fmt(vat) + 'đ');
+  console.log('TẠM TÍNH:', fmt(afterKM + vat) + 'đ');
+  console.log('appliedPromos:', km.appliedPromos);
+  console.log('bonusItems:', km.bonusItems);
+  console.log('desc:', km.desc);
+
+  var draftCart = {};
+  Object.keys(cart || {}).forEach(function(m) {
+    var c = cart[m]; if (c && (c.qT > 0 || c.qL > 0)) draftCart[m] = { qT: c.qT, qL: c.qL };
+  });
+  if (qT > 0 || qL > 0) draftCart[ma] = { qT: qT, qL: qL };
+  var items = getItemsFromCartState(draftCart);
+  var orderKM = calcOrderKM(items);
+  console.log('--- Order-level KM (cả giỏ ' + items.length + ' SP) ---');
+  console.log('Order disc:', fmt(orderKM.disc) + 'đ');
+  console.log('Order bonusItems:', orderKM.bonusItems);
+  console.log('Order desc:', orderKM.desc);
+
+  console.groupEnd();
+  return { km: km, orderKM: orderKM, ctx: ctx, applicable: applicable, skipped: skipped, items: items };
+}
+
 window.cart = cart; window.customers = customers;
 window.saveCart = saveCart; window.fmt = fmt;
 window.calcKM = calcKM; window.calcOrderKM = calcOrderKM;
 window.getItems = getItems;
 window.getItemsFromCartState = getItemsFromCartState;
+window.buildOrderContextFromCart = buildOrderContextFromCart;
+window.debugCalcPrice = debugCalcPrice;
 window.removeCart = removeCart; window.clearCart = clearCart;
 window.renderDon = renderDon; window.submitOrder = submitOrder;
 window.renderKH = renderKH; window.addKH = addKH; window.delKH = delKH;

@@ -433,7 +433,7 @@ window.toggleCard = function(ma) {
       var qL2 = parseInt((eL2 && eL2.value) || 0, 10);
       var useQT = (qT2 > 0 || qL2 > 0) ? qT2 : 1;
       var useQL = (qT2 > 0 || qL2 > 0) ? qL2 : 0;
-      var kmTop = calcKM(p, useQT, useQL);
+      var kmTop = calcKM(p, useQT, useQL, buildOrderContextFromCart(p.ma));
       // Chỉ cập nhật pt_ div, KHÔNG overwrite toàn bộ expandEl (tránh xóa inputs)
       var ptEl = document.getElementById('pt_' + ma);
       if (ptEl) ptEl.innerHTML = buildPriceTable(p, kmTop, !(qT2 > 0 || qL2 > 0));
@@ -478,8 +478,13 @@ function onQty(ma) {
 
   if (card) card.classList.add('inCart');
 
-  var kmInfo = calcKM(p, qT, qL);
-  if (pt) pt.innerHTML = buildPriceTable(p, kmInfo);
+  var kmInfo = calcKM(p, qT, qL, buildOrderContextFromCart(ma));
+  // Tính KM đơn hàng (draft) để hiển thị Ontop/order_bonus trong preview
+  var draftState = buildDraftCartState(ma, qT, qL);
+  var draftItems = getItemsFromCartState(draftState);
+  var draftOrderKM = calcOrderKM(draftItems);
+  var kmForTable = buildOrderAwareKmDisplay(p, kmInfo, draftItems, draftOrderKM);
+  if (pt) pt.innerHTML = buildPriceTable(p, kmForTable);
   var hasDis = kmInfo.disc > 0 || kmInfo.bonus > 0 || kmInfo.bonusItems.length > 0;
   
   var goc = p.giaNYLon * totalLon;
@@ -499,15 +504,34 @@ function onQty(ma) {
   }
   ht += '<div class="pv-row"><span class="pv-l">VAT (1.5%):</span><span class="pv-v">' + fmt(vatAmt) + 'đ</span></div>';
 
-  if(kmInfo.desc || kmInfo.bonusItems.length > 0) {
+  var hasOrderBonus = draftOrderKM && draftOrderKM.bonusItems && draftOrderKM.bonusItems.length > 0;
+  if (kmInfo.desc || kmInfo.bonusItems.length > 0 || hasOrderBonus) {
     ht += '<div class="km-alert">';
-    if(kmInfo.desc) ht += '<div class="km-alert-title">' + escapeHtml(kmInfo.desc) + '</div>';
-    if(kmInfo.bonusItems.length > 0) {
+    if (kmInfo.desc) {
+      // Quy đổi thùng cho quà tặng cùng SP (thay "Tặng 216 hộp" → "🎁 Tặng 216 hộp (4 thùng + 24 hộp)")
+      var descShow = kmInfo.desc;
+      if (kmInfo.bonus > 0 && typeof formatQtyByCarton === 'function') {
+        var rawBonusPfx = 'Tặng ' + kmInfo.bonus + ' ' + (p.donvi || 'hộp');
+        descShow = descShow.replace(rawBonusPfx, '🎁 Tặng ' + formatQtyByCarton(p, kmInfo.bonus));
+      }
+      ht += '<div class="km-alert-title">' + escapeHtml(descShow) + '</div>';
+    }
+    if (kmInfo.bonusItems.length > 0) {
       kmInfo.bonusItems.forEach(function(bi) {
         var bip = (bi.ma && typeof spFind === 'function') ? spFind(bi.ma) : null;
         var biqStr = bip ? formatQtyByCarton(bip, bi.qty) : (bi.qty + ' hộp');
         var nameStr = (bi.ma && bi.ma !== ma) ? ' ' + escapeHtml(bi.name || '') : '';
         ht += '<div class="km-desc">🎁 Tặng ' + biqStr + nameStr + '</div>';
+      });
+    }
+    // Quà tặng từ CT đơn hàng (Ontop / order_bonus)
+    if (hasOrderBonus) {
+      draftOrderKM.bonusItems.forEach(function(bi) {
+        var bip = bi.ma ? spFind(bi.ma) : null;
+        var biqStr = bip ? formatQtyByCarton(bip, bi.qty) : (bi.qty + ' SP');
+        var nameStr = bi.name ? ' ' + escapeHtml(bi.name) : '';
+        var progStr = bi.progName ? ' <span style="font-size:10px;color:var(--n3)">[' + escapeHtml(bi.progName) + ']</span>' : '';
+        ht += '<div class="km-desc">🎁 Ontop: +' + escapeHtml(biqStr) + nameStr + progStr + '</div>';
       });
     }
     ht += '</div>';
@@ -680,7 +704,7 @@ function renderOrder() {
     groups[nhom].forEach(function(p) {
       var inCart = cart[p.ma] && (cart[p.ma].qT > 0 || cart[p.ma].qL > 0);
       var isFav = favorites.includes(p.ma);
-      var kmInfo = inCart ? calcKM(p, cart[p.ma].qT || 0, cart[p.ma].qL || 0) : calcKM(p, 0, 0);
+      var kmInfo = inCart ? calcKM(p, cart[p.ma].qT || 0, cart[p.ma].qL || 0, buildOrderContextFromCart()) : calcKM(p, 0, 0);
       var brand = detectBrand(p);
       var appliedCTs = getProductPromoRefs(p.ma);
 
@@ -726,7 +750,7 @@ function renderOrder() {
       if (inCart && !isExpanded) {
         var cq2 = cart[p.ma];
         var qT2 = cq2.qT || 0, qL2 = cq2.qL || 0;
-        var kmInCart = calcKM(p, qT2, qL2);
+        var kmInCart = calcKM(p, qT2, qL2, buildOrderContextFromCart());
         var totalL2 = qT2 * p.slThung + qL2;
         var afterKM2 = p.giaNYLon * totalL2 - kmInCart.disc;
         var goc2 = p.giaNYLon * totalL2;
