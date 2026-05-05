@@ -1121,7 +1121,7 @@
   {
     "name": "SCU Susu/Hero/Yomilk 80/110: 129+15",
     "type": "bonus",
-    "nhoms": "D",
+    "nhoms": "C",
     "active": true,
     "stackable": false,
     "bX": "129",
@@ -1129,6 +1129,7 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
+    "_syncId": "km_mop2q3hf_nc06lw",
     "spMas": [
       "06UQ40",
       "06UA40",
@@ -1142,8 +1143,7 @@
       "06UN32",
       "06UQ32"
     ],
-    "_syncId": "km_mop2q3hf_nc06lw",
-    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_updatedAt": "2026-05-05T00:43:28.691Z",
     "_deleted": false
   },
   {
