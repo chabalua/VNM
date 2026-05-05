@@ -1149,7 +1149,7 @@
   {
     "name": "SCU Susu/Hero 170/180: 11+1",
     "type": "bonus",
-    "nhoms": "D",
+    "nhoms": "C",
     "active": true,
     "stackable": false,
     "bX": "11",
@@ -1157,6 +1157,7 @@
     "bUnit": "lon",
     "bMax": 0,
     "bMa": "same",
+    "_syncId": "km_mop2q3hf_mk3zes",
     "spMas": [
       "06UK10",
       "08HA11",
@@ -1164,8 +1165,7 @@
       "06VC23",
       "06VQ23"
     ],
-    "_syncId": "km_mop2q3hf_mk3zes",
-    "_updatedAt": "2026-05-03T01:10:17.379Z",
+    "_updatedAt": "2026-05-05T00:43:47.189Z",
     "_deleted": false
   },
   {
