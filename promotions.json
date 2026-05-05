@@ -4514,7 +4514,7 @@
     "name": "Ontop SN: 2M+2h/5M+8h Cascade",
     "type": "order_bonus",
     "nhoms": "C",
-    "active": true,
+    "active": false,
     "stackable": true,
     "bonusMa": "04EI33",
     "bonusName": "",
@@ -4590,7 +4590,7 @@
       "05AD31",
       "06SA73"
     ],
-    "_updatedAt": "2026-04-21T15:38:33.562Z",
+    "_updatedAt": "2026-05-05T00:42:42.964Z",
     "_syncId": "km_mop2pfj8_93h4qr",
     "_deleted": false
   },
