@@ -79,6 +79,7 @@ async function loadPromotions() {
   var normalized = normalizePromotionList(raw);
   kmProgs = validatePromotionList(normalized) ? normalized : [];
   kmSave();
+  if (window.KM_DATA_VERSION) localStorage.setItem('vnm_km_version', KM_DATA_VERSION);
 }
 
 function saveSP() { localStorage.setItem(LS_KEYS.SP, JSON.stringify(SP)); if (window.lsCheckQuota) lsCheckQuota(); }
@@ -111,7 +112,11 @@ async function initData() {
       }
     } catch(e) {}
   }
-  var cachedKM = localStorage.getItem(LS_KEYS.KM);
+  // Invalidate KM cache khi version server đổi (ví dụ: đổi tháng T4→T5)
+  var kmVersionOk = window.KM_DATA_VERSION &&
+    localStorage.getItem('vnm_km_version') === KM_DATA_VERSION;
+  var cachedKM = kmVersionOk ? localStorage.getItem(LS_KEYS.KM) : null;
+  if (!kmVersionOk) localStorage.removeItem(LS_KEYS.KM);
   if (cachedKM) {
     try {
       var _rawK = JSON.parse(cachedKM);
@@ -126,7 +131,7 @@ async function initData() {
     // vì sẽ xoá mất CT KM mới tạo chưa kịp push lên GitHub
     if (overlay) overlay.classList.remove('show');
     var bgPromises = [loadProducts()];
-    // Chỉ load KM từ server nếu chưa có cache KM (lần đầu có SP nhưng chưa có KM)
+    // Load KM nếu chưa có cache hoặc cache đã bị invalidate do version đổi
     if (!cachedKM) bgPromises.push(loadPromotions());
     Promise.all(bgPromises)
       .then(function() {

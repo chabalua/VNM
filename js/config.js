@@ -5,6 +5,9 @@ var PRODUCTS_URL = REPO_RAW + 'products.json';
 var LOCAL_PROMOTIONS_URL = 'promotions.json';
 var PROMOTIONS_URL = REPO_RAW + 'promotions.json';
 
+// Phiên bản CT KM — đổi khi thay CTKM tháng mới để buộc thiết bị reload cache
+var KM_DATA_VERSION = 'T05-2026-05';
+
 // Thuế VAT
 var VAT = 0.015;
 
@@ -51,6 +54,7 @@ window.NCOLOR = NCOLOR;
 window.NBG = NBG;
 window.NLBL = NLBL;
 window.FALLBACK_PRODUCTS = FALLBACK_PRODUCTS;
+window.KM_DATA_VERSION = KM_DATA_VERSION;
 // ============================================================
 // HTML ESCAPE — shared utilities for XSS prevention
 // ============================================================
