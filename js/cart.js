@@ -139,7 +139,7 @@ function startEditOrder(orderRef) {
   _orderDraftDate = (order.date || '').slice(0, 10) || getTodayDateInputValue();
 
   if (typeof onSelectCustomer === 'function') onSelectCustomer(order.khMa || '');
-  else window._selectedCustomerMa = order.khMa || '';
+  else setSelectedCustomerMa(order.khMa || '');
 
   var modal = document.getElementById('km-modal');
   if (modal) modal.style.display = 'none';
@@ -153,7 +153,7 @@ function startEditOrder(orderRef) {
 function cancelEditOrder() {
   clearOrderDraftState();
   if (typeof onSelectCustomer === 'function') onSelectCustomer('');
-  else window._selectedCustomerMa = '';
+  else setSelectedCustomerMa('');
   cart = {};
   saveCart();
   updateBadge();
@@ -614,19 +614,25 @@ function getItems() {
   return getItemsFromCartState(cart);
 }
 
-// Build orderContext từ cart hiện tại để truyền vào calcKM. extraMa để bao gồm
-// SP đang được preview (chưa add cart) — minSKU sẽ check như thể SP đã trong giỏ.
-function buildOrderContextFromCart(extraMa) {
+function buildOrderContextFromCartState(cartState, extraMa) {
+  var sourceCart = cartState || {};
   var allMas = [];
   var seen = {};
-  Object.keys(cart || {}).forEach(function(ma) {
-    var c = cart[ma];
+  Object.keys(sourceCart).forEach(function(ma) {
+    var c = sourceCart[ma];
     if (!c || (c.qT <= 0 && c.qL <= 0)) return;
     if (seen[ma]) return;
-    seen[ma] = true; allMas.push(ma);
+    seen[ma] = true;
+    allMas.push(ma);
   });
   if (extraMa && !seen[extraMa]) allMas.push(extraMa);
   return { allMas: allMas, skuCount: allMas.length };
+}
+
+// Build orderContext từ cart hiện tại để truyền vào calcKM. extraMa để bao gồm
+// SP đang được preview (chưa add cart) — minSKU sẽ check như thể SP đã trong giỏ.
+function buildOrderContextFromCart(extraMa) {
+  return buildOrderContextFromCartState(cart, extraMa);
 }
 
 function removeCart(ma) {
@@ -643,7 +649,7 @@ function clearCart() {
   updateBadge();
   clearOrderDraftState();
   if (typeof onSelectCustomer === 'function') onSelectCustomer('');
-  else window._selectedCustomerMa = '';
+  else setSelectedCustomerMa('');
   if (window.renderOrder) window.renderOrder();
   renderDon();
 }
@@ -669,7 +675,7 @@ function renderDon() {
     var totAfterOrder = totAfter - orderKM.disc;
     var totSave = totGoc - totAfterOrder;
 
-    var selMa = window._selectedCustomerMa || '';
+    var selMa = getSelectedCustomerMa();
     var cusList = (typeof CUS !== 'undefined' && Array.isArray(CUS)) ? CUS : [];
     var selKH = selMa ? cusList.find(function(k) { return k.ma === selMa; }) : null;
 
@@ -901,7 +907,8 @@ function renderOrdersList(orders, period) {
 async function submitOrder() {
   var items = getItems(); if (!items.length) return;
   var existingOrder = _editingOrderId ? resolveOrder(_editingOrderId) : null;
-  var makh = (window._selectedCustomerMa) ? window._selectedCustomerMa : ((document.getElementById('makh-inp') || {}).value || '').trim().toUpperCase();
+  var selectedCustomerMa = getSelectedCustomerMa();
+  var makh = selectedCustomerMa ? selectedCustomerMa : ((document.getElementById('makh-inp') || {}).value || '').trim().toUpperCase();
   var orderDateValue = getSelectedOrderDateValue();
   var orderDateISO = buildOrderDateISO(orderDateValue);
   var orderKM = calcOrderKM(items);
@@ -1168,6 +1175,7 @@ window.saveCart = saveCart; window.fmt = fmt;
 window.calcKM = calcKM; window.calcOrderKM = calcOrderKM;
 window.getItems = getItems;
 window.getItemsFromCartState = getItemsFromCartState;
+window.buildOrderContextFromCartState = buildOrderContextFromCartState;
 window.buildOrderContextFromCart = buildOrderContextFromCart;
 window.debugCalcPrice = debugCalcPrice;
 window.removeCart = removeCart; window.clearCart = clearCart;

@@ -111,6 +111,10 @@
       installGlobals(scope, fixtures, progs);
     }
 
+    function resetWithFixtures(customProducts, progs) {
+      installGlobals(scope, { products: clone(customProducts || []) }, progs);
+    }
+
     function product(ma) {
       var result = findProduct(scope, ma);
       assert(result, 'Missing fixture product ' + ma);
@@ -320,6 +324,362 @@
       assertEqual(items[1].afterKM, sttBase - sttExpectedDisc);
       assertEqual(orderResult.disc, expectedOrderDisc);
       assertEqual(grandTotal, subtotal - expectedOrderDisc);
+    });
+
+    group('Pricing UI helpers');
+
+    test('buildCartDisplaySnapshot keeps gross and subtotal equal when no promotions apply', function() {
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 }
+      };
+      reset([]);
+      var nspn = product(fixtures.ma.nspn);
+      var snapshot = scope.buildCartDisplaySnapshot(nspn, cartState, 2, 0);
+      var expectedGross = itemBaseTotal(fixtures.ma.nspn, 2, 0);
+      assertEqual(snapshot.gross, expectedGross);
+      assertEqual(snapshot.kmInfo.disc, 0);
+      assertEqual(snapshot.orderExtraDisc, 0);
+      assertEqual(snapshot.subtotal, expectedGross);
+      assertEqual(snapshot.kmForTable.hopKM, nspn.giaNYLon);
+    });
+
+    test('buildOrderAwareKmDisplay allocates order_money discount by item proportion', function() {
+      var progs = [
+        { name: 'CK don 10%', type: 'order_money', active: true, stackable: true, spMas: [], tiers: [{ type: 'above', value: 1000, ck: 10 }] }
+      ];
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 },
+        '03SN01': { qT: 1, qL: 0 }
+      };
+      var items = buildItems(cartState, progs);
+      reset(progs);
+      var orderResult = scope.calcOrderKM(items);
+      var nspn = product(fixtures.ma.nspn);
+      var nspnItem = items.find(function(item) { return item.ma === fixtures.ma.nspn; });
+      var totalAfter = items.reduce(function(sum, item) { return sum + item.afterKM; }, 0);
+      var expectedAllocated = Math.round(orderResult.disc * (nspnItem.afterKM / totalAfter));
+      var display = scope.buildOrderAwareKmDisplay(nspn, scope.calcKM(nspn, 2, 0, scope.buildOrderContextFromCartState(cartState, fixtures.ma.nspn)), items, orderResult);
+      assertEqual(display.orderDiscAllocated, expectedAllocated);
+      assertEqual(display.orderGiftValueAllocated, 0);
+      assertEqual(display.hopKM, Math.round((nspnItem.afterKM - expectedAllocated) / nspnItem.totalLon));
+    });
+
+    test('buildOrderAwareKmDisplay converts order bonus gift value into proportional virtual discount', function() {
+      var progs = [
+        { name: 'Tang bot theo don', type: 'order_bonus', active: true, stackable: true, bonusMa: fixtures.ma.bot, repeat: false, tiers: [{ value: 1000, bonusQty: 2 }] }
+      ];
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 },
+        '03SN01': { qT: 1, qL: 0 }
+      };
+      var items = buildItems(cartState, progs);
+      reset(progs);
+      var orderResult = scope.calcOrderKM(items);
+      var stt = product(fixtures.ma.stt);
+      var sttItem = items.find(function(item) { return item.ma === fixtures.ma.stt; });
+      var totalAfter = items.reduce(function(sum, item) { return sum + item.afterKM; }, 0);
+      var totalGiftValue = 2 * product(fixtures.ma.bot).giaNYLon;
+      var expectedAllocated = Math.round(totalGiftValue * (sttItem.afterKM / totalAfter));
+      var display = scope.buildOrderAwareKmDisplay(stt, scope.calcKM(stt, 1, 0, scope.buildOrderContextFromCartState(cartState, fixtures.ma.stt)), items, orderResult);
+      assertEqual(display.orderDiscAllocated, 0);
+      assertEqual(display.orderGiftValueAllocated, expectedAllocated);
+      assertEqual(display.hopKM, Math.round((sttItem.afterKM - expectedAllocated) / sttItem.totalLon));
+    });
+
+    test('buildOrderAwareKmDisplay adds same-product order bonus qty into effective unit price', function() {
+      var progs = [
+        { name: 'Tang NSPN theo don', type: 'order_bonus', active: true, stackable: true, bonusMa: fixtures.ma.nspn, repeat: false, tiers: [{ value: 1000, bonusQty: 6 }] }
+      ];
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 },
+        '03SN01': { qT: 1, qL: 0 }
+      };
+      var items = buildItems(cartState, progs);
+      reset(progs);
+      var orderResult = scope.calcOrderKM(items);
+      var nspn = product(fixtures.ma.nspn);
+      var nspnItem = items.find(function(item) { return item.ma === fixtures.ma.nspn; });
+      var display = scope.buildOrderAwareKmDisplay(nspn, scope.calcKM(nspn, 2, 0, scope.buildOrderContextFromCartState(cartState, fixtures.ma.nspn)), items, orderResult);
+      assertEqual(display.orderBonusQty, 6);
+      assertEqual(display.orderDiscAllocated, 0);
+      assertEqual(display.orderGiftValueAllocated, 0);
+      assertEqual(display.hopKM, Math.round(nspnItem.afterKM / (nspnItem.totalLon + 6)));
+    });
+
+    test('buildCartDisplaySnapshot subtotal includes both item discount and allocated order discount', function() {
+      var progs = [
+        { name: 'Fixed 5', type: 'fixed', active: true, stackable: true, spMas: [fixtures.ma.nspn], ck: 5 },
+        { name: 'CK don 1%', type: 'order_money', active: true, stackable: true, spMas: [], tiers: [{ type: 'above', value: 2000, ck: 1 }] }
+      ];
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 },
+        '03SN01': { qT: 1, qL: 0 }
+      };
+      reset(progs);
+      var nspn = product(fixtures.ma.nspn);
+      var snapshot = scope.buildCartDisplaySnapshot(nspn, cartState, 2, 0);
+      var expectedGross = itemBaseTotal(fixtures.ma.nspn, 2, 0);
+      var expectedItemDisc = Math.round(expectedGross * 0.05);
+      assertEqual(snapshot.gross, expectedGross);
+      assertEqual(snapshot.kmInfo.disc, expectedItemDisc);
+      assertEqual(snapshot.orderExtraDisc, snapshot.kmForTable.orderDiscAllocated + snapshot.kmForTable.orderGiftValueAllocated);
+      assertEqual(snapshot.subtotal, expectedGross - expectedItemDisc - snapshot.orderExtraDisc);
+    });
+
+    test('buildCartDisplaySnapshot keeps same-product bonus as effective qty instead of virtual discount', function() {
+      var progs = [
+        { name: 'Mua 48 tang 8', type: 'bonus', active: true, stackable: true, spMas: [fixtures.ma.nspn], bX: 48, bY: 8, bUnit: 'lon', bMa: 'same' }
+      ];
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 }
+      };
+      reset(progs);
+      var nspn = product(fixtures.ma.nspn);
+      var snapshot = scope.buildCartDisplaySnapshot(nspn, cartState, 2, 0);
+      var expectedGross = itemBaseTotal(fixtures.ma.nspn, 2, 0);
+      assertEqual(snapshot.gross, expectedGross);
+      assertEqual(snapshot.kmInfo.disc, 0);
+      assertEqual(snapshot.kmInfo.bonus, 8);
+      assertEqual(snapshot.orderExtraDisc, 0);
+      assertEqual(snapshot.subtotal, expectedGross);
+      assertEqual(snapshot.kmForTable.hopKM, Math.round(expectedGross / (48 + 8)));
+    });
+
+    test('buildCartDisplaySnapshot subtotal includes both allocated order discount and order bonus gift value', function() {
+      var progs = [
+        { name: 'Fixed 5', type: 'fixed', active: true, stackable: true, spMas: [fixtures.ma.nspn], ck: 5 },
+        { name: 'CK don 1%', type: 'order_money', active: true, stackable: true, spMas: [], tiers: [{ type: 'above', value: 2000, ck: 1 }] },
+        { name: 'Tang bot theo don', type: 'order_bonus', active: true, stackable: true, bonusMa: fixtures.ma.bot, repeat: false, tiers: [{ value: 1000, bonusQty: 2 }] }
+      ];
+      var cartState = {
+        '01SB10': { qT: 2, qL: 0 },
+        '03SN01': { qT: 1, qL: 0 }
+      };
+      reset(progs);
+      var stt = product(fixtures.ma.stt);
+      var snapshot = scope.buildCartDisplaySnapshot(stt, cartState, 1, 0);
+      assert(snapshot.kmForTable.orderDiscAllocated > 0, 'Expected allocated order discount');
+      assert(snapshot.kmForTable.orderGiftValueAllocated > 0, 'Expected allocated order gift value');
+      assertEqual(snapshot.orderExtraDisc, snapshot.kmForTable.orderDiscAllocated + snapshot.kmForTable.orderGiftValueAllocated);
+      assertEqual(snapshot.subtotal, snapshot.gross - snapshot.kmInfo.disc - snapshot.orderExtraDisc);
+    });
+
+    group('Real data regressions');
+
+    test('Live tier_qty promo blocks until enough SKUs are in cart', function() {
+      var liveProducts = [
+        { ma: '02EA35', ten: 'Dielac Alpha 3 HT 900g', nhom: 'A', donvi: 'Lon', slThung: 12, giaNYLon: 243972, giaNYThung: 2927664, kmRules: [] },
+        { ma: '02EA45', ten: 'Dielac Alpha 4 HT 900g', nhom: 'A', donvi: 'Lon', slThung: 12, giaNYLon: 243972, giaNYThung: 2927664, kmRules: [] }
+      ];
+      var livePromo = {
+        name: 'T05·A·SBTE Alpha/Yoko/SBNL Canxi/Mama/SBNK: 2 lon+ giảm 3% [MR05263002]',
+        type: 'tier_qty', nhoms: 'A', active: true, stackable: false, tUnit: 'lon', minSKU: 2,
+        tiers: [{ mn: 2, ck: 3 }], spMas: ['02EA35', '02EA45']
+      };
+      resetWithFixtures(liveProducts, [livePromo]);
+      var result = scope.calcKM(scope.spFind('02EA35'), 2, 0, { allMas: ['02EA35'], skuCount: 1 });
+      assertEqual(result.disc, 0);
+      assertEqual(result.desc, '');
+    });
+
+    test('Live tier_qty promo applies once minSKU is satisfied', function() {
+      var liveProducts = [
+        { ma: '02EA35', ten: 'Dielac Alpha 3 HT 900g', nhom: 'A', donvi: 'Lon', slThung: 12, giaNYLon: 243972, giaNYThung: 2927664, kmRules: [] },
+        { ma: '02EA45', ten: 'Dielac Alpha 4 HT 900g', nhom: 'A', donvi: 'Lon', slThung: 12, giaNYLon: 243972, giaNYThung: 2927664, kmRules: [] }
+      ];
+      var livePromo = {
+        name: 'T05·A·SBTE Alpha/Yoko/SBNL Canxi/Mama/SBNK: 2 lon+ giảm 3% [MR05263002]',
+        type: 'tier_qty', nhoms: 'A', active: true, stackable: false, tUnit: 'lon', minSKU: 2,
+        tiers: [{ mn: 2, ck: 3 }], spMas: ['02EA35', '02EA45']
+      };
+      resetWithFixtures(liveProducts, [livePromo]);
+      var result = scope.calcKM(scope.spFind('02EA35'), 1, 0, { allMas: ['02EA35', '02EA45'], skuCount: 2 });
+      assertEqual(result.disc, 87830);
+      assertEqual(result.hopKM, 236653);
+      assertIncludes(result.desc, 'CK 3%');
+    });
+
+    test('Live SBPS same-product bonus 7+1 keeps discount at zero and increases received qty', function() {
+      resetWithFixtures([
+        { ma: '02HG18', ten: 'Dielac Alpha Gold 180ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 12852, giaNYThung: 616896, kmRules: [] }
+      ], [{
+        name: 'T05·A·SBPS Mẹ&Bé: 7+1 cùng loại [MR05263013]',
+        type: 'bonus', nhoms: 'A', active: true, stackable: false,
+        bX: 7, bY: 1, bUnit: 'lon', bMa: 'same', bMax: 0, spMas: ['02HG18']
+      }]);
+      var result = scope.calcKM(scope.spFind('02HG18'), 0, 7, { allMas: ['02HG18'], skuCount: 1 });
+      assertEqual(result.disc, 0);
+      assertEqual(result.bonus, 1);
+      assertEqual(result.nhan, 8);
+      assertEqual(result.hopKM, 11246);
+    });
+
+    test('Live snapshot keeps same-product bonus as effective qty for SBPS 7+1', function() {
+      resetWithFixtures([
+        { ma: '02HG18', ten: 'Dielac Alpha Gold 180ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 12852, giaNYThung: 616896, kmRules: [] }
+      ], [{
+        name: 'T05·A·SBPS Mẹ&Bé: 7+1 cùng loại [MR05263013]',
+        type: 'bonus', nhoms: 'A', active: true, stackable: false,
+        bX: 7, bY: 1, bUnit: 'lon', bMa: 'same', bMax: 0, spMas: ['02HG18']
+      }]);
+      var productLive = scope.spFind('02HG18');
+      var snapshot = scope.buildCartDisplaySnapshot(productLive, { '02HG18': { qT: 0, qL: 7 } }, 0, 7);
+      assertEqual(snapshot.gross, 89964);
+      assertEqual(snapshot.kmInfo.disc, 0);
+      assertEqual(snapshot.kmInfo.bonus, 1);
+      assertEqual(snapshot.orderExtraDisc, 0);
+      assertEqual(snapshot.subtotal, 89964);
+      assertEqual(snapshot.kmForTable.hopKM, 11246);
+    });
+
+    test('Live stackable gift-other bonus converts gift value into discount', function() {
+      resetWithFixtures([
+        { ma: '01SX05', ten: 'Creamer đặc NSPN xanh lá lon 380g', nhom: 'B', donvi: 'hộp', slThung: 48, giaNYLon: 19926, giaNYThung: 956448, kmRules: [] },
+        { ma: '04FT32', ten: 'SDD không đường Vinamilk F220ml', nhom: 'C', donvi: 'Hộp', slThung: 48, giaNYLon: 7668, giaNYThung: 368064, kmRules: [] }
+      ], [{
+        name: 'T05·B·NSPN XL 380g HT: 14+1 Fino [MR05263016-M1]',
+        type: 'bonus', nhoms: 'B', active: true, stackable: true,
+        bX: 14, bY: 1, bUnit: 'lon', bMa: '04FT32', bMax: 0, spMas: ['01SX05']
+      }]);
+      var result = scope.calcKM(scope.spFind('01SX05'), 0, 14, { allMas: ['01SX05'], skuCount: 1 });
+      assertEqual(result.disc, 7668);
+      assertEqual(result.bonus, 0);
+      assertBonusItems(result.bonusItems, [{ ma: '04FT32', qty: 1 }]);
+    });
+
+    test('Live NSPN combo aggregates stackable gift-other with non-stackable gift program', function() {
+      resetWithFixtures([
+        { ma: '01SX05', ten: 'Creamer đặc NSPN xanh lá lon 380g', nhom: 'B', donvi: 'hộp', slThung: 48, giaNYLon: 19926, giaNYThung: 956448, kmRules: [] },
+        { ma: '04FT32', ten: 'SDD không đường Vinamilk F220ml', nhom: 'C', donvi: 'Hộp', slThung: 48, giaNYLon: 7668, giaNYThung: 368064, kmRules: [] }
+      ], [
+        {
+          name: 'T05·B·NSPN XL 380g HT: 14+1 Fino [MR05263016-M1]',
+          type: 'bonus', nhoms: 'B', active: true, stackable: true,
+          bX: 14, bY: 1, bUnit: 'lon', bMa: '04FT32', bMax: 0, spMas: ['01SX05']
+        },
+        {
+          name: 'T05·B·NSPN XL 380g HT: 28+1 NSPN/ÔT Tuýp [MR05263016-M2]',
+          type: 'bonus', nhoms: 'B', active: true, stackable: false,
+          bX: 28, bY: 1, bUnit: 'lon', bMa: '01SX05', bMax: 0, spMas: ['01SX05']
+        }
+      ]);
+      var result = scope.calcKM(scope.spFind('01SX05'), 0, 28, { allMas: ['01SX05'], skuCount: 1 });
+      assertEqual(result.disc, 35262);
+      assertIncludes(result.desc, 'Tặng 2 hộp SP khác + 1 hộp SP khác');
+      assertBonusItems(result.bonusItems, [{ ma: '04FT32', qty: 2 }, { ma: '01SX05', qty: 1 }]);
+    });
+
+    test('Live order_bonus promo gives one gift pack at 250k threshold', function() {
+      resetWithFixtures([
+        { ma: '02HG38', ten: 'Dielac Alpha Gold 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 8586, giaNYThung: 412128, kmRules: [] },
+        { ma: '02HL37', ten: 'Dielac Grow Plus 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 9450, giaNYThung: 453600, kmRules: [] }
+      ], [{
+        name: 'T05·A·SBPS TE Ontop ĐH: 250k → 4h GP/Optimum 110ml (DS T1+T2≥5tr) [MR05263012-OB]',
+        type: 'order_bonus', nhoms: 'A', active: true, bonusMa: '02HL36', bonusName: 'Grow Plus/Optimum 110ml',
+        repeat: true, maxSets: 0, tiers: [{ value: 250, bonusQty: 4 }], spMas: ['02HG38', '02HL37']
+      }]);
+      var items = scope.getItemsFromCartState({ '02HG38': { qT: 0, qL: 30 } });
+      var result = scope.calcOrderKM(items);
+      assertBonusItems(result.bonusItems, [{ ma: '02HL36', qty: 4 }]);
+      assertIncludes(result.desc, '+4 Grow Plus/Optimum 110ml');
+    });
+
+    test('Live snapshot converts order_bonus gift into virtual discount when cart has one qualifying SKU', function() {
+      resetWithFixtures([
+        { ma: '02HG38', ten: 'Dielac Alpha Gold 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 8586, giaNYThung: 412128, kmRules: [] },
+        { ma: '02HL37', ten: 'Dielac Grow Plus 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 9450, giaNYThung: 453600, kmRules: [] },
+        { ma: '02HL36', ten: 'Grow Plus/Optimum 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 9450, giaNYThung: 453600, kmRules: [] }
+      ], [{
+        name: 'T05·A·SBPS TE Ontop ĐH: 250k → 4h GP/Optimum 110ml (DS T1+T2≥5tr) [MR05263012-OB]',
+        type: 'order_bonus', nhoms: 'A', active: true, bonusMa: '02HL36', bonusName: 'Grow Plus/Optimum 110ml',
+        repeat: true, maxSets: 0, tiers: [{ value: 250, bonusQty: 4 }], spMas: ['02HG38', '02HL37']
+      }]);
+      var productLive = scope.spFind('02HG38');
+      var snapshot = scope.buildCartDisplaySnapshot(productLive, { '02HG38': { qT: 0, qL: 30 } }, 0, 30);
+      assertEqual(snapshot.gross, 257580);
+      assertEqual(snapshot.kmInfo.disc, 0);
+      assertEqual(snapshot.kmForTable.orderDiscAllocated, 0);
+      assertEqual(snapshot.kmForTable.orderGiftValueAllocated, 37800);
+      assertEqual(snapshot.orderExtraDisc, 37800);
+      assertEqual(snapshot.subtotal, 219780);
+    });
+
+    test('Live order_bonus promo repeats on every 250k block', function() {
+      resetWithFixtures([
+        { ma: '02HG38', ten: 'Dielac Alpha Gold 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 8586, giaNYThung: 412128, kmRules: [] },
+        { ma: '02HL37', ten: 'Dielac Grow Plus 110ml', nhom: 'A', donvi: 'Hộp', slThung: 48, giaNYLon: 9450, giaNYThung: 453600, kmRules: [] }
+      ], [{
+        name: 'T05·A·SBPS TE Ontop ĐH: 250k → 4h GP/Optimum 110ml (DS T1+T2≥5tr) [MR05263012-OB]',
+        type: 'order_bonus', nhoms: 'A', active: true, bonusMa: '02HL36', bonusName: 'Grow Plus/Optimum 110ml',
+        repeat: true, maxSets: 0, tiers: [{ value: 250, bonusQty: 4 }], spMas: ['02HG38', '02HL37']
+      }]);
+      var items = scope.getItemsFromCartState({ '02HG38': { qT: 1, qL: 12 } });
+      var result = scope.calcOrderKM(items);
+      assertBonusItems(result.bonusItems, [{ ma: '02HL36', qty: 8 }]);
+      assertIncludes(result.desc, '+8 Grow Plus/Optimum 110ml');
+    });
+
+    test('Live SCA order_bonus promo is blocked when order lacks required SKUs', function() {
+      resetWithFixtures([
+        { ma: '07KD12', ten: 'SCA không đường VNM 100g', nhom: 'D', donvi: 'hộp', slThung: 48, giaNYLon: 6210, giaNYThung: 298080, kmRules: [] },
+        { ma: '07TR33', ten: 'Sữa chua ăn có đường VNM 100g', nhom: 'D', donvi: 'Hũ', slThung: 48, giaNYLon: 6210, giaNYThung: 298080, kmRules: [] }
+      ], [{
+        name: 'T05·D·SCA Ontop ĐH 600k (≥2 SKU): 1 SCA Nha đam mỗi 300k [MR05263053-M1]',
+        type: 'order_bonus', nhoms: 'D', active: true, bonusMa: '07ND12', bonusName: 'SCA Nha đam có đường',
+        repeat: true, maxSets: 0, minSKU: 2, tiers: [{ value: 300, bonusQty: 1 }], spMas: ['07KD12', '07TR33']
+      }]);
+      var items = scope.getItemsFromCartState({ '07KD12': { qT: 0, qL: 60 } });
+      var result = scope.calcOrderKM(items);
+      assertEqual(result.desc, '');
+      assertBonusItems(result.bonusItems, []);
+    });
+
+    test('Live SCA order_bonus promo applies after minSKU gate is met', function() {
+      resetWithFixtures([
+        { ma: '07KD12', ten: 'SCA không đường VNM 100g', nhom: 'D', donvi: 'hộp', slThung: 48, giaNYLon: 6210, giaNYThung: 298080, kmRules: [] },
+        { ma: '07TR33', ten: 'Sữa chua ăn có đường VNM 100g', nhom: 'D', donvi: 'Hũ', slThung: 48, giaNYLon: 6210, giaNYThung: 298080, kmRules: [] }
+      ], [{
+        name: 'T05·D·SCA Ontop ĐH 600k (≥2 SKU): 1 SCA Nha đam mỗi 300k [MR05263053-M1]',
+        type: 'order_bonus', nhoms: 'D', active: true, bonusMa: '07ND12', bonusName: 'SCA Nha đam có đường',
+        repeat: true, maxSets: 0, minSKU: 2, tiers: [{ value: 300, bonusQty: 1 }], spMas: ['07KD12', '07TR33']
+      }]);
+      var items = scope.getItemsFromCartState({ '07KD12': { qT: 1, qL: 0 }, '07TR33': { qT: 1, qL: 1 } });
+      var result = scope.calcOrderKM(items);
+      assertBonusItems(result.bonusItems, [{ ma: '07ND12', qty: 2 }]);
+      assertIncludes(result.desc, '+2 SCA Nha đam có đường');
+    });
+
+    test('Live Green Farm order_money promo applies 1% once threshold is reached', function() {
+      resetWithFixtures([
+        { ma: '04GI34', ten: 'STTT rất ít đường Green Farm 110ml', nhom: 'C', donvi: 'Hộp', slThung: 48, giaNYLon: 6156, giaNYThung: 295488, kmRules: [] },
+        { ma: '04GI14', ten: 'STTT rất ít đường Green Farm 180ml', nhom: 'C', donvi: 'Hộp', slThung: 48, giaNYLon: 9612, giaNYThung: 461376, kmRules: [] }
+      ], [{
+        name: 'T05·C·GF MPP: ĐH 1.5tr giảm 1% [MR0526MPPGFSN-M1]',
+        type: 'order_money', nhoms: 'C', active: true,
+        tiers: [{ type: 'above', value: 1500, ck: 1 }], spMas: ['04GI34', '04GI14']
+      }]);
+      var items = scope.getItemsFromCartState({ '04GI14': { qT: 3, qL: 20 } });
+      var result = scope.calcOrderKM(items);
+      assertEqual(result.disc, 15764);
+      assertIncludes(result.desc, 'GF MPP');
+    });
+
+    test('Live snapshot allocates Green Farm order_money discount into subtotal', function() {
+      resetWithFixtures([
+        { ma: '04GI34', ten: 'STTT rất ít đường Green Farm 110ml', nhom: 'C', donvi: 'Hộp', slThung: 48, giaNYLon: 6156, giaNYThung: 295488, kmRules: [] },
+        { ma: '04GI14', ten: 'STTT rất ít đường Green Farm 180ml', nhom: 'C', donvi: 'Hộp', slThung: 48, giaNYLon: 9612, giaNYThung: 461376, kmRules: [] }
+      ], [{
+        name: 'T05·C·GF MPP: ĐH 1.5tr giảm 1% [MR0526MPPGFSN-M1]',
+        type: 'order_money', nhoms: 'C', active: true,
+        tiers: [{ type: 'above', value: 1500, ck: 1 }], spMas: ['04GI34', '04GI14']
+      }]);
+      var productLive = scope.spFind('04GI14');
+      var snapshot = scope.buildCartDisplaySnapshot(productLive, { '04GI14': { qT: 3, qL: 20 } }, 3, 20);
+      assertEqual(snapshot.gross, 1576368);
+      assertEqual(snapshot.kmInfo.disc, 0);
+      assertEqual(snapshot.kmForTable.orderDiscAllocated, 15764);
+      assertEqual(snapshot.orderExtraDisc, 15764);
+      assertEqual(snapshot.subtotal, 1560604);
     });
 
     return {

@@ -17,12 +17,16 @@
 |-----|-------|-----------|
 | Background refresh ghi đè CT KM user vừa tạo | Mất CT KM chưa kịp push GitHub | 2026-04-21 |
 | `syncFromGitHub()` không validate promotions | GitHub trả về object lỗi → `normalizePromotionList` → `[]` → xóa trắng CT KM | 2026-04-26 |
+| `promotions.json` bị lặp nguyên dataset nhiều lần | Hero/bonus stackable bị nhân quà x2/x3 dù engine đúng | 2026-05-05 |
+| Import/load CTKM bypass sanitizer | Duplicate KM hoặc record lỗi lọt lại vào `kmProgs` | 2026-05-05 |
+| Active CTKM trỏ vào mã SP không còn trong `products.json` | Preview/probe sai hoặc thành `CTKM mù giá`; fix theo hướng cảnh báo + audit, không auto-xóa | 2026-05-05 |
 
 ## customer.js
 
 | Bug | Mô tả | Fixed |
 |-----|-------|-----------|
 | `cusReadDS()` thiếu `sbpsTrungBay` | Checkbox trưng bày SBPS không ảnh hưởng preview thưởng | 2026-04-26 |
+| Import KH/tuyến dùng filter ad-hoc thay vì sanitizer chung | Record lỗi/trùng vẫn có thể lọt qua import | 2026-05-05 |
 
 ## ui.js
 
@@ -33,6 +37,7 @@
 | Ontop/order_bonus không hiện trong per-item preview | `buildOrderAwareKmDisplay` và `buildDraftCartState` tồn tại nhưng chưa được gọi trong `onQty` | 2026-05-04 |
 | `renderOrder` tạo `#order-desktop-side` thứ hai bên trong `#order-list` | Conflict với CSS grid vốn trỏ vào element đã có sẵn trong HTML | 2026-05-04 |
 | `calcKM` gọi không truyền `orderContext` ở 4/5 call site UI | Bypass `minSKU` → preview hiện KM "ảo" khi chưa đủ SKU | 2026-05-04 |
+| State `_selectedCustomerMa` bị đọc/ghi trực tiếp ở nhiều file | Lệch state giữa UI/order draft/edit order | 2026-05-05 |
 
 ## main.js
 

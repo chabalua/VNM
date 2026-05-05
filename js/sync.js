@@ -16,11 +16,31 @@ var SYNC_DEFAULTS = {
   autoPullAllOnStart: true
 };
 
+function syncSanitizeActiveMasterRecords(name, records, sourceLabel) {
+  var list = Array.isArray(records) ? records : [];
+  if (name === 'products.json' && typeof sanitizeProductList === 'function') return sanitizeProductList(list, sourceLabel);
+  if (name === 'promotions.json' && typeof sanitizePromotionList === 'function') return sanitizePromotionList(list, sourceLabel);
+  if (name === 'customers.json' && typeof sanitizeCustomerList === 'function') return sanitizeCustomerList(list, sourceLabel);
+  if (name === 'routes.json' && typeof sanitizeRouteList === 'function') return sanitizeRouteList(list, sourceLabel);
+  return list;
+}
+
+function syncSanitizeMasterRecordsForMerge(name, records, sourceLabel) {
+  if (!Array.isArray(records)) throw new Error(name + ' không phải mảng hợp lệ');
+  var deleted = records.filter(function(entity) {
+    return entity && typeof entity === 'object' && entity._deleted;
+  });
+  var active = records.filter(function(entity) {
+    return entity && typeof entity === 'object' && !entity._deleted;
+  });
+  return deleted.concat(syncSanitizeActiveMasterRecords(name, active, sourceLabel));
+}
+
 var SYNC_FILES = [
-  { name: 'products.json', getLocal: function() { return SP; }, setLocal: function(d) { SP = Array.isArray(d) ? d.filter(function(p) { return p && p.ma && !p._deleted; }) : []; SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } }); saveSP(); } },
-  { name: 'promotions.json', getLocal: function() { return kmProgs; }, setLocal: function(d) { kmProgs = normalizePromotionList(d).filter(function(prog) { return prog && !prog._deleted; }); kmSave(); } },
-  { name: 'customers.json', getLocal: function() { return CUS; }, setLocal: function(d) { CUS = Array.isArray(d) ? d.filter(function(k){ return k && k.ma && !k._deleted; }) : []; cusSave(); } },
-  { name: 'routes.json', getLocal: function() { return ROUTES; }, setLocal: function(d) { ROUTES = Array.isArray(d) ? d.filter(function(route) { return route && route.id && !route._deleted; }) : []; routesSave(); } },
+  { name: 'products.json', getLocal: function() { return SP; }, setLocal: function(d) { SP = syncSanitizeActiveMasterRecords('products.json', d).filter(function(p) { return p && !p._deleted; }); SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } }); saveSP(); } },
+  { name: 'promotions.json', getLocal: function() { return kmProgs; }, setLocal: function(d) { kmProgs = syncSanitizeActiveMasterRecords('promotions.json', d).filter(function(prog) { return prog && !prog._deleted; }); kmSave(); } },
+  { name: 'customers.json', getLocal: function() { return CUS; }, setLocal: function(d) { CUS = syncSanitizeActiveMasterRecords('customers.json', d).filter(function(k){ return k && !k._deleted; }); cusSave(); } },
+  { name: 'routes.json', getLocal: function() { return ROUTES; }, setLocal: function(d) { ROUTES = syncSanitizeActiveMasterRecords('routes.json', d).filter(function(route) { return route && !route._deleted; }); routesSave(); } },
   { name: 'orders.json', getLocal: function() { return getOrdersForSync(); }, setLocal: function(d) { setOrdersFromSync(d); } }
 ];
 
@@ -245,6 +265,11 @@ function normalizeOrderRecord(order) {
   return clone;
 }
 
+function syncValidateOrdersPayload(data, sourceLabel) {
+  if (!Array.isArray(data)) throw new Error((sourceLabel || 'orders.json') + ' không phải mảng hợp lệ');
+  return data;
+}
+
 function mergeOrders(localOrders, remoteOrders) {
   var map = {};
   [remoteOrders || [], localOrders || []].forEach(function(list) {
@@ -278,7 +303,7 @@ function getOrdersForSync() {
 }
 
 function setOrdersFromSync(data) {
-  if (Array.isArray(data)) saveOrders(mergeOrders(getOrdersRaw(), data));
+  saveOrders(mergeOrders(getOrdersRaw(), syncValidateOrdersPayload(data, 'orders.json')));
 }
 
 function softDeleteOrder(orderId) {
@@ -338,11 +363,14 @@ async function syncPushSelected(fileNames, options) {
       var remote = await ghGetFile(name);
       var localData = file.getLocal();
       if (name === 'orders.json') {
-        localData = mergeOrders(localData, remote.content || []);
+        localData = mergeOrders(localData, remote.exists && remote.content != null ? syncValidateOrdersPayload(remote.content, 'GitHub ' + name) : []);
         saveOrders(localData);
       } else if (syncIsMasterDataFile(name)) {
+        var remoteMasterRecords = remote.exists && remote.content != null
+          ? syncSanitizeMasterRecordsForMerge(name, remote.content, 'GitHub ' + name)
+          : [];
         localData = syncPrepareMasterRecords(name, localData);
-        localData = syncMergeMasterRecords(name, localData, remote.content || []);
+        localData = syncMergeMasterRecords(name, localData, remoteMasterRecords);
         syncSetShadowRecords(name, localData);
         file.setLocal(syncFilterActiveMasterRecords(name, localData));
       }
@@ -383,9 +411,10 @@ async function syncPullSelected(fileNames, options) {
       if (showOverlay && overlay) overlay.querySelector('div:nth-child(3)').textContent = '(' + (i + 1) + '/' + names.length + ') ' + name;
       var remote = await ghGetFile(name);
       if (remote.exists && remote.content != null) {
-        if (name === 'orders.json') file.setLocal(mergeOrders(getOrdersForSync(), remote.content));
+        if (name === 'orders.json') file.setLocal(syncValidateOrdersPayload(remote.content, 'GitHub ' + name));
         else if (syncIsMasterDataFile(name)) {
-          var mergedMaster = syncMergeMasterRecords(name, syncPrepareMasterRecords(name, file.getLocal()), remote.content);
+          var remoteMasterRecords = syncSanitizeMasterRecordsForMerge(name, remote.content, 'GitHub ' + name);
+          var mergedMaster = syncMergeMasterRecords(name, syncPrepareMasterRecords(name, file.getLocal()), remoteMasterRecords);
           syncSetShadowRecords(name, mergedMaster);
           file.setLocal(syncFilterActiveMasterRecords(name, mergedMaster));
         } else file.setLocal(remote.content);
@@ -595,6 +624,90 @@ function backupAll() {
   showToast('✅ Backup hoàn tất · ' + SP.length + ' SP · ' + kmProgs.length + ' KM · ' + CUS.length + ' KH · ' + getOrdersForSync().length + ' đơn');
 }
 
+function syncRestoreBackupData(data) {
+  if (!data || typeof data !== 'object') throw new Error('File backup không hợp lệ');
+  if (!data._backup) throw new Error('File không phải backup VNM Order');
+
+  var nextProducts = null;
+  var nextPromotions = null;
+  var nextCustomers = null;
+  var nextRoutes = null;
+  var nextOrders = null;
+
+  if (data.products !== undefined) {
+    if (!Array.isArray(data.products)) throw new Error('Backup products không hợp lệ');
+    nextProducts = syncSanitizeActiveMasterRecords('products.json', data.products, 'backup products');
+    if (data.products.length && !nextProducts.length) throw new Error('Backup products không có dữ liệu hợp lệ');
+  }
+  if (data.promotions !== undefined) {
+    if (!Array.isArray(data.promotions)) throw new Error('Backup promotions không hợp lệ');
+    nextPromotions = syncSanitizeActiveMasterRecords('promotions.json', data.promotions, 'backup promotions');
+    if (data.promotions.length && !nextPromotions.length) throw new Error('Backup promotions không có dữ liệu hợp lệ');
+  }
+  if (data.customers !== undefined) {
+    if (!Array.isArray(data.customers)) throw new Error('Backup customers không hợp lệ');
+    nextCustomers = syncSanitizeActiveMasterRecords('customers.json', data.customers, 'backup customers');
+    if (data.customers.length && !nextCustomers.length) throw new Error('Backup customers không có dữ liệu hợp lệ');
+  }
+  if (data.routes !== undefined) {
+    if (!Array.isArray(data.routes)) throw new Error('Backup routes không hợp lệ');
+    nextRoutes = syncSanitizeActiveMasterRecords('routes.json', data.routes, 'backup routes');
+    if (data.routes.length && !nextRoutes.length) throw new Error('Backup routes không có dữ liệu hợp lệ');
+  }
+  if (data.orders !== undefined) {
+    if (!Array.isArray(data.orders)) throw new Error('Backup orders không hợp lệ');
+    nextOrders = mergeOrders(data.orders, []);
+    if (data.orders.length && !nextOrders.length) throw new Error('Backup orders không có dữ liệu hợp lệ');
+  }
+  if (data.favorites !== undefined && !Array.isArray(data.favorites)) throw new Error('Backup favorites không hợp lệ');
+  if (data.cart !== undefined && !Array.isArray(data.cart)) throw new Error('Backup cart không hợp lệ');
+  if (data.kpiConfig !== undefined && data.kpiConfig !== null && typeof data.kpiConfig !== 'object') throw new Error('Backup KPI config không hợp lệ');
+
+  if (nextProducts) {
+    SP = nextProducts;
+    SP.forEach(function(p) {
+      if (typeof normalizeProduct === 'function') normalizeProduct(p);
+      else {
+        if (!p.kmRules) p.kmRules = [];
+        if (!p.kmText) p.kmText = '';
+        if (p.phanLoaiTuNhap !== true) {
+          if (p._brand && p.phanLoai === p._brand) delete p.phanLoai;
+          delete p.phanLoaiTuNhap;
+        }
+      }
+    });
+    saveSP();
+  }
+  if (nextPromotions) {
+    kmProgs = nextPromotions;
+    kmSave();
+  }
+  if (nextCustomers) {
+    CUS = nextCustomers;
+    cusSave();
+  }
+  if (nextRoutes) {
+    ROUTES = nextRoutes;
+    routesSave();
+  }
+  if (nextOrders) saveOrders(nextOrders);
+  if (data.favorites !== undefined) localStorage.setItem(LS_KEYS.FAVORITES, JSON.stringify(data.favorites));
+  if (data.cart !== undefined) {
+    cart = data.cart;
+    localStorage.setItem(LS_KEYS.CART, JSON.stringify(cart));
+  }
+  if (data.kpiConfig && typeof setKpiConfig === 'function') setKpiConfig(data.kpiConfig);
+
+  return {
+    date: data._date || '',
+    products: nextProducts ? nextProducts.length : null,
+    promotions: nextPromotions ? nextPromotions.length : null,
+    customers: nextCustomers ? nextCustomers.length : null,
+    routes: nextRoutes ? nextRoutes.length : null,
+    orders: nextOrders ? nextOrders.length : null
+  };
+}
+
 function restoreAll() {
   var input = document.createElement('input');
   input.type = 'file';
@@ -605,22 +718,9 @@ function restoreAll() {
     reader.onload = function(ev) {
       try {
         var data = JSON.parse(ev.target.result);
-        if (!data._backup) throw new Error('File không phải backup VNM Order');
-        // không hỏi confirm, tự động khôi phục
-
-        if (data.products && Array.isArray(data.products)) {
-          SP = data.products;
-          SP.forEach(function(p){ if (typeof normalizeProduct === 'function') normalizeProduct(p); else { if (!p.kmRules) p.kmRules = []; if (!p.kmText) p.kmText = ''; if (p.phanLoaiTuNhap !== true) { if (p._brand && p.phanLoai === p._brand) delete p.phanLoai; delete p.phanLoaiTuNhap; } } });
-          saveSP();
-        }
-        if (data.promotions) { kmProgs = normalizePromotionList(data.promotions); kmSave(); }
-        if (data.customers) { CUS = data.customers.filter(function(k){ return k && k.ma; }); cusSave(); }
-        if (data.routes) { ROUTES = data.routes; routesSave(); }
-        if (data.orders) { saveOrders(mergeOrders(data.orders, [])); }
-        if (data.favorites) localStorage.setItem(LS_KEYS.FAVORITES, JSON.stringify(data.favorites));
-        if (data.kpiConfig && typeof setKpiConfig === 'function') setKpiConfig(data.kpiConfig);
+        var restored = syncRestoreBackupData(data);
         rerenderAfterSync();
-        showToast('✅ Khôi phục thành công từ ' + (data._date || '').slice(0, 10));
+        showToast('✅ Khôi phục thành công từ ' + (restored.date || '').slice(0, 10));
       } catch (err) {
         showToast('Lỗi: ' + err.message);
       }
@@ -645,6 +745,8 @@ window.syncSetFlag = syncSetFlag;
 window.syncGetConfig = syncGetConfig;
 window.syncHasToken = syncHasToken;
 window.syncTrackEntityDeletion = syncTrackEntityDeletion;
+window.syncRestoreBackupData = syncRestoreBackupData;
+window.syncValidateOrdersPayload = syncValidateOrdersPayload;
 window.backupAll = backupAll;
 window.restoreAll = restoreAll;
 window.getOrders = getOrders;

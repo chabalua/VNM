@@ -17,8 +17,26 @@ function normalizeProduct(product) {
   return product;
 }
 
+function isValidProductRecord(item) {
+  return !!(item && typeof item.ma === 'string' && item.ma.trim() && typeof item.giaNYLon === 'number' && isFinite(item.giaNYLon));
+}
+
+function sanitizeProductList(data, sourceLabel) {
+  if (!Array.isArray(data)) return [];
+  var invalidCount = 0;
+  var sanitized = data.filter(function(item) {
+    var ok = isValidProductRecord(item);
+    if (!ok) invalidCount += 1;
+    return ok;
+  });
+  if (invalidCount > 0 && sourceLabel) {
+    console.warn('[data] Bỏ qua ' + invalidCount + ' sản phẩm lỗi từ ' + (sourceLabel || 'unknown source'));
+  }
+  return sanitized;
+}
+
 function validateProductList(data) {
-  return Array.isArray(data) && data.length > 0 && data.every(item => item && typeof item.ma === 'string' && typeof item.giaNYLon === 'number');
+  return sanitizeProductList(data).length > 0;
 }
 
 function isPromotionMetadata(item) {
@@ -33,13 +51,100 @@ function normalizePromotionList(data) {
   return data.filter(item => !isPromotionMetadata(item));
 }
 
-function validatePromotionList(data) {
-  const list = normalizePromotionList(data);
-  return Array.isArray(list) && list.every(item => {
-    if (!item || typeof item.name !== 'string' || typeof item.type !== 'string') return false;
-    if (item.type === 'order_money' || item.type === 'order_bonus') return true;
-    return Array.isArray(item.spMas);
+function isValidPromotionRecord(item) {
+  if (!item || typeof item.name !== 'string' || !item.name.trim() || typeof item.type !== 'string' || !item.type.trim()) return false;
+  if (item.type === 'order_money' || item.type === 'order_bonus') return true;
+  return Array.isArray(item.spMas);
+}
+
+function getPromotionDedupKey(item) {
+  if (!item || typeof item !== 'object') return '';
+  var normalized = {};
+  Object.keys(item).forEach(function(key) {
+    if (key.startsWith('_')) return;
+    normalized[key] = item[key];
   });
+  return JSON.stringify(normalized);
+}
+
+function collectPromotionReferenceIssues(data, products) {
+  var list = Array.isArray(data) ? data : [];
+  var productList = Array.isArray(products) ? products : [];
+  var productMap = {};
+  productList.forEach(function(product) {
+    if (!product || !product.ma) return;
+    productMap[String(product.ma).trim().toUpperCase()] = true;
+  });
+  var issues = {
+    activePromotions: 0,
+    promotionsWithMissingSpMas: 0,
+    promotionsWithMissingBonusMa: 0,
+    actionableBrokenBonusRefs: 0,
+    samples: []
+  };
+
+  list.forEach(function(prog) {
+    if (!prog || !prog.active) return;
+    issues.activePromotions += 1;
+    var spMas = Array.isArray(prog.spMas) ? prog.spMas : [];
+    var existingTriggers = spMas.filter(function(ma) {
+      return !!productMap[String(ma || '').trim().toUpperCase()];
+    });
+    var missingSpMas = spMas.filter(function(ma) {
+      return !productMap[String(ma || '').trim().toUpperCase()];
+    });
+    if (missingSpMas.length) issues.promotionsWithMissingSpMas += 1;
+
+    var giftMa = '';
+    if (prog.type === 'bonus') giftMa = prog.bMa || '';
+    else if (prog.type === 'order_bonus') giftMa = prog.bonusMa || '';
+    var missingBonusMa = !!(giftMa && giftMa !== 'same' && !productMap[String(giftMa).trim().toUpperCase()]);
+    if (missingBonusMa) {
+      issues.promotionsWithMissingBonusMa += 1;
+      if (existingTriggers.length) issues.actionableBrokenBonusRefs += 1;
+    }
+
+    if ((missingSpMas.length || missingBonusMa) && issues.samples.length < 12) {
+      issues.samples.push({
+        name: prog.name || 'CT KM',
+        missingSpMas: missingSpMas.slice(0, 8),
+        missingBonusMa: missingBonusMa ? giftMa : '',
+        existingTriggers: existingTriggers.slice(0, 8)
+      });
+    }
+  });
+
+  return issues;
+}
+
+function sanitizePromotionList(data, sourceLabel) {
+  var list = normalizePromotionList(data);
+  var invalidCount = 0;
+  var duplicateCount = 0;
+  var seen = {};
+  var sanitized = list.filter(function(item) {
+    var ok = isValidPromotionRecord(item);
+    if (!ok) invalidCount += 1;
+    if (!ok) return false;
+    var dedupKey = getPromotionDedupKey(item);
+    if (dedupKey && seen[dedupKey]) {
+      duplicateCount += 1;
+      return false;
+    }
+    if (dedupKey) seen[dedupKey] = true;
+    return true;
+  });
+  if (invalidCount > 0 && sourceLabel) {
+    console.warn('[data] Bỏ qua ' + invalidCount + ' CTKM lỗi từ ' + (sourceLabel || 'unknown source'));
+  }
+  if (duplicateCount > 0 && sourceLabel) {
+    console.warn('[data] Bỏ qua ' + duplicateCount + ' CTKM trùng từ ' + (sourceLabel || 'unknown source'));
+  }
+  return sanitized;
+}
+
+function validatePromotionList(data) {
+  return sanitizePromotionList(data).length === normalizePromotionList(data).length;
 }
 
 // ============================================================
@@ -66,18 +171,27 @@ async function fetchJSON(url, storageKey, fallback) {
 
 async function loadProducts() {
   var raw = await fetchJSON(PRODUCTS_URL, 'vnm_sp', FALLBACK_PRODUCTS);
-  SP = validateProductList(raw) ? raw : FALLBACK_PRODUCTS;
+  var sanitized = sanitizeProductList(raw, PRODUCTS_URL);
+  SP = sanitized.length ? sanitized : FALLBACK_PRODUCTS;
   SP.forEach(normalizeProduct);
   saveSP();
 }
 
 async function loadPromotions() {
   var raw = await fetchJSON(LOCAL_PROMOTIONS_URL, 'vnm_km3', []);
-  if (!validatePromotionList(raw) || !raw.length) {
+  var normalized = sanitizePromotionList(raw, LOCAL_PROMOTIONS_URL);
+  if (!normalized.length) {
     raw = await fetchJSON(PROMOTIONS_URL, 'vnm_km3', []);
+    normalized = sanitizePromotionList(raw, PROMOTIONS_URL);
   }
-  var normalized = normalizePromotionList(raw);
-  kmProgs = validatePromotionList(normalized) ? normalized : [];
+  kmProgs = normalized;
+  var referenceIssues = collectPromotionReferenceIssues(kmProgs, SP);
+  if (referenceIssues.promotionsWithMissingSpMas > 0) {
+    console.warn('[data] Có ' + referenceIssues.promotionsWithMissingSpMas + ' CTKM active đang tham chiếu mã SP không còn trong products.json');
+  }
+  if (referenceIssues.actionableBrokenBonusRefs > 0) {
+    console.warn('[data] Có ' + referenceIssues.actionableBrokenBonusRefs + ' CTKM active có quà tặng trỏ tới mã SP không tồn tại nhưng vẫn áp trên SKU hiện có');
+  }
   kmSave();
   if (window.KM_DATA_VERSION) localStorage.setItem('vnm_km_version', KM_DATA_VERSION);
 }
@@ -105,8 +219,9 @@ async function initData() {
   if (cachedSP) {
     try {
       var _raw = JSON.parse(cachedSP);
-      if (validateProductList(_raw)) {
-        SP = _raw;
+      var _sanitized = sanitizeProductList(_raw, 'localStorage.' + LS_KEYS.SP);
+      if (_sanitized.length) {
+        SP = _sanitized;
         SP.forEach(normalizeProduct);
         hasCachedSP = true;
       }
@@ -127,8 +242,8 @@ async function initData() {
   if (cachedKM) {
     try {
       var _rawK = JSON.parse(cachedKM);
-      var _norm = normalizePromotionList(_rawK);
-      if (validatePromotionList(_norm)) kmProgs = _norm;
+      var _norm = sanitizePromotionList(_rawK, 'localStorage.' + LS_KEYS.KM);
+      if (_norm.length) kmProgs = _norm;
     } catch(e) {}
   }
 
@@ -178,15 +293,17 @@ async function syncFromGitHub() {
     ]);
     var newProducts = results[0];
     var newPromos = results[1];
-    if (validateProductList(newProducts)) {
-      SP = newProducts;
+    var sanitizedProducts = sanitizeProductList(newProducts, 'GitHub products.json');
+    if (sanitizedProducts.length) {
+      SP = sanitizedProducts;
       SP.forEach(normalizeProduct);
       saveSP();
     } else {
       throw new Error('Products data không hợp lệ');
     }
-    if (!Array.isArray(newPromos) || !validatePromotionList(newPromos)) throw new Error('Promotions data không hợp lệ');
-    kmProgs = normalizePromotionList(newPromos);
+    var sanitizedPromotions = sanitizePromotionList(newPromos, 'GitHub promotions.json');
+    if (!sanitizedPromotions.length) throw new Error('Promotions data không hợp lệ');
+    kmProgs = sanitizedPromotions;
     kmSave();
     if (window.renderOrder) window.renderOrder();
     if (window.renderAdm) window.renderAdm();
@@ -233,8 +350,9 @@ function importProductsJSON() {
       try {
         var data = JSON.parse(ev.target.result);
         if (!Array.isArray(data)) throw new Error('File không phải mảng SP');
-        if (!validateProductList(data)) throw new Error('Dữ liệu products không hợp lệ');
-        SP = data;
+        var sanitized = sanitizeProductList(data, 'import products.json');
+        if (!sanitized.length) throw new Error('Dữ liệu products không hợp lệ');
+        SP = sanitized;
         SP.forEach(normalizeProduct);
         saveSP();
         if (window.syncAutoPushFile) syncAutoPushFile('products.json');

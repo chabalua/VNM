@@ -2,11 +2,8 @@
 
 var NAV_TABS = ['home', 'order', 'don', 'ai', 'kh', 'adm'];
 var ALL_PAGES = ['home', 'order', 'don', 'adm', 'km', 'ai', 'kh'];
-var _homeMonthKey = getCurrentMonthKey();
-var _kpiEditorMonthKey = '';
 var KPI_CONFIG_KEY = LS_KEYS.KPI_CONFIG;
 var THEME_STORAGE_KEY = LS_KEYS.THEME;
-var _themeMode = 'light';
 var KPI_DEFAULT_TARGETS = {
   totalSales: 1416533000,
   avgSku: 10.03,
@@ -53,7 +50,30 @@ var KPI_RULE_META = [
   { key: 'fm', label: 'FM ít đường/không đường', help: 'Mặc định nhận diện theo tên sản phẩm, có thể ghi đè bằng mã SP.' },
   { key: 'catD', label: 'cat D', help: 'Mặc định lấy toàn bộ nhóm D, có thể giới hạn bằng mã SP.' }
 ];
-var _brandRuleDraft = [];
+
+function getRootAppState() {
+  if (!window.appState || typeof window.appState !== 'object') window.appState = {};
+  return window.appState;
+}
+
+function getMainUIState() {
+  var appState = getRootAppState();
+  if (!appState.main || typeof appState.main !== 'object') {
+    appState.main = {
+      homeMonthKey: getCurrentMonthKey(),
+      kpiEditorMonthKey: '',
+      themeMode: 'light',
+      brandRuleDraft: []
+    };
+  }
+  return appState.main;
+}
+
+function getCustomerFilterRoute() {
+  var appState = getRootAppState();
+  var customerUI = appState.customerUI || {};
+  return customerUI.filterRoute || '';
+}
 
 function gotoTab(t) {
   var activeNav = (t === 'km') ? 'adm' : t;
@@ -124,13 +144,14 @@ function getThemeMode() {
 }
 
 function applyTheme(mode, skipPersist) {
-  _themeMode = mode === 'dark' ? 'dark' : 'light';
-  document.documentElement.setAttribute('data-theme', _themeMode);
+  var mainUIState = getMainUIState();
+  mainUIState.themeMode = mode === 'dark' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', mainUIState.themeMode);
   if (!skipPersist) {
-    try { localStorage.setItem(THEME_STORAGE_KEY, _themeMode); } catch (e) {}
+    try { localStorage.setItem(THEME_STORAGE_KEY, mainUIState.themeMode); } catch (e) {}
   }
   var meta = document.getElementById('theme-color-meta') || document.querySelector('meta[name="theme-color"]');
-  if (meta) meta.setAttribute('content', _themeMode === 'dark' ? '#0b1220' : '#1A4DFF');
+  if (meta) meta.setAttribute('content', mainUIState.themeMode === 'dark' ? '#0b1220' : '#1A4DFF');
 }
 
 function setThemeMode(mode) {
@@ -212,15 +233,16 @@ function isOrderItemMatchingRule(item, ruleKey) {
 }
 
 function openKpiSettings(monthKey) {
-  _kpiEditorMonthKey = normalizeMonthKey(monthKey || _homeMonthKey || getCurrentMonthKey());
+  var mainUIState = getMainUIState();
+  mainUIState.kpiEditorMonthKey = normalizeMonthKey(monthKey || mainUIState.homeMonthKey || getCurrentMonthKey());
   var modal = document.getElementById('km-modal');
-  document.getElementById('km-modal-t').textContent = '🎯 Cấu hình KPI ' + getMonthLabel(_kpiEditorMonthKey);
+  document.getElementById('km-modal-t').textContent = '🎯 Cấu hình KPI ' + getMonthLabel(mainUIState.kpiEditorMonthKey);
   modal.style.display = 'block';
 
-  var targets = getKpiTargets(_kpiEditorMonthKey);
+  var targets = getKpiTargets(mainUIState.kpiEditorMonthKey);
   var body = document.getElementById('km-modal-body');
   var html = '';
-  html += '<div class="kf"><div class="kfl">Tháng áp dụng</div><input type="month" id="kpi-month-input" value="' + _kpiEditorMonthKey + '" onchange="openKpiSettings(this.value)" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:14px;color:var(--n1)"></div>';
+  html += '<div class="kf"><div class="kfl">Tháng áp dụng</div><input type="month" id="kpi-month-input" value="' + mainUIState.kpiEditorMonthKey + '" onchange="openKpiSettings(this.value)" style="width:100%;height:40px;border:1.5px solid var(--n5);border-radius:var(--Rs);padding:0 12px;font-size:14px;color:var(--n1)"></div>';
   html += '<div class="kf"><div class="kfl">Mục tiêu theo tháng</div>';
   KPI_GROUP_META.forEach(function(group) {
     html += '<div class="kpi-config-group">';
@@ -248,7 +270,8 @@ function openKpiSettings(monthKey) {
 }
 
 function saveKpiSettings() {
-  var monthKey = normalizeMonthKey((document.getElementById('kpi-month-input') || {}).value || _kpiEditorMonthKey || getCurrentMonthKey());
+  var mainUIState = getMainUIState();
+  var monthKey = normalizeMonthKey((document.getElementById('kpi-month-input') || {}).value || mainUIState.kpiEditorMonthKey || getCurrentMonthKey());
   var cfg = getKpiConfig();
   var monthTargets = {};
   KPI_GROUP_META.forEach(function(group) {
@@ -263,14 +286,15 @@ function saveKpiSettings() {
     else delete cfg.ruleCodes[rule.key];
   });
   saveKpiConfig(cfg);
-  _homeMonthKey = monthKey;
+  mainUIState.homeMonthKey = monthKey;
   document.getElementById('km-modal').style.display = 'none';
   renderHomeDashboard();
   showToast('✅ Đã lưu cấu hình KPI cho ' + getMonthLabel(monthKey));
 }
 
 function setHomeMonth(monthKey) {
-  _homeMonthKey = normalizeMonthKey(monthKey);
+  var mainUIState = getMainUIState();
+  mainUIState.homeMonthKey = normalizeMonthKey(monthKey);
   renderHomeDashboard();
 }
 
@@ -375,7 +399,8 @@ function _calcBrandPerformance(monthOrders) {
 }
 
 function getDashboardData(monthKey) {
-  monthKey = normalizeMonthKey(monthKey || _homeMonthKey);
+  var mainUIState = getMainUIState();
+  monthKey = normalizeMonthKey(monthKey || mainUIState.homeMonthKey);
   var targets = getKpiTargets(monthKey);
   var orders = (typeof getOrders === 'function' ? getOrders() : []);
   var monthOrders = orders.filter(function(order) {
@@ -422,7 +447,8 @@ function getDashboardData(monthKey) {
 }
 
 function renderHomeDashboard() {
-  var data = getDashboardData(_homeMonthKey);
+  var mainUIState = getMainUIState();
+  var data = getDashboardData(mainUIState.homeMonthKey);
   var targets = data.targets || getKpiTargets(data.monthKey);
   var hero = document.getElementById('home-hero-metrics');
   var content = document.getElementById('home-content');
@@ -496,7 +522,8 @@ function renderSettingsOverview() {
   var brandRules = (typeof getCustomBrandRules === 'function') ? getCustomBrandRules() : [];
   var lastPush = cfg.lastPush ? new Date(cfg.lastPush).toLocaleString('vi-VN') : 'Chưa';
   var lastPull = cfg.lastPull ? new Date(cfg.lastPull).toLocaleString('vi-VN') : 'Chưa';
-  var themeMode = _themeMode || getThemeMode();
+  var mainUIState = getMainUIState();
+  var themeMode = mainUIState.themeMode || getThemeMode();
   el.innerHTML = '' +
     '<div class="settings-theme-card"><div><div class="settings-strip-title">Giao diện</div><div class="settings-strip-meta">Đổi nhanh giữa chế độ sáng và tối.</div></div><div class="theme-toggle-group"><button class="theme-toggle-btn ' + (themeMode === 'light' ? 'active' : '') + '" onclick="setThemeMode(\'light\')">Sáng</button><button class="theme-toggle-btn ' + (themeMode === 'dark' ? 'active' : '') + '" onclick="setThemeMode(\'dark\')">Tối</button></div></div>' +
     '<div class="settings-info-card"><div class="settings-info-number">' + SP.length + '</div><div class="settings-info-label">Sản phẩm</div></div>' +
@@ -508,7 +535,8 @@ function renderSettingsOverview() {
 }
 
 function openBrandRulesSettings() {
-  _brandRuleDraft = ((typeof getCustomBrandRules === 'function') ? getCustomBrandRules() : []).map(function(rule) {
+  var mainUIState = getMainUIState();
+  mainUIState.brandRuleDraft = ((typeof getCustomBrandRules === 'function') ? getCustomBrandRules() : []).map(function(rule) {
     return { brand: rule.brand, nhom: rule.nhom, patterns: (rule.patterns || []).slice() };
   });
   var modal = document.getElementById('km-modal');
@@ -518,9 +546,10 @@ function openBrandRulesSettings() {
 }
 
 function brandRulesSyncDraft() {
+  var mainUIState = getMainUIState();
   var cards = document.querySelectorAll('.brand-rule-card');
   if (!cards.length) return;
-  _brandRuleDraft = Array.prototype.map.call(cards, function(card) {
+  mainUIState.brandRuleDraft = Array.prototype.map.call(cards, function(card) {
     var brand = ((card.querySelector('.brand-rule-brand') || {}).value || '').trim();
     var nhom = ((card.querySelector('.brand-rule-group') || {}).value || '').trim().toUpperCase();
     var patterns = ((card.querySelector('.brand-rule-patterns') || {}).value || '').split(/[\n,;]+/).map(function(token) { return token.trim(); }).filter(Boolean);
@@ -537,23 +566,25 @@ function brandRulesEscape(value) {
 }
 
 function renderBrandRuleCard(rule, index) {
+  var mainUIState = getMainUIState();
   var brand = brandRulesEscape(rule.brand || '');
   var patterns = brandRulesEscape(Array.isArray(rule.patterns) ? rule.patterns.join('\n') : '');
   return '<div class="brand-rule-card">' +
-    '<div class="brand-rule-top"><div class="brand-rule-title">Rule ' + (index + 1) + '</div><div class="brand-rule-actions"><button class="brand-rule-action" onclick="brandRulesMove(' + index + ',-1)"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="brand-rule-action" onclick="brandRulesMove(' + index + ',1)"' + (index === _brandRuleDraft.length - 1 ? ' disabled' : '') + '>↓</button><button class="brand-rule-action danger" onclick="brandRulesDelete(' + index + ')">✕</button></div></div>' +
+    '<div class="brand-rule-top"><div class="brand-rule-title">Rule ' + (index + 1) + '</div><div class="brand-rule-actions"><button class="brand-rule-action" onclick="brandRulesMove(' + index + ',-1)"' + (index === 0 ? ' disabled' : '') + '>↑</button><button class="brand-rule-action" onclick="brandRulesMove(' + index + ',1)"' + (index === mainUIState.brandRuleDraft.length - 1 ? ' disabled' : '') + '>↓</button><button class="brand-rule-action danger" onclick="brandRulesDelete(' + index + ')">✕</button></div></div>' +
     '<div class="brand-rule-grid"><div><div class="kfl">Tên phân loại</div><input class="brand-rule-brand" type="text" value="' + brand + '" placeholder="VD: Green Farm"></div><div><div class="kfl">Nhóm</div><select class="brand-rule-group"><option value=""' + (!rule.nhom ? ' selected' : '') + '>Tất cả nhóm</option><option value="A"' + (rule.nhom === 'A' ? ' selected' : '') + '>A · Bột</option><option value="B"' + (rule.nhom === 'B' ? ' selected' : '') + '>B · Đặc</option><option value="C"' + (rule.nhom === 'C' ? ' selected' : '') + '>C · Nước</option><option value="D"' + (rule.nhom === 'D' ? ' selected' : '') + '>D · Chua</option></select></div></div>' +
     '<div><div class="kfl">Từ khóa hoặc mã nhận diện</div><textarea class="brand-rule-patterns" placeholder="Mỗi dòng 1 từ khóa hoặc mã SP\nVD:\ngreen farm\n04g\norganic">' + patterns + '</textarea></div>' +
   '</div>';
 }
 
 function renderBrandRulesSettings() {
+  var mainUIState = getMainUIState();
   var body = document.getElementById('km-modal-body');
   var html = '';
   html += '<div class="rule-help-box"><div class="rule-help-title">Thứ tự ưu tiên hiện tại</div><div class="rule-help-text">1. Phân loại nhập tay trên từng sản phẩm. 2. Rule phân loại do bạn cấu hình ở đây. 3. Rule mặc định sẵn trong app.</div></div>';
   html += '<div class="rule-help-box subtle"><div class="rule-help-title">Cách dùng</div><div class="rule-help-text">Mỗi rule đại diện cho một phân loại. App sẽ đọc từ trên xuống dưới, rule nào match trước sẽ được dùng trước. Chỉ cần nhập vài từ khóa hoặc mã SP dễ nhớ, không cần viết regex.</div></div>';
   html += '<div style="display:flex;gap:8px;margin-bottom:10px"><button class="mini-action" onclick="brandRulesAdd()">+ Thêm rule</button><button class="mini-action" onclick="brandRulesReset()">Khôi phục mặc định</button></div>';
   html += '<div id="brand-rule-list">';
-  if (_brandRuleDraft.length) html += _brandRuleDraft.map(renderBrandRuleCard).join('');
+  if (mainUIState.brandRuleDraft.length) html += mainUIState.brandRuleDraft.map(renderBrandRuleCard).join('');
   else html += '<div class="empty" style="padding:24px 12px">Chưa có rule tùy chỉnh<br><small>Nếu để trống, app sẽ dùng rule mặc định.</small></div>';
   html += '</div>';
   html += '<button class="btn-km-save" onclick="brandRulesSave()">💾 Lưu quy tắc phân loại</button>';
@@ -561,30 +592,34 @@ function renderBrandRulesSettings() {
 }
 
 function brandRulesAdd() {
+  var mainUIState = getMainUIState();
   brandRulesSyncDraft();
-  _brandRuleDraft.push({ brand: '', nhom: '', patterns: [] });
+  mainUIState.brandRuleDraft.push({ brand: '', nhom: '', patterns: [] });
   renderBrandRulesSettings();
 }
 
 function brandRulesDelete(index) {
+  var mainUIState = getMainUIState();
   brandRulesSyncDraft();
-  _brandRuleDraft.splice(index, 1);
+  mainUIState.brandRuleDraft.splice(index, 1);
   renderBrandRulesSettings();
 }
 
 function brandRulesMove(index, direction) {
+  var mainUIState = getMainUIState();
   brandRulesSyncDraft();
   var target = index + direction;
-  if (target < 0 || target >= _brandRuleDraft.length) return;
-  var current = _brandRuleDraft[index];
-  _brandRuleDraft[index] = _brandRuleDraft[target];
-  _brandRuleDraft[target] = current;
+  if (target < 0 || target >= mainUIState.brandRuleDraft.length) return;
+  var current = mainUIState.brandRuleDraft[index];
+  mainUIState.brandRuleDraft[index] = mainUIState.brandRuleDraft[target];
+  mainUIState.brandRuleDraft[target] = current;
   renderBrandRulesSettings();
 }
 
 function brandRulesReset() {
+  var mainUIState = getMainUIState();
   // không hỏi confirm, tự xóa
-  _brandRuleDraft = [];
+  mainUIState.brandRuleDraft = [];
   if (typeof saveCustomBrandRules === 'function') saveCustomBrandRules([]);
   if (window.renderOrder) renderOrder();
   if (window.renderAdm) renderAdm();
@@ -593,10 +628,11 @@ function brandRulesReset() {
 }
 
 function brandRulesSave() {
+  var mainUIState = getMainUIState();
   brandRulesSyncDraft();
   if (typeof saveCustomBrandRules !== 'function') return;
   var hasInvalid = false;
-  var usableRules = _brandRuleDraft.filter(function(rule) {
+  var usableRules = mainUIState.brandRuleDraft.filter(function(rule) {
     var hasBrand = !!(rule.brand || '').trim();
     var hasPatterns = Array.isArray(rule.patterns) && rule.patterns.length > 0;
     if (!hasBrand && !hasPatterns) return false;
@@ -623,7 +659,7 @@ function brandRulesSave() {
 function renderRoutePills() {
   var el = document.getElementById('cus-route-pills'); if (!el) return;
   var routes = (typeof ROUTES !== 'undefined' && Array.isArray(ROUTES)) ? ROUTES : [];
-  var curFilter = (typeof _cusFilterRoute !== 'undefined') ? _cusFilterRoute : '';
+  var curFilter = getCustomerFilterRoute();
   var html = '<div class="pill ' + (!curFilter ? 'on-all' : '') + '" onclick="cusFilterRoute(\'\');renderRoutePills()">Tất cả</div>';
   routes.forEach(function(r) {
     var active = curFilter === r.id;

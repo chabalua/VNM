@@ -467,9 +467,11 @@ function renderKMTab() {
   kmUpdateFilterButtons();
   var el = document.getElementById('km-list');
   if (!el) return;
+  var duplicateWarningHTML = kmBuildDuplicateWarningHTML(kmProgs);
+  var missingRefWarningHTML = kmBuildMissingRefWarningHTML(kmProgs);
 
   if (!kmProgs.length) {
-    el.innerHTML = '<div class="empty">Chưa có CT KM nào<br><small>Dùng nút "＋ Thêm CT KM" ở đầu trang để tạo.</small></div>';
+    el.innerHTML = duplicateWarningHTML + missingRefWarningHTML + '<div class="empty">Chưa có CT KM nào<br><small>Dùng nút "＋ Thêm CT KM" ở đầu trang để tạo.</small></div>';
     return;
   }
 
@@ -489,7 +491,7 @@ function renderKMTab() {
   });
 
   if (!filtered.length) {
-    el.innerHTML = '<div class="empty">Không tìm thấy CT KM nào theo bộ lọc</div>';
+    el.innerHTML = duplicateWarningHTML + missingRefWarningHTML + '<div class="empty">Không tìm thấy CT KM nào theo bộ lọc</div>';
     return;
   }
 
@@ -516,12 +518,70 @@ function renderKMTab() {
     });
     html += '</div>';
   });
-  el.innerHTML = html;
+  el.innerHTML = duplicateWarningHTML + missingRefWarningHTML + html;
 }
 
 function kmToggle(i) { kmProgs[i].active = !kmProgs[i].active; if (window.markEntityUpdated) markEntityUpdated(kmProgs[i]); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
 function kmDel(i) { var prog = kmProgs[i]; if (prog && window.syncTrackEntityDeletion) syncTrackEntityDeletion('promotions.json', prog); kmProgs.splice(i, 1); kmSave(); if (window.syncAutoPushFile) syncAutoPushFile('promotions.json'); renderKMTab(); renderOrder(); }
 function kmEdit(i) { kmOpenModal(kmProgs[i], i); }
+
+function kmGetPromotionDedupKey(prog) {
+  if (typeof getPromotionDedupKey === 'function') return getPromotionDedupKey(prog);
+  if (!prog || typeof prog !== 'object') return '';
+  var normalized = {};
+  Object.keys(prog).forEach(function(key) {
+    if (key.indexOf('_') === 0) return;
+    normalized[key] = prog[key];
+  });
+  return JSON.stringify(normalized);
+}
+
+function kmCollectDuplicatePromotions(list) {
+  var groups = {};
+  (Array.isArray(list) ? list : []).forEach(function(prog, idx) {
+    var dedupKey = kmGetPromotionDedupKey(prog);
+    if (!dedupKey) return;
+    if (!groups[dedupKey]) groups[dedupKey] = [];
+    groups[dedupKey].push({ prog: prog, idx: idx });
+  });
+  return Object.keys(groups).map(function(key) { return groups[key]; }).filter(function(entries) {
+    return entries.length > 1;
+  });
+}
+
+function kmBuildDuplicateWarningHTML(list) {
+  var duplicates = kmCollectDuplicatePromotions(list);
+  if (!duplicates.length) return '';
+  var sample = duplicates.slice(0, 3).map(function(entries) {
+    var prog = entries[0].prog || {};
+    return escapeHtml((prog.name || 'CT KM') + ' x' + entries.length);
+  }).join(' · ');
+  var hiddenCount = duplicates.length - Math.min(duplicates.length, 3);
+  if (hiddenCount > 0) sample += ' · +' + hiddenCount + ' nhóm khác';
+  return '<div style="margin-bottom:12px;padding:12px 14px;border-radius:12px;border:1px solid #F6C37A;background:#FFF5E8;color:#8A4B00">'
+    + '<div style="font-size:12.5px;font-weight:800;margin-bottom:4px">Canh bao du lieu CTKM trung</div>'
+    + '<div style="font-size:11.5px;line-height:1.45">Phat hien ' + duplicates.length + ' nhom CTKM trung logic trong danh sach dang tai. App se tu bo qua khi sanitize, nhung nen don file nguon de tranh hien tuong qua tang/CK bi chong. ' + sample + '</div>'
+    + '</div>';
+}
+
+function kmBuildMissingRefWarningHTML(list) {
+  if (typeof collectPromotionReferenceIssues !== 'function') return '';
+  var issues = collectPromotionReferenceIssues(list, SP);
+  if (!issues.promotionsWithMissingSpMas && !issues.actionableBrokenBonusRefs) return '';
+  var detail = [];
+  if (issues.promotionsWithMissingSpMas > 0) detail.push(issues.promotionsWithMissingSpMas + ' CTKM active có `spMas` chứa mã SP không còn trong master');
+  if (issues.actionableBrokenBonusRefs > 0) detail.push(issues.actionableBrokenBonusRefs + ' CTKM active có quà tặng trỏ tới mã SP không tồn tại nhưng vẫn áp trên SKU hiện có');
+  var sample = issues.samples.slice(0, 3).map(function(item) {
+    var extras = [];
+    if (item.missingBonusMa) extras.push('gift ' + item.missingBonusMa);
+    if (item.missingSpMas && item.missingSpMas.length) extras.push('missing SKU ' + item.missingSpMas.slice(0, 2).join(', '));
+    return escapeHtml((item.name || 'CT KM') + (extras.length ? ' [' + extras.join(' · ') + ']' : ''));
+  }).join(' · ');
+  return '<div style="margin-bottom:12px;padding:12px 14px;border-radius:12px;border:1px solid #F3A6A6;background:#FFF1F1;color:#8C1D18">'
+    + '<div style="font-size:12.5px;font-weight:800;margin-bottom:4px">Canh bao tham chieu SP trong CTKM</div>'
+    + '<div style="font-size:11.5px;line-height:1.45">' + escapeHtml(detail.join('. ')) + '. ' + sample + '</div>'
+    + '</div>';
+}
 
 function kmBuildText(prog) {
   var t = prog.type;
@@ -570,8 +630,9 @@ function importKM() {
     reader.onload = function(ev) {
       try {
         var data = JSON.parse(ev.target.result);
-        if (!validatePromotionList(data)) throw new Error('File CT KM không hợp lệ');
-        data = normalizePromotionList(data);
+        if (!Array.isArray(data)) throw new Error('File CT KM không hợp lệ');
+        data = typeof sanitizePromotionList === 'function' ? sanitizePromotionList(data, 'import KM file') : normalizePromotionList(data);
+        if (!data.length) throw new Error('File CT KM không có bản ghi hợp lệ');
         var action = true; // auto thay thế
         if (action) kmProgs = data;
         else kmProgs.push.apply(kmProgs, data);
@@ -591,8 +652,9 @@ async function loadKMFromURL() {
     var res = await fetch(url + (url.indexOf('?') >= 0 ? '&' : '?') + '_t=' + Date.now(), { cache: 'no-store' });
     if (!res.ok) throw new Error('HTTP ' + res.status);
     var data = await res.json();
-    if (!validatePromotionList(data)) throw new Error('Dữ liệu CT KM không hợp lệ');
-    data = normalizePromotionList(data);
+    if (!Array.isArray(data)) throw new Error('Dữ liệu CT KM không hợp lệ');
+    data = typeof sanitizePromotionList === 'function' ? sanitizePromotionList(data, 'KM URL import') : normalizePromotionList(data);
+    if (!data.length) throw new Error('Dữ liệu CT KM không có bản ghi hợp lệ');
     var action = true; // auto thay thế
     if (action) kmProgs = data;
     else kmProgs.push.apply(kmProgs, data);

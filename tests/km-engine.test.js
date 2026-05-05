@@ -78,6 +78,7 @@ function loadScript(relativePath) {
 
 loadScript('js/config.js');
 loadScript('js/cart.js');
+loadScript('js/order-pricing-ui.js');
 loadScript('tests/km-engine.test.shared.js');
 
 const result = context.runKmEngineTests(context);

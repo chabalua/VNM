@@ -25,9 +25,15 @@ css/style.css, tokens.css, ui-primitives.css, mobile-ui.css
 js/config.js     (~120 dòng)     — Hằng số, URLs, LS_KEYS, escapeHtml, showToast, lsCheckQuota
 js/data.js       (~300 dòng)     — Fetch + cache, initData, loadProducts, loadPromotions
 js/cart.js       (~1600 dòng)    — Giỏ hàng + KM Engine v2 + lịch sử đơn + buildOrderContextFromCart + debugCalcPrice
-js/ui.js         (~1600 dòng)    — Render tab Đặt hàng, buildPriceTable, brand classification
+js/ui.js         (~500 dòng)     — Điều phối tab Đặt hàng + filter/state bridge + public UI exports
+js/order-pricing-ui.js           — Pricing snapshot, buildPriceTable, TL strip, promo chips
+js/order-interactions-ui.js      — onQty, toggleCard, draft cart state
+js/order-render-ui.js            — HTML builders cho card/section Đặt hàng
+js/admin-products-ui.js          — Tab admin sản phẩm + modal sửa SP
 js/km.js         (~1200 dòng)    — Modal CT KM, form, picker SP
-js/customer.js   (~2900 dòng)    — KH + KPI + tính thưởng VNM/VIP/SBPS  ⚠️ NÊN TÁCH
+js/customer-data.js              — Dữ liệu KH/tuyến + sanitize + monthly aggregation
+js/customer-reward.js            — Engine thưởng VNM/VIP/SBPS + cấu hình CT
+js/customer-ui.js                — UI tab KH + form + nhập DS + route manager
 js/sync.js       (~900 dòng)     — Sync 2 chiều GitHub, debounce queue push
 js/ai-*.js                       — Tab AI (service, context, chat, ui)
 js/mobile-ui.js  (~360 dòng)     — Mobile tabbar SVG, renderDesktopSidebar
@@ -36,7 +42,7 @@ docs/                            — Tài liệu chi tiết per-area (xem §4)
 tests/                           — Node test runner
 ```
 
-**Thứ tự load script** (cố định, đừng đảo): `config → data → cart → ui → km → customer → sync → ai-service → ai-context → ai-chat → ai-ui → mobile-ui → main`.
+**Thứ tự load script** (cố định, đừng đảo): `config → data → cart → ui → order-pricing-ui → order-interactions-ui → order-render-ui → admin-products-ui → km → customer-data → customer-reward → customer-ui → sync → ai-service → ai-context → ai-chat → ai-ui → mobile-ui → main`.
 
 ---
 
@@ -51,6 +57,8 @@ tests/                           — Node test runner
 5. **KHÔNG đảo thứ tự load script** — có dependency ngầm.
 6. **KHÔNG dùng `let`/`const` ở scope global** trong các file `js/*` — dùng `var` để tương thích cross-script.
 7. **KHÔNG gọi `calcKM(p, qT, qL)` mà thiếu `orderContext`** — sẽ bypass minSKU check. Dùng `buildOrderContextFromCart(ma)`.
+8. **KHÔNG import/restore master data bằng filter ad-hoc** — luôn đi qua `sanitizeProductList`, `sanitizePromotionList`, `sanitizeCustomerList`, `sanitizeRouteList`.
+9. **KHÔNG tự xóa CTKM active chỉ vì thiếu mã SP** — đây là lỗi dữ liệu nghiệp vụ; trước hết phải cảnh báo, audit, rồi mới sửa dữ liệu gốc.
 
 ### ✅ LUÔN làm
 
@@ -59,6 +67,8 @@ tests/                           — Node test runner
 3. **LUÔN test trên iOS Safari** — Safari cache rất aggressive. Mọi `fetch` phải có `cache: 'no-store'` + `?_t=Date.now()`.
 4. **LUÔN export hàm public qua `window.fnName = fnName`** ở cuối file.
 5. **LUÔN dùng `LS_KEYS.XXX`** thay vì hardcode `'vnm_xxx'`.
+6. **LUÔN chạy sanitizer ở mọi luồng nạp master data**: load local, import file, restore backup, pull/push sync.
+7. **LUÔN check cảnh báo duplicate/missing-ref trong tab KM** sau khi chỉnh `promotions.json` hoặc import CTKM.
 
 ---
 
@@ -67,8 +77,9 @@ tests/                           — Node test runner
 | Khi sửa... | Đọc trước |
 |---|---|
 | Logic giá / KM / chiết khấu (cart.js calcKM/calcOrderKM, ui.js render giá) | `docs/km-engine.md` |
-| Thưởng KH (VNM/VIP/SBPS Shop, customer.js) | `docs/reward-engine.md` |
+| Thưởng KH (VNM/VIP/SBPS Shop, customer-*.js) | `docs/reward-engine.md` |
 | Sync GitHub (sync.js, data.js) | `docs/sync.md` |
+| Dữ liệu CTKM / mã SP thiếu / duplicate KM | `docs/promotion-data-audit.md` |
 | File js bất kỳ — kiểm tra bug history | `docs/anti-patterns.md` |
 
 **Quy tắc đọc:** chỉ đọc file nào liên quan tới task. KHÔNG đọc tất cả mỗi turn.
@@ -142,13 +153,14 @@ Mọi fetch: `fetch(url + '?_t=' + Date.now(), { cache: 'no-store' })`.
 3. **Search anti-pattern**: trước khi viết, search file để xem pattern tương tự đã có chưa.
 4. **Test KM thay đổi**: chạy `node tests/km-engine.test.js`.
 5. **Test reward thay đổi**: chạy `node tests/reward-engine.test.js`.
-6. **KHÔNG nói "test ok" nếu thay đổi nằm ngoài engine**. Engine test KHÔNG cover UI render path. Phải nói rõ:
+6. **Test validation/sync guard thay đổi**: chạy `node tests/data-validation.test.js` và `node tests/sync-guards.test.js`.
+7. **KHÔNG nói "test ok" nếu thay đổi nằm ngoài engine**. Engine test KHÔNG cover UI render path. Phải nói rõ:
    - Test case nào cover thay đổi này?
    - Nếu KHÔNG có → liệt kê path UI bị ảnh hưởng + yêu cầu user verify thủ công bằng kịch bản cụ thể.
-7. **Verify iOS Safari**: nếu thay đổi liên quan input/scroll/cache.
-8. **Check escapeHtml**: nếu render user input ra HTML.
-9. **Push GitHub**: nếu sửa file data master, đảm bảo gọi `syncAutoPushFile`.
-10. **Commit message**: ngắn gọn, tiếng Việt OK. VD: `fix(cart): aggregate stackable bonus thay vì pick best`.
+8. **Verify iOS Safari**: nếu thay đổi liên quan input/scroll/cache.
+9. **Check escapeHtml**: nếu render user input ra HTML.
+10. **Push GitHub**: nếu sửa file data master, đảm bảo gọi `syncAutoPushFile`.
+11. **Commit message**: ngắn gọn, tiếng Việt OK. VD: `fix(cart): aggregate stackable bonus thay vì pick best`.
 
 ---
 
@@ -162,5 +174,9 @@ Mọi fetch: `fetch(url + '?_t=' + Date.now(), { cache: 'no-store' })`.
 - [x] Fix calcKM thiếu orderContext ở UI call sites — bypass minSKU (Done 2026-05-04)
 - [x] Tách CLAUDE.md thành docs/ — tiết kiệm token (Done 2026-05-04)
 - [x] Debug helper `debugCalcPrice` cho console (Done 2026-05-04)
-- [ ] Tách `customer.js` thành 3 file: `customer-data.js`, `customer-reward.js`, `customer-ui.js`
+- [x] Tách `customer.js` thành 3 file: `customer-data.js`, `customer-reward.js`, `customer-ui.js` (Done 2026-05-05)
+- [x] Tách `ui.js` thành order/admin submodules (`order-pricing-ui`, `order-interactions-ui`, `order-render-ui`, `admin-products-ui`) (Done 2026-05-05)
+- [x] Dedupe `promotions.json` ở cả load boundary lẫn file gốc để chặn CTKM nhân bản gây cộng quà x2/x3 (Done 2026-05-05)
+- [x] Cảnh báo duplicate KM + CTKM tham chiếu mã SP thiếu ngay trong tab KM (Done 2026-05-05)
+- [x] Hardening import/restore/sync bằng shared sanitizers + test `data-validation`/`sync-guards` (Done 2026-05-05)
 - [ ] Centralize state — gom global `_xxx` vars vào 1 `appState` object
