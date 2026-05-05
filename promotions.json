@@ -2024,7 +2024,7 @@
     "name": "SCU/STC Susu/Hero Ontop: đơn từ 2tr → CK 2%",
     "type": "order_money",
     "nhoms": "D",
-    "active": true,
+    "active": false,
     "stackable": true,
     "tiers": [
       {
@@ -2051,7 +2051,7 @@
       "06VC23",
       "06VQ23"
     ],
-    "_updatedAt": "2026-04-21T16:11:28.513Z",
+    "_updatedAt": "2026-05-05T00:45:09.386Z",
     "_syncId": "km_mop2q3hf_s188f3",
     "_deleted": false
   },
