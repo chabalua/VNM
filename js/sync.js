@@ -60,13 +60,13 @@ function syncGetEntityKey(name, entity) {
   if (!entity || typeof entity !== 'object') return '';
   if (name === 'products.json' || name === 'customers.json') return String(entity.ma || '');
   if (name === 'routes.json') return String(entity.id || '');
-  if (name === 'promotions.json') return String(entity._syncId || '');
+  if (name === 'promotions.json') return String(entity.name || entity._syncId || '');
   return '';
 }
 
 function syncEnsureEntityIdentity(name, entity) {
   if (!entity || typeof entity !== 'object') return entity;
-  if (name === 'promotions.json' && !entity._syncId) entity._syncId = syncCreateEntityId('km');
+  if (name === 'promotions.json' && !entity._syncId) entity._syncId = 'km_' + (entity.name || syncCreateEntityId('km'));
   return entity;
 }
 

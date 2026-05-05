@@ -6,7 +6,7 @@ var LOCAL_PROMOTIONS_URL = 'promotions.json';
 var PROMOTIONS_URL = REPO_RAW + 'promotions.json';
 
 // Phiên bản CT KM — đổi khi thay CTKM tháng mới để buộc thiết bị reload cache
-var KM_DATA_VERSION = 'T05-2026-05';
+var KM_DATA_VERSION = 'T05-2026-05b';
 
 // Thuế VAT
 var VAT = 0.015;
