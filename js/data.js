@@ -116,7 +116,14 @@ async function initData() {
   var kmVersionOk = window.KM_DATA_VERSION &&
     localStorage.getItem('vnm_km_version') === KM_DATA_VERSION;
   var cachedKM = kmVersionOk ? localStorage.getItem(LS_KEYS.KM) : null;
-  if (!kmVersionOk) localStorage.removeItem(LS_KEYS.KM);
+  if (!kmVersionOk) {
+    localStorage.removeItem(LS_KEYS.KM);
+    // Xóa shadow records của promotions.json để T4 promos không hồi sinh qua syncMergeMasterRecords
+    try {
+      var _sh = JSON.parse(localStorage.getItem(LS_KEYS.SYNC_SHADOW) || '{}');
+      if (_sh['promotions.json']) { delete _sh['promotions.json']; localStorage.setItem(LS_KEYS.SYNC_SHADOW, JSON.stringify(_sh)); }
+    } catch(e) {}
+  }
   if (cachedKM) {
     try {
       var _rawK = JSON.parse(cachedKM);
